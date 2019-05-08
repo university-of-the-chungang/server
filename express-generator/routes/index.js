@@ -29,6 +29,17 @@ router.get('/forgotpassword', function(req, res, next) {
   res.render('forgotpassword' );
 });
 
+router.get('/empty', function(req, res, next) {
+  res.render('empty' );
+});
+
+router.get('/logmanagement', function(req, res, next) {
+  res.render('logmanagement' );
+});
+
+router.get('/agentmanagement', function(req, res, next) {
+  res.render('agentmanagement' );
+});
 
 
 
