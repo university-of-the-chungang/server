@@ -10,11 +10,37 @@ router.get('/dashboard', function(req, res, next) {
   res.render('dashboard' );
 });
 
-/* DB.JS TEST MAPPING */
-router.get('/dbtest',(req,res,next)=>{
-  res.render('test_mssql');
+
+router.get('/404', function(req, res, next) {
+  res.render('404' );
 });
 
-/* ****************** */
+
+router.get('/login', function(req, res, next) {
+  res.render('login' );
+});
+
+
+router.get('/signup', function(req, res, next) {
+  res.render('signup' );
+});
+
+router.get('/forgotpassword', function(req, res, next) {
+  res.render('forgotpassword' );
+});
+
+router.get('/empty', function(req, res, next) {
+  res.render('empty' );
+});
+
+router.get('/logmanagement', function(req, res, next) {
+  res.render('logmanagement' );
+});
+
+router.get('/agentmanagement', function(req, res, next) {
+  res.render('agentmanagement' );
+});
+
+
 
 module.exports = router;
