@@ -1,6 +1,7 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-console */
-import { connect, Request, on } from 'mssql';
+let sql = require('mssql');
 
 // DB 정보 
 
