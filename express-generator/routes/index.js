@@ -43,7 +43,7 @@ router.get('/agentmanagement', function (req, res, next) {
   res.render('agentmanagement');
 });
 
-router.post('/login', (req, res, next) => {
+router.post('/signin', (req, res, next) => {
   DB.login_admin(req.body['login_name'], req.body['login_pw']).catch(err => {
     if (String(err) === 'Please fill the blank.') {
       res.json({
