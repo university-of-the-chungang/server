@@ -1,5 +1,63 @@
 # node-express-generator-template
 
+### 2019-05-12 로그인 API Sample 추가
+../test 페이지 접속 후 테스트 가능
+
+DB.js를 require 후 login_admin(아이디, 비밀번호) 를 이용해 결과를 받을 수 있다.
+1. 로그인 성공시 
+> "1"  
+
+2. 로그인 실패시  
+> "0"  
+
+3. 공백을 보낼시
+> "Please fill the blank."  
+
+4. 기타 SQL 에러시
+> "{$에러내용}"  
+
+* sample Code
+```
+DB.login_admin(req.body['login_name'], req.body['login_pw']).catch(err => {
+    if (String(err) === 'Please fill the blank.') {
+      res.json({
+        "status": 400,
+        code: "4005",
+        description: "빈칸을 모두 채우세요",
+        message: err
+      });
+    } else {
+      res.json({
+        "status": 500,
+        code: "5000",
+        description: "서버에러",
+        message: "Internal Server Error"
+      });
+    }
+  }).then((result) => {
+    if (result === 1) {
+      res.json({
+        status: 200,
+        code: 200
+        , message: "Success",
+        data: null
+      });
+    } else {
+      res.json({
+        status: 400,
+        code: 4006,
+        description: "로그인실패",
+        message: "Login Failed"
+      });
+    }
+  }).catch(() => {
+  });
+```
+
+![TestPage](./test_page.png)
+
+## 사용된 SAMPLE API  
+
 | 메소드 | 경로 | 짧은 설명 |
 | ------ | ------ | ------ |
 | POST | /user/signin | 로그인 |
@@ -60,5 +118,3 @@ Content-Type: application/json
 }
 
 ```
-### 2019-05-12 로그인 API 추가
-![TestPage](./test_page.png)
