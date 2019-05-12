@@ -17,13 +17,13 @@ let config = {
     }
 };
 let table_list = [];
-connect(config, err => {
+sql.connect(config, err => {
     if (err) {
         throw err;
     }
     console.log("Connection Successful !");
 
-    new Request().query("select name from sysobjects where type='U' ", (err, result) => {
+    new sql.Request().query("select name from sysobjects where type='U' ", (err, result) => {
         if (err) {
             console.log("Tables Loading Failed .");
         } else {
@@ -40,14 +40,14 @@ connect(config, err => {
 
 });
 
-on('error', err => {
+sql.on('error', err => {
     // ... error handler 
     console.log("Sql database connection error ", err);
 })
 
 let query_select = (data, table_name) => {
     return new Promise((resolve, reject) => {
-        new Request().query(`SELECT ` + String(data) + ` FROM ` + table_name, (err, result) => {
+        new sql.Request().query(`SELECT ` + String(data) + ` FROM ` + table_name, (err, result) => {
             if (result) {
                 resolve(result);
             } else {
@@ -64,7 +64,7 @@ exports.login_admin = (login_name, login_pw)=> {
             reject("Do not submit Blank.");
         }
         else {
-            new Request().query(`SELECT COUNT(ID) AS login_result FROM TBL_ADMIN_INFO WHERE NAME = '` + login_name + `' AND PASSWD = '` + login_pw + `'`, (err, result) => {
+            new sql.Request().query(`SELECT COUNT(ID) AS login_result FROM TBL_ADMIN_INFO WHERE NAME = '` + login_name + `' AND PASSWD = '` + login_pw + `'`, (err, result) => {
                 if (err) {
                     reject(err);
                 } else {
@@ -107,7 +107,7 @@ let add_admin = (data) => {
         query += arr.join(", ");
         query += `)`
         console.log(query);
-        new Request().query(query, (err, result) => {
+        new sql.Request().query(query, (err, result) => {
             if (err) {
                 reject(err);
             }
