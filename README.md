@@ -41,6 +41,24 @@ Content-Type: application/json
     "message": "Login Failed"
 }
 ```
+* 빈값이 넘어온경우
+```
+{
+    "status": 400,
+    "code": 4005,
+    "description": "빈칸을 모두 채우세요",
+    "message": "Please fill the blank."
+}
+```
+* 서버 에러
+```
+{ 
+    "status": 500,
+    "code": 5000,
+    "description": '서버에러',
+    "message": 'Internal Server Error' 
+}
 
+```
 ### 2019-05-12 로그인 API 추가
 ![TestPage](./test_page.png)
