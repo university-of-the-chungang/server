@@ -61,7 +61,7 @@ let query_select = (data, table_name) => {
 exports.login_admin = (login_name, login_pw)=> {
     return new Promise((resolve, reject) => {
         if (login_name == null || login_pw == null || login_name.length <= 0 || login_pw.length <= 0) {
-            reject("Do not submit Blank.");
+            reject("Please fill the blank.");
         }
         else {
             new sql.Request().query(`SELECT COUNT(ID) AS login_result FROM TBL_ADMIN_INFO WHERE NAME = '` + login_name + `' AND PASSWD = '` + login_pw + `'`, (err, result) => {
