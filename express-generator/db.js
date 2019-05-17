@@ -61,7 +61,7 @@ let query_select = (data, table_name) => {
 
 exports.login_admin = (login_name, login_pw)=> {
     return new Promise((resolve, reject) => {
-        if (login_name == null || login_pw == null || login_name.length <= 0 || login_pw.length <= 0) {
+        if (login_name.length <= 0 || login_pw.length <= 0) {
             reject("Please fill the blank.");
         }
         else {

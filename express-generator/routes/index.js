@@ -45,39 +45,39 @@ router.get('/agentmanagement', function (req, res, next) {
 });
 
 router.post('/signin', (req, res, next) => {
-  DB.login_admin(req.body['login_name'], req.body['login_pw']).catch(err => {
-    result = {}
+  DB.login_admin(req.body['login_name'], req.body['login_pw']).then((result) => {
+    if (result === 1) {
+      resultData = ({
+        status: 200,
+        message: "Success",
+        data: null
+      });
+    } else {
+      resultData = ({
+        status: 400,
+        description: "로그인실패",
+        message: "Login Failed"
+      });
+    }
+    res.render('test_mssql',{view_singin:JSON.stringify(resultData)});
+  }).catch(err => {
+    resultData = {}
+    console.log(String(err));
     if (String(err) === 'Please fill the blank.') {
-      result = ({
+      resultData = ({
         "status": 400,
         description: "빈칸을 모두 채우세요",
         message: err
       });
     } else {
 
-      result = ({
+      resultData = ({
         "status": 500,
         description: "서버에러",
         message: "Internal Server Error"
       });
     }
-  }).then((result) => {
-    if (result === 1) {
-      result = ({
-        status: 200,
-        message: "Success",
-        data: null
-      });
-    } else {
-      result = ({
-        status: 400,
-        description: "로그인실패",
-        message: "Login Failed"
-      });
-    }
-    res.render('test_mssql',{view_singin:JSON.stringify(result)});
-  }).catch((err) => {
-    res.render('test_mssql',{view_singin:JSON.stringify(err)});
+    res.render('test_mssql',{view_singin:JSON.stringify(resultData)});
   });
 });
 router.get('/test', (req, res, next) => {
