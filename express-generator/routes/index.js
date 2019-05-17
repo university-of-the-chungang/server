@@ -46,40 +46,38 @@ router.get('/agentmanagement', function (req, res, next) {
 
 router.post('/signin', (req, res, next) => {
   DB.login_admin(req.body['login_name'], req.body['login_pw']).catch(err => {
+    result = {}
     if (String(err) === 'Please fill the blank.') {
-      res.json({
+      result = ({
         "status": 400,
-        code: "4005",
         description: "빈칸을 모두 채우세요",
         message: err
       });
     } else {
 
-      res.json({
+      result = ({
         "status": 500,
-        code: "5000",
         description: "서버에러",
         message: "Internal Server Error"
       });
     }
   }).then((result) => {
     if (result === 1) {
-      res.json({
+      result = ({
         status: 200,
-        code: 200
-        , message: "Success",
+        message: "Success",
         data: null
       });
     } else {
-      res.json({
+      result = ({
         status: 400,
-        code: 4006,
         description: "로그인실패",
         message: "Login Failed"
       });
     }
   }).catch(() => {
   });
+  res.render('test_mssql',{view_singin:result});
 });
 router.get('/test', (req, res, next) => {
   res.render('test_mssql');

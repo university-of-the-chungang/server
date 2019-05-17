@@ -17,6 +17,9 @@
         <input type="password" placeholder="Input your Password" name="login_pw">
         <button id="btnTest" type="submit">테스트</button>
     </form>
+    <% if(typeof(view_singin) != "undefined"){ %>
+        <textarea style="width:50%; height:40px;"><%=view_singin %></textarea>
+        <% } %>
     <hr />
     <h3>TBL_AGENT_INFO 조회</h3>
     <form action="/view_tbl_agent_info" method="GET">
