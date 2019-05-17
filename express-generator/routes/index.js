@@ -75,9 +75,10 @@ router.post('/signin', (req, res, next) => {
         message: "Login Failed"
       });
     }
-  }).catch(() => {
+    res.render('test_mssql',{view_singin:result});
+  }).catch((err) => {
+    res.render('test_mssql',{view_singin:err});
   });
-  res.render('test_mssql',{view_singin:result});
 });
 router.get('/test', (req, res, next) => {
   res.render('test_mssql');
