@@ -62,7 +62,6 @@ router.post('/signin', (req, res, next) => {
     res.render('test_mssql',{view_singin:JSON.stringify(resultData)});
   }).catch(err => {
     resultData = {}
-    console.log(String(err));
     if (String(err) === 'Please fill the blank.') {
       resultData = ({
         "status": 400,
