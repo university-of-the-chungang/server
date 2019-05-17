@@ -74,8 +74,60 @@ exports.login_admin = (login_name, login_pw)=> {
         }
     });
 }
+exports.get_inspect_stats = (group_set_cd)=>{
+    // group_set_cd를 가진 점검 결과를 검색
+    return new Promise((resolve,reject)=>{
+        new sql.Request().query(`SELECT * FROM TBL_INSPECT_STATS WHERE GROUP_SET_CD = '`+group_set_cd+"'",(err,result)=>{
+            if (err){
+                reject(err);
+            }
+            resolve(result);
+        });
+    });
+}
+exports.get_group_agents = (group_set_cd)=>{
+    // 그룹생성코드가 group_set_cd인 Agent CD를 검색
+    return new Promise((resolve,reject)=>{
+        new sql.Request().query(`SELECT AGENT_CD FROM TBL_GROUP_SET_LIST WHERE GROUP_SET_CD = '`+group_set_cd+"'",(err,result)=>{
+            if (err){
+                reject(err);
+            }
+            resolve(result);
+        });
+    });
+}
+exports.get_agent_info = (agent_cd=null)=>{
+    // 에이전트 코드가 agent_cd인 Agent들의 정보를 검색
+    // agent_cd를 넣지않으면 전체검색
+    sql_adder = "";
+    if(agent_cd){
+        sql_adder = " WHERE AGENT_CD = '"+agent_cd+"'";
+    }
+    return new Promise((resolve,reject)=>{
+        new sql.Request().query(`SELECT * FROM TBL_AGENT_INFO`+sql_adder,(err,result)=>{
+            if (err){
+                reject(err);
+            }
+            resolve(result);
+        });
+    });
+}
 
-
+exports.get_group_info = (group_name=null)=>{
+    // 그룹 정보 조회
+    return new Promise((resolve,reject)=>{
+        sql_adder = "";
+        if(group_name){
+            sql_adder = "WHERE NAME LIKE '"+group_name+"%'";
+        }
+        new sql.Request().query(`SELECT * FROM TBL_GROUP_INFO `+sql_adder,(err,result)=>{
+            if (err){
+                reject(err);
+            }
+            resolve(result);
+        });
+    });
+}
 let view_admin = (column_name) => {
     return new Promise((resolve, reject) => {
         query_select(column_name, "TBL_ADMIN_INFO").then((result) => {

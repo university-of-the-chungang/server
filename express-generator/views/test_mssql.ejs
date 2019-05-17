@@ -10,14 +10,31 @@
 
 <body>
     <h2>MS SQL 테스트 페이지</h2>
-    <hr/>
+    <hr />
     <h3>로그인 테스트 영역</h3>
     <form action="/signin" method="POST">
         <input type="text" placeholder="Input your name" name="login_name">
         <input type="password" placeholder="Input your Password" name="login_pw">
         <button id="btnTest" type="submit">테스트</button>
     </form>
+    <hr />
+    <h3>TBL_AGENT_INFO 조회</h3>
+    <form action="/view_tbl_agent_info" method="GET">
+        <input type="text" placeholder="INPUT AGENT_CD" name="agent_cd">
+        <button id="btnTest2" type="submit">테스트</button>
+    </form>
+    <% if(typeof(agent_info) != "undefined"){ %>
+    <textarea style="width:50%; height:40px;"><%=agent_info %></textarea>
+    <% } %>
     <hr/>
+    <h3>TBL_GROUP_INFO 조회</h3>
+    <form action="/view_tbl_group_info", method="GET">
+        <input type="text" placeholder="INPUT GROUP NAME" name="group_name">
+        <button id="btnTest3" type="submit">테스트</button>
+    </form>
+    <% if(typeof(group_info) != "undefined"){ %>
+    <textarea style="width:50%; height:40px;"><%=group_info %></textarea>
+    <% } %>
 </body>
 
 </html>
