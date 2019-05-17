@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="min-width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>MS SQL TEST PAGE</title>
 </head>
@@ -18,7 +18,7 @@
         <button id="btnTest" type="submit">테스트</button>
     </form>
     <% if(typeof(view_singin) != "undefined"){ %>
-        <textarea style="width:50%; height:40px;"><%=view_singin %></textarea>
+        <textarea style="min-width:50%; min-height:40px;"><%=view_singin %></textarea>
         <% } %>
     <hr />
     <h3>TBL_AGENT_INFO 조회(입력값 비우면 전체 검색)</h3>
@@ -27,7 +27,7 @@
         <button id="btnTest2" type="submit">테스트</button>
     </form>
     <% if(typeof(agent_info) != "undefined"){ %>
-    <textarea style="width:50%; height:40px;"><%=agent_info %></textarea>
+    <textarea style="min-width:50%; min-height:40px;"><%=agent_info %></textarea>
     <% } %>
     <hr/>
     <h3>TBL_GROUP_INFO 조회(입력값 비우면 전체 검색)</h3>
@@ -36,7 +36,7 @@
         <button id="btnTest3" type="submit">테스트</button>
     </form>
     <% if(typeof(group_info) != "undefined"){ %>
-    <textarea style="width:50%; height:40px;"><%=group_info %></textarea>
+    <textarea style="min-width:50%; min-height:40px;"><%=group_info %></textarea>
     <% } %>
 </body>
 
