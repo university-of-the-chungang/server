@@ -11,6 +11,7 @@ let config = {
     "user": "developer", //default is sa
     "password": "ang0511",
     "server": "localhost", // for local machine
+    "port":"1444",
     "database": "nsrang", // name of database
     "options": {
         "encrypt": true
