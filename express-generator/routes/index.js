@@ -75,9 +75,9 @@ router.post('/signin', (req, res, next) => {
         message: "Login Failed"
       });
     }
-    res.render('test_mssql',{view_singin:result});
+    res.render('test_mssql',{view_singin:JSON.stringify(result)});
   }).catch((err) => {
-    res.render('test_mssql',{view_singin:err});
+    res.render('test_mssql',{view_singin:JSON.stringify(err)});
   });
 });
 router.get('/test', (req, res, next) => {
