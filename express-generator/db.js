@@ -38,8 +38,6 @@ sql.connect(config, err => {
         }
     });
 
-}).catch((err)=>{
-    console.log(err);
 });
 
 sql.on('error', err => {
