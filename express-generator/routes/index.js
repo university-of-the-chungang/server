@@ -59,7 +59,7 @@ router.post('/signin', (req, res, next) => {
         message: "Login Failed"
       });
     }
-    res.render('test_mssql',{view_singin:JSON.stringify(resultData)});
+    res.render('test_mssql', { view_singin: JSON.stringify(resultData) });
   }).catch(err => {
     resultData = {}
     if (String(err) === 'Please fill the blank.') {
@@ -76,26 +76,27 @@ router.post('/signin', (req, res, next) => {
         message: "Internal Server Error"
       });
     }
-    res.render('test_mssql',{view_singin:JSON.stringify(resultData)});
+    res.render('test_mssql', { view_singin: JSON.stringify(resultData) });
   });
 });
 router.get('/test', (req, res, next) => {
   res.render('test_mssql');
 });
-router.get('/view_tbl_agent_info',(req,res,next)=>{
-  DB.get_agent_info(req.query.agent_cd).then(result=>{
-    res.render('test_mssql',{agent_info : JSON.stringify(result)});
-  }).catch((err)=>{
-    res.render('test_mssql',{agent_info : JSON.stringify(err)});
+router.get('/view_tbl_agent_info', (req, res, next) => {
+  DB.get_agent_info(req.query.agent_cd).then(result => {
+    res.render('test_mssql', { agent_info: JSON.stringify(result) });
+  }).catch((err) => {
+    res.render('test_mssql', { agent_info: JSON.stringify(err) });
   });
+});
+router.get('/view_tbl_group_info', (req, res, next) => {
+  DB.get_group_info(req.query.group_name).then(result => {
+    res.render('test_mssql', { group_info: JSON.stringify(result) });
+  }).catch((err) => {
+    res.render('test_mssql', { group_info: JSON.stringify(err) });
+  });
+});
 
-});
-router.get('/view_tbl_group_info',(req,res,next)=>{
-  DB.get_group_info(req.query.group_name).then(result=>{
-    res.render('test_mssql',{group_info : JSON.stringify(result)});
-  }).catch((err)=>{
-    res.render('test_mssql',{group_info : JSON.stringify(err)});
-  });
-});
+
 
 module.exports = router;
