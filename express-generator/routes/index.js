@@ -44,7 +44,14 @@ router.get('/agentmanagement', function (req, res, next) {
   res.render('agentmanagement');
 });
 
-router.post('/signin', (req, res, next) => {
+router.get('/changeinfo', function(req, res, next) {
+  res.render('changeinfo' );
+});
+
+
+
+///////////////// 테스트용 API ////////////////////
+router.post('/test_signin', (req, res, next) => {
   DB.login_admin(req.body['login_name'], req.body['login_pw']).then((result) => {
     if (result === 1) {
       resultData = ({
@@ -96,10 +103,7 @@ router.get('/view_tbl_group_info', (req, res, next) => {
     res.render('test_mssql', { group_info: JSON.stringify(err) });
   });
 });
-
-router.get('/changeinfo', function(req, res, next) {
-  res.render('changeinfo' );
-});
+////////////////////////////////////////////////////////////////////
 
 
 
