@@ -41,6 +41,11 @@ router.get('/agentmanagement', function(req, res, next) {
   res.render('agentmanagement' );
 });
 
+router.get('/changeinfo', function(req, res, next) {
+  res.render('changeinfo' );
+});
+
+
 
 
 module.exports = router;
