@@ -45,6 +45,10 @@ router.get('/changeinfo', function(req, res, next) {
   res.render('changeinfo' );
 });
 
+router.get('/grouppolicy', function(req, res, next) {
+  res.render('grouppolicy' );
+});
+
 
 
 
