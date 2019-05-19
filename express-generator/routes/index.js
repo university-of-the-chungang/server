@@ -44,8 +44,8 @@ router.get('/agentmanagement', function (req, res, next) {
   res.render('agentmanagement');
 });
 
-router.get('/changeinfo', function(req, res, next) {
-  res.render('changeinfo' );
+router.get('/changeinfo', function (req, res, next) {
+  res.render('changeinfo');
 });
 
 
@@ -86,12 +86,63 @@ router.post('/test_signin', (req, res, next) => {
     res.render('test_mssql', { view_singin: JSON.stringify(resultData) });
   });
 });
-router.post('/test_signup',(req,res,next)=>{
-  data = req.body;
-  DB.add_admin(data).then(result=>{
+router.post('/test_signup', (req, res, next) => {
+  let data = req.body;
+  DB.add_admin(data).then(result => {
     res.render('test_mssql', { test_upsign: JSON.stringify(result) });
-  }).catch(err=>{
+  }).catch(err => {
     res.render('test_mssql', { test_upsign: JSON.stringify(err) });
+  });
+});
+router.post('/change_group_state', (req, res, next) => {
+  let group_set_cd = req.body.group_set_cd;
+  let state = req.body.state;
+  DB.change_group_state(group_set_cd, state).then(result => {
+    res.render('test_mssql', { change_group_state: JSON.stringify(result) });
+  }).catch(err => {
+    res.render('test_mssql', { change_group_state: JSON.stringify(err) });
+  });
+});
+router.post('/delete_group_info', (req, res, next) => {
+  let group_set_cd = req.body.group_set_cd;
+  DB.delete_group_info(group_set_cd).then(result => {
+    res.render('test_mssql', { delete_group_info: JSON.stringify(result) });
+  }).catch(err => {
+    res.render('test_mssql', { delete_group_info: JSON.stringify(err) });
+  });
+});
+router.post('/put_xccdf', (req,res,next)=>{
+  DB.put_xccdf(req.body.xccdf_cd,req.body.file_name,req.body.file_path,req.body.inspect_os).then(result=>{
+    DB.view_tbl_xccdf().then(Result=>{
+      res.render('test_mssql', { put_xccdf: JSON.stringify(Result.recordsets) });
+    }).catch(err=>{
+      res.render('test_mssql', { put_xccdf: JSON.stringify(err) });
+    });
+  }).catch(err=>{
+    res.render('test_mssql', { put_xccdf: JSON.stringify(err) });
+  });
+});
+router.post('/mapping_xccdf_group', (req,res,next)=>{
+  DB.mapping_xccdf_group(req.body.xccdf_cd,req.body.group_set_cd).then(result=>{
+    DB.view_tbl_xccdf_set_list().then(Result=>{
+      res.render('test_mssql', { mapping_xccdf_group: JSON.stringify(Result.recordsets) });
+    }).catch(err=>{
+      res.render('test_mssql', { mapping_xccdf_group: JSON.stringify(err) });
+    });
+  }).catch(err=>{
+    res.render('test_mssql', { mapping_xccdf_group: JSON.stringify(err) });
+  });
+});
+router.post('/add_group_info',(req,res,next)=>{
+  DB.add_group_info(req.body.name,req.body.create_time,req.body.active_time,req.body.agent_counting,req.body.inspection_period,req.body.discription)
+  .then(result=>{
+    DB.get_group_info().then(Result=>{
+      res.render('test_mssql',{add_group_info:JSON.stringify(Result.recordsets)});
+    }).catch(err=>{
+      res.render('test_mssql', { add_group_info: JSON.stringify(err) });
+    });
+  }).catch(err=>{
+    res.render('test_mssql', { add_group_info: JSON.stringify(err) });
   });
 });
 
@@ -110,6 +161,13 @@ router.get('/view_tbl_group_info', (req, res, next) => {
     res.render('test_mssql', { group_info: JSON.stringify(result) });
   }).catch((err) => {
     res.render('test_mssql', { group_info: JSON.stringify(err) });
+  });
+});
+router.get('/get_new_xccdf_cd',(req,res,next)=>{
+  DB.get_new_xccdf_cd().then(result=>{
+    res.render('test_mssql', { get_new_xccdf_cd: JSON.stringify(result) });
+  }).catch(err=>{
+    res.render('test_mssql', { get_new_xccdf_cd: JSON.stringify(err) });
   });
 });
 ////////////////////////////////////////////////////////////////////

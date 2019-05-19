@@ -8,9 +8,11 @@
     <title>MS SQL TEST PAGE</title>
 </head>
 
-<body>
-    <h2>MS SQL 테스트 페이지</h2>
+<body><div style="position:fixed; background-color: white; width:100%">
+    <a href='/test'><h2>MS SQL 테스트 페이지</h2></a>
     <hr />
+    </div>
+    <div style="padding:50px 0px"></div>
     <h3>로그인 테스트 영역</h3>
     <form action="/test_signin" method="POST">
         DB.login_admin(<input type="text" placeholder="Input your Name" name="login_name">,&nbsp;
@@ -62,10 +64,92 @@
     <% if(typeof(group_info) != "undefined"){ %>
     <textarea style="min-width:50%; min-height:40px;"><%=group_info %></textarea>
     <% } %>
+    <hr />
+    <h3>Group 정보 추가</h3>
+    <form action="/add_group_info", method="POST">
+    DB.add_group_info(
+        <input type="text" placeholder="Input Group Name" name="name">
+        <input type="datetime" class="dateTimePicker" title="Input Create Time" name="create_time">
+        <input type="datetime" class="dateTimePicker" title="Input Active time" name="active_time">
+        <input type="number" placeholder="Input Agent Counting" name="agent_counting">
+        <input type="datetime" class="dateTimePicker" title="Input Inspection Period" name="inspection_period">
+        <input type="text" placeholder="Input Discription" name="discription">
+    )<button id="btnTest8" type="submit">테스트</button>
+    </form>
+    <% if(typeof(add_group_info) != "undefined"){ %>
+    <textarea style="min-width:50%; min-height:40px;"><%=add_group_info %></textarea>
+    <% } %>
+
+    <hr />
+    <h3>Group 정보 활성화/비활성화</h3>
+    <form action="/change_group_state" , method="POST">
+        DB.change_group_state(<input type="number" placeholder="INPUT GROUP SET CD" name="group_set_cd">,
+        <select name="state">
+            <option value=true>true(활성화)</option>
+            <option value=false>false(비활성화)</option>
+        </select>
+        )
+        <button id="btnTest4" type="submit">테스트</button>
+    </form>
+    <% if(typeof(change_group_state) != "undefined"){ %>
+    <textarea style="min-width:50%; min-height:40px;"><%=change_group_state %></textarea>
+    <% } %>
+    <h3>Group 정보 제거 (실제 DB에서는 제거되지 않고 DEL_FLAG로 설정)</h3>
+    <form action="/delete_group_info" , method="POST">
+        DB.delete_group_info(<input type="number" placeholder="INPUT GROUP SET CD" name="group_set_cd">)
+        <button id="btnTest5" type="submit">테스트</button>
+    </form>
+    <% if(typeof(delete_group_info) != "undefined"){ %>
+    <textarea style="min-width:50%; min-height:40px;"><%=delete_group_info %></textarea>
+    <% } %>
+    <hr />
+        <h3>새로 생성될 XCCDF_CD 번호 조회</h3>
+        <form action="/get_new_xccdf_cd" method="GET">
+            DB.get_new_xccdf_cd()
+            <button id="btnTest6" type="submit">테스트</button>
+        </form>
+        <% if(typeof(get_new_xccdf_cd) != "undefined"){ %>
+        <textarea style="min-width:50%; min-height:40px;"><%=get_new_xccdf_cd %></textarea>
+        <% } %>
+    <hr />
+        <h3>XCCDF 정보 추가</h3>
+        <form action="/put_xccdf" method="POST">
+            DB.put_xccdf(<input type="number" placeholder="INPUT XCCDF CD" name="xccdf_cd">,
+            <input type="text" placeholder="INPUT FILE NAME" name="file_name">,
+            <input type="text" placeholder="INPUT FILE PATH" name="file_path">,
+            <input type="text" placeholder="INPUT INSPECT OS" name="inspect_os">
+            )
+            <button id="btnTest7" type="submit">테스트</button>
+        </form>
+        <% if(typeof(put_xccdf) != "undefined"){ %>
+        <textarea style="min-width:50%; min-height:40px;"><%=put_xccdf %></textarea>
+        <% } %>
+    <hr />
+        <h3>XCCDF 코드 GROUP 매핑</h3>
+        <form action="/mapping_xccdf_group" method="POST">
+            DB.mapping_xccdf_group(<input type="number" placeholder="INPUT XCCDF CD" name="xccdf_cd">,
+            <input type="number" placeholder="INPUT GROUP SET CD" name="group_set_cd">
+            )
+            <button id="btnTest7" type="submit">테스트</button>
+    </form>
+    <% if(typeof(mapping_xccdf_group) != "undefined"){ %>
+    <textarea style="min-width:50%; min-height:40px;"><%=mapping_xccdf_group %></textarea>
+    <% } %>
     <script>
         let dpArr = document.getElementsByClassName('datePicker');
         for (let i = 0; i < dpArr.length; i += 1) {
             dpArr[i].valueAsDate = new Date();
+        }
+        
+        function pad(n, width) {
+        n = n + '';
+        return n.length >= width ? n : new Array(width - n.length + 1).join('0') + n;
+        }
+        let dtpArr = document.getElementsByClassName('dateTimePicker');
+        let d = new Date(); 
+        let datestring = d.getFullYear()+ "-"  + pad(d.getMonth()+1,2) + "-" + pad(d.getDate(),2) + " " + pad(d.getHours(),2) + ":" + pad(d.getMinutes(),2)+":"+pad(d.getSeconds(),2);       
+        for (let i = 0; i < dtpArr.length; i += 1) {
+            dtpArr[i].value = datestring;
         }
     </script>
 </body>
