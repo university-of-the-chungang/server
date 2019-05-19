@@ -140,7 +140,7 @@ let view_admin = (column_name) => {
     });
 };
 
-let add_admin = (data) => {
+exports.add_admin = (data) => {
     return new Promise((resolve, reject) => {
         let query = `INSERT INTO TBL_ADMIN_INFO (NAME, PASSWD, TEL_NO, EMAIL, DIVISION, POSITION, LOCK_STAT, FROM_DATE, TO_DATE, ROLE_CD, LOCK_COUNT, LOCK_DATE, LAST_LOGIN) VALUES(`;
         let arr = [];
@@ -155,7 +155,7 @@ let add_admin = (data) => {
         arr.push(`'` + data.to_date + `'`);
         arr.push(data.role_cd);
         arr.push(data.lock_count);
-        arr.push(`'` + data.lock_date + `'`);
+        arr.push(`NULL`);
         arr.push(`'` + data.last_login + `'`);
         query += arr.join(", ");
         query += `)`

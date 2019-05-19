@@ -13,12 +13,32 @@
     <hr />
     <h3>로그인 테스트 영역</h3>
     <form action="/test_signin" method="POST">
-        login_admin(<input type="text" placeholder="Input your name" name="login_name">,&nbsp;
+        login_admin(<input type="text" placeholder="Input your Name" name="login_name">,&nbsp;
         <input type="password" placeholder="Input your Password" name="login_pw">)
         <button id="btnTest" type="submit">테스트</button>
     </form>
     <% if(typeof(view_singin) != "undefined"){ %>
-        <textarea style="min-width:50%; min-height:40px;"><%=view_singin %></textarea>
+    <textarea style="min-width:50%; min-height:40px;"><%=view_singin %></textarea>
+    <% } %>
+    <hr />
+    <h3>관리자 등록</h3>
+    
+    <form action="/test_signup" method="POST">
+        <input type="text" placeholder="Input your Name" name="name">
+        <input type="password" placeholder="Input your Password" name="passwd">
+        <input type="tel" placeholder="Input your TEL" name="tel_no">
+        <input type="email" placeholder="Input your Email" name="email">
+        <input type="text" placeholder="Input your Division" name="division">
+        <input type="text" placeholder="Input your Position" name="position">
+        <input type="number" title="Input your LOCK_STAT" name="lock_stat" value="0" disabled>
+        <input type="date" class="datePicker" title="Input your FROM_DATE" name="from_date">
+        <input type="date" class="datePicker" title="Input your TO_DATE" name="to_date">
+        <input type="number" placeholder="Input your ROLE_CD" name="role_cd" >
+        <input type="number" title="Input your LOCK_COUNT" name="lock_count" value="0" disabled>
+        <button id="btnSignup" type="submit">테스트</button>
+    </form>
+    <% if(typeof(test_upsign) != "undefined"){ %>
+        <textarea style="min-width:50%; min-height:40px;"><%=test_upsign %></textarea>
         <% } %>
     <hr />
     <h3>TBL_AGENT_INFO 조회(입력값 비우면 전체 검색)</h3>
@@ -29,15 +49,21 @@
     <% if(typeof(agent_info) != "undefined"){ %>
     <textarea style="min-width:50%; min-height:40px;"><%=agent_info %></textarea>
     <% } %>
-    <hr/>
+    <hr />
     <h3>TBL_GROUP_INFO 조회(입력값 비우면 전체 검색)</h3>
-    <form action="/view_tbl_group_info", method="GET">
+    <form action="/view_tbl_group_info" , method="GET">
         DB.get_group_info(<input type="text" placeholder="INPUT GROUP NAME" name="group_name">)
         <button id="btnTest3" type="submit">테스트</button>
     </form>
     <% if(typeof(group_info) != "undefined"){ %>
     <textarea style="min-width:50%; min-height:40px;"><%=group_info %></textarea>
     <% } %>
+    <script>
+        let dpArr = document.getElementsByClassName('datePicker');
+        for(let i = 0 ; i < dpArr.length; i +=1){
+            dpArr[i].valueAsDate =  new Date();
+        }
+    </script>
 </body>
 
 </html>

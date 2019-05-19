@@ -86,6 +86,15 @@ router.post('/test_signin', (req, res, next) => {
     res.render('test_mssql', { view_singin: JSON.stringify(resultData) });
   });
 });
+router.post('/test_signup',(req,res,next)=>{
+  data = req.body;
+  DB.add_admin(data).then(result=>{
+    res.render('test_mssql', { test_upsign: JSON.stringify(result) });
+  }).catch(err=>{
+    res.render('test_mssql', { test_upsign: JSON.stringify(err) });
+  });
+});
+
 router.get('/test', (req, res, next) => {
   res.render('test_mssql');
 });
