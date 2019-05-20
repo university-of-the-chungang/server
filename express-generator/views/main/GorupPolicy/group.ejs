@@ -6,6 +6,61 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
+    <style type="text/css">
+        .btn-group .btn {
+    transition: background-color .3s ease;
+}
+
+.panel-table .panel-body {
+    padding: 0;
+}
+
+.table > thead > tr > th {
+    border-bottom: none;
+}
+
+.panel-footer, .panel-table .panel-body .table-bordered {
+    border-style: none;
+    margin: 0;
+}
+
+.panel-table .panel-body .table-bordered > thead > tr > th:first-of-type {
+    text-align: center;
+    width: 50px;
+}
+
+.panel-table .panel-body .table-bordered > thead > tr > th.col-tools {
+    text-align: center;
+    width: 120px;
+}
+
+.panel-table .panel-body .table-bordered > thead > tr > th:last-of-type,
+.panel-table .panel-body .table-bordered > tbody > tr > td:last-of-type {
+    border-right: 0;
+}
+
+.panel-table .panel-body .table-bordered > thead > tr > th:first-of-type,
+.panel-table .panel-body .table-bordered > tbody > tr > td:first-of-type {
+    border-left: 0;
+}
+
+.panel-table .panel-body .table-bordered > tbody > tr:first-of-type > td {
+    border-bottom: 0;
+}
+
+.panel-table .panel-body .table-bordered > thead > tr:first-of-type > th {
+    border-top: 0;
+}
+
+.pagination > li > a, .pagination > li > span {
+    border-radius: 50% !important;
+    margin: 0 5px;
+}
+
+.pagination {
+    margin: 0;
+}
+    </style>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css">
     <link href="assets/vendor/fonts/circular-std/style.css" rel="stylesheet">
@@ -237,11 +292,90 @@
                             <!-- ============================================================== -->
                             <!--  판넬 바디 시작(그룹명 정책명 이런거 들어가는거) -->
                             <!-- ============================================================== -->
-                         
+                            <div class="panel-body">
+                                <table id="mytable" class="table table-bordered">
+            
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                             <label class="custom-control custom-checkbox">
+                                                <input type="checkbox" id="checkall" onclick="test()"class="custom-control-input"><span class="custom-control-label"></span>
+                                            </label>
+                                        </td>
+                                        <td colspan="2">그룹 3(1일)</td>
+                                        <td colspan="2">오프라인 정보시스템 포함</td>
+                                        <td> 정책활성
+                                            <div class="switch-button switch-button-yesno">
+                                                <input type="checkbox" checked="" name="switch19" id="switch19"><span>
+                                                <label for="switch19"></label></span>
+                                            </div>
+                                        </td>
+                                       
+                                    </tr>
+
+                                    <tr>   
+                                        <td> - 그룹명</td>
+                                        <td colspan="4">기관보안관리를 위한 필수정책 ver 3</td>
+                                        <td> 긴급점검 <div class="switch-button switch-button-danger">
+                                                        <input type="checkbox" checked="" name="switch18" id="switch18"><span>
+                                                               <label for="switch18"></label></span>
+                                                    </div> </td>
+                                    </tr>
+
+                                    <tr>   
+                                        <td>- 그룹설명</td>
+                                        <td colspan="4">기관 보안관리 수준을 준수하기 위한 필수 정책 50가지, 2019년 3월 10일 기준</td>
+                                        <td>
+                                         <i class="fas fa-cloud-upload-alt"></i> 오프라인 점검 결과 업로드 
+
+                                        </div>
+                             
+                                                   
+                                        </td>
+                                    </tr>
+
+                                     <tr>   
+                                        <td colspan="2">- 생성시간 (2019.01.02.10:20:20)</td>
+                                        <td colspan="2">- 활성화 시간 (2019.01.30.15:30:55)</td>
+                                        <td colspan="2">- 에이전트 수 (100)</td>
+                                    </tr>      
+                                    </tbody>
+
+
+                                </table>
+
+                            </div>
 
                     <!-- 패널 푸터 시작-->       
 
-                           
+                            <div class="panel-footer">
+                                <div class="row">
+                                    <div class="col-xs-12 ">
+                                        <nav aria-label="Page navigation">
+                                            <div class="col-xs-5"></div>
+                                            <div class="col-xs-4">
+                                            <ul class="pagination" style="text-align: center;">
+                                                <li>
+                                                    <a href="#" aria-label="Previous">
+                                                        <span aria-hidden="true">«</span>
+                                                    </a>
+                                                </li>
+                                                <li class="active"><a href="#">1</a></li>
+                                                <li><a href="#">2</a></li>
+                                                <li><a href="#">3</a></li>
+                                                <li><a href="#">4</a></li>
+                                                <li><a href="#">5</a></li>
+                                                <li>
+                                                    <a href="#" aria-label="Next">
+                                                        <span aria-hidden="true">»</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
                     <!-- 패널 푸터 끝-->
 
                         </div>
