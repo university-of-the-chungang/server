@@ -16,142 +16,86 @@
     <link rel="stylesheet" href="assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="assets/vendor/charts/c3charts/c3.css">
     <link rel="stylesheet" href="assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
-    <title>NSRANG</title>
+    <title>국가보안연구소</title>
 </head>
 
 <body>
-    <!-- ============================================================== -->
-    <!-- main wrapper -->
-    <!-- ============================================================== -->
-   
-        <!-- ============================================================== -->
-        <!-- navbar -->
-        <!-- ============================================================== -->
-
+  
 <div class="dashboard-main-wrapper">
     <div class="dashboard-header">
-            <nav class="navbar navbar-expand-lg bg-white fixed-top">
-                <a class="navbar-brand" href="../index.html">국가보안연구소</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse " id="navbarSupportedContent">
+        <nav class="navbar navbar-expand-lg bg-white fixed-top">
+            <a class="navbar-brand" href="../dashboard">국가보안연구소</a>
+            <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                
+                <ul class="navbar-nav ml-auto navbar-right-top">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../dashboard"  role="button"  aria-haspopup="true" aria-expanded="false">대쉬보드</a>
+                    </li>
 
-                    <ul class="navbar-nav ml-auto navbar-right-top">
-                        <li class="nav-item dropdown ">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" active=>
-                             대쉬보드
-                            </a>
-                           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                              <a class="dropdown-item" href="#"></a>
-                              <a class="dropdown-item" href="#"></a>
-                              <div class="dropdown-divider"></div>
-                              <a class="dropdown-item" href="#">Something else here</a>
-                            </div>
-                          </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../agent"  role="button" aria-haspopup="true" aria-expanded="false">에이전트관리</a>    
+                    </li>
 
-                          <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            에이전트관리
-                            </a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="../group" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">그룹 및 정책관리</a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                              <a class="dropdown-item" href="#"></a>
-                              <a class="dropdown-item" href="#"></a>
-                              <div class="dropdown-divider"></div>
-                              <a class="dropdown-item" href="#">Something else here</a>
-                            </div>
-                          </li>
+                            <a class="dropdown-item" href="../group">기본 정보 </a>
+                            <a class="dropdown-item" href="../newgroup">신규 그룹 생성</a>
+                            <a class="dropdown-item" href="../oldgroup">기존 그룹 관리</a>
+                            </div>  
+                    </li>
 
+                    <li class="nav-item">
+                        <a class="nav-link" href="../log" role="button" aria-haspopup="true" aria-expanded="false">평가문항/로그관리</a>
+                    </li>
 
-                                    <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              그룹 및 정책관리
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                              <a class="dropdown-item" href="#">기본정보</a>
-                              <a class="dropdown-item" href="#">신규그룹생성</a>
-                              <a class="dropdown-item" href="#">에이전트 할당</a>
-                              <a class="dropdown-item" href="#">정책적용</a>
-                              <a class="dropdown-item" href="#">레포팅</a>
-                              
-                          </li>
-
-                          <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              평가문항 추출/로그관리
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                              <a class="dropdown-item" href="#">Action</a>
-                              <a class="dropdown-item" href="#">Another action</a>
-                              <div class="dropdown-divider"></div>
-                              <a class="dropdown-item" href="#">Something else here</a>
-                            </div>
-                          </li>
-
-
+                    <li class="nav-item dropdown connection">
+                        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 설정 <i class="far fa-sun"></i> </a>
+                        <ul class="dropdown-menu dropdown-menu-right connection-dropdown">
+                            <li class="connection-list">
+                                <div class="row">
+                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
+                                        <a href="#" class="connection-item"><span>CPE</span></a>
+                                    </div>
+                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
+                                        <a href="#" class="connection-item"> <span>CCE</span></a>
+                                    </div>
+                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
+                                        <a href="#" class="connection-item"> <span>OVAL</span></a>
+                                    </div>
+                                    </div>
+                            </li>
+                        </ul>
+                    </li>
                     
-                        <li class="nav-item dropdown connection">
-                            <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">설정 관리 <i class="far fa-sun"></i> </a>
-                            <ul class="dropdown-menu dropdown-menu-right connection-dropdown">
-                                <li class="connection-list">
-                                    <div class="row">
-                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                            <a href="#" class="connection-item">
-                                                <span>CPE</span></a>
-                                        </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                            <a href="#" class="connection-item"> <span>CCE</span></a>
-                                        </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                            <a href="#" class="connection-item"> <span>OVAL</span></a>
-                                        </div>
+                    <li class="nav-item dropdown nav-user">
+                        <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">사용자 관리 </a>
+                        
+                        <ul class="dropdown-menu dropdown-menu-right connection-dropdown">
+                            <li class="connection-list">
+                                <div class="row">
+                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
+                                        <a href="../login" class="connection-item"><span>로그인</span></a>
                                     </div>
-                                    
-                                </li>
-                               
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown nav-user">
-
-                            <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">사용자 관리 <img src="../images/wook.png" alt="" class="user-avatar-md rounded-circle"></a>
-                            <ul class="dropdown-menu dropdown-menu-right connection-dropdown">
-                                <li class="connection-list">
-                                    <div class="row">
-                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                            <a href="#" class="connection-item">
-                                                <span>로그인</span></a>
-                                        </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                            <a href="#" class="connection-item"> <span>로그아웃</span></a>
-                                        </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                            <a href="#" class="connection-item"> <span>정보변경</span></a>
-                                        </div>
+                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
+                                        <a href="../login" class="connection-item"> <span>로그아웃</span></a>
                                     </div>
-                                    
-                                </li>
-                               
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
-
-
-        <!-- ============================================================== -->
-        <!-- end navbar -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- left sidebar -->
-        <!-- ============================================================== -->
-      
-        <!-- ============================================================== -->
-        <!-- end left sidebar -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- wrapper  -->
-        <!-- ============================================================== -->
+                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
+                                        <a href="../changeinfo" class="connection-item"> <span>정보변경</span></a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <!-- ============================================================== -->
+    <!-- 헤드 네비게이션 바 종료  -->
+    <!-- ============================================================== -->
+    
         <div class="">
             <div class="dashboard-ecommerce">
                 <div class="container-fluid dashboard-content ">
@@ -165,6 +109,7 @@
                                             <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">MENU</a></li>
                                             <li class="breadcrumb-item active" aria-current="page">대쉬보드</li>
                                             <li class="breadcrumb-item active" aria-current="page">그룹 및 정책 관리</li>
+                                             <li class="breadcrumb-item active" aria-current="page">기존 그룹 관리</li>
                                         </ol>
                                     </nav>
                                 </div>
@@ -195,6 +140,9 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">정책적용</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="report-tab" data-toggle="tab" href="#report" role="tab" aria-controls="report" aria-selected="false">레포팅</a>
                             </li>
                         </ul>
 
@@ -247,8 +195,8 @@
                              
                          
                             </div>
-                            <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                               
+
+                <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">        
                     <div class="row">
                         <div class="col-xl-1">
                           <label class="custom-control custom-checkbox" style="margin-left: 10px">
@@ -366,11 +314,10 @@
                                 </div>
                              </div>
 
-                        </div>
+                        </div>       
+                    </div>
 
-
-                                
-                            </div>
+                    <!-- 두번째 탭 에이전트 끝 -->
 
                     <div class="tab-pane" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                         <div class="row">
@@ -427,9 +374,99 @@
                                 </div>
                             </div>
 
+                            
+
+<!-- 4번째 탭 레포팅 시작-->
+                <div class="tab-pane" id="report" role="tabpanel" aria-labelledby="report-tab">
+                     
+                    <div class="row">
+                      
+                        <div class="col-xl-3" style="height: 70px">
+                            <div class="input-group input-search">
+                                <input class="form-control" type="text" placeholder="Search "><span class="input-group-btn">
+                                <button class="btn btn-secondary" type="button"><i class="fas fa-search"></i></button></span>
+                            </div>
+                        </div> 
+                    </div>
+                    
+                    <div class="row">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="card" style="height: 290px; overflow: scroll;">
+                                    <h4 class="card-header text-center">레포팅(그룹) 이력 조회 및 다운로드
+</h4>
+                                    <div class="card-body p-0">
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead class="bg-light">
+                                                    <tr class="border-0">
+                                                        <th class="border-0 text-center">번호</th>
+                                                        <th class="border-0 text-center">레포팅 명칭</th>
+                                                        <th class="border-0 text-center">정책 활성화 시간</th>
+                                                        <th class="border-0 text-center">생성시간</th>
+                                                        <th class="border-0 text-center">다운로드</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="text-center">1</td>
+                                                        <td class="text-center">생성시간-그룹ID-그룹명</td>
+                                                        <td class="text-center">2019.02.09.15:30.58</td>
+                                                        <td class="text-center">2019.02.10.15:30.58</td>
+                                                        <td class="text-center">
+                                                            
+                                                            <span class="icon"><i class="fas fa-paperclip"></i> </span>
+                                                        </td>
+                                                    </tr>
+
+                                                   
+                                                     
+                                                </tbody>
+                                            </table>
 
 
-                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <!-- 아래 화살표 1 2 3 4 5 끝 -->
+                                <div class="col-xs-12 ">
+                                    <nav aria-label="Page navigation">
+                                        <div class="col-xs-5"></div>
+                                        <div class="col-xs-4">
+                                            <ul class="pagination" style="text-align: center;">
+                                                <li>
+                                                    <a href="#" aria-label="Previous">
+                                                        <span aria-hidden="true">«</span>
+                                                    </a>
+                                                </li>
+                                                <li class="active"><a href="#">1</a></li>
+                                                <li><a href="#">2</a></li>
+                                                <li><a href="#">3</a></li>
+                                                <li><a href="#">4</a></li>
+                                                <li><a href="#">5</a></li>
+                                                <li>
+                                                    <a href="#" aria-label="Next">
+                                                        <span aria-hidden="true">»</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </nav>
+                                </div>
+                              <!-- 아래 화살표 1 2 3 4 5 끝 -->
+
+                            </div>
+                          
+
+        
+
+                        </div>       
+                    </div>
+
+
+
+                            </div>
+
+<!-- 4번째 탭 레포팅 끝-->
                     </div>
                 </div>
             </div>
