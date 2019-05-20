@@ -6,6 +6,62 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
+    <style type="text/css">
+        .btn-group .btn {
+    transition: background-color .3s ease;
+}
+
+.panel-table .panel-body {
+    padding: 0;
+}
+
+.table > thead > tr > th {
+    border-bottom: none;
+}
+
+.panel-footer, .panel-table .panel-body .table-bordered {
+    border-style: none;
+    margin: 0;
+}
+
+.panel-table .panel-body .table-bordered > thead > tr > th:first-of-type {
+    text-align: center;
+    width: 50px;
+}
+
+.panel-table .panel-body .table-bordered > thead > tr > th.col-tools {
+    text-align: center;
+    width: 120px;
+}
+
+.panel-table .panel-body .table-bordered > thead > tr > th:last-of-type,
+.panel-table .panel-body .table-bordered > tbody > tr > td:last-of-type {
+    border-right: 0;
+}
+
+.panel-table .panel-body .table-bordered > thead > tr > th:first-of-type,
+.panel-table .panel-body .table-bordered > tbody > tr > td:first-of-type {
+    border-left: 0;
+}
+
+.panel-table .panel-body .table-bordered > tbody > tr:first-of-type > td {
+    border-bottom: 0;
+}
+
+.panel-table .panel-body .table-bordered > thead > tr:first-of-type > th {
+    border-top: 0;
+}
+
+.pagination > li > a, .pagination > li > span {
+    border-radius: 50% !important;
+    margin: 0 5px;
+}
+
+.pagination {
+    margin: 0;
+}
+    </style>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css">
     <link href="assets/vendor/fonts/circular-std/style.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/libs/css/style.css">
@@ -22,13 +78,13 @@
     <!-- ============================================================== -->
     <!-- main wrapper -->
     <!-- ============================================================== -->
-    <div class="dashboard-main-wrapper">
+   
         <!-- ============================================================== -->
         <!-- navbar -->
         <!-- ============================================================== -->
 
-
-<div class="dashboard-header">
+<div class="dashboard-main-wrapper">
+    <div class="dashboard-header">
             <nav class="navbar navbar-expand-lg bg-white fixed-top">
                 <a class="navbar-brand" href="../index.html">국가보안연구소</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,11 +92,9 @@
                 </button>
                 <div class="collapse navbar-collapse " id="navbarSupportedContent">
 
-                    
-
                     <ul class="navbar-nav ml-auto navbar-right-top">
                         <li class="nav-item dropdown ">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" active="">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" active=>
                              대쉬보드
                             </a>
                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -75,7 +129,7 @@
                               <a class="dropdown-item" href="#">정책적용</a>
                               <a class="dropdown-item" href="#">레포팅</a>
                               
-                          </div></li>
+                          </li>
 
                           <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -92,50 +146,47 @@
 
                     
                         <li class="nav-item dropdown connection">
-                            <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">사용자 관리 <i class="far fa-sun"></i> </a>
+                            <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">설정 관리 <i class="far fa-sun"></i> </a>
                             <ul class="dropdown-menu dropdown-menu-right connection-dropdown">
                                 <li class="connection-list">
                                     <div class="row">
                                         <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                            <a href="#" class="connection-item"><img src="../assets/images/github.png" alt=""> <span>Github</span></a>
+                                            <a href="#" class="connection-item">
+                                                <span>CPE</span></a>
                                         </div>
                                         <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                            <a href="#" class="connection-item"><img src="../assets/images/dribbble.png" alt=""> <span>Dribbble</span></a>
+                                            <a href="#" class="connection-item"> <span>CCE</span></a>
                                         </div>
                                         <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                            <a href="#" class="connection-item"><img src="../assets/images/dropbox.png" alt=""> <span>Dropbox</span></a>
+                                            <a href="#" class="connection-item"> <span>OVAL</span></a>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                            <a href="#" class="connection-item"><img src="../assets/images/bitbucket.png" alt=""> <span>Bitbucket</span></a>
-                                        </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                            <a href="#" class="connection-item"><img src="../assets/images/mail_chimp.png" alt=""><span>Mail chimp</span></a>
-                                        </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                            <a href="#" class="connection-item"><img src="../assets/images/slack.png" alt=""> <span>Slack</span></a>
-                                        </div>
-                                    </div>
+                                    
                                 </li>
-                                <li>
-                                    <div class="conntection-footer"><a href="#">More</a></div>
-                                </li>
+                               
                             </ul>
                         </li>
                         <li class="nav-item dropdown nav-user">
 
-                            <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">관리자  <img src="../images/wook.png" alt="" class="user-avatar-md rounded-circle"></a>
-                            <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
-                                <div class="nav-user-info">
-                                    <h5 class="mb-0 text-white nav-user-name">
-John Abraham</h5>
-                                    <span class="status"></span><span class="ml-2">Available</span>
-                                </div>
-                                <a class="dropdown-item" href="#"><i class="fas fa-user mr-2"></i>Account</a>
-                                <a class="dropdown-item" href="#"><i class="fas fa-cog mr-2"></i>Setting</a>
-                                <a class="dropdown-item" href="#"><i class="fas fa-power-off mr-2"></i>Logout</a>
-                            </div>
+                            <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">사용자 관리 <img src="../images/wook.png" alt="" class="user-avatar-md rounded-circle"></a>
+                            <ul class="dropdown-menu dropdown-menu-right connection-dropdown">
+                                <li class="connection-list">
+                                    <div class="row">
+                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
+                                            <a href="#" class="connection-item">
+                                                <span>로그인</span></a>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
+                                            <a href="#" class="connection-item"> <span>로그아웃</span></a>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
+                                            <a href="#" class="connection-item"> <span>정보변경</span></a>
+                                        </div>
+                                    </div>
+                                    
+                                </li>
+                               
+                            </ul>
                         </li>
                     </ul>
                 </div>
@@ -159,31 +210,189 @@ John Abraham</h5>
         <div class="">
             <div class="dashboard-ecommerce">
                 <div class="container-fluid dashboard-content ">
-                    <!-- ============================================================== -->
-                    <!-- pageheader  -->
-                    <!-- ============================================================== -->
-                   
                     <div class="row">
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div class="page-header">
-                                <h2 class="pageheader-title">대쉬보드 </h2>
+                                <h2 class="pageheader-title">그룹 및 정책 관리 </h2>
                                 <div class="page-breadcrumb">
                                     <nav aria-label="breadcrumb">
                                         <ol class="breadcrumb">
                                             <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">MENU</a></li>
                                             <li class="breadcrumb-item active" aria-current="page">대쉬보드</li>
+                                            <li class="breadcrumb-item active" aria-current="page">그룹 및 정책 관리</li>
                                         </ol>
                                     </nav>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- ============================================================== -->
-                    <!-- end pageheader  -->
-                    <!-- ============================================================== -->
-                  
+        <!-- ============================================================== -->
+        <!-- end pageheader  -->
+        <!-- ============================================================== -->
+
+        <!-- ============================================================== -->
+        <!-- Search Bar 시작 -->
+        <!-- ============================================================== -->
+        <div class="ecommerce-widget">
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="card" style="height: 600px; overflow: scroll;">
+        
+                        <div class="card-header">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 text-right">
+                                <button type="submit" class="btn btn-space btn-primary"> 신규 그룹 생성</button> 
+                            </div>
+                        </div>
+
+                <div class="card-body p-0">                    
+                <!-- ============================================================== -->
+                <!-- 안에 테이블 시작 -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-default panel-table">
+                            <!-- ============================================================== -->
+                            <!--  판넬 헤딩(수정(내용조회,삭제 들어가는 부분)) -->
+                            <!-- ============================================================== -->
+                            <div class="panel-heading">
+                                <div class="row">
+
+                                    <div class="col-xl-1" style="height: 70px"> <!-- check box left side-->
+                                        <form>
+                                            <label class="custom-control custom-checkbox">
+                                                <input type="checkbox" id="checkall" onclick="test()"class="custom-control-input"><span class="custom-control-label">모두 선택</span>
+                                            </label>
+                                        </form>
+                                       
+                                    </div>
+
+                                    <div class="col-xl-3" style="height: 70px">
+                                        <div class="input-group input-search">
+                                            <input class="form-control" type="text" placeholder="Search "><span class="input-group-btn">
+                                            <button class="btn btn-secondary" type="button"><i class="fas fa-search"></i></button></span>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col col-xs-3 text-right">
+                                        <div class="pull-right">
+                                            <div class="btn-group" data-toggle="buttons">
+                                                <label class="btn btn-success btn-filter active" data-target="completed">
+                                                    <input type="radio" name="options" id="option1" autocomplete="off"/>
+                                                    수정(내용조회)
+                                                </label>
+                                                <label class="btn btn-warning btn-filter" data-target="pending">
+                                                    <input type="radio" name="options" id="option2" autocomplete="off"> 삭제
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ============================================================== -->
+                            <!--  판넬 바디 시작(그룹명 정책명 이런거 들어가는거) -->
+                            <!-- ============================================================== -->
+                            <div class="panel-body">
+                                <table id="mytable" class="table table-bordered">
+            
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                             <label class="custom-control custom-checkbox">
+                                                <input type="checkbox" id="checkall" onclick="test()"class="custom-control-input"><span class="custom-control-label"></span>
+                                            </label>
+                                        </td>
+                                        <td colspan="2">그룹 3(1일)</td>
+                                        <td colspan="2">오프라인 정보시스템 포함</td>
+                                        <td> 정책활성
+                                            <div class="switch-button switch-button-yesno">
+                                                <input type="checkbox" checked="" name="switch19" id="switch19"><span>
+                                                <label for="switch19"></label></span>
+                                            </div>
+                                        </td>
+                                       
+                                    </tr>
+
+                                    <tr>   
+                                        <td> - 그룹명</td>
+                                        <td colspan="4">기관보안관리를 위한 필수정책 ver 3</td>
+                                        <td> 긴급점검 <div class="switch-button switch-button-danger">
+                                                        <input type="checkbox" checked="" name="switch18" id="switch18"><span>
+                                                               <label for="switch18"></label></span>
+                                                    </div> </td>
+                                    </tr>
+
+                                    <tr>   
+                                        <td>- 그룹설명</td>
+                                        <td colspan="4">기관 보안관리 수준을 준수하기 위한 필수 정책 50가지, 2019년 3월 10일 기준</td>
+                                        <td>
+                                         <i class="fas fa-cloud-upload-alt"></i> 오프라인 점검 결과 업로드 
+
+                                        </div>
+                             
+                                                   
+                                        </td>
+                                    </tr>
+
+                                     <tr>   
+                                        <td colspan="2">- 생성시간 (2019.01.02.10:20:20)</td>
+                                        <td colspan="2">- 활성화 시간 (2019.01.30.15:30:55)</td>
+                                        <td colspan="2">- 에이전트 수 (100)</td>
+                                    </tr>      
+                                    </tbody>
+
+
+                                </table>
+
+                            </div>
+
+                    <!-- 패널 푸터 시작-->       
+
+                            <div class="panel-footer">
+                                <div class="row">
+                                    <div class="col-xs-12 ">
+                                        <nav aria-label="Page navigation">
+                                            <div class="col-xs-5"></div>
+                                            <div class="col-xs-4">
+                                            <ul class="pagination" style="text-align: center;">
+                                                <li>
+                                                    <a href="#" aria-label="Previous">
+                                                        <span aria-hidden="true">«</span>
+                                                    </a>
+                                                </li>
+                                                <li class="active"><a href="#">1</a></li>
+                                                <li><a href="#">2</a></li>
+                                                <li><a href="#">3</a></li>
+                                                <li><a href="#">4</a></li>
+                                                <li><a href="#">5</a></li>
+                                                <li>
+                                                    <a href="#" aria-label="Next">
+                                                        <span aria-hidden="true">»</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                    <!-- 패널 푸터 끝-->
+
+                        </div>
+                    </div>
+                </div>
+                <!-- 테이블 끝-->
+                </div> 
+                <!-- 카드 바디 끝-->
+
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+    </div>
+    </div>
+    </div>
             <!-- ============================================================== -->
             <!-- footer -->
             <!-- ============================================================== -->
@@ -191,7 +400,7 @@ John Abraham</h5>
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                             Copyright © 2018 Concept. All rights reserved. Dashboard by 중앙대학교
+                             Copyright © 2018 Concept. All rights reserved. Dashboard by 중앙대학교</a>
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
                             <div class="text-md-right footer-links d-none d-sm-block">
@@ -206,7 +415,7 @@ John Abraham</h5>
             <!-- ============================================================== -->
             <!-- end footer -->
             <!-- ============================================================== -->
-        </div>
+       
         <!-- ============================================================== -->
         <!-- end wrapper  -->
         <!-- ============================================================== -->
@@ -235,8 +444,13 @@ John Abraham</h5>
     <script src="assets/vendor/charts/c3charts/d3-5.4.0.min.js"></script>
     <script src="assets/vendor/charts/c3charts/C3chartjs.js"></script>
     <script src="assets/libs/js/dashboard-ecommerce.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript">
+        
+        
 
- 
+    </script>
 </body>
  
 </html>
