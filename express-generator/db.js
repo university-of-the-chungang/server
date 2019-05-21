@@ -139,8 +139,87 @@ let view_admin = (column_name) => {
         });
     });
 };
-
-let add_admin = (data) => {
+// 그룹 점검 활성화/비활성화 (default : 비활성화)
+exports.change_group_state = (group_set_cd,state=false)=>{
+    return new Promise((resolve,reject)=>{
+        let query = `UPDATE TBL_GROUP_INFO SET ACTIVE_STATE = `;
+        query += state?`'A'`:`'D'`;
+        query += ` WHERE GROUP_SET_CD = `+group_set_cd;
+        new sql.Request().query(query,(err,result)=>{
+            if (err) {
+                reject(err);
+            }
+            resolve(result);
+        });
+    });
+};
+// 그룹 정보 삭제 (데이터베이스에서 날리지 않고 DEL_FLAG를 1로 설정)
+exports.delete_group_info= (group_set_cd)=>{
+    return new Promise((resolve,reject)=>{
+        let query = `UPDATE TBL_GROUP_INFO SET DEL_FLAG = 1 WHERE GROUP_SET_CD = `+group_set_cd;
+        new sql.Request().query(query,(err,result)=>{
+            if (err) {
+                reject(err);
+            }
+            resolve(result);
+        });
+    });
+}
+//몇번째 XCCDF_CD인지 조회 
+exports.get_new_xccdf_cd= ()=>{
+    return new Promise((resolve,reject)=>{
+      let query = `SELECT COUNT(XCCDF_CD) as cnt FROM TBL_XCCDF`;
+      new sql.Request().query(query,(err,result)=>{
+        if (err) {
+            reject({new_xccdf_cd:err});
+        }
+        resolve({new_xccdf_cd:result.recordset[0].cnt+1});
+      });  
+    });
+};
+exports.put_xccdf = (xccdf_cd,file_name,file_path,inspect_os)=>{
+    return new Promise((resolve,reject)=>{
+        let query = `INSERT INTO TBL_XCCDF (XCCDF_CD, FILE_NAME, FILE_PATH, INSPECT_OS) VALUES (`+xccdf_cd+`, '`+file_name+`', '`+file_path+`', '`+inspect_os+`')`;
+        new sql.Request().query(query,(err,result)=>{
+            if (err) {
+                reject({new_xccdf_cd:err});
+            }
+            resolve({new_xccdf_cd:result});
+          });
+    });
+};
+exports.view_tbl_xccdf = ()=>{
+    return new Promise((resolve,reject)=>{
+        new sql.Request().query(`SELECT * FROM TBL_XCCDF `,(err,result)=>{
+            if (err){
+                reject(err);
+            }
+            resolve(result);
+        });
+    });
+}
+exports.mapping_xccdf_group = (xccdf_cd,group_set_cd)=>{
+    return new Promise((resolve,reject)=>{
+        let query = `INSERT INTO TBL_XCCDF_SET_LIST (GROUP_SET_CD, XCCDF_CD) VALUES (`+group_set_cd+`, `+xccdf_cd+`)`;
+        new sql.Request().query(query,(err,result)=>{
+            if (err) {
+                reject({mapping_xccdf_group:err});
+            }
+            resolve({mapping_xccdf_group:result});
+          });
+    });
+};
+exports.view_tbl_xccdf_set_list = ()=>{
+    return new Promise((resolve,reject)=>{
+        new sql.Request().query(`SELECT * FROM TBL_XCCDF_SET_LIST `,(err,result)=>{
+            if (err){
+                reject(err);
+            }
+            resolve(result);
+        });
+    });
+}
+exports.add_admin = (data) => {
     return new Promise((resolve, reject) => {
         let query = `INSERT INTO TBL_ADMIN_INFO (NAME, PASSWD, TEL_NO, EMAIL, DIVISION, POSITION, LOCK_STAT, FROM_DATE, TO_DATE, ROLE_CD, LOCK_COUNT, LOCK_DATE, LAST_LOGIN) VALUES(`;
         let arr = [];
@@ -155,7 +234,7 @@ let add_admin = (data) => {
         arr.push(`'` + data.to_date + `'`);
         arr.push(data.role_cd);
         arr.push(data.lock_count);
-        arr.push(`'` + data.lock_date + `'`);
+        arr.push(`NULL`);
         arr.push(`'` + data.last_login + `'`);
         query += arr.join(", ");
         query += `)`
@@ -166,6 +245,19 @@ let add_admin = (data) => {
             }
             resolve(result);
         })
+    });
+};
+exports.add_group_info = (name,create_time,active_time,agent_counting,inspection_period,discription)=>{
+    return new Promise((resolve,reject)=>{
+        let query = `INSERT INTO TBL_GROUP_INFO (NAME, CREATE_TIME, ACTIVE_TIME, AGENT_COUNTING, ACTIVE_STATE, INSPECTION_PERIOD, DEL_FLAG, DISCRIPTION) 
+        VALUES ('`+name+`', CONVERT(CHAR(19), '`+create_time+`', 20), CONVERT(CHAR(19), '`+active_time+`',20), `+agent_counting+`, 'A',  CONVERT(CHAR(19),'`+inspection_period+`', 20), 0, '`+discription+`')`;
+        
+        new sql.Request().query(query,(err,result)=>{
+            if (err) {
+                reject(err);
+            }
+            resolve(result);
+        });
     });
 
 };
