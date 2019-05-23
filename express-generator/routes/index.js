@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 const express = require('express');
@@ -36,9 +37,17 @@ router.get('/changeinfo', function(req, res, next) {
 
 // User 기능과 관련된 페이지 끝
 router.get('/agent', function(req, res, next) {
-  res.render('./main/Agent/agent');
+  DB.get_agent_info().then(result=>{
+    res.render('./main/Agent/agent',result);
+  });
 });// 에이전트 페이지
-
+router.post('/add_manual_agent',(req,res,next)=>{
+  console.log(req.body);
+  DB.add_agent_info(req.body.txtIP,req.body.txtMac,req.body.txtOS,req.body.txtUseful,req.body.txtOwner,req.body.txtDesc).then(result=>{
+    console.log(result);
+    res.render('./main/Agent/agent');
+  });
+});
 
 
 router.get('/log', function(req, res, next) {

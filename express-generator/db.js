@@ -261,3 +261,14 @@ exports.add_group_info = (name,create_time,active_time,agent_counting,inspection
     });
 
 };
+exports.add_agent_info = (ip,mac,os,purpose,owner,desc)=>{
+    return new Promise((resolve,reject)=>{
+        let query = `INSERT INTO TBL_AGENT_INFO (IP, MAC_ADDR, OS, PURPOSE, OWNER, DEL_FLAG, DISCRIPTION ) VALUES('`+ip+`', '`+mac+`', '`+os+`', '`+purpose+`', '`+owner+`', 0, '`+desc+`')`;
+        new sql.Request().query(query,(err,result)=>{
+            if(err){
+                reject(err);
+            }
+            resolve(result);
+        });
+    });
+};
