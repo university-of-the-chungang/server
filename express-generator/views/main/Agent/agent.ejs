@@ -121,35 +121,35 @@
 
             <div class="row">
                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                  <div class="card" style="height: 500px; overflow: scroll;">
+                  <div class="card" style="height: 400px; overflow: scroll;">
                     
                     <div class="card-body p-0">
 \   
-                        <div class="row"> 
-                            <div class="col-xl-3">
-                              <label class="custom-control custom-checkbox" style="margin-left: 50px">
+                        <div class="row" style="margin-top: 10px; margin-bottom: 30px;"> 
+                            <div class="col-xl-2">
+                              <label class="custom-control custom-checkbox" style="margin-left: 60px">
                                 <input id="ck1" name="ck1" type="checkbox" class="custom-control-input"><span class="custom-control-label">모두 선택</span>
                               </label>
                             </div>
 
-                            <div class="col-xl-5" style="height: 70px">
+                            <div class="col-xl-3" style="margin-right: 15px;">
                                 <div class="input-group input-search">
-                                    <input class="form-control" type="text" placeholder="Search "><span class="input-group-btn">
+                                    <input class="form-control" type="text"><span class="input-group-btn">
                                     <button class="btn btn-secondary" type="button"><i class="fas fa-search"></i></button></span>
                                 </div>
                             </div>
-
-                            <button type="submit" class="btn btn-space btn-primary">정보수정</button>
-
-                            <button type="submit" class="btn btn-space btn-primary">등록</button>
-
-                            <button type="submit" class="btn btn-space btn-primary">삭제</button>
-
-                            <div class="float-right icon-circle-medium  icon-box-lg  bg-info-light mt-1">
+                        
+                        <div class="col-xl-4">
+                            <a href="#" class="btn btn-rounded btn-success" style="margin-right: 10px; width: 150px;">정보수정</a>
+                           
+                            <a href="#" class="btn btn-rounded btn-primary" style="margin-right: 10px; width: 150px;"> 등록 </a>
                             
-                            <i class="fa fa-eye fa-fw fa-sm text-info"><h5>갱신</h5></i>
-                                
-                                </div>
+                            <a href="#" class="btn btn-rounded btn-danger" style="width: 150px;"> 삭제 </a>
+                        </div>
+                            
+                            <div class="col-xl-1"><span><h4>900(20)/1000</h4></span></div>
+                            <div class="col-sm-1 col-md-1 col-lg-1 f-icon"><i class="fas fa-redo"></i></div>
+                          
                             
                         </div>
                 
@@ -165,10 +165,10 @@
                                         <th class="border-0 text-center">소유자</th>
                                         <th class="border-0 text-center">요청시간</th>
                                         <th class="border-0 text-center">등록시간</th>
-                                        <th class="border-0 text-center">삭제</th>
                                     </tr>
                                 </thead>
-                                <tbody>      
+                                <tbody>
+
                                 </tbody>
                             </table>
                         </div>
@@ -178,10 +178,11 @@
             </div>
 
 <!-- ============================================================== -->
-<!-- 숫자 네비게이션 [1][2][3][4][5][6][7] 시작  얘를 가운대로 어떻게 보낼까...-->
+<!-- 숫자 네비게이션 [1][2][3][4][5][6][7] 시작  ...-->
 <!-- ============================================================== -->
-
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" >
+            <div class="row">
+                <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-5"></div>
+                <div class="col-xl-7 col-lg-7 col-md-7 col-sm-7 col-7" style="margin-bottom: 30px" >
                     <div class="">
                         <nav aria-label="Demo of active current page number">
                             <ul class="pagination">
@@ -203,23 +204,30 @@
 
                                 <li class="page-item"><a class="page-link" href="#">Next</a></li>
                             </ul>
-
+                        </nav>
+                    </div>
+                </div>
+            </div>
                         <div class= "row">
-                        <div class="col-xl-7 col-lg-7 col-md-7 col-sm-7 col-7">
+
+                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
+                        <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-5">
                             <div class="card">
-                                <div class="card-header"><h3 style="text-align: center;">후보에이전트 등록/일괄정보갱신</h3>
-                                </div>
+
+                                <div class="card-header"><h3 style="text-align: center;">후보에이전트 등록/일괄정보갱신</h3></div>
                                 
                                 <div class="card-body">
-                                    <div class="row">
+                                    <div class="row">   
+                                    <div class="col-xl-1"></div>
 
-                                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2" style="margin-right: 70px; margin-left: 70px;">
-                                        <button type="submit" class="btn btn-dark active">1.엑셀입력(일괄입력)</button>
-                                        </div>
+                                         <a href="#" class="btn btn-success btn-lg" style="width: 170px;">1. 엑셀입력 </a>
 
-                                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2" >
+                                         <a href="#" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModal"style="width: 170px; margin-left: 15px;">2. 수동입력 </a>
+                                         <a href="#" class="btn btn-secondary btn-lg" style="width: 170px; margin-left: 15px">3. 등록정보갱신 </a>
+
+                                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1" ></div>
                                         
-                                         <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">2.수동입력</a>
+                                        
 
                                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="display: none;">
                                     <div class="modal-dialog" role="document">
@@ -233,58 +241,75 @@
 
 
                                     <div class="modal-body">
-                                                   <form>
+                                        <form action="채워넣으시오" method="채워넣으시오">
                                             <div class="form-group">
-                                                <label for="inputText3" class="col-form-label">IP</label>
-                                                <input id="inputText3" type="number" class="form-control">
+                                                <label for="inputText1" class="col-form-label">IP</label>
+                                                <input id="채워넣으시오" type="text" class="form-control">
                                             </div>
+
                                             <div class="form-group">
-                                                <label for="inputText4">운영체제 버전</label>
-                                                <input id="inputText4" type="text" placeholder="Windows 10" class="form-control">
+                                                <label for="inputText2">MAC Address</label>
+                                                <input id="채워넣으시오" type="text"  class="form-control">
                                             </div>
+
+                                            <div class="form-group">
+                                                <label for="inputText3">운영체제 버전</label>
+                                                <input id="채워넣으시오" type="text"  class="form-control">
+                                            </div>
+
                                             <div class="form-group">
                                                 <label for="inputText4" class="col-form-label">용도</label>
-                                                <input id="inputText4" type="text" class="form-control" placeholder="Numbers">
+                                                <input id="채워넣으시오" type="text" class="form-control" >
                                             </div>
                                             <div class="form-group">
-                                                <label for="inputText4">소유자</label>
-                                                <input id="inputText4" type="text"  class="form-control">
+                                                <label for="inputText5">소유자</label>
+                                                <input id="채워넣으시오" type="text"  class="form-control">
                                             </div>
-                                           
+
+                                            <div class="form-group">
+                                                <label for="inputText6">설명</label>
+                                                <input id="채워넣으시오" type="text"  class="form-control">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="inputText7">상태</label>
+                                                <input id="채워넣으시오" disabled="disabled" type="text" placeholder="C" class="form-control">
+                                            </div>
                                         </form>
-
-
                                     </div>
-                                                <div class="modal-footer">
-                                                    <a href="#" class="btn btn-secondary" data-dismiss="modal">닫기</a>
-                                                    <a href="#" class="btn btn-primary">변경 저장</a>
-                                                </div>
+
+                                    <div class="modal-footer">
+                                        <a href="#" class="btn btn-secondary" data-dismiss="modal">닫기</a>
+                                        <a href="#" class="btn btn-primary" type="submit">변경 저장</a>
+                                    </div>
                                             </div>
                                         </div>
                                     </div>        
 
                                         </div>
 
-                                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2" style="margin-right: 50px;">
-                                        <button type="submit" class="btn btn-info">3.등록정보갱신(일괄)</button>
-                                        </div>
+                                   
                                     </div>
                                 </div>
                             </div>
-                            
-                            </div>
+                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 style="text-align: center;">오프라인 정보시스템 등록</h3>
+                                </div>
 
-                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h3 style="text-align: center;">오프라인 정보시스템 등록</h3>
-                                    </div>
-                                    <div class="card-body">
-                                        
-                                        <a href="#" class="btn btn-warning active" style="margin-left: 70px">오프라인 정보시스템 등록</a>
-                                    </div>
+                                <div class="card-body">
+                                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
+                                    <a href="#" class="btn btn-warning btn-lg" style="width: 300px; margin-left:100px;">오프라인 정보시스템 등록</a>
+                                  
                                 </div>
                             </div>
+                        </div>
+
+                    </div>
+
+                       
 
                         </div>
                         </nav>
