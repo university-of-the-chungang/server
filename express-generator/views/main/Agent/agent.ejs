@@ -150,8 +150,76 @@
                                         </div>
 
                                         <div class="col-xl-4">
-                                            <a href="#" class="btn btn-rounded btn-success"
-                                                style="margin-right: 10px; width: 150px;">정보수정</a>
+                                            <a href="#" class="btn btn-rounded btn-success" data-toggle="modal" data-target="#changeinfomodal" style="margin-right: 10px; width: 150px;">정보수정</a>
+
+
+                                <!-- 정부 수정 모달 시작  -->
+                                <!-- ================================ -->         
+                                <!-- ================================ -->
+
+                                <div class="modal fade" id="changeinfomodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="display: none;">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">정보수정</h5>
+                                            <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                            </a>
+                                            </div>
+
+
+                                    <div class="modal-body">
+                                        <form action="채워넣으시오" method="채워넣으시오">
+                                            <div class="form-group">
+                                                <label for="inputText1" class="col-form-label">IP</label>
+                                                <input id="채워넣으시오" type="text" class="form-control">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="inputText2">MAC Address</label>
+                                                <input id="채워넣으시오" type="text"  class="form-control">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="inputText3">운영체제 버전</label>
+                                                <input id="채워넣으시오" type="text"  class="form-control">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="inputText4" class="col-form-label">용도</label>
+                                                <input id="채워넣으시오" type="text" class="form-control" >
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputText5">소유자</label>
+                                                <input id="채워넣으시오" type="text"  class="form-control">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="inputText6">설명</label>
+                                                <input id="채워넣으시오" type="text"  class="form-control">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="inputText7">상태</label>
+                                                <input id="채워넣으시오" disabled="disabled" type="text" placeholder="" class="form-control">
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <a href="#" class="btn btn-secondary" data-dismiss="modal">닫기</a>
+                                        <a href="#" class="btn btn-primary" type="submit">변경 저장</a>
+                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>   
+
+                                <!-- 정부 수정 모달 끝  -->
+                                <!-- ================================ -->         
+                                <!-- ================================ -->
+
+
+
 
                                             <a href="#" class="btn btn-rounded btn-primary"
                                                 style="margin-right: 10px; width: 150px;"> 등록 </a>
@@ -195,7 +263,17 @@
                                                                 class="custom-control-label"
                                                                 style="position: absolute;left:40%; top:0"></span></label>
                                                     </td>
+
                                                     <td><%= recordsets[0][i].STATE %></td>
+
+                                                    <!-- 여기에 STATE 값 별로 그림 이미지좀 출력해줘 -->
+                                                    <!-- 이미지는 public/assets/images 에 넣어놓을꼐-->
+                                                    <!-- 흰색/검은색/파란색/빨간색/주황색 존재 PPT  4page참고
+                                                
+                                                    <img src="../assets/images/avatar-2.jpg" alt="User Avatar" class="rounded-circle user-avatar-lg">
+                                                    
+                                                     -->
+
                                                     <td><%= recordsets[0][i].IP %></td>
                                                     <td><%= recordsets[0][i].OS %></td>
                                                     <td><%= recordsets[0][i].PURPOSE %></td>
@@ -350,8 +428,76 @@
 
                                 <div class="card-body">
                                     <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
-                                    <a href="#" class="btn btn-warning btn-lg"
-                                        style="width: 300px; margin-left:100px;">오프라인 정보시스템 등록</a>
+                                    
+
+
+                                       <a href="#" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#offlinemodal" style="width: 300px; margin-left:100px;">오프라인 정보시스템 등록</a>
+                      
+
+                                <!-- 오프라인 정보시스템 등록 모달 시작  -->
+                                <!-- ================================ -->         
+                                <!-- ================================ -->
+
+                                <div class="modal fade" id="offlinemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="display: none;">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">오프라인 정보시스템 등록</h5>
+                                            <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                            </a>
+                                            </div>
+
+
+                                    <div class="modal-body">
+                                        <form action="채워넣으시오" method="채워넣으시오">
+                                            <div class="form-group">
+                                                <label for="inputText1" class="col-form-label">IP</label>
+                                                <input id="채워넣으시오" type="text" class="form-control">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="inputText2">MAC Address</label>
+                                                <input id="채워넣으시오" type="text"  class="form-control">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="inputText3">운영체제 버전</label>
+                                                <input id="채워넣으시오" type="text"  class="form-control">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="inputText4" class="col-form-label">용도</label>
+                                                <input id="채워넣으시오" type="text" class="form-control" >
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputText5">소유자</label>
+                                                <input id="채워넣으시오" type="text"  class="form-control">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="inputText6">설명</label>
+                                                <input id="채워넣으시오" type="text"  class="form-control">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="inputText7">상태</label>
+                                                <input id="채워넣으시오" disabled="disabled" type="text" placeholder="오프라인" class="form-control">
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <a href="#" class="btn btn-secondary" data-dismiss="modal">닫기</a>
+                                        <a href="#" class="btn btn-primary" type="submit">변경 저장</a>
+                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>   
+
+                                    <!-- 오프라인 정보시스템 등록 모달 종료  -->
+                                    <!-- ================================ -->         
+                                    <!-- ================================ -->
 
                                 </div>
                             </div>
