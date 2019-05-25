@@ -43,7 +43,9 @@ router.get('/agent', function (req, res, next) {
   });
 });// 에이전트 페이지
 router.post('/add_manual_agent', (req, res, next) => {
-  let arr = [req.body.txtIP, req.body.txtMac, req.body.txtOS, req.body.txtUseful, req.body.txtOwner, req.body.txtDesc];
+  let arr = [req.body.txtIP, req.body.txtMac, req.body.txtOS, req.body.txtUseful, req.body.txtOwner, req.body.txtDesc,req.body.state];
+  
+
   let isnull = false;
   arr.forEach(element => {
     if (element.length === 0) {
@@ -52,13 +54,12 @@ router.post('/add_manual_agent', (req, res, next) => {
   });
   if (isnull) {
     DB.get_agent_info().then(result => {
-        result['reason'] = 'error';
+      result['reason'] = 'error';
       res.render('./main/Agent/agent', result);
     });
   } else {
-    DB.add_agent_info(req.body.txtIP, req.body.txtMac, req.body.txtOS, req.body.txtUseful, req.body.txtOwner, req.body.txtDesc).then(result => {
+    DB.add_agent_info(req.body.txtIP, req.body.txtMac, req.body.txtOS, req.body.txtUseful, req.body.txtOwner, req.body.txtDesc, req.body.state).then(result => {
       DB.get_agent_info().then(result2 => {
-        console.log(result2);
         res.render('./main/Agent/agent', result2);
       });
     });
