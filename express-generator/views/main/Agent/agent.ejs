@@ -652,7 +652,6 @@
             } else {
                 let idx = $("input[class='custom-control-input chkbox']:checked")[0].id;
                 let recordsets = JSON.parse('<%- JSON.stringify(recordsets[0]) %>');
-                console.log(recordsets[idx]);
                 $('#editID').val(recordsets[idx].AGENT_CD)
                 $('#editIP').val(recordsets[idx].IP);
                 $('#editMAC').val(recordsets[idx].MAC_ADDR);
