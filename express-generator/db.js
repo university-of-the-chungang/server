@@ -272,3 +272,29 @@ exports.add_agent_info = (ip,mac,os,purpose,owner,desc,state)=>{
         });
     });
 };
+
+exports.update_agent_info = (cd,ip,mac,os,purpose,owner,desc,state)=>{
+    return new Promise((resolve,reject)=>{
+        let query = `UPDATE TBL_AGENT_INFO SET IP='${ip}', MAC_ADDR = '${mac}', OS = '${os}', PURPOSE = '${purpose}', OWNER = '${owner}', DEL_FLAG = 0, DISCRIPTION = '${desc}', STATE = '${state}' WHERE AGENT_CD = '${cd}'`;
+        new sql.Request().query(query,(err,result)=>{
+            if(err){
+                reject(err);
+            }
+
+            resolve(result);
+        });
+    });
+};
+exports.activate_agent_info = (agent_cd) =>{
+    return new Promise((resolve,reject)=>{
+        let query = `UPDATE TBL_AGENT_INFO SET STATE = 'C-2' WHERE AGENT_CD = ${agent_cd}`;
+        console.log(query);
+        new sql.Request().query(query,(err,result)=>{
+            if(err){
+                reject(err);
+            }
+
+            resolve(result);
+        });
+    });
+}

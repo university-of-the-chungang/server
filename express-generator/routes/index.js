@@ -38,7 +38,6 @@ router.get('/changeinfo', function (req, res, next) {
 // User 기능과 관련된 페이지 끝
 router.get('/agent', function (req, res, next) {
   DB.get_agent_info().then(result => {
-    console.log(result);
     res.render('./main/Agent/agent', result);
   });
 });// 에이전트 페이지
@@ -65,8 +64,36 @@ router.post('/add_manual_agent', (req, res, next) => {
     });
   }
 });
+router.post('/update_agent_info',(req,res,next)=>{
+  let arr = [req.body.txtIP, req.body.txtMac, req.body.txtOS, req.body.txtUseful, req.body.txtOwner, req.body.txtDesc,req.body.state];
+  let cd = req.body.cd;
 
-
+  let isnull = false;
+  arr.forEach(element => {
+    if (element.length === 0) {
+      isnull = true;
+    }
+  });
+  if (isnull) {
+    DB.get_agent_info().then(result => {
+      result['reason'] = 'error';
+      res.render('./main/Agent/agent', result);
+    });
+  } else {
+    DB.update_agent_info(cd,req.body.txtIP, req.body.txtMac, req.body.txtOS, req.body.txtUseful, req.body.txtOwner, req.body.txtDesc, req.body.state).then(result => {
+      DB.get_agent_info().then(result2 => {
+        res.render('./main/Agent/agent', result2);
+      });
+    });
+  }
+});
+router.post('/activate_agent_info',(req,res,next)=>{
+  DB.activate_agent_info(req.body.agent_cd).then(result=>{
+    DB.get_agent_info().then(result2 => {
+      res.render('./main/Agent/agent', result2);
+    });
+  });
+});
 router.get('/log', function (req, res, next) {
   res.render('./main/Log/log');
 }); // 평가문항 및 로그 추출 페이지

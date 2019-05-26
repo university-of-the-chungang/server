@@ -150,9 +150,9 @@
                                         </div>
 
                                         <div class="col-xl-4">
-                                            <a href="#" class="btn btn-rounded btn-success" data-toggle="modal"
-                                                data-target="#changeinfomodal"
-                                                style="margin-right: 10px; width: 150px;">정보수정</a>
+                                            <button href="#" class="btn btn-rounded btn-success"
+                                                data-target="#changeinfomodal" id="changeAgentInfoBtn"
+                                                style="margin-right: 10px; width: 150px;">정보수정</button>
 
 
                                             <!-- 정부 수정 모달 시작  -->
@@ -172,53 +172,60 @@
                                                             </a>
                                                         </div>
 
-
-                                                        <div class="modal-body">
-                                                            <form action="채워넣으시오" method="채워넣으시오">
+                                                        <form action="/update_agent_info" method="POST">
+                                                            <div class="modal-body">
+                                                                <input type="hidden" name="cd" id="editID" value="">
                                                                 <div class="form-group">
                                                                     <label for="inputText1"
                                                                         class="col-form-label">IP</label>
-                                                                    <input id="채워넣으시오" type="text" class="form-control">
+                                                                    <input name="txtIP" type="text" id="editIP"
+                                                                        class="form-control">
                                                                 </div>
 
                                                                 <div class="form-group">
                                                                     <label for="inputText2">MAC Address</label>
-                                                                    <input id="채워넣으시오" type="text" class="form-control">
+                                                                    <input name="txtMac" type="text" id="editMAC"
+                                                                        class="form-control">
                                                                 </div>
 
                                                                 <div class="form-group">
                                                                     <label for="inputText3">운영체제 버전</label>
-                                                                    <input id="채워넣으시오" type="text" class="form-control">
+                                                                    <input name="txtOS" type="text" id="editOS"
+                                                                        class="form-control">
                                                                 </div>
 
                                                                 <div class="form-group">
                                                                     <label for="inputText4"
                                                                         class="col-form-label">용도</label>
-                                                                    <input id="채워넣으시오" type="text" class="form-control">
+                                                                    <input name="txtUseful" type="text" id="editUseful"
+                                                                        class="form-control">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="inputText5">소유자</label>
-                                                                    <input id="채워넣으시오" type="text" class="form-control">
+                                                                    <input name="txtOwner" type="text" id="editOwner"
+                                                                        class="form-control">
                                                                 </div>
 
                                                                 <div class="form-group">
                                                                     <label for="inputText6">설명</label>
-                                                                    <input id="채워넣으시오" type="text" class="form-control">
+                                                                    <input name="txtDesc" type="text" id="editDesc"
+                                                                        class="form-control">
                                                                 </div>
 
                                                                 <div class="form-group">
                                                                     <label for="inputText7">상태</label>
-                                                                    <input id="채워넣으시오" disabled="disabled" type="text"
-                                                                        placeholder="" class="form-control">
+                                                                    <input disabled="disabled" type="text" value="" id="editState"
+                                                                        class="form-control">
+                                                                    <input type="hidden" name="state" value="O" id="editStateValue">
                                                                 </div>
-                                                            </form>
-                                                        </div>
+                                                            </div>
 
                                                         <div class="modal-footer">
                                                             <a href="#" class="btn btn-secondary"
                                                                 data-dismiss="modal">닫기</a>
-                                                            <a href="#" class="btn btn-primary" type="submit">변경 저장</a>
+                                                            <button href="#" class="btn btn-primary" type="submit">변경 저장</button>
                                                         </div>
+                                                    </form>
                                                     </div>
                                                 </div>
                                             </div>
@@ -229,16 +236,18 @@
 
 
 
-
-                                            <a href="#" class="btn btn-rounded btn-primary"
-                                                style="margin-right: 10px; width: 150px;"> 등록 </a>
+                                            <form action="/activate_agent_info" method="POST">
+                                                <input type="hidden" name="agent_cd" id="agent_cd" value="">
+                                            <button href="#" class="btn btn-rounded btn-primary"
+                                                style="margin-right: 10px; width: 150px;" id="activateBtn"> 등록 </button>
+                                                </form>
 
                                             <a href="#" class="btn btn-rounded btn-danger" style="width: 150px;"> 삭제
                                             </a>
                                         </div>
 
                                         <div class="col-xl-1"><span>
-                                                <h4>900(20)/1000</h4>
+                                                <h4>900(20)/<%=recordsets[0].length %></h4>
                                             </span></div>
                                         <div class="col-sm-1 col-md-1 col-lg-1 f-icon" onclick="location.reload();"><i
                                                 class="fas fa-redo"></i></div>
@@ -268,7 +277,7 @@
                                                 <tr style="text-align: center">
                                                     <td style="text-align:center; vertical-align: middle;"><label
                                                             class="custom-control custom-checkbox"><input
-                                                                type="checkbox"
+                                                                type="checkbox" id='<%=i %>'
                                                                 class="custom-control-input chkbox"><span
                                                                 class="custom-control-label"
                                                                 style="position: absolute;left:40%; top:0"></span></label>
@@ -623,7 +632,57 @@
             if (chk) $(".chkbox").prop('checked', true);
             else $(".chkbox").prop('checked', false);
         });
-
+        $('#activateBtn').click((e)=>{
+            let cnt = $("input[class='custom-control-input chkbox']:checked").length;
+            if (cnt !== 1) {
+                alert("한번에 한가지만 수정 가능합니다.");
+                e.preventDefault();
+            } else {
+                let idx = $("input[class='custom-control-input chkbox']:checked")[0].id;
+                let recordsets = JSON.parse('<%- JSON.stringify(recordsets[0]) %>');
+                $('#agent_cd').val(recordsets[idx].AGENT_CD);
+                console.log($('#agent_cd').val());
+                $('#activateBtn').submit();
+            }
+        });
+        $('#changeAgentInfoBtn').click(() => {
+            let cnt = $("input[class='custom-control-input chkbox']:checked").length;
+            if (cnt !== 1) {
+                alert("한번에 한가지만 수정 가능합니다.");
+                $('#changeinfomodal').modal('hide');
+            } else {
+                let idx = $("input[class='custom-control-input chkbox']:checked")[0].id;
+                let recordsets = JSON.parse('<%- JSON.stringify(recordsets[0]) %>');
+                
+                $('#editID').val(recordsets[idx].AGENT_CD)
+                $('#editIP').val(recordsets[idx].IP);
+                $('#editMAC').val(recordsets[idx].MAC_ADDR);
+                $('#editOS').val(recordsets[idx].OS);
+                $('#editUseful').val(recordsets[idx].PURPOSE);
+                $('#editOwner').val(recordsets[idx].OWNER);
+                $('#editDesc').val(recordsets[idx].DISCRIPTION);
+                let state= recordsets[idx].STATE
+                $('#editStateValue').val(state);
+                switch(state){
+                    case 'C':
+                    $('#editState').val("수동등록");
+                    break;
+                    case 'C-2':
+                    $('#editState').val("후보 에이전트");
+                    break;
+                    case 'R':
+                    $('#editState').val("정식 에이전트");
+                    break;
+                    case 'E':
+                    $('#editState').val("휴면 에이전트");
+                    break;
+                    case 'O':
+                    $('#editState').val("오프라인");
+                    break;
+                }
+                $('#changeinfomodal').modal('show');
+            }
+        });
     </script>
 
 </body>
