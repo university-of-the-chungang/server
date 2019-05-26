@@ -76,6 +76,7 @@ router.post('/update_agent_info',(req,res,next)=>{
   });
   if (isnull) {
     DB.get_agent_info().then(result => {
+      console.log("ERROR BY ISNULL");
       result['reason'] = 'error';
       res.render('./main/Agent/agent', result);
     });
