@@ -641,7 +641,6 @@
                 let idx = $("input[class='custom-control-input chkbox']:checked")[0].id;
                 let recordsets = JSON.parse('<%- JSON.stringify(recordsets[0]) %>');
                 $('#agent_cd').val(recordsets[idx].AGENT_CD);
-                console.log($('#agent_cd').val());
                 $('#activateBtn').submit();
             }
         });
@@ -653,14 +652,14 @@
             } else {
                 let idx = $("input[class='custom-control-input chkbox']:checked")[0].id;
                 let recordsets = JSON.parse('<%- JSON.stringify(recordsets[0]) %>');
-                
+                console.log(recordsets[idx]);
                 $('#editID').val(recordsets[idx].AGENT_CD)
                 $('#editIP').val(recordsets[idx].IP);
                 $('#editMAC').val(recordsets[idx].MAC_ADDR);
                 $('#editOS').val(recordsets[idx].OS);
                 $('#editUseful').val(recordsets[idx].PURPOSE);
                 $('#editOwner').val(recordsets[idx].OWNER);
-                $('#editDesc').val(recordsets[idx].DISCRIPTION);
+                $('#editDesc').val(recordsets[idx].DESCRIPTION);
                 let state= recordsets[idx].STATE
                 $('#editStateValue').val(state);
                 switch(state){

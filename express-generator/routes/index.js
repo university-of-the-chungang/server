@@ -198,7 +198,7 @@ router.post('/mapping_xccdf_group', (req, res, next) => {
   });
 });
 router.post('/add_group_info', (req, res, next) => {
-  DB.add_group_info(req.body.name, req.body.create_time, req.body.active_time, req.body.agent_counting, req.body.inspection_period, req.body.discription)
+  DB.add_group_info(req.body.name, req.body.create_time, req.body.active_time, req.body.agent_counting, req.body.inspection_period, req.body.description)
     .then(result => {
       DB.get_group_info().then(Result => {
         res.render('test_mssql', { add_group_info: JSON.stringify(Result.recordsets) });
