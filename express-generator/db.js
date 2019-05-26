@@ -247,10 +247,10 @@ exports.add_admin = (data) => {
         })
     });
 };
-exports.add_group_info = (name,create_time,active_time,agent_counting,inspection_period,discription)=>{
+exports.add_group_info = (name,create_time,active_time,agent_counting,inspection_period,DESCRIPTION)=>{
     return new Promise((resolve,reject)=>{
-        let query = `INSERT INTO TBL_GROUP_INFO (NAME, CREATE_TIME, ACTIVE_TIME, AGENT_COUNTING, ACTIVE_STATE, INSPECTION_PERIOD, DEL_FLAG, DISCRIPTION) 
-        VALUES ('`+name+`', CONVERT(CHAR(19), '`+create_time+`', 20), CONVERT(CHAR(19), '`+active_time+`',20), `+agent_counting+`, 'A',  CONVERT(CHAR(19),'`+inspection_period+`', 20), 0, '`+discription+`')`;
+        let query = `INSERT INTO TBL_GROUP_INFO (NAME, CREATE_TIME, ACTIVE_TIME, AGENT_COUNTING, ACTIVE_STATE, INSPECTION_PERIOD, DEL_FLAG, DESCRIPTION) 
+        VALUES ('`+name+`', CONVERT(CHAR(19), '`+create_time+`', 20), CONVERT(CHAR(19), '`+active_time+`',20), `+agent_counting+`, 'A',  CONVERT(CHAR(19),'`+inspection_period+`', 20), 0, '`+DESCRIPTION+`')`;
         
         new sql.Request().query(query,(err,result)=>{
             if (err) {
@@ -263,7 +263,7 @@ exports.add_group_info = (name,create_time,active_time,agent_counting,inspection
 };
 exports.add_agent_info = (ip,mac,os,purpose,owner,desc,state)=>{
     return new Promise((resolve,reject)=>{
-        let query = `INSERT INTO TBL_AGENT_INFO (IP, MAC_ADDR, OS, PURPOSE, OWNER, DEL_FLAG, DISCRIPTION, STATE ) VALUES('`+ip+`', '`+mac+`', '`+os+`', '`+purpose+`', '`+owner+`', 0, '`+desc+`', '`+state+`')`;
+        let query = `INSERT INTO TBL_AGENT_INFO (IP, MAC_ADDR, OS, PURPOSE, OWNER, DEL_FLAG, DESCRIPTION, STATE ) VALUES('`+ip+`', '`+mac+`', '`+os+`', '`+purpose+`', '`+owner+`', 0, '`+desc+`', '`+state+`')`;
         new sql.Request().query(query,(err,result)=>{
             if(err){
                 reject(err);
@@ -275,7 +275,7 @@ exports.add_agent_info = (ip,mac,os,purpose,owner,desc,state)=>{
 
 exports.update_agent_info = (cd,ip,mac,os,purpose,owner,desc,state)=>{
     return new Promise((resolve,reject)=>{
-        let query = `UPDATE TBL_AGENT_INFO SET IP='${ip}', MAC_ADDR = '${mac}', OS = '${os}', PURPOSE = '${purpose}', OWNER = '${owner}', DEL_FLAG = 0, DISCRIPTION = '${desc}', STATE = '${state}' WHERE AGENT_CD = '${cd}'`;
+        let query = `UPDATE TBL_AGENT_INFO SET IP='${ip}', MAC_ADDR = '${mac}', OS = '${os}', PURPOSE = '${purpose}', OWNER = '${owner}', DEL_FLAG = 0, DESCRIPTION = '${desc}', STATE = '${state}' WHERE AGENT_CD = '${cd}'`;
         console.log(query);
         new sql.Request().query(query,(err,result)=>{
             if(err){
