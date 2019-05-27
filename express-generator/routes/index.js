@@ -5,6 +5,7 @@ const express = require('express');
 const router = express.Router();
 const DB = require('../db');
 
+
 /* GET home page. */
 router.get('/', (req, res, next) => {
   res.render('index', { title: 'Express' });
@@ -100,17 +101,14 @@ router.get('/log', function (req, res, next) {
 
 
 // 그룹 페이지
-router.get('/group', function (req, res, next) {
-  res.render('./main/GroupPolicy/group');
-}); // 그룹페이지 홈
+const group = require('./group/group');
+const oldgroup = require('./group/oldgroup');
+const newgroup = require('./group/newgroup');
 
-router.get('/newgroup', function (req, res, next) {
-  res.render('./main/GroupPolicy/NewGroup/newgroup');
-});//신규 그룹페이지
+router.use('/group', group);
+router.use('/oldgroup', oldgroup);
+router.use('/newgroup', newgroup);
 
-router.get('/oldgroup', function (req, res, next) {
-  res.render('./main/GroupPolicy/OldGroup/oldgroup');
-});// 기존 그룹페이지
 
 
 ///////////////// 테스트용 API ////////////////////
