@@ -6,15 +6,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css">
-    <link href="assets/vendor/fonts/circular-std/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/libs/css/style.css">
-    <link rel="stylesheet" href="assets/vendor/fonts/fontawesome/css/fontawesome-all.css">
-    <link rel="stylesheet" href="assets/vendor/charts/chartist-bundle/chartist.css">
-    <link rel="stylesheet" href="assets/vendor/charts/morris-bundle/morris.css">
-    <link rel="stylesheet" href="assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="assets/vendor/charts/c3charts/c3.css">
-    <link rel="stylesheet" href="assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
+    <link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link href="/assets/vendor/fonts/circular-std/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/libs/css/style.css">
+    <link rel="stylesheet" href="/assets/vendor/fonts/fontawesome/css/fontawesome-all.css">
+    <link rel="stylesheet" href="/assets/vendor/charts/chartist-bundle/chartist.css">
+    <link rel="stylesheet" href="/assets/vendor/charts/morris-bundle/morris.css">
+    <link rel="stylesheet" href="/assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="/assets/vendor/charts/c3charts/c3.css">
+    <link rel="stylesheet" href="/assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
     <title>국가보안연구소</title>
 </head>
 
@@ -127,16 +127,18 @@
    
                         <div class="row" style="margin-top: 10px; margin-bottom: 30px;"> 
                         <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1"></div>
-                            <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1"">
+                            <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1">
                               <label class="custom-control custom-checkbox">
-                                <input id="ck1" name="ck1" type="checkbox" class="custom-control-input"><span class="custom-control-label">선택</span>
+                                <input id="chk_all" name="chk_all" type="checkbox" class="custom-control-input"><span class="custom-control-label">All</span>
                               </label>
                             </div>
 
                         <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3" style="height: 70px">
+                            
                                 <div class="input-group input-search">
-                                    <input class="form-control" type="text" placeholder="Search "><span class="input-group-btn">
-                                    <button class="btn btn-secondary" type="button"><i class="fas fa-search"></i></button></span>
+                                        
+                                    <input id="search_keyword" class="form-control" type="text" placeholder="Search "><span class="input-group-btn">
+                                    <button class="btn btn-secondary" type="button" id="searchBtn"><i class="fas fa-search"></i></button></span>
                                 </div>
                         </div>
                             
@@ -231,9 +233,9 @@
                                 id="activateBtn"> 등록 </button>
                         </form>
 
-                        <form action="/activate_agent_info" method="POST" class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
-                                <input type="hidden" name="agent_cd" id="agent_cd" value="">
-                                <button href="#" class="btn btn btn-rounded btn-danger col-xl-12 col-lg-12 col-md-12 col-sm-12"
+                        <form action="/agent/del_agent_info" method="POST" class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+                                <input type="hidden" name="del_agent_cd" id="del_agent_cd" value="">
+                                <button id="agentDelBtn"  class="btn btn btn-rounded btn-danger col-xl-12 col-lg-12 col-md-12 col-sm-12"
                                 id="activateBtn"> 삭제 </button>
 
                         </form>
@@ -246,7 +248,7 @@
                             
                         <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2">
                      		<div style="text-align: center;"><h5>900(20)/<%=recordsets[0].length %></h5></div>
-                            <div style="text-align: center; " onclick="location.reload();"><i class="fas fa-redo"></i></div>
+                            <div style="text-align: center; cursor: pointer;" onclick="location.reload();"><i class="fas fa-redo"></i></div>
                         </div>
                     </div>
                 
@@ -596,24 +598,24 @@
 
     <!-- Optional JavaScript -->
     <!-- jquery 3.3.1 -->
-    <script src="assets/vendor/jquery/jquery-3.3.1.min.js"></script>
+    <script src="/assets/vendor/jquery/jquery-3.3.1.min.js"></script>
     <!-- bootstap bundle js -->
-    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
     <!-- slimscroll js -->
-    <script src="assets/vendor/slimscroll/jquery.slimscroll.js"></script>
+    <script src="/assets/vendor/slimscroll/jquery.slimscroll.js"></script>
     <!-- main js -->
-    <script src="assets/libs/js/main-js.js"></script>
+    <script src="/assets/libs/js/main-js.js"></script>
     <!-- chart chartist js -->
-    <script src="assets/vendor/charts/chartist-bundle/chartist.min.js"></script>
+    <script src="/assets/vendor/charts/chartist-bundle/chartist.min.js"></script>
     <!-- sparkline js -->
-    <script src="assets/vendor/charts/sparkline/jquery.sparkline.js"></script>
+    <script src="/assets/vendor/charts/sparkline/jquery.sparkline.js"></script>
     <!-- morris js -->
     <!-- <script src="assets/vendor/charts/morris-bundle/raphael.min.js"></script> -->
     <!-- <script src="assets/vendor/charts/morris-bundle/morris.js"></script> -->
     <!-- chart c3 js -->
-    <script src="assets/vendor/charts/c3charts/c3.min.js"></script>
-    <script src="assets/vendor/charts/c3charts/d3-5.4.0.min.js"></script>
-    <script src="assets/vendor/charts/c3charts/C3chartjs.js"></script>
+    <script src="/assets/vendor/charts/c3charts/c3.min.js"></script>
+    <script src="/assets/vendor/charts/c3charts/d3-5.4.0.min.js"></script>
+    <script src="/assets/vendor/charts/c3charts/C3chartjs.js"></script>
     <!-- <script src="assets/libs/js/dashboard-ecommerce.js"></script> -->
 
     <script>
@@ -621,6 +623,19 @@
             let chk = $('#chk_all').is(":checked");//.attr('checked');
             if (chk) $(".chkbox").prop('checked', true);
             else $(".chkbox").prop('checked', false);
+        });
+        $('#agentDelBtn').click((e)=>{
+            let arr = [];
+            let chk_arr = $(".chkbox:checked");
+            chk_arr.each((idx,elem)=>{
+                let id = elem.id;
+                let recordsets = JSON.parse('<%- JSON.stringify(recordsets[0]) %>');
+                arr.push(recordsets[idx].AGENT_CD);
+            });
+            
+            $('#del_agent_cd').val(JSON.stringify(arr));
+            console.log($('#del_agent_cd').val())
+            $('#agentDelBtn').submit();
         });
         $('#activateBtn').click((e)=>{
             let cnt = $("input[class='custom-control-input chkbox']:checked").length;
@@ -684,6 +699,14 @@
                     break;
                 }
                 $('#changeinfomodal').modal('show');
+            }
+        });
+        $('#searchBtn').click(()=>{
+            location.href= "/agent/"+$('#search_keyword').val();
+        });
+        $('#search_keyword').keydown((key)=>{
+            if(key.keyCode === 13){
+                $('#searchBtn').click();
             }
         });
     </script>

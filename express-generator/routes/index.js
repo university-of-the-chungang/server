@@ -41,6 +41,26 @@ router.get('/agent', function (req, res, next) {
     res.render('./main/Agent/agent', result);
   });
 });// 에이전트 페이지
+router.get('/agent/:keyword',(req,res,next)=>{
+  DB.search_agent_info(req.params.keyword).then(result=>{
+    res.render('./main/Agent/agent', result);
+  }).catch(err=>{
+    console.log(err);
+  });
+
+})
+router.post('/agent/del_agent_info',(req,res,next)=>{
+  console.log(req.body.del_agent_cd);
+  DB.delete_agent_info(JSON.parse(req.body.del_agent_cd)).then(()=>{
+    DB.get_agent_info().then(result => {
+      res.render('./main/Agent/agent', result);
+    });
+
+  }).catch(err=>{
+    console.log(err);
+  });
+});
+
 router.post('/add_manual_agent', (req, res, next) => {
   let arr = [req.body.txtIP, req.body.txtMac, req.body.txtOS, req.body.txtUseful, req.body.txtOwner, req.body.txtDesc,req.body.state];
   
