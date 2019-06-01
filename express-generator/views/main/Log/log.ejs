@@ -112,7 +112,7 @@
                                             <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">MENU</a></li>
                                             <li class="breadcrumb-item active" aria-current="page">평가문항 및 로그관리</li>
                                         </ol>
-                                    </nav>
+                                    </nav>                                                                                                                
                                 </div>
                             </div>
                         </div>
@@ -123,42 +123,40 @@
                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                   <div class="card" style="height: 600px; overflow: scroll;">
                     <h4 class="card-header text-center">평가 문항 추출</h4>
-                    <div class="card-body p-0">
-\   
-		                <div class="row"> 
-		                    <div class="col-xl-3">
-		                      <label class="custom-control custom-checkbox" style="margin-left: 50px">
-		                        <input id="ck1" name="ck1" type="checkbox" class="custom-control-input"><span class="custom-control-label">모두 선택</span>
-		                      </label>
-		                    </div>
+                    <div class="card-body p-0">   
+                        <div class="row"> 
+                              <label class="custom-control custom-checkbox" style="margin-left: 5px">
+                                <input id="ck1" name="ck1" type="checkbox" class="custom-control-input">
+                              </label>
+                            <div class="col-3">
+                                <span class="custom-control-label" style="margin-left: 5px">모두 선택</span>
+                            </div>
+                            <div class="col-5" style="height: 70px">
+                                <div class="input-group input-search">
+                                    <input class="form-control" type="text" placeholder="Search "><span class="input-group-btn">
+                                    <button class="btn btn-secondary" type="button"><i class="fas fa-search"></i></button></span>
+                                </div>
+                            </div>
 
-		                    <div class="col-xl-5" style="height: 70px">
-		                        <div class="input-group input-search">
-		                            <input class="form-control" type="text" placeholder="Search "><span class="input-group-btn">
-		                            <button class="btn btn-secondary" type="button"><i class="fas fa-search"></i></button></span>
-		                        </div>
-		                    </div>
+                            <button type="submit" style="height: 40px;" class="btn btn-space btn-primary col-3">점검결과 추출</button> 
 
-		                    <div class="col-xl-4" style="">
-		                      <button type="submit" class="btn btn-space btn-primary"> 평가문항 점검결과 추출</button> 
-		                    </div>
-		                </div>
+                        </div>
              
-	                    <div class="table-responsive">
-	                        <table class="table">
-	                            <thead class="bg-light">
-	                                <tr class="border-0">
-	                                    <th class="border-0 text-center">check</th>
-	                                    <th class="border-0 text-center">상태</th>
-	                                    <th class="border-0 text-center ">IP</th>
-	                                    <th class="border-0 text-center">운영체제 버전</th>
-	                                    <th class="border-0 text-center">용도</th>
-	                                </tr>
-	                            </thead>
-	                            <tbody>      
-	                     		</tbody>
-	                        </table>
-	                    </div>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class="bg-light">
+                                    <tr class="border-0">
+                                        <th class="border-0 text-center">check</th>
+                                        <th class="border-0 text-center">상태</th>
+                                        <th class="border-0 text-center ">IP</th>
+                                        <th class="border-0 text-center">운영체제 버전</th>
+                                        <th class="border-0 text-center">용도</th>
+                                    </tr>
+                                </thead>
+                                <tbody>      
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
               </div>
@@ -167,42 +165,42 @@
 <!-- ============================================================== -->
 <!-- 로그 관리 카드 시작 -->
             <div class="card">
-	            <h5 class="card-header text-center">로그관리</h5>
-	                <div class="card-body p-0">
-	                    <div class="table-responsive">
-	                        <table class="table">
-	                            <thead class="bg-light">
-	                                <tr class="border-0">
-	                                    <th class="border-0 text-center">번호</th>
-	                                    <th class="border-0">항목</th>
-	                                    <th class="border-0 text-center">위험도</th>
-	                                    <th class="border-0 text-center">개수</th>
-	                                </tr>
-	                            </thead>
-	                            <tbody>
-	                                <tr>
-	                                    <td class="text-center">1</td>
-	                                    <td><h5>각종 로그기록</h5></td>
-	                                    <td class="text-center">높음 </td>
-	                                    <td class="text-center">6 </td>
-	                                </tr>
-	                                <tr>
-	                                    <td class="text-center">1</td>
-	                                    <td><h5>각종 로그기록</h5></td>
-	                                    <td class="text-center">높음 </td>
-	                                    <td class="text-center">6 </td>
-	                                </tr>
-	                                <tr>
-	                                    <td class="text-center">1</td>
-	                                    <td><h5>각종 로그기록</h5></td>
-	                                    <td class="text-center">높음 </td>
-	                                    <td class="text-center">6 </td>
-	                                </tr>
-	       						</tbody>
-	                        </table>
-	                    </div>
-	                </div>
-	            </div>
+                <h5 class="card-header text-center">로그관리</h5>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class="bg-light">
+                                    <tr class="border-0">
+                                        <th class="border-0 text-center">번호</th>
+                                        <th class="border-0">항목</th>
+                                        <th class="border-0 text-center">위험도</th>
+                                        <th class="border-0 text-center">개수</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="text-center">1</td>
+                                        <td><h5>각종 로그기록</h5></td>
+                                        <td class="text-center">높음 </td>
+                                        <td class="text-center">6 </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">1</td>
+                                        <td><h5>각종 로그기록</h5></td>
+                                        <td class="text-center">높음 </td>
+                                        <td class="text-center">6 </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">1</td>
+                                        <td><h5>각종 로그기록</h5></td>
+                                        <td class="text-center">높음 </td>
+                                        <td class="text-center">6 </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
 <!-- 로그 관리 카드 끝 -->
 <!-- ============================================================== -->
 <!-- ============================================================== -->
