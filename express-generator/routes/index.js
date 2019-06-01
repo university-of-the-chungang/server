@@ -41,29 +41,28 @@ router.get('/agent', function (req, res, next) {
     res.render('./main/Agent/agent', result);
   });
 });// 에이전트 페이지
-router.get('/agent/:keyword',(req,res,next)=>{
-  DB.search_agent_info(req.params.keyword).then(result=>{
+router.get('/agent/:keyword', (req, res, next) => {
+  DB.search_agent_info(req.params.keyword).then(result => {
     res.render('./main/Agent/agent', result);
-  }).catch(err=>{
+  }).catch(err => {
     console.log(err);
   });
 
 })
-router.post('/agent/del_agent_info',(req,res,next)=>{
-  console.log(req.body.del_agent_cd);
-  DB.delete_agent_info(JSON.parse(req.body.del_agent_cd)).then(()=>{
+router.post('/agent/del_agent_info', (req, res, next) => {
+  DB.delete_agent_info(JSON.parse(req.body.del_agent_cd)).then(() => {
     DB.get_agent_info().then(result => {
       res.render('./main/Agent/agent', result);
     });
 
-  }).catch(err=>{
+  }).catch(err => {
     console.log(err);
   });
 });
 
 router.post('/add_manual_agent', (req, res, next) => {
-  let arr = [req.body.txtIP, req.body.txtMac, req.body.txtOS, req.body.txtUseful, req.body.txtOwner, req.body.txtDesc,req.body.state];
-  
+  let arr = [req.body.txtIP, req.body.txtMac, req.body.txtOS, req.body.txtUseful, req.body.txtOwner, req.body.txtDesc, req.body.state];
+
 
   let isnull = false;
   arr.forEach(element => {
@@ -84,8 +83,8 @@ router.post('/add_manual_agent', (req, res, next) => {
     });
   }
 });
-router.post('/update_agent_info',(req,res,next)=>{
-  let arr = [req.body.txtIP, req.body.txtMac, req.body.txtOS, req.body.txtUseful, req.body.txtOwner, req.body.txtDesc,req.body.state];
+router.post('/update_agent_info', (req, res, next) => {
+  let arr = [req.body.txtIP, req.body.txtMac, req.body.txtOS, req.body.txtUseful, req.body.txtOwner, req.body.txtDesc, req.body.state];
   let cd = req.body.cd;
 
   let isnull = false;
@@ -100,15 +99,15 @@ router.post('/update_agent_info',(req,res,next)=>{
       res.render('./main/Agent/agent', result);
     });
   } else {
-    DB.update_agent_info(cd,req.body.txtIP, req.body.txtMac, req.body.txtOS, req.body.txtUseful, req.body.txtOwner, req.body.txtDesc, req.body.state).then(result => {
+    DB.update_agent_info(cd, req.body.txtIP, req.body.txtMac, req.body.txtOS, req.body.txtUseful, req.body.txtOwner, req.body.txtDesc, req.body.state).then(result => {
       DB.get_agent_info().then(result2 => {
         res.render('./main/Agent/agent', result2);
       });
     });
   }
 });
-router.post('/activate_agent_info',(req,res,next)=>{
-  DB.activate_agent_info(req.body.agent_cd).then(result=>{
+router.post('/activate_agent_info', (req, res, next) => {
+  DB.activate_agent_info(req.body.agent_cd).then(result => {
     DB.get_agent_info().then(result2 => {
       res.render('./main/Agent/agent', result2);
     });

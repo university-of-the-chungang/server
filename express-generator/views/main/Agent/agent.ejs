@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
- 
+
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -19,136 +19,151 @@
 </head>
 
 <body>
-<div class="dashboard-main-wrapper">
-    <div class="dashboard-header">
-        <nav class="navbar navbar-expand-lg bg-white fixed-top">
-            <a class="navbar-brand" href="../dashboard">국가보안연구소</a>
-            <div class="collapse navbar-collapse " id="navbarSupportedContent">
-                
-                <ul class="navbar-nav ml-auto navbar-right-top">
-                    <li class="nav-item">
-                        <a class="nav-link" href="../dashboard"  role="button"  aria-haspopup="true" aria-expanded="false">대쉬보드</a>
-                    </li>
+    <div class="dashboard-main-wrapper">
+        <div class="dashboard-header">
+            <nav class="navbar navbar-expand-lg bg-white fixed-top">
+                <a class="navbar-brand" href="../dashboard">국가보안연구소</a>
+                <div class="collapse navbar-collapse " id="navbarSupportedContent">
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="../agent"  role="button" aria-haspopup="true" aria-expanded="false">에이전트관리</a>    
-                    </li>
+                    <ul class="navbar-nav ml-auto navbar-right-top">
+                        <li class="nav-item">
+                            <a class="nav-link" href="../dashboard" role="button" aria-haspopup="true"
+                                aria-expanded="false">대쉬보드</a>
+                        </li>
 
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="../group" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">그룹 및 정책관리</a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../agent" role="button" aria-haspopup="true"
+                                aria-expanded="false">에이전트관리</a>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="../group" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">그룹 및 정책관리</a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="../group">기본 정보 </a>
-                            <a class="dropdown-item" href="../newgroup">신규 그룹 생성</a>
-                            <a class="dropdown-item" href="../oldgroup">기존 그룹 관리</a>
-                            </div>  
-                    </li>
+                                <a class="dropdown-item" href="../group">기본 정보 </a>
+                                <a class="dropdown-item" href="../newgroup">신규 그룹 생성</a>
+                                <a class="dropdown-item" href="../oldgroup">기존 그룹 관리</a>
+                            </div>
+                        </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="../log" role="button" aria-haspopup="true" aria-expanded="false">평가문항/로그관리</a>
-                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../log" role="button" aria-haspopup="true"
+                                aria-expanded="false">평가문항/로그관리</a>
+                        </li>
 
-                    <li class="nav-item dropdown connection">
-                        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 설정 <i class="far fa-sun"></i> </a>
-                        <ul class="dropdown-menu dropdown-menu-right connection-dropdown">
-                            <li class="connection-list">
-                                <div class="row">
-                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                        <a href="#" class="connection-item"><span>CPE</span></a>
+                        <li class="nav-item dropdown connection">
+                            <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false"> 설정 <i class="far fa-sun"></i> </a>
+                            <ul class="dropdown-menu dropdown-menu-right connection-dropdown">
+                                <li class="connection-list">
+                                    <div class="row">
+                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
+                                            <a href="#" class="connection-item"><span>CPE</span></a>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
+                                            <a href="#" class="connection-item"> <span>CCE</span></a>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
+                                            <a href="#" class="connection-item"> <span>OVAL</span></a>
+                                        </div>
                                     </div>
-                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                        <a href="#" class="connection-item"> <span>CCE</span></a>
-                                    </div>
-                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                        <a href="#" class="connection-item"> <span>OVAL</span></a>
-                                    </div>
-                                    </div>
-                            </li>
-                        </ul>
-                    </li>
-                    
-                    <li class="nav-item dropdown nav-user">
-                        <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">사용자 관리 </a>
-                        
-                        <ul class="dropdown-menu dropdown-menu-right connection-dropdown">
-                            <li class="connection-list">
-                                <div class="row">
-                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                        <a href="../login" class="connection-item"><span>로그인</span></a>
-                                    </div>
-                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                        <a href="../login" class="connection-item"> <span>로그아웃</span></a>
-                                    </div>
-                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                        <a href="../changeinfo" class="connection-item"> <span>정보변경</span></a>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                
-                </ul>
-            </div>
-        </nav>
-    </div>
-    <!-- ============================================================== -->
-    <!-- 헤드 네비게이션 바 종료  -->
-    <!-- ============================================================== -->
-    
+                                </li>
+                            </ul>
+                        </li>
 
-       <div class="">
+                        <li class="nav-item dropdown nav-user">
+                            <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">사용자 관리 </a>
+
+                            <ul class="dropdown-menu dropdown-menu-right connection-dropdown">
+                                <li class="connection-list">
+                                    <div class="row">
+                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
+                                            <a href="../login" class="connection-item"><span>로그인</span></a>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
+                                            <a href="../login" class="connection-item"> <span>로그아웃</span></a>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
+                                            <a href="../changeinfo" class="connection-item"> <span>정보변경</span></a>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <!-- ============================================================== -->
+        <!-- 헤드 네비게이션 바 종료  -->
+        <!-- ============================================================== -->
+
+
+        <div class="">
             <div class="dashboard-ecommerce">
                 <div class="container-fluid dashboard-content ">
                     <!-- ============================================================== -->
                     <!-- pageheader  -->
                     <!-- ============================================================== -->
-                   
-            <div class="row">
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                    <div class="page-header">
-                        <h2 class="pageheader-title">에이전트 관리 </h2>
-                        <div class="page-breadcrumb">
-                            <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">MENU</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">에이전트 관리 </li>
-                                </ol>
-                            </nav>
+
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                            <div class="page-header">
+                                <h2 class="pageheader-title">에이전트 관리 </h2>
+                                <div class="page-breadcrumb">
+                                    <nav aria-label="breadcrumb">
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">MENU</a>
+                                            </li>
+                                            <li class="breadcrumb-item active" aria-current="page">에이전트 관리 </li>
+                                        </ol>
+                                    </nav>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
 
 
-            <div class="row">
-               <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                  <div class="card" style="height: 400px; overflow: scroll;">
-                    
-                    <div class="card-body p-0">
-   
-                        <div class="row" style="margin-top: 10px; margin-bottom: 30px;"> 
-                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1"></div>
-                            <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1">
-                              <label class="custom-control custom-checkbox">
-                                <input id="chk_all" name="chk_all" type="checkbox" class="custom-control-input"><span class="custom-control-label">All</span>
-                              </label>
-                            </div>
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                            <div class="card" style="height: 400px; overflow: scroll;">
 
-                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3" style="height: 70px">
-                            
-                                <div class="input-group input-search">
-                                        
-                                    <input id="search_keyword" class="form-control" type="text" placeholder="Search "><span class="input-group-btn">
-                                    <button class="btn btn-secondary" type="button" id="searchBtn"><i class="fas fa-search"></i></button></span>
-                                </div>
-                        </div>
-                            
-                        
-                    <div class="row col-xl-4 col-lg-4 col-md-4 col-sm-4" style="text-align: center;">
+                                <div class="card-body p-0">
 
-                       
-                         <form class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
-                                 <button href="#" class="btn btn-rounded btn-success col-xl-12 col-lg-12 col-md-12 col-sm-12" data-target="#changeinfomodal" id="changeAgentInfoBtn" data-toggle="modal">정보수정</button>
-                        </form>
+                                    <div class="row" style="margin-top: 10px; margin-bottom: 30px;">
+                                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1"></div>
+                                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1">
+                                            <label class="custom-control custom-checkbox">
+                                                <input id="chk_all" name="chk_all" type="checkbox"
+                                                    class="custom-control-input"><span
+                                                    class="custom-control-label">All</span>
+                                            </label>
+                                        </div>
+
+                                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3" style="height: 70px">
+
+                                            <div class="input-group input-search">
+
+                                                <input id="search_keyword" class="form-control" type="text"
+                                                    placeholder="Search "><span class="input-group-btn">
+                                                    <button class="btn btn-secondary" type="button" id="searchBtn"><i
+                                                            class="fas fa-search"></i></button></span>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="row col-xl-4 col-lg-4 col-md-4 col-sm-4"
+                                            style="text-align: center;">
+
+
+                                            <form class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+                                                <button href="#"
+                                                    class="btn btn-rounded btn-success col-xl-12 col-lg-12 col-md-12 col-sm-12"
+                                                    data-target="#changeinfomodal" id="changeAgentInfoBtn"
+                                                    data-toggle="modal">정보수정</button>
+                                            </form>
 
 
                                             <!-- 정부 수정 모달 시작  -->
@@ -210,64 +225,73 @@
 
                                                                 <div class="form-group">
                                                                     <label for="inputText7">상태</label>
-                                                                    <input disabled="disabled" type="text" value="" id="editState"
-                                                                        class="form-control">
-                                                                    <input type="hidden" name="state" value="O" id="editStateValue">
+                                                                    <input disabled="disabled" type="text" value=""
+                                                                        id="editState" class="form-control">
+                                                                    <input type="hidden" name="state" value="O"
+                                                                        id="editStateValue">
                                                                 </div>
                                                             </div>
 
-                                                        <div class="modal-footer">
-                                                            <a href="#" class="btn btn-secondary"
-                                                                data-dismiss="modal">닫기</a>
-                                                            <button href="#" class="btn btn-primary" type="submit">변경 저장</button>
-                                                        </div>
-                                                    </form>
+                                                            <div class="modal-footer">
+                                                                <a href="#" class="btn btn-secondary"
+                                                                    data-dismiss="modal">닫기</a>
+                                                                <button href="#" class="btn btn-primary"
+                                                                    type="submit">변경 저장</button>
+                                                            </div>
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>
 
 
-                        <form action="/activate_agent_info" method="POST" class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
-                                <input type="hidden" name="agent_cd" id="agent_cd" value="">
-                                <button href="#" class="btn btn btn-rounded btn-primary col-xl-12 col-lg-12 col-md-12 col-sm-12"
-                                id="activateBtn"> 등록 </button>
-                        </form>
+                                            <form action="/activate_agent_info" method="POST"
+                                                class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+                                                <input type="hidden" name="agent_cd" id="agent_cd" value="">
+                                                <button href="#"
+                                                    class="btn btn btn-rounded btn-primary col-xl-12 col-lg-12 col-md-12 col-sm-12"
+                                                    id="activateBtn"> 등록 </button>
+                                            </form>
 
-                        <form action="/agent/del_agent_info" method="POST" class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
-                                <input type="hidden" name="del_agent_cd" id="del_agent_cd" value="">
-                                <button id="agentDelBtn"  class="btn btn btn-rounded btn-danger col-xl-12 col-lg-12 col-md-12 col-sm-12"
-                                id="activateBtn"> 삭제 </button>
+                                            <form action="/agent/del_agent_info" method="POST"
+                                                class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+                                                <input type="hidden" name="del_agent_cd" id="del_agent_cd" value="">
+                                                <button id="agentDelBtn"
+                                                    class="btn btn btn-rounded btn-danger col-xl-12 col-lg-12 col-md-12 col-sm-12"
+                                                    id="activateBtn"> 삭제 </button>
 
-                        </form>
-                    	
+                                            </form>
 
-                          
 
-                            
-                        </div>
-                            
-                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2">
-                     		<div style="text-align: center;"><h5>900(20)/<%=recordsets[0].length %></h5></div>
-                            <div style="text-align: center; cursor: pointer;" onclick="location.reload();"><i class="fas fa-redo"></i></div>
-                        </div>
-                    </div>
-                
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead class="bg-light">
-                                    <tr class="border-0">
-                                        <th class="border-0 text-center">check</th>
-                                        <th class="border-0 text-center">상태</th>
-                                        <th class="border-0 text-center ">IP</th>
-                                        <th class="border-0 text-center">운영체제 버전</th>
-                                        <th class="border-0 text-center">용도</th>
-                                        <th class="border-0 text-center">소유자</th>
-                                        <th class="border-0 text-center">요청시간</th>
-                                        <th class="border-0 text-center">등록시간</th>
-                                    </tr>
-                                </thead>
-                            
-								<tbody>
+
+
+
+                                        </div>
+
+                                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2">
+                                            <div style="text-align: center;">
+                                                <h5>900(20)/<%=recordsets[0].length %></h5>
+                                            </div>
+                                            <div style="text-align: center; cursor: pointer;"
+                                                onclick="location.reload();"><i class="fas fa-redo"></i></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead class="bg-light">
+                                                <tr class="border-0">
+                                                    <th class="border-0 text-center">check</th>
+                                                    <th class="border-0 text-center">상태</th>
+                                                    <th class="border-0 text-center ">IP</th>
+                                                    <th class="border-0 text-center">운영체제 버전</th>
+                                                    <th class="border-0 text-center">용도</th>
+                                                    <th class="border-0 text-center">소유자</th>
+                                                    <th class="border-0 text-center">요청시간</th>
+                                                    <th class="border-0 text-center">등록시간</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
                                                 <% if (typeof(reason) !='undefined' && reason == 'error'){ %>
                                                 <script>alert("ERROR");</script>
                                                 <% }  %>
@@ -315,145 +339,157 @@
                                                 </tr>
                                                 <% } %>
                                             </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-          </div>
-        </div>
-
-<!-- ============================================================== -->
-<!-- 숫자 네비게이션 [1][2][3][4][5][6][7] 시작  ...-->
-<!-- ============================================================== -->
-            <div class="row">
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4"></div>
-                <div class="col-xl-7 col-lg-7 col-md-7 col-sm-7" style="margin-bottom: 30px">
-                    <div class="">
-                        <nav aria-label="Demo of active current page number">
-                            <ul class="pagination">
-                                <li class="page-item"><a class="page-link" href="#">Prev</a></li>
-
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-
-                                <li class="page-item active"><a class="page-link" href="#">3</a></li>
-
-                                <li class="page-item"><a class="page-link" href="#">4</a></li>
-
-                                <li class="page-item"><a class="page-link" href="#">5</a></li>
-
-                                <li class="page-item"><a class="page-link" href="#">6</a></li>
-
-                                <li class="page-item"><a class="page-link" href="#">7</a></li>               
-
-                                <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-                        
-
-                <div class= "row">
-						<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1"></div>
-                        <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5">
-                            <div class="card">
-                                <div class="card-header"><h3 style="text-align: center;">후보에이전트 등록/일괄정보갱신</h3></div>
-                                
-                                <div class="card-body">
-                                    <div class="row">   
-                                   
-
-                                        <a href="#" class="btn btn-success btn-lg col-xl-4 col-lg-4 col-md-4 col-sm-4" >1. 엑셀입력 </a>
-
-                                       
-
-                                         <a href="#" class="btn btn-primary btn-lg col-xl-4 col-lg-4 col-md-4 col-sm-4" data-toggle="modal" data-target="#exampleModal">2. 수동입력 </a>
-
-                                
-
-                                <!-- 후보 수동 에이전트 등록 시작 -->
-                                <!-- 후보 수동 에이전트 등록 시작 -->         
-                                <!-- 후보 수동 에이전트 등록 시작 -->
-                                
-                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="display: none;">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">에이전트 수동 입력</h5>
-                                            <a href="#" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">×</span>
-                                            </a>
-                                            </div>
-
-
-                                   <form action="/add_manual_agent" method="POST">
-                                        <div class="modal-body">
-                                
-                                            <div class="form-group">
-                                                <label for="inputText1" class="col-form-label">IP</label>
-                                                <input id="txtIP" type="text" class="form-control">
-                                            </div>
-
-                                             <div class="form-group">
-                                                <label for="inputText2">MAC Address</label>
-                                                <input name="txtMac" type="text" class="form-control">
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="inputText3">운영체제 버전</label>
-                                                <input name="txtOS" type="text" class="form-control">
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="inputText4"
-                                                    class="col-form-label">용도</label>
-                                                <input name="txtUseful" type="text"
-                                                    class="form-control">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="inputText5">소유자</label>
-                                                <input name="txtOwner" type="text" class="form-control">
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="inputText6">설명</label>
-                                                <input name="txtDesc" type="text" class="form-control">
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="inputText7">상태</label>
-                                                <input disabled="disabled" type="text" value="수동등록"
-                                                    class="form-control">
-                                                <input type="hidden" name="state" value="C">
-                                            </div>
-                                       
-                                    </div>
-
-                                    <div class="modal-footer">
-                                        <a href="#" class="btn btn-secondary" data-dismiss="modal">닫기</a>
-                                        <a href="#" class="btn btn-primary" type="submit">변경 저장</a>
-                                    </div>
-                                </form>
-                                            </div>
-                                        </div>
-                                    </div>   
-
-                                    <!-- 후보 수동 에이전트 끝 시작 -->
-                                	<!-- 후보 수동 에이전트 끝 시작 -->         
-                                	<!-- 후보 수동 에이전트 끝 시작 -->
-
-
-                                     <a href="#" class="btn btn-secondary btn-lg col-xl-4 col-lg-4 col-md-4 col-sm-4" >3. 등록정보갱신 </a>
-
-                                      <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1"></div>
-
-                                        
-                                        </div>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+
+                    <!-- ============================================================== -->
+                    <!-- 숫자 네비게이션 [1][2][3][4][5][6][7] 시작  ...-->
+                    <!-- ============================================================== -->
+                    <div class="row">
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4"></div>
+                        <div class="col-xl-7 col-lg-7 col-md-7 col-sm-7" style="margin-bottom: 30px">
+                            <div class="">
+                                <nav aria-label="Demo of active current page number">
+                                    <ul class="pagination">
+                                        <li class="page-item"><a class="page-link" href="#">Prev</a></li>
+
+                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+
+                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+
+                                        <li class="page-item active"><a class="page-link" href="#">3</a></li>
+
+                                        <li class="page-item"><a class="page-link" href="#">4</a></li>
+
+                                        <li class="page-item"><a class="page-link" href="#">5</a></li>
+
+                                        <li class="page-item"><a class="page-link" href="#">6</a></li>
+
+                                        <li class="page-item"><a class="page-link" href="#">7</a></li>
+
+                                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1"></div>
+                        <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 style="text-align: center;">후보에이전트 등록/일괄정보갱신</h3>
+                                </div>
+
+                                <div class="card-body">
+                                    <div class="row">
+
+
+                                        <a href="#"
+                                            class="btn btn-success btn-lg col-xl-4 col-lg-4 col-md-4 col-sm-4">1. 엑셀입력
+                                        </a>
+
+
+
+                                        <a href="#" class="btn btn-primary btn-lg col-xl-4 col-lg-4 col-md-4 col-sm-4"
+                                            data-toggle="modal" data-target="#exampleModal">2. 수동입력 </a>
+
+
+
+                                        <!-- 후보 수동 에이전트 등록 시작 -->
+                                        <!-- 후보 수동 에이전트 등록 시작 -->
+                                        <!-- 후보 수동 에이전트 등록 시작 -->
+
+                                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                            aria-labelledby="exampleModalLabel" aria-hidden="true"
+                                            style="display: none;">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">에이전트 수동 입력</h5>
+                                                        <a href="#" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">×</span>
+                                                        </a>
+                                                    </div>
+
+
+                                                    <form action="/add_manual_agent" method="POST">
+                                                        <div class="modal-body">
+
+                                                            <div class="form-group">
+                                                                <label for="inputText1"
+                                                                    class="col-form-label">IP</label>
+                                                                <input id="txtIP" type="text" class="form-control">
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="inputText2">MAC Address</label>
+                                                                <input name="txtMac" type="text" class="form-control">
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="inputText3">운영체제 버전</label>
+                                                                <input name="txtOS" type="text" class="form-control">
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="inputText4"
+                                                                    class="col-form-label">용도</label>
+                                                                <input name="txtUseful" type="text"
+                                                                    class="form-control">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="inputText5">소유자</label>
+                                                                <input name="txtOwner" type="text" class="form-control">
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="inputText6">설명</label>
+                                                                <input name="txtDesc" type="text" class="form-control">
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="inputText7">상태</label>
+                                                                <input disabled="disabled" type="text" value="수동등록"
+                                                                    class="form-control">
+                                                                <input type="hidden" name="state" value="C">
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div class="modal-footer">
+                                                            <a href="#" class="btn btn-secondary"
+                                                                data-dismiss="modal">닫기</a>
+                                                            <a href="#" class="btn btn-primary" type="submit">변경 저장</a>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- 후보 수동 에이전트 끝 시작 -->
+                                        <!-- 후보 수동 에이전트 끝 시작 -->
+                                        <!-- 후보 수동 에이전트 끝 시작 -->
+
+
+                                        <a href="#"
+                                            class="btn btn-secondary btn-lg col-xl-4 col-lg-4 col-md-4 col-sm-4">3.
+                                            등록정보갱신 </a>
+
+                                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1"></div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
                         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
                             <div class="card">
@@ -464,14 +500,15 @@
                                 <div class="card-body">
                                     <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 "></div>
 
-                                    <a href="#" class="btn btn-warning btn-lg col-xl-12 col-lg-12 col-md-12 col-sm-12" data-toggle="modal" data-target="#offlinemodal">오프라인 정보시스템 등록</a>
-                      
+                                    <a href="#" class="btn btn-warning btn-lg col-xl-12 col-lg-12 col-md-12 col-sm-12"
+                                        data-toggle="modal" data-target="#offlinemodal">오프라인 정보시스템 등록</a>
 
-                                <!-- 오프라인 정보시스템 등록 모달 시작  -->
-                                <!-- ================================ -->         
-                                <!-- ================================ -->
 
-                                <div class="modal fade" id="offlinemodal" tabindex="-1" role="dialog"
+                                    <!-- 오프라인 정보시스템 등록 모달 시작  -->
+                                    <!-- ================================ -->
+                                    <!-- ================================ -->
+
+                                    <div class="modal fade" id="offlinemodal" tabindex="-1" role="dialog"
                                         aria-labelledby="exampleModalLabel" aria-hidden="true" style="display: none;">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
@@ -538,63 +575,63 @@
                                             </div>
                                         </div>
 
-                                    <!-- 오프라인 정보시스템 등록 모달 종료  -->
-                                	<!-- ================================ -->         
-                                	<!-- ================================ -->
+                                        <!-- 오프라인 정보시스템 등록 모달 종료  -->
+                                        <!-- ================================ -->
+                                        <!-- ================================ -->
 
+                                    </div>
                                 </div>
                             </div>
+
                         </div>
+
+
 
                     </div>
-
-                       
-
-                        </div>
-                        </nav>
-                    </div>    
-                </div>
-
-<!-- ============================================================== -->
-<!-- 숫자 네비게이션 [1][2][3][4][5][6][7] 종료 -->
-<!-- ============================================================== -->
-
-
-            </div>
-         </div>
-       </div>
-    </div>
-            <!-- ============================================================== -->
-            <!-- footer -->
-            <!-- ============================================================== -->
-            <div class="footer">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                             Copyright © 2018 Concept. All rights reserved. Dashboard by 중앙대학교
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                            <div class="text-md-right footer-links d-none d-sm-block">
-                                <a href="javascript: void(0);">About</a>
-                                <a href="javascript: void(0);">Support</a>
-                                <a href="javascript: void(0);">Contact Us</a>
-                            </div>
-                        </div>
-                    </div>
+                    </nav>
                 </div>
             </div>
+
             <!-- ============================================================== -->
-            <!-- end footer -->
+            <!-- 숫자 네비게이션 [1][2][3][4][5][6][7] 종료 -->
             <!-- ============================================================== -->
+
+
         </div>
-        <!-- ============================================================== -->
-        <!-- end wrapper  -->
-        <!-- ============================================================== -->
+    </div>
+    </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- footer -->
+    <!-- ============================================================== -->
+    <div class="footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    Copyright © 2018 Concept. All rights reserved. Dashboard by 중앙대학교
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="text-md-right footer-links d-none d-sm-block">
+                        <a href="javascript: void(0);">About</a>
+                        <a href="javascript: void(0);">Support</a>
+                        <a href="javascript: void(0);">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- end footer -->
+    <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- end wrapper  -->
+    <!-- ============================================================== -->
     </div>
     <!-- ============================================================== -->
     <!-- end main wrapper  -->
     <!-- ============================================================== -->
-   
+
 
     <!-- Optional JavaScript -->
     <!-- jquery 3.3.1 -->
@@ -624,24 +661,23 @@
             if (chk) $(".chkbox").prop('checked', true);
             else $(".chkbox").prop('checked', false);
         });
-        $('#agentDelBtn').click((e)=>{
+        $('#agentDelBtn').click((e) => {
             let arr = [];
             let chk_arr = $(".chkbox:checked");
-            chk_arr.each((idx,elem)=>{
+            chk_arr.each((idx, elem) => {
                 let id = elem.id;
                 let recordsets = JSON.parse('<%- JSON.stringify(recordsets[0]) %>');
-                arr.push(recordsets[idx].AGENT_CD);
+                arr.push(recordsets[id].AGENT_CD);
             });
-            
+
             $('#del_agent_cd').val(JSON.stringify(arr));
-            console.log($('#del_agent_cd').val())
             $('#agentDelBtn').submit();
         });
-        $('#activateBtn').click((e)=>{
+        $('#activateBtn').click((e) => {
             let cnt = $("input[class='custom-control-input chkbox']:checked").length;
 
-            if(cnt === 0){
-                 alert("선택 된 에이전트가 없습니다.");
+            if (cnt === 0) {
+                alert("선택 된 에이전트가 없습니다.");
                 e.preventDefault();
             }
             else if (cnt !== 1) {
@@ -657,21 +693,21 @@
         });
         $('#changeAgentInfoBtn').click(() => {
             let cnt = $("input[class='custom-control-input chkbox']:checked").length;
-            if(cnt == 0){
-                 alert("선택 된 에이전트가 없습니다.");
+            if (cnt == 0) {
+                alert("선택 된 에이전트가 없습니다.");
                 $('#changeinfomodal').modal('hide');
             }
 
-            else if(cnt != 1) {
+            else if (cnt != 1) {
                 alert("한번에 한가지만 수정 가능합니다.");
                 $('#changeinfomodal').modal('hide');
-            } 
+            }
 
-        
+
             else {
                 let idx = $("input[class='custom-control-input chkbox']:checked")[0].id;
                 let recordsets = JSON.parse('<%- JSON.stringify(recordsets[0]) %>');
-                
+
                 $('#editID').val(recordsets[idx].AGENT_CD)
                 $('#editIP').val(recordsets[idx].IP);
                 $('#editMAC').val(recordsets[idx].MAC_ADDR);
@@ -679,37 +715,38 @@
                 $('#editUseful').val(recordsets[idx].PURPOSE);
                 $('#editOwner').val(recordsets[idx].OWNER);
                 $('#editDesc').val(recordsets[idx].DISCRIPTION);
-                let state= recordsets[idx].STATE
+                let state = recordsets[idx].STATE
                 $('#editStateValue').val(state);
-                switch(state){
+                switch (state) {
                     case 'C':
-                    $('#editState').val("수동등록");
-                    break;
+                        $('#editState').val("수동등록");
+                        break;
                     case 'C-2':
-                    $('#editState').val("후보 에이전트");
-                    break;
+                        $('#editState').val("후보 에이전트");
+                        break;
                     case 'R':
-                    $('#editState').val("정식 에이전트");
-                    break;
+                        $('#editState').val("정식 에이전트");
+                        break;
                     case 'E':
-                    $('#editState').val("휴면 에이전트");
-                    break;
+                        $('#editState').val("휴면 에이전트");
+                        break;
                     case 'O':
-                    $('#editState').val("오프라인");
-                    break;
+                        $('#editState').val("오프라인");
+                        break;
                 }
                 $('#changeinfomodal').modal('show');
             }
         });
-        $('#searchBtn').click(()=>{
-            location.href= "/agent/"+$('#search_keyword').val();
+        $('#searchBtn').click(() => {
+            location.href = "/agent/" + $('#search_keyword').val();
         });
-        $('#search_keyword').keydown((key)=>{
-            if(key.keyCode === 13){
+        $('#search_keyword').keydown((key) => {
+            if (key.keyCode === 13) {
                 $('#searchBtn').click();
             }
         });
     </script>
 
 </body>
+
 </html>
