@@ -255,9 +255,9 @@
                                             <form action="/agent/del_agent_info" method="POST"
                                                 class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
                                                 <input type="hidden" name="del_agent_cd" id="del_agent_cd" value="">
-                                                <button id="agentDelBtn"
+                                                <input type="submit" id="agentDelBtn"
                                                     class="btn btn btn-rounded btn-danger col-xl-12 col-lg-12 col-md-12 col-sm-12"
-                                                    id="activateBtn"> 삭제 </button>
+                                                    id="activateBtn" value="삭제">  
 
                                             </form>
 
@@ -664,14 +664,19 @@
         $('#agentDelBtn').click((e) => {
             let arr = [];
             let chk_arr = $(".chkbox:checked");
-            chk_arr.each((idx, elem) => {
-                let id = elem.id;
-                let recordsets = JSON.parse('<%- JSON.stringify(recordsets[0]) %>');
-                arr.push(recordsets[id].AGENT_CD);
-            });
+            if (chk_arr.length === 0) {
+                alert("선택된 에이전트가 없습니다.");
+                return;
+            } else {
+                chk_arr.each((idx, elem) => {
+                    let id = elem.id;
+                    let recordsets = JSON.parse('<%- JSON.stringify(recordsets[0]) %>');
+                    arr.push(recordsets[id].AGENT_CD);
+                });
 
-            $('#del_agent_cd').val(JSON.stringify(arr));
-            $('#agentDelBtn').submit();
+                $('#del_agent_cd').val(JSON.stringify(arr));
+                $('#agentDelBtn').submit();
+            }
         });
         $('#activateBtn').click((e) => {
             let cnt = $("input[class='custom-control-input chkbox']:checked").length;

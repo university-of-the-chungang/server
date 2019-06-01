@@ -50,14 +50,20 @@ router.get('/agent/:keyword', (req, res, next) => {
 
 })
 router.post('/agent/del_agent_info', (req, res, next) => {
-  DB.delete_agent_info(JSON.parse(req.body.del_agent_cd)).then(() => {
+  if (req.body.del_agent_cd.length === 0) {
     DB.get_agent_info().then(result => {
       res.render('./main/Agent/agent', result);
     });
+  } else {
+    DB.delete_agent_info(JSON.parse(req.body.del_agent_cd)).then(() => {
+      DB.get_agent_info().then(result => {
+        res.render('./main/Agent/agent', result);
+      });
 
-  }).catch(err => {
-    console.log(err);
-  });
+    }).catch(err => {
+      console.log(err);
+    });
+  }
 });
 
 router.post('/add_manual_agent', (req, res, next) => {
