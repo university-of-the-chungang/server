@@ -1,11 +1,34 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>asdfasdfasdfasd</title>
-  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <meta charset="UTF-8">
+  <title>Document</title>
 </head>
 <body>
-<h1>asdfasdfasdfasfd</h1>
-<p>asdfasdfasdfasfd</p>
+
+<form action="/oval" method="post" enctype="multipart/form-data">
+  <input type="file" name="imgFile"  onchange="checkFile(this)">
+  <input type="submit" value="파일 업로드하기">
+</form>
+
 </body>
+
+<script>
+  function checkFile(f) {
+    // files 로 해당 파일 정보 얻기.
+    var file = f.files;
+
+    // file[0].name 은 파일명 입니다.
+    // 정규식으로 확장자 체크
+    if(!/\.(xml)$/i.test(file[0].name)) alert('xml 파일만 선택해 주세요.\n\n현재 파일 : ' + file[0].name);
+
+    else return;
+
+    f.outerHTML = f.outerHTML;
+
+  }
+</script>
+
+
 </html>
+
