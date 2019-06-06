@@ -111,6 +111,7 @@ router.use('/newgroup', newgroup);
 
 // 정책
 const oval = require('./policy/oval');
+const uploads = require('./')
 
 router.use('/oval', oval);
 
