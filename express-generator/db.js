@@ -331,3 +331,16 @@ exports.activate_agent_info = (agent_cd) => {
         });
     });
 }
+
+exports.total_group_info = () =>{
+    return new Promise((resolve,reject)=>{
+        let query = `SELECT GROUP_SET_CD, NAME, CREATE_TIME, ACTIVE_TIME, AGENT_COUNTING, INSPECTION_PERIOD, ACTIVE_STATE, DISCRIPTION FROM TBL_GROUP_INFO`;
+        console.log(query);
+        new sql.Request().query(query,(err,result)=>{
+            if(err){
+                reject(err);
+            }
+            resolve(result);
+        });
+    });
+}
