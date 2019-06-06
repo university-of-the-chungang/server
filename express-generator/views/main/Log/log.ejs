@@ -16,6 +16,25 @@
     <link rel="stylesheet" href="assets/vendor/charts/c3charts/c3.css">
     <link rel="stylesheet" href="assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
     <title>국가보안연구소</title>
+
+    <style>
+
+    td { 
+        vertical-align: middle; 
+        overflow:hidden;
+        white-space : nowrap;
+        text-overflow: ellipsis;
+
+     }
+
+
+
+    td.textOverDefault {
+        white-space : normal; /*기본값*/
+        text-overflow: clip; /*기본값*/
+    }
+
+    </style>
 </head>
 
 <body>
@@ -125,20 +144,33 @@
                     <h4 class="card-header text-center">평가 문항 추출</h4>
                     <div class="card-body p-0">   
                         <div class="row"> 
-                              <label class="custom-control custom-checkbox" style="margin-left: 5px">
-                                <input id="ck1" name="ck1" type="checkbox" class="custom-control-input">
-                              </label>
-                            <div class="col-3">
-                                <span class="custom-control-label" style="margin-left: 5px">모두 선택</span>
-                            </div>
-                            <div class="col-5" style="height: 70px">
-                                <div class="input-group input-search">
-                                    <input class="form-control" type="text" placeholder="Search "><span class="input-group-btn">
-                                    <button class="btn btn-secondary" type="button"><i class="fas fa-search"></i></button></span>
-                                </div>
-                            </div>
 
-                            <button type="submit" style="height: 40px;" class="btn btn-space btn-primary col-3">점검결과 추출</button> 
+                            <table class="table">
+                                <thead>
+                                    <tr class="border-0">
+                                        <td class="border-0">
+                                        </td>
+                                        <td class="border-0">
+                                        </td>
+                                        <td class="border-0">
+                                                <label class="custom-control custom-checkbox">
+                                                <input id="ck1" name="ck1" type="checkbox" class="custom-control-input" >
+                                                <span class="custom-control-label" style="">모두 선택</span>
+                                                </label>
+                                        </td>
+                                        <td class="border-0 text-center">
+                                             <div class="input-group input-search">
+                                                <input class="form-control" type="text" placeholder="Search "><span class="input-group-btn">
+                                                <button class="btn btn-secondary" type="button"><i class="fas fa-search"></i></button></span>
+                                            </div>
+                                        </td>
+                                        <td class="border-0 text-center">
+                                            <button type="submit"  class="btn btn-space btn-primary">점검결과 추출</button> 
+                                        </td>
+
+                                    </tr>
+                                </thead>
+                            </table>
 
                         </div>
              
