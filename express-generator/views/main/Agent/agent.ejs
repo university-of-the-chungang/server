@@ -132,7 +132,7 @@
 
                                 <div class="card-body p-0">
 
-                                    <div class="row" style="margin-top: 10px; margin-bottom: 30px;">
+                                    <div class="row" style="margin-top: 30px; margin-bottom: 30px; ">
                                         <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1"></div>
                                         <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1">
                                             <label class="custom-control custom-checkbox">
@@ -149,7 +149,7 @@
                                                 <input id="search_keyword" class="form-control" type="text"
                                                     placeholder="Search "><span class="input-group-btn">
                                                     <button class="btn btn-secondary" type="button" id="searchBtn"><i
-                                                            class="fas fa-search"></i></button></span>
+                                                            class="fas fa-search" ></i></button></span>
                                             </div>
                                         </div>
 
@@ -159,15 +159,14 @@
 
 
                                             <form class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
-                                                <button href="#"
+                                                <button 
                                                     class="btn btn-rounded btn-success col-xl-12 col-lg-12 col-md-12 col-sm-12"
                                                     data-target="#changeinfomodal" id="changeAgentInfoBtn"
-                                                    data-toggle="modal">정보수정</button>
+                                                    data-toggle="modal" style="height: 55px">정보수정</button>
+
                                             </form>
 
-
                                             <!-- 정부 수정 모달 시작  -->
-                                            <!-- ================================ -->
                                             <!-- ================================ -->
 
                                             <div class="modal fade" id="changeinfomodal" tabindex="-1" role="dialog"
@@ -242,14 +241,16 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            
+                                            <!-- ================================ -->
 
-
+                                          
                                             <form action="/activate_agent_info" method="POST"
                                                 class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
                                                 <input type="hidden" name="agent_cd" id="agent_cd" value="">
                                                 <button href="#"
                                                     class="btn btn btn-rounded btn-primary col-xl-12 col-lg-12 col-md-12 col-sm-12"
-                                                    id="activateBtn"> 등록 </button>
+                                                    id="activateBtn" style="height: 55px"> 등록 </button>
                                             </form>
 
                                             <form action="/agent/del_agent_info" method="POST"
@@ -257,7 +258,7 @@
                                                 <input type="hidden" name="del_agent_cd" id="del_agent_cd" value="">
                                                 <input type="submit" id="agentDelBtn"
                                                     class="btn btn btn-rounded btn-danger col-xl-12 col-lg-12 col-md-12 col-sm-12"
-                                                    id="activateBtn" value="삭제">  
+                                                    id="activateBtn" value="삭제" style="height: 55px">  
 
                                             </form>
 
@@ -267,12 +268,13 @@
 
                                         </div>
 
-                                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2">
-                                            <div style="text-align: center;">
-                                                <h5>900(20)/<%=recordsets[0].length %></h5>
+                                        <div class="row col-xl-3 col-lg-3 col-md-3 col-sm-3">
+                                            
+                                            <div class="col-4 alert alert-secondary" role="alert" align="text-center">
+                                               900(20)/<%=recordsets[0].length %>
                                             </div>
-                                            <div style="text-align: center; cursor: pointer;"
-                                                onclick="location.reload();"><i class="fas fa-redo"></i></div>
+
+                                            <div class="col-3" style="margin-left: 25px"onclick="location.reload();"><i class="fas fa-redo" style="font-size:30px; margin-top: 15px;"></i></div>
                                         </div>
                                     </div>
 
@@ -390,22 +392,59 @@
                                 <div class="card-body">
                                     <div class="row">
 
-
+                                         <a class="col-xl-1 col-lg-1 col-md-1 col-sm-1"></a>
                                         <a href="#"
-                                            class="btn btn-success btn-lg col-xl-4 col-lg-4 col-md-4 col-sm-4">1. 엑셀입력
+                                            class="btn btn-outline-success col-xl-3 col-lg-3 col-md-3 col-sm-3"
+                                            data-toggle="modal" data-target="#excelModal" style="margin-right: 5px;">엑셀입력
                                         </a>
 
 
+                                        <!-- 엑셀입력 모달 시작-->
+                                         <div class="modal fade" id="excelModal" tabindex="-1" role="dialog"
+                                            aria-labelledby="exampleModalLabel" aria-hidden="true"
+                                            style="display: none;">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="excelModal">엑셀 입력</h5>
+                                                        <a href="#" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">×</span>
+                                                        </a>
+                                                    </div>
 
-                                        <a href="#" class="btn btn-primary btn-lg col-xl-4 col-lg-4 col-md-4 col-sm-4"
-                                            data-toggle="modal" data-target="#exampleModal">2. 수동입력 </a>
+
+                                                    <form action="" method="POST">
+                                                        <div class="modal-body">
+
+                                                        <label class="col-12 btn btn-outline-success btn-lg">
+                                                       엑셀 파일 첨부하기<input type="file" style="display: none;">
+                                                        </label>
+
+
+
+                                                        </div>
+
+                                                        <div class="modal-footer">
+                                                            <a href="#" class="btn btn-secondary"
+                                                                data-dismiss="modal">닫기</a>
+                                                            <a href="#" class="btn btn-primary" type="submit">변경 저장</a>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- 엑셀입력 모달 끝-->
+
+
+                                        <a href="#" class="btn btn-outline-primary btn-lg col-xl-3 col-lg-3 col-md-3 col-sm-3" style="margin-left: 5px;" 
+                                            data-toggle="modal" data-target="#exampleModal">수동입력 </a>
 
 
 
                                         <!-- 후보 수동 에이전트 등록 시작 -->
-                                        <!-- 후보 수동 에이전트 등록 시작 -->
-                                        <!-- 후보 수동 에이전트 등록 시작 -->
-
+                                     
                                         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
                                             aria-labelledby="exampleModalLabel" aria-hidden="true"
                                             style="display: none;">
@@ -475,15 +514,52 @@
                                         </div>
 
                                         <!-- 후보 수동 에이전트 끝 시작 -->
-                                        <!-- 후보 수동 에이전트 끝 시작 -->
-                                        <!-- 후보 수동 에이전트 끝 시작 -->
-
+                                        
 
                                         <a href="#"
-                                            class="btn btn-secondary btn-lg col-xl-4 col-lg-4 col-md-4 col-sm-4">3.
-                                            등록정보갱신 </a>
+                                            class="btn btn-outline-secondary btn-lg col-xl-3 col-lg-3 col-md-3 col-sm-4" style=" margin-left: 10px;" data-toggle="modal" data-target="#knownModal">등록정보갱신</a>
 
-                                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1"></div>
+                                         <!-- 등록정보 갱신  모달  시작 -->
+
+                                         <div class="modal fade" id="knownModal" tabindex="-1" role="dialog"
+                                            aria-labelledby="exampleModalLabel" aria-hidden="true"
+                                            style="display: none;">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="knownModal">등록정보갱신</h5>
+                                                        <a href="#" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">×</span>
+                                                        </a>
+                                                    </div>
+
+
+                                                    <form action="/" method="POST">
+                                                        <div class="modal-body">
+
+                                                       
+
+                                                        <label class="col-12 btn btn-outline-secondary btn-lg">
+                                                       엑셀 파일 첨부하기<input type="file" style="display: none;">
+                                                        </label>
+
+
+
+
+                                                        </div>
+
+                                                        <div class="modal-footer">
+                                                            <a href="#" class="btn btn-secondary"
+                                                                data-dismiss="modal">닫기</a>
+                                                            <a href="#" class="btn btn-primary" type="submit">변경 저장</a>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        
 
 
                                     </div>
@@ -498,9 +574,9 @@
                                 </div>
 
                                 <div class="card-body">
-                                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 "></div>
+                                   
 
-                                    <a href="#" class="btn btn-warning btn-lg col-xl-12 col-lg-12 col-md-12 col-sm-12"
+                                    <a href="#" class="btn btn-outline-warning btn-lg col-xl-12 col-lg-12 col-md-12 col-sm-12"
                                         data-toggle="modal" data-target="#offlinemodal">오프라인 정보시스템 등록</a>
 
 
