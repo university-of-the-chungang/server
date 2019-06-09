@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="en">
+ 
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link href="assets/vendor/fonts/circular-std/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/libs/css/style.css">
+    <link rel="stylesheet" href="assets/vendor/fonts/fontawesome/css/fontawesome-all.css">
+    <link rel="stylesheet" href="assets/vendor/charts/chartist-bundle/chartist.css">
+    <link rel="stylesheet" href="assets/vendor/charts/morris-bundle/morris.css">
+    <link rel="stylesheet" href="assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="assets/vendor/charts/c3charts/c3.css">
+    <link rel="stylesheet" href="assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
+    <title>국가보안연구소</title>
+
+    <style>
+
+    td { 
+        vertical-align: middle; 
+        overflow:hidden;
+        white-space : nowrap;
+        text-overflow: ellipsis;
+
+     }
+
+
+
+    td.textOverDefault {
+        white-space : normal; /*기본값*/
+        text-overflow: clip; /*기본값*/
+    }
+
+    </style>
+</head>
+
+<body>
+
+<div class="dashboard-main-wrapper">
+    <div class="dashboard-header">
+        <nav class="navbar navbar-expand-lg bg-white fixed-top">
+            <a class="navbar-brand" href="../dashboard">국가보안연구소</a>
+            <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                
+                <ul class="navbar-nav ml-auto navbar-right-top">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../dashboard"  role="button"  aria-haspopup="true" aria-expanded="false">대쉬보드</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="../agent"  role="button" aria-haspopup="true" aria-expanded="false">에이전트관리</a>    
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="../group" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">그룹 및 정책관리</a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="../group">기본 정보 </a>
+                            <a class="dropdown-item" href="../newgroup">신규 그룹 생성</a>
+                            <a class="dropdown-item" href="../oldgroup">기존 그룹 관리</a>
+                            </div>  
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="../log" role="button" aria-haspopup="true" aria-expanded="false">평가문항/로그관리</a>
+                    </li>
+
+                    <li class="nav-item dropdown connection">
+                        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 설정 <i class="far fa-sun"></i> </a>
+                        <ul class="dropdown-menu dropdown-menu-right connection-dropdown">
+                            <li class="connection-list">
+                                <div class="row">
+                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
+                                        <a href="#" class="connection-item"><span>CPE</span></a>
+                                    </div>
+                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
+                                        <a href="#" class="connection-item"> <span>CCE</span></a>
+                                    </div>
+                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
+                                        <a href="#" class="connection-item"> <span>OVAL</span></a>
+                                    </div>
+                                    </div>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <li class="nav-item dropdown nav-user">
+                        <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">사용자 관리 </a>
+                        
+                        <ul class="dropdown-menu dropdown-menu-right connection-dropdown">
+                            <li class="connection-list">
+                                <div class="row">
+                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
+                                        <a href="../login" class="connection-item"><span>로그인</span></a>
+                                    </div>
+                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
+                                        <a href="../login" class="connection-item"> <span>로그아웃</span></a>
+                                    </div>
+                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
+                                        <a href="../changeinfo" class="connection-item"> <span>정보변경</span></a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <!-- ============================================================== -->
+    <!-- 헤드 네비게이션 바 종료  -->
+    <!-- ============================================================== -->
+    
+        <div class="">
+            <div class="dashboard-ecommerce">
+                <div class="container-fluid dashboard-content ">
+                    <!-- ============================================================== -->
+                    <!-- pageheader  -->
+                    <!-- ============================================================== -->
+                   
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="page-header">
+                                <h2 class="pageheader-title">평가문항 및 로그관리</h2>
+                                <div class="page-breadcrumb">
+                                    <nav aria-label="breadcrumb">
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">MENU</a></li>
+                                            <li class="breadcrumb-item active" aria-current="page">평가문항 및 로그관리</li>
+                                        </ol>
+                                    </nav>                                                                                                                
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+            <div class="row">
+               <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                  <div class="card" style="height: 600px; overflow: scroll;">
+                    <h4 class="card-header text-center">평가 문항 추출</h4>
+                    <div class="card-body p-0">   
+                        <div class="row"> 
+
+                            <table class="table">
+                                <thead>
+                                    <tr class="border-0">
+                                        <td class="border-0">
+                                        </td>
+                                        <td class="border-0">
+                                        </td>
+                                        <td class="border-0">
+                                                <label class="custom-control custom-checkbox">
+                                                <input id="ck1" name="ck1" type="checkbox" class="custom-control-input" >
+                                                <span class="custom-control-label" style="">모두 선택</span>
+                                                </label>
+                                        </td>
+                                        <td class="border-0 text-center">
+                                             <div class="input-group input-search">
+                                                <input class="form-control" type="text" placeholder="Search "><span class="input-group-btn">
+                                                <button class="btn btn-secondary" type="button"><i class="fas fa-search"></i></button></span>
+                                            </div>
+                                        </td>
+                                        <td class="border-0 text-center">
+                                            <button type="submit"  class="btn btn-space btn-primary">점검결과 추출</button> 
+                                        </td>
+
+                                    </tr>
+                                </thead>
+                            </table>
+
+                        </div>
+             
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class="bg-light">
+                                    <tr class="border-0">
+                                        <th class="border-0 text-center">check</th>
+                                        <th class="border-0 text-center">상태</th>
+                                        <th class="border-0 text-center ">IP</th>
+                                        <th class="border-0 text-center">운영체제 버전</th>
+                                        <th class="border-0 text-center">용도</th>
+                                    </tr>
+                                </thead>
+                                <tbody>      
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+<!-- ============================================================== -->            
+<!-- ============================================================== -->
+<!-- 로그 관리 카드 시작 -->
+            <div class="card">
+                <h5 class="card-header text-center">로그관리</h5>
+                    <div class="card-body p-0">
+                        <div class="row"> 
+
+                            <table class="table">
+                                <thead>
+                                    <tr class="border-0">
+
+                                        <td class="border-0">
+                                        </td>
+                                        <td class="border-0 text-center">
+                                             <div class="input-group input-search">
+                                                <input class="form-control" type="text" placeholder="Search "><span class="input-group-btn">
+                                                <button class="btn btn-secondary" type="button"><i class="fas fa-search"></i></button></span>
+                                            </div>
+                                        </td>
+                                        <td class="border-0 text-center">
+                                            <button type="submit"  class="btn btn-space btn-success">점검결과 추출</button> 
+                                        </td>
+
+                                    </tr>
+                                </thead>
+                            </table>
+
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class="bg-light">
+                                    <tr class="border-0">
+                                        <th class="border-0 text-center">번호</th>
+                                        <th class="border-0">항목</th>
+                                        <th class="border-0 text-center">위험도</th>
+                                        <th class="border-0 text-center">개수</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="text-center">1</td>
+                                        <td><h5>각종 로그기록</h5></td>
+                                        <td class="text-center">높음 </td>
+                                        <td class="text-center">6 </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">1</td>
+                                        <td><h5>각종 로그기록</h5></td>
+                                        <td class="text-center">높음 </td>
+                                        <td class="text-center">6 </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">1</td>
+                                        <td><h5>각종 로그기록</h5></td>
+                                        <td class="text-center">높음 </td>
+                                        <td class="text-center">6 </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+<!-- 로그 관리 카드 끝 -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+            </div>
+         </div>
+       </div>
+    </div>
+            <!-- ============================================================== -->
+            <!-- footer -->
+            <!-- ============================================================== -->
+            <div class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                             Copyright © 2018 Concept. All rights reserved. Dashboard by 중앙대학교
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                            <div class="text-md-right footer-links d-none d-sm-block">
+                                <a href="javascript: void(0);">About</a>
+                                <a href="javascript: void(0);">Support</a>
+                                <a href="javascript: void(0);">Contact Us</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- end footer -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- end wrapper  -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- end main wrapper  -->
+    <!-- ============================================================== -->
+    <!-- Optional JavaScript -->
+    <!-- jquery 3.3.1 -->
+    <script src="assets/vendor/jquery/jquery-3.3.1.min.js"></script>
+    <!-- bootstap bundle js -->
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+    <!-- slimscroll js -->
+    <script src="assets/vendor/slimscroll/jquery.slimscroll.js"></script>
+    <!-- main js -->
+    <script src="assets/libs/js/main-js.js"></script>
+    <!-- chart chartist js -->
+    <script src="assets/vendor/charts/chartist-bundle/chartist.min.js"></script>
+    <!-- sparkline js -->
+    <script src="assets/vendor/charts/sparkline/jquery.sparkline.js"></script>
+    <!-- morris js -->
+    <script src="assets/vendor/charts/morris-bundle/raphael.min.js"></script>
+    <script src="assets/vendor/charts/morris-bundle/morris.js"></script>
+    <!-- chart c3 js -->
+    <script src="assets/vendor/charts/c3charts/c3.min.js"></script>
+    <script src="assets/vendor/charts/c3charts/d3-5.4.0.min.js"></script>
+    <script src="assets/vendor/charts/c3charts/C3chartjs.js"></script>
+    <script src="assets/libs/js/dashboard-ecommerce.js"></script>
+
+ 
+</body>
+</html>
