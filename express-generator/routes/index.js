@@ -4,7 +4,7 @@
 const express = require('express');
 const router = express.Router();
 const DB = require('../db');
-
+const LOGS = require('../logs');
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
@@ -123,7 +123,12 @@ router.post('/activate_agent_info', (req, res, next) => {
 router.get('/log', function (req, res, next) {
   res.render('./main/Log/log');
 }); // 평가문항 및 로그 추출 페이지
-
+router.post('/make_xlsx',function(req,res,next){
+  let param = req.body;
+  let now = new Date().toISOString().slice(0,10); 
+  let result = LOGS.make_xlsx(now+".log",param);
+  res.json(result);
+});
 
 // 그룹 페이지
 const group = require('./group/group');
