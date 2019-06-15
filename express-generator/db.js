@@ -111,7 +111,6 @@ exports.get_agent_info = (agent_cd = null) => {
             console.log(`SELECT * FROM TBL_AGENT_INFO` + sql_adder);
             if (err) {
                 print(err);
-                reject(err);
             }
             console.log(result);
             resolve(result);

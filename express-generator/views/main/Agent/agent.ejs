@@ -535,15 +535,15 @@
                                                     </div>
 
 
-                                                    <form action="/" method="POST">
+                                                    <form action="/agent/refresh_xlsx" method="POST" enctype="multipart/form-data">
                                                         <div class="modal-body">
 
                                                        
 
                                                         <label class="col-12 btn btn-outline-secondary btn-lg">
-                                                       엑셀 파일 첨부하기<input type="file" style="display: none;">
+                                                       엑셀 파일 첨부하기<input type="file" style="display: none;" name="xlsx_file">
                                                         </label>
-
+                                                        <span style="color:red">주의 : 등록된 IP를 기반으로 용도와 소유자를 변경합니다.</span>
 
 
 
@@ -552,7 +552,7 @@
                                                         <div class="modal-footer">
                                                             <a href="#" class="btn btn-secondary"
                                                                 data-dismiss="modal">닫기</a>
-                                                            <a href="#" class="btn btn-primary" type="submit">변경 저장</a>
+                                                            <input class="btn btn-primary" type="submit" value="변경 저장">
                                                         </div>
                                                     </form>
                                                 </div>

@@ -131,7 +131,6 @@ router.post('/make_xlsx',function(req,res,next){
 });
 let upload = multer({dest:'public/uploads/'})
 router.post('/agent/upload_xlsx',upload.single('xlsx_file'),(req,res,next)=>{
-  console.log(req.file);
   LOGS.read_xlsx(req.file.path).then(result=>{
     DB.get_agent_info().then(result2 => {
       res.render('./main/Agent/agent', result2);
@@ -139,9 +138,15 @@ router.post('/agent/upload_xlsx',upload.single('xlsx_file'),(req,res,next)=>{
   }).catch(err=>{
     console.log(err);
   });
-  
-
 });
+router.post('/agent/refresh_xlsx',upload.single('xlsx_file'),(req,res,next)=>{
+  LOGS.refresh_xlsx(req.file.path).then(result=>{
+    DB.get_agent_info().then(result2 => {
+      res.render('./main/Agent/agent', result2);
+    });
+  })
+});
+
 
 // 그룹 페이지
 const group = require('./group/group');
