@@ -23,9 +23,39 @@ router.get('/404', function (req, res, next) {
 router.get('/login', function (req, res, next) {
   res.render('./main/User/login');
 });
+router.post('/signin',(req,res,next)=>{
+  data =req.body;
+  DB.login_admin(data.name,data.pass).then(result=>{
+    if(result === 1){
+      req.session.username = data.name;
+      LOGS.make_log("USER",req.session.username,"로그인");
+      res.render('./dashboard');
+    }else{
+      req.session.username = null;
+      res.render('./main/User/login');
+    }
+  }).catch(err=>{
+    req.session.username = null;
+    res.render('./main/User/login');
+  });
+});
 
 router.get('/signup', function (req, res, next) {
   res.render('./main/User/signup');
+});
+router.post('/signup',(req,res,next)=>{
+  data = req.body;
+  data.lock_stat = 0;
+  data.lock_count = 0;
+
+  DB.add_admin(data).then(result=>{
+    res.render('./main/User/login');
+  });
+});
+router.get('/logout',(req,res,next)=>{
+  LOGS.make_log("USER",req.session.username,"로그아웃");
+  req.session.username = null;
+  res.render('./main/User/login');
 });
 
 router.get('/forgotpassword', function (req, res, next) {
@@ -38,12 +68,19 @@ router.get('/changeinfo', function (req, res, next) {
 
 // User 기능과 관련된 페이지 끝
 router.get('/agent', function (req, res, next) {
+  console.log(req.session.username);
+  if(req.session.username){
   DB.get_agent_info().then(result => {
+    result.sess_name = req.session.username;
     res.render('./main/Agent/agent', result);
   });
+}else{
+  res.render('./main/User/login');
+}
 });// 에이전트 페이지
 router.get('/agent/:keyword', (req, res, next) => {
   DB.search_agent_info(req.params.keyword).then(result => {
+    result.sess_name = req.session.username;
     res.render('./main/Agent/agent', result);
   }).catch(err => {
     console.log(err);
@@ -53,11 +90,14 @@ router.get('/agent/:keyword', (req, res, next) => {
 router.post('/agent/del_agent_info', (req, res, next) => {
   if (req.body.del_agent_cd.length === 0) {
     DB.get_agent_info().then(result => {
+      result.sess_name = req.session.username;
       res.render('./main/Agent/agent', result);
     });
   } else {
     DB.delete_agent_info(JSON.parse(req.body.del_agent_cd)).then(() => {
+      LOGS.make_log("AGENT",req.session.username,"삭제");
       DB.get_agent_info().then(result => {
+        result.sess_name = req.session.username;
         res.render('./main/Agent/agent', result);
       });
 
@@ -68,7 +108,6 @@ router.post('/agent/del_agent_info', (req, res, next) => {
 });
 
 router.post('/add_manual_agent', (req, res, next) => {
-  console.log(req.body);
   let arr = [req.body.txtIP, req.body.txtMac, req.body.txtOS, req.body.txtUseful, req.body.txtOwner, req.body.txtDesc, req.body.state];
 
 
@@ -81,10 +120,13 @@ router.post('/add_manual_agent', (req, res, next) => {
   if (isnull) {
     DB.get_agent_info().then(result => {
       result['reason'] = 'error';
+      result.sess_name = req.session.username;
       res.render('./main/Agent/agent', result);
     });
   } else {
     DB.add_agent_info(req.body.txtIP, req.body.txtMac, req.body.txtOS, req.body.txtUseful, req.body.txtOwner, req.body.txtDesc, req.body.state).then(result => {
+      
+      LOGS.make_log("AGENT",req.session.username,"에이전트 등록");
       DB.get_agent_info().then(result2 => {
         res.render('./main/Agent/agent', result2);
       });
@@ -102,11 +144,15 @@ router.post('/update_agent_info', (req, res, next) => {
   if (isnull) {
     DB.get_agent_info().then(result => {
       result['reason'] = 'error';
+      result.sess_name = req.session.username;
       res.render('./main/Agent/agent', result);
     });
   } else {
     DB.update_agent_info(cd, req.body.txtIP, req.body.txtMac, req.body.txtOS, req.body.txtUseful, req.body.txtOwner, req.body.txtDesc, req.body.state).then(result => {
+      
+      LOGS.make_log("AGENT",req.session.username,"정보수정");
       DB.get_agent_info().then(result2 => {
+        result2.sess_name = req.session.username;
         res.render('./main/Agent/agent', result2);
       });
     });
@@ -114,7 +160,9 @@ router.post('/update_agent_info', (req, res, next) => {
 });
 router.post('/activate_agent_info', (req, res, next) => {
   DB.activate_agent_info(req.body.agent_cd).then(result => {
+    LOGS.make_log("AGENT",req.session.username,"등록");
     DB.get_agent_info().then(result2 => {
+      result2.sess_name = req.session.username;
       res.render('./main/Agent/agent', result2);
     });
   });
@@ -131,7 +179,10 @@ router.post('/make_xlsx',function(req,res,next){
 let upload = multer({dest:'public/uploads/'})
 router.post('/agent/upload_xlsx',upload.single('xlsx_file'),(req,res,next)=>{
   LOGS.read_xlsx(req.file.path).then(result=>{
+    
     DB.get_agent_info().then(result2 => {
+      LOGS.make_log("AGENT",req.session.username,"엑셀등록");
+      result2.sess_name = req.session.username;
       res.render('./main/Agent/agent', result2);
     });
   }).catch(err=>{
@@ -141,9 +192,12 @@ router.post('/agent/upload_xlsx',upload.single('xlsx_file'),(req,res,next)=>{
 router.post('/agent/refresh_xlsx',upload.single('xlsx_file'),(req,res,next)=>{
   LOGS.refresh_xlsx(req.file.path).then(result=>{
     DB.get_agent_info().then(result2 => {
+      LOGS.make_log("AGENT",req.session.username,"등록정보갱신");
+      result2.sess_name = req.session.username;
       res.render('./main/Agent/agent', result2);
     });
-  })
+    })
+  
 });
 
 

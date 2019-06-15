@@ -58,7 +58,17 @@ let query_select = (data, table_name) => {
     });
 
 };
-
+exports.add_log = (log_type,contents,date)=>{
+    return new Promise((resolve,reject)=>{
+        console.log(`INSERT INTO TBL_LOG(LOG_TYPE,CONTENTS,CONTENT_DATE) VALUES('${log_type}','${contents}',CONVERT(DATETIME,'${date}'))`);
+        new sql.Request().query(`INSERT INTO TBL_LOG(LOG_TYPE,CONTENTS,CONTENT_DATE) VALUES('${log_type}','${contents}',CONVERT(DATETIME,'${date}'))`,(err,result)=>{
+            if(err){
+                console.log(err);
+            }else
+            resolve(result);
+        });
+    });
+};
 exports.login_admin = (login_name, login_pw) => {
     return new Promise((resolve, reject) => {
         if (login_name.length <= 0 || login_pw.length <= 0) {
@@ -254,7 +264,7 @@ exports.view_tbl_xccdf_set_list = () => {
 }
 exports.add_admin = (data) => {
     return new Promise((resolve, reject) => {
-        let query = `INSERT INTO TBL_ADMIN_INFO (NAME, PASSWD, TEL_NO, EMAIL, DIVISION, POSITION, LOCK_STAT, FROM_DATE, TO_DATE, ROLE_CD, LOCK_COUNT, LOCK_DATE, LAST_LOGIN) VALUES(`;
+        let query = `INSERT INTO TBL_ADMIN_INFO (NAME, PASSWD, TEL_NO, EMAIL, DIVISION, POSITION, LOCK_STAT,  ROLE_CD, LOCK_COUNT, LOCK_DATE, LAST_LOGIN) VALUES(`;
         let arr = [];
         arr.push(`'` + data.name + `'`);
         arr.push(`'` + data.passwd + `'`);
@@ -263,12 +273,10 @@ exports.add_admin = (data) => {
         arr.push(`'` + data.division + `'`);
         arr.push(`'` + data.position + `'`);
         arr.push(data.lock_stat);
-        arr.push(`'` + data.from_date + `'`);
-        arr.push(`'` + data.to_date + `'`);
-        arr.push(data.role_cd);
+        arr.push(`NULL`);
         arr.push(data.lock_count);
         arr.push(`NULL`);
-        arr.push(`'` + data.last_login + `'`);
+        arr.push(`NULL`);
         query += arr.join(", ");
         query += `)`
         console.log(query);

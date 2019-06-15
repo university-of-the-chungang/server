@@ -79,10 +79,7 @@
                                 <li class="connection-list">
                                     <div class="row">
                                         <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                            <a href="../login" class="connection-item"><span>로그인</span></a>
-                                        </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                            <a href="../login" class="connection-item"> <span>로그아웃</span></a>
+                                            <a href="../logout" class="connection-item"> <span>로그아웃</span></a>
                                         </div>
                                         <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
                                             <a href="../changeinfo" class="connection-item"> <span>정보변경</span></a>
@@ -230,7 +227,7 @@
                                                                         id="editStateValue">
                                                                 </div>
                                                             </div>
-
+                                                            <input type="hidden" name="sess_name" value="<%= sess_name %>">
                                                             <div class="modal-footer">
                                                                 <a href="#" class="btn btn-secondary"
                                                                     data-dismiss="modal">닫기</a>
@@ -256,6 +253,7 @@
                                             <form action="/agent/del_agent_info" method="POST"
                                                 class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
                                                 <input type="hidden" name="del_agent_cd" id="del_agent_cd" value="">
+                                                <input type="hidden" name="sess_name" value="<%= sess_name %>">
                                                 <input type="submit" id="agentDelBtn"
                                                     class="btn btn btn-rounded btn-danger col-xl-12 col-lg-12 col-md-12 col-sm-12"
                                                     value="삭제" style="height: 55px">  
@@ -425,6 +423,7 @@
 
                                                         </div>
 
+                                                        <input type="hidden" name="sess_name" value="<%= sess_name %>">
                                                         <div class="modal-footer">
                                                             <a href="#" class="btn btn-secondary"
                                                                 data-dismiss="modal">닫기</a>
@@ -503,6 +502,7 @@
 
                                                         </div>
 
+                                                        <input type="hidden" name="sess_name" value="<%= sess_name %>">
                                                         <div class="modal-footer">
                                                             <a href="#" class="btn btn-secondary"
                                                                 data-dismiss="modal">닫기</a>
@@ -549,6 +549,7 @@
 
                                                         </div>
 
+                                                        <input type="hidden" name="sess_name" value="<%= sess_name %>">
                                                         <div class="modal-footer">
                                                             <a href="#" class="btn btn-secondary"
                                                                 data-dismiss="modal">닫기</a>
@@ -639,6 +640,7 @@
                                                             </div>
                                                         </div>
 
+                                                        <input type="hidden" name="sess_name" value="<%= sess_name %>">
 
                                                         <div class="modal-footer">
                                                             <a href="#" class="btn btn-secondary"

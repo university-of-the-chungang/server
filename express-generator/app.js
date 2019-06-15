@@ -6,7 +6,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
-
+const session = require('express-session');
 const indexRouter = require('./routes/index');
 
 const app = express();
@@ -14,7 +14,13 @@ const app = express();
 //view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
+app.use(session({
+  key: 'sid', // 세션키
+  secret: 'secret' , // 비밀키
+  cookie: {
+    maxAge: 1000 * 60 * 60 // 쿠키 유효기간 1시간
+  }
+}));
 //middleware - logger
 app.use(logger('dev'));
 //middleware - body-parser

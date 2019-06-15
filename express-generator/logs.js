@@ -2,6 +2,7 @@
 let xlsx = require("xlsx");
 let fs = require("fs");
 let DB = require('./db');
+let moment = require('moment');
 exports.make_xlsx = (file_name, obj) => {
     let data = new Array(obj)
     let file_path = __dirname + '\\public\\logs\\' + file_name + '.xlsx';
@@ -27,27 +28,27 @@ exports.make_xlsx = (file_name, obj) => {
         return null;
     }
 };
-exports.refresh_xlsx = (file_path) =>{
+exports.refresh_xlsx = (file_path) => {
     let workbook = xlsx.readFile(file_path);
     let first_sheet_name = workbook.SheetNames[0];
     let first_sheet = workbook.Sheets[first_sheet_name];
     let first_data = xlsx.utils.sheet_to_json(first_sheet);
     return new Promise((resolve, reject) => {
-    DB.get_agent_info().then(result=>{
-        db_data = result['recordset'];
-        db_data.forEach(db_elem=>{
-            first_data.forEach(elem => {
-                if(elem['IP'] == db_elem['IP']){
-                    db_elem['PURPOSE'] = elem['용도'];
-                    db_elem['OWNER'] = elem['소유자'];
-                    DB.update_agent_info(db_elem.AGENT_CD,db_elem.IP,db_elem.MAC_ADDR,db_elem.OS,db_elem.PURPOSE,db_elem.OWNER,db_elem.DESCRIPTION,db_elem.STATE);
-                }
-            })
+        DB.get_agent_info().then(result => {
+            db_data = result['recordset'];
+            db_data.forEach(db_elem => {
+                first_data.forEach(elem => {
+                    if (elem['IP'] == db_elem['IP']) {
+                        db_elem['PURPOSE'] = elem['용도'];
+                        db_elem['OWNER'] = elem['소유자'];
+                        DB.update_agent_info(db_elem.AGENT_CD, db_elem.IP, db_elem.MAC_ADDR, db_elem.OS, db_elem.PURPOSE, db_elem.OWNER, db_elem.DESCRIPTION, db_elem.STATE);
+                    }
+                })
+            });
+        }).then(() => {
+            resolve(true);
         });
-    }).then(()=>{
-        resolve(true);
-    });
-        
+
     });
 }
 exports.read_xlsx = (file_path) => {
@@ -70,5 +71,11 @@ exports.read_xlsx = (file_path) => {
         resolve(true);
     }
 
-    
-    )};
+
+    )
+};
+
+exports.make_log = (log_type,sess_name,act)=>{
+    let now =  moment().format('YYYY-MM-DD HH:mm:ss');
+    DB.add_log(log_type,`${sess_name} 가 ${act}을(를) 하였음`, now);
+};
