@@ -68,6 +68,7 @@ router.post('/agent/del_agent_info', (req, res, next) => {
 });
 
 router.post('/add_manual_agent', (req, res, next) => {
+  console.log(req.body);
   let arr = [req.body.txtIP, req.body.txtMac, req.body.txtOS, req.body.txtUseful, req.body.txtOwner, req.body.txtDesc, req.body.state];
 
 
@@ -93,13 +94,11 @@ router.post('/add_manual_agent', (req, res, next) => {
 router.post('/update_agent_info', (req, res, next) => {
   let arr = [req.body.txtIP, req.body.txtMac, req.body.txtOS, req.body.txtUseful, req.body.txtOwner, req.body.txtDesc, req.body.state];
   let cd = req.body.cd;
-
   let isnull = false;
-  arr.forEach(element => {
-    if (element.length === 0) {
-      isnull = true;
-    }
-  });
+  if (req.body.txtIP.length === 0 || req.body.txtOwner.length === 0 || req.body.txtUseful.length === 0){
+    isnull = true;
+  }
+  
   if (isnull) {
     DB.get_agent_info().then(result => {
       result['reason'] = 'error';
