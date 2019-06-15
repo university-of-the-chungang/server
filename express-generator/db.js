@@ -110,8 +110,10 @@ exports.get_agent_info = (agent_cd = null) => {
         new sql.Request().query(`SELECT * FROM TBL_AGENT_INFO` + sql_adder, (err, result) => {
             console.log(`SELECT * FROM TBL_AGENT_INFO` + sql_adder);
             if (err) {
+                print(err);
                 reject(err);
             }
+            console.log(result);
             resolve(result);
         });
     });
@@ -300,6 +302,15 @@ exports.add_agent_info = (ip, mac, os, purpose, owner, desc, state) => {
             if (err) {
                 reject(err);
             }
+            resolve(result);
+        });
+    });
+};
+exports.add_agent_info_from_xlsx = (ip,purpose,owner)=>{
+    return new Promise((resolve,reject)=>{
+        let query = `INSERT INTO TBL_AGENT_INFO (IP, PURPOSE, OWNER) VALUES( '${ip}', '${purpose}', '${owner}')`;
+        console.log(query);
+        new sql.Request().query(query,(err,result)=>{
             resolve(result);
         });
     });

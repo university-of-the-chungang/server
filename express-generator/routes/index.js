@@ -5,7 +5,7 @@ const express = require('express');
 const router = express.Router();
 const DB = require('../db');
 const LOGS = require('../logs');
-
+const multer = require('multer');
 /* GET home page. */
 router.get('/', (req, res, next) => {
   res.render('index', { title: 'Express' });
@@ -128,6 +128,19 @@ router.post('/make_xlsx',function(req,res,next){
   let now = new Date().toISOString().slice(0,10); 
   let result = LOGS.make_xlsx(now+".log",param);
   res.json(result);
+});
+let upload = multer({dest:'public/uploads/'})
+router.post('/agent/upload_xlsx',upload.single('xlsx_file'),(req,res,next)=>{
+  console.log(req.file);
+  LOGS.read_xlsx(req.file.path).then(result=>{
+    DB.get_agent_info().then(result2 => {
+      res.render('./main/Agent/agent', result2);
+    });
+  }).catch(err=>{
+    console.log(err);
+  });
+  
+
 });
 
 // 그룹 페이지

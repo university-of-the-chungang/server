@@ -159,10 +159,10 @@
 
 
                                             <form class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
-                                                <button 
+                                                <input type="button" 
                                                     class="btn btn-rounded btn-success col-xl-12 col-lg-12 col-md-12 col-sm-12"
-                                                    data-target="#changeinfomodal" id="changeAgentInfoBtn"
-                                                    data-toggle="modal" style="height: 55px">정보수정</button>
+                                                     id="changeAgentInfoBtn"
+                                                    data-toggle="modal" style="height: 55px" value="정보수정"></button>
 
                                             </form>
 
@@ -414,13 +414,13 @@
                                                     </div>
 
 
-                                                    <form action="" method="POST">
+                                                    <form action="/agent/upload_xlsx" method="POST" enctype="multipart/form-data">
                                                         <div class="modal-body">
 
                                                         <label class="col-12 btn btn-outline-success btn-lg">
-                                                       엑셀 파일 첨부하기<input type="file" style="display: none;">
+                                                       엑셀 파일 첨부하기<input type="file" name="xlsx_file" style="display: none;" >
                                                         </label>
-
+                                                        <span style="color:red">주의 : 중복되는 IP가 있는경우 제외하고 등록됩니다</span>
 
 
                                                         </div>
@@ -428,7 +428,7 @@
                                                         <div class="modal-footer">
                                                             <a href="#" class="btn btn-secondary"
                                                                 data-dismiss="modal">닫기</a>
-                                                            <a href="#" class="btn btn-primary" type="submit">변경 저장</a>
+                                                            <input class="btn btn-primary" type="submit" value="변경 저장">
                                                         </div>
                                                     </form>
                                                 </div>
@@ -776,19 +776,19 @@
             let cnt = $("input[class='custom-control-input chkbox']:checked").length;
             if (cnt == 0) {
                 alert("선택 된 에이전트가 없습니다.");
-                $('#changeinfomodal').modal('hide');
+                // $('#changeinfomodal').modal('hide');
             }
 
             else if (cnt != 1) {
                 alert("한번에 한가지만 수정 가능합니다.");
-                $('#changeinfomodal').modal('hide');
+                // $('#changeinfomodal').modal('hide');
             }
 
 
             else {
                 let idx = $("input[class='custom-control-input chkbox']:checked")[0].id;
                 let recordsets = JSON.parse('<%- JSON.stringify(recordsets[0]) %>');
-
+                console.log(recordsets[idx]);
                 $('#editID').val(recordsets[idx].AGENT_CD)
                 $('#editIP').val(recordsets[idx].IP);
                 $('#editMAC').val(recordsets[idx].MAC_ADDR);
