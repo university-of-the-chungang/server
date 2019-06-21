@@ -168,35 +168,38 @@
                                         </div>
                                     </div>  
 
-                                    <div class="row">   
+                                   <div class="row">   
 
-                                        <div class="col-xl-1">
+                                        <div class="col-1">
                                             <label for="validationServer01">점검 주기 설정</label>
+
                                         </div>
 
-                                        <div class="col-xl-3">
-                                
+                                        <div class="col-4">
                                             <div class="input-group-append be-addon">
-                                                <input type="text" class="form-control is-valid" id="validationServer01" " required="" style="height: 50px">
+                                               
+                                               <select class="col-5 custom-select d-block w-100" style="height: 70px; margin-top: 1px; ">
 
-                                                <button type="button" data-toggle="dropdown" class="btn btn-secondary dropdown-toggle" aria-expanded="false">시간설정
+                                                <option selected="">현재 점검 주기 : 매 월 1 일</option>
+                                                <option value="10-20">매 주 월요일</option>
+                                                <option value="20-30">매 주 수요일</option>
+                                                <option value="30-30">매 주 금요일</option>
+                                                <option value="1">매 월 1 일</option>
+                                                <option value="10">매 월 10 일</option>
+                                                <option value="15">매 월 15 일</option>
+                                                <option value="finish">매 월 말일</option>
+                                            </select>
 
-                                                <div class="dropdown-menu" >
-                                                    <a href="#" class="dropdown-item">매일 수요일 12시</a>
-                                                    <a href="#" class="dropdown-item">매주 수요일 12시</a>
-                                                    <a href="#" class="dropdown-item">Something else here</a>
-                                                </div></button>
-
+                                            <a type="date" id="datepicker" class="col-3 btn btn-outline-brand" style="margin-left: 5px; text-align: center;"><h5 style="margin-top: 7px;">적용</h5></a>
                                             </div>
                                         </div>   
-
-                                       
-                                    </div>           
+                                    </div>               
                              
                          
                             </div>
 
-                <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">        
+                 <!-- 에이전트 할당 탭 시작-->
+                <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                     <div class="row">
                         <div class="col-xl-1">
                           <label class="custom-control custom-checkbox" style="margin-left: 10px">
@@ -215,16 +218,15 @@
                     </div>
                     
                     <div class="row">
-                            <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-5">
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
                                 <div class="card" style="height: 300px; overflow: scroll;">
                                     <h4 class="card-header text-center">그룹 정보</h4>
                                     <div class="card-body p-0">
-\                            
                                         <div class="table-responsive">
                                             <table class="table">
                                                 <thead class="bg-light">
                                                     <tr class="border-0">
-                                                        <th class="border-0 text-center">check</th>
+                                                        <th class="">check</th>
                                                         <th class="border-0 text-center">상태</th>
                                                         <th class="border-0 text-center ">IP</th>
                                                         <th class="border-0 text-center">운영체제 버전</th>
@@ -234,7 +236,7 @@
                                                 <tbody>
                                                     <tr>
                                                         <td>
-                                                            <label class="custom-control custom-checkbox" style="margin-left: 90px ">
+                                                            <label class="custom-control custom-checkbox" style="margin-left: 10px" >
                                                                 <input class="custom-control-input checkboxes text-center" type="checkbox" value="1" id="one"><span class="custom-control-label "></span>
                                                             </label>
                                                         </td>
@@ -248,7 +250,7 @@
 
                                                     <tr>
                                                         <td>
-                                                            <label class="custom-control custom-checkbox" style="margin-left: 90px">
+                                                            <label class="custom-control custom-checkbox" style="margin-left: 10px">
                                                                 <input class="custom-control-input checkboxes" type="checkbox" value="1" id="one"><span class="custom-control-label"></span>
                                                             </label>
                                                         </td>
@@ -270,109 +272,345 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-xs-12 ">
-                                        <nav aria-label="Page navigation">
-                                            <div class="col-xs-3"></div>
-                                            <div class="col-xs-4">
-                                            <ul class="pagination" style="text-align: center;">
-                                                <li>
-                                                    <a href="#" aria-label="Previous">
-                                                        <span aria-hidden="true">«</span>
-                                                    </a>
-                                                </li>
-                                                <li class="active"><a href="#">1</a></li>
-                                                <li><a href="#">2</a></li>
-                                                <li><a href="#">3</a></li>
-                                                <li><a href="#">4</a></li>
-                                                <li><a href="#">5</a></li>
-                                                <li>
-                                                    <a href="#" aria-label="Next">
-                                                        <span aria-hidden="true">»</span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        </nav>
-                                    </div>
+
+                            <div class="row col-12">
+                                <div class="col-3"></div>
+                                <div class="col-4">
+
+                                <nav aria-label="Demo of active current page number">
+                                    <ul class="pagination">
+                                        <li class="page-item active"><a class="page-link" href="#">Prev</a></li>
+
+                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+
+                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+
+                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+
+                                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                    </ul>
+                                </nav>
+
+                                </div>
                             </div>
-                            <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1">
+
+                        </div><!--그룹정보 카드 끝-->
+
+                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>   <!-- 더미 div-->
+
+                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"> <!-- 버튼 시작-->
                                
-                               <button type="button" class="btn btn-outline-light" data-method="move" data-option="10" data-second-option="0" title="Move Right" style="width: 130px; height: 90px; margin-top: 200px;">
+                               <button type="button" class="btn btn-outline-light" data-method="move" data-option="10" data-second-option="0" title="Move Right" style=" width: 130px; height: 90px; margin-top: 100px;">
+
                                 <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="" data-original-title="$().cropper(&quot;move&quot;, 10, 0)">
-                          <span class="fa fa-arrow-right"></span>
+                                 <span class="fa fa-arrow-right"></span>
                                 </span>
                             </button>
-                            </div>
+                        </div><!-- 버튼 끝-->
 
-
-                            <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-5">
+                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div><!-- 더미 div-->
+                        
+                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3""><!-- 할당된 에이전트 부분-->
                                 <div class="card" style="height: 300px; overflow:scroll; ">
                                     <h5 class="card-header text-center">할당된 에이전트</h5>
-                                    <div class="card-footer text-center bg-white">
                                    
+                                      <div class="table-responsive">
+                                            <table class="table">
+                                                <thead class="bg-light">
+                                                    <tr class="border-0">
+                                                      <th class="border-0 text-center ">IP</th> 
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr><td class="text-center">192.168.1.1</td></tr>
+                                                    <tr><td class="text-center">192.168.1.1</td></tr>
+                                                    <tr><td class="text-center">192.168.1.1</td></tr>
+                                                    <tr><td class="text-center">192.168.1.1</td></tr>      
+                                                </tbody>
+                                            </table>
+
+
+                                        </div>
+                                    
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-2"></div>
+
+                                    <div class="col-4" style="margin-right: 10px">
+                                        <div class="metric-label d-inline-block float-right text-success font-weight-bold">
+                                        <a href="#" class="btn btn-outline-dark" data-toggle="modal" data-target="#directmodal"> 직접 작성 <span class="icon-circle-small icon-box-xs"><i class="fas fa-edit"></i></span></a>
+                                        </div>
                                     </div>
+                                    
+                                    <!-- 직접쓰기  모달 시작-->
+                                     <div class="modal fade" id="directmodal" tabindex="-1" role="dialog"
+                                            aria-labelledby="exampleModalLabel" aria-hidden="true"
+                                            style="display: none;">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="directmodal">에이전트 직접 할당</h5>
+                                                        <a href="#" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">×</span>
+                                                        </a>
+                                                    </div>
+
+
+                                                    <form action="" method="POST">
+                                                        <div class="modal-body">
+
+                                                         <div class="form-group">
+                                                                <label for="inputText1"
+                                                                    class="col-form-label">IP</label>
+                                                                <input name="txtIP" type="text" class="form-control">
+                                                            </div>
+                                                                
+                                                        
+
+
+                                                        </div>
+
+                                                        <div class="modal-footer">
+                                                            <a href="#" class="btn btn-secondary"
+                                                                data-dismiss="modal">닫기</a>
+                                                            <a href="#" class="btn btn-primary" type="submit">할당</a>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- 직접 쓰기 모달 끝-->
+                                    <div class="col-4">
+                                        <div class="metric-label d-inline-block float-right text-success font-weight-bold">
+                                                <a href="#" class="btn btn-outline-success" data-toggle="modal" data-target="#csvModal"> 파일 업로드 <span class="icon-circle-small icon-box-xs text-success bg-success-light"><i class="fa fa-fw fa-arrow-up"></i></span><span class="ml-1"></span></a>     
+                                        </div>
+                                    </div>
+
+
+                                        <!-- 파일 업로드 모달-->
+                                     <div class="modal fade" id="csvModal" tabindex="-1" role="dialog"
+                                            aria-labelledby="exampleModalLabel" aria-hidden="true"
+                                            style="display: none;">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+
+
+                                                        <h5 class="modal-title" id="csvModal">파일 업로드</h5>
+                                                        <a href="#" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">×</span>
+                                                        </a>
+                                                    </div>
+
+                                                     
+
+                                                    <form action="" method="POST">
+                                                        <div class="modal-body">
+
+                                                            <div class="form-group">
+                                                                <label for="inputText1"
+                                                                    class="col-form-label">파일 경로</label>
+                                                                <input name="txtIP" type="text" class="form-control">
+                                                            </div>
+
+                                                            <label class="col-12 btn btn-outline-success btn-lg">
+                                                             파일 첨부하기<input type="file" style="display: none;">
+                                                            </label>
+
+                                                        </div>
+
+                                                        <div class="modal-footer">
+                                                            <a href="#" class="btn btn-secondary"
+                                                                data-dismiss="modal">닫기</a>
+                                                            <a href="#" class="btn btn-primary" type="submit">변경 저장</a>
+                                                        </div>
+
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- 파일업로드 모달 끝-->
+                                   
                                 </div>
                              </div>
+                        </div>
+                    </div><!-- 에이전트 할당 탭 끝-->
 
-                        </div>       
-                    </div>
-
-                    <!-- 두번째 탭 에이전트 끝 -->
-
+                <!-- 정책 적용 탭 시작-->
+                   
                     <div class="tab-pane" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                         <div class="row">
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
                                 <div class="card" style="height: 300px; overflow: scroll;">
                                     <h4 class="card-header text-center">그룹에 포함된 운영체제 버전</h4>
                                    
                                     <div class="card-body p-0">
+                                        <table class="table table-bordered">
+                                        
+                                        <tbody>
+                                            <tr>
+                                                <td>Windows 7</td>
+                                                <td>Windows 10</td>
+                                            </tr>
+                                            <tr>
+                                             
+                                                <td>Windows 10</td>
+                                                <td>Windows 7</td>
+                                            </tr>
+                                            <tr>
+                                               
+                                                <td>Windows 10</td>
+                                                <td>Windows 7</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                         
                                     </div>
                                 </div>
 
 
-                                <div class="col-xs-12 ">
-                                    <nav aria-label="Page navigation">
-                                        <div class="col-xs-3"></div>
-                                        <div class="col-xs-4">
-                                        <ul class="pagination" style="text-align: center;">
-                                            <li>
-                                                <a href="#" aria-label="Previous">
-                                                    <span aria-hidden="true">«</span>
-                                                </a>
-                                                </li>
-                                                <li class="active"><a href="#">1</a></li>
-                                                <li><a href="#">2</a></li>
-                                                <li><a href="#">3</a></li>
-                                                <li><a href="#">4</a></li>
-                                                <li><a href="#">5</a></li>
-                                                <li>
-                                                    <a href="#" aria-label="Next">
-                                                        <span aria-hidden="true">»</span>
-                                                    </a>
-                                                </li>
-                                        </ul>
+                            <div class="row col-12">
+                                <div class="col-3"></div>
+                                <div class="col-4">
+
+                                <nav aria-label="Demo of active current page number">
+                                    <ul class="pagination">
+                                        <li class="page-item"><a class="page-link" href="#">Prev</a></li>
+
+                                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+
+                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+
+                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+
+                                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                    </ul>
+                                </nav>
+
+                                </div>
+                            </div>
+
+                            <div class="col-12" style="margin-top: 15px;">
+                               <a href="#" class="col-11 btn btn-outline-success" data-toggle="modal" data-target="#xccdfModal"> 정책 적용 <span class="icon-circle-small icon-box-xs text-success bg-success-light"><i class="fa fa-fw fa-arrow-up"></i></span><span class="ml-1"></span></a>
+                            </div>
+
+                           
+                        
+
+                             <!-- 정책 적용 모달 시작 -->
+                                     <div class="modal fade" id="xccdfModal" tabindex="-1" role="dialog"
+                                            aria-labelledby="exampleModalLabel" aria-hidden="true"
+                                            style="display: none;">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+
+
+                                                        <h5 class="modal-title" id="xccdfModal">정책 다운로드</h5>
+                                                        <a href="#" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">×</span>
+                                                        </a>
+                                                    </div>
+
+                                                     
+
+                                                    <form action="" method="POST">
+                                                        <div class="modal-body">
+
+                                                            <div class="form-group">
+                                                                <label for="inputText1"
+                                                                    class="col-form-label">다운로드 할 정책 명</label>
+                                                                <input name="txtIP" type="text" class="form-control">
+                                                            </div>
+
+                                                            <a href="download path" download="" class="col-12 btn btn-outline-danger btn-lg">
+                                                             정책 파일 다운로드<input type="file" style="display: none;">
+                                                            </a>
+
+                                                      
+                                                        </div>
+
+                                                        <div class="modal-footer">
+                                                            <a href="#" class="btn btn-secondary"
+                                                                data-dismiss="modal">닫기</a>
+                                                            
+                                                        </div>
+
+                                                    </form>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </nav>
-                                </div>
-
-
-                                <button class="btn  btn-block btn-social btn-twitter" type="button">정책 적용  </button>
+                                    <!-- 정책 적용 모달 끝-->
+                                                
 
                                 </div>
+                                
                                 <!-- 운영체제 버전에 대한 div 끝이면서 운영체제 별 정책 할당 결과 div시작-->
-                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                                <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-5">
                                     <div class="card" style="height: 500px; overflow: scroll;">
                                     <h4 class="card-header text-center">운영체제 별 정책 할당 결과</h4>
-                                      <div class="card-body p-0"></div>
+                                      <div class="card-body p-0">
+                                          
+                                        <table class="table table-hover">
+                                       
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">1</th>
+                                                <td>색깔</td>
+                                                <td>Windows 10</td>
+                                                <td>Windows 10 bench mark</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">2</th>
+                                                <td>색깔</td>
+                                                <td>Windows 10</td>
+                                                <td>Windows 10 bench mark</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">3</th>
+                                                <td>색깔</td>
+                                                <td>Windows 10</td>
+                                                <td>Windows 10 bench mark</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                      </div>
                                     </div>
                                 </div>
 
 
-                                <button class="btn  btn-block btn-social btn-twitter" type="button">오프라인 점검용 정책 다운로드  </button>
-                                <button class="btn  btn-block btn-social btn-twitter" type="button">정책 다운로드 확인  </button>
+                                 
+                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+                                    <div class="card " overflow="scroll" style="height: 500px;">
+                                    <div class="card-header">
+                                    README
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="card-text"> 파란색은 ~~~~ 의미입니다. </p>
+                                        <p class="card-text"> 빨간색은 ~~~의미 입니다. </p>
+                                        <p class="card-text"> 노란색은 ~~~의미입니다.</p>
+                                    </div>
+                                    <div class="card-footer p-0 text-center">
+                                        <div class="card-footer-item card-footer-item-bordered">
+                                            <a href="#" class="card-link"> 설명서 다운로드 </a>
+                                        </div>
+                                    </div>
                                 </div>
+                                </div>
+
+                            <div class="col-9" style="margin-top: 3px;">
+                                <a href="#" class="col-12 btn btn-warning btn-lg" data-toggle="modal" data-target="#xccdfModal"> 정책 다운로드 확인 </a>
                             </div>
+                       
+
+                    </div>
+                </div>
+                <!-- 정책 적용 탭 끝 -->
 
                             
 
@@ -472,10 +710,10 @@
             </div>
 
             <div class="row">
-                <div class="col-xl-5 col-sm-5 col-lg-5"></div>
-                <div class="col-xl-3 col-sm-3 col-lg-3" style="margin-top: 15px">
-                    <button type="submit" class="btn btn-space btn-primary">저장</button>
-                    <button class="btn btn-space btn-secondary">취소</button>
+                <div class="col-xl-4 col-sm-4 col-lg-4 col-4"></div>
+                <div class="col-xl-3 col-sm-3 col-lg-3" style="margin-top: 25px">
+                    <button type="submit" class="btn btn-space btn-primary col-5">수정</button>
+                    <button class="btn btn-space btn-secondary col-5">취소</button>
                 </div>
             </div>
             

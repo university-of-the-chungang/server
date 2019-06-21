@@ -66,6 +66,10 @@ router.get('/changeinfo', function (req, res, next) {
   res.render('./main/User/changeinfo');
 });
 
+router.get('/policy', function (req, res, next) {
+  res.render('./policy');
+});
+
 // User 기능과 관련된 페이지 끝
 router.get('/agent', function (req, res, next) {
   console.log(req.session.username);

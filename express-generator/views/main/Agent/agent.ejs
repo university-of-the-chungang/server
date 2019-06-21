@@ -157,7 +157,7 @@
 
                                             <form class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
                                                 <input type="button" 
-                                                    class="btn btn-rounded btn-success col-xl-12 col-lg-12 col-md-12 col-sm-12"
+                                                    class="btn btn-outline-success col-xl-12 col-lg-12 col-md-12 col-sm-12"
                                                      id="changeAgentInfoBtn"
                                                     data-toggle="modal" style="height: 55px" value="정보수정"></button>
 
@@ -246,7 +246,7 @@
                                                 class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
                                                 <input type="hidden" name="agent_cd" id="agent_cd" value="">
                                                 <button 
-                                                    class="btn btn btn-rounded btn-primary col-xl-12 col-lg-12 col-md-12 col-sm-12"
+                                                    class="btn btn-outline-primary col-xl-12 col-lg-12 col-md-12 col-sm-12"
                                                     id="activateBtn" style="height: 55px" >등록</button>
                                             </form>
 
@@ -255,7 +255,7 @@
                                                 <input type="hidden" name="del_agent_cd" id="del_agent_cd" value="">
                                                 <input type="hidden" name="sess_name" value="<%= sess_name %>">
                                                 <input type="submit" id="agentDelBtn"
-                                                    class="btn btn btn-rounded btn-danger col-xl-12 col-lg-12 col-md-12 col-sm-12"
+                                                    class="btn btn-outline-secondary btn-lg col-xl-12 col-lg-12 col-md-12 col-sm-12"
                                                     value="삭제" style="height: 55px">  
 
                                             </form>
@@ -306,19 +306,19 @@
                                                     </td>
                                                     <td style="text-align: center">
                                                         <% if(recordsets[0][i].STATE == 'C'){ %>
-                                                        <div style="background-color: white; border: 3px solid; margin:auto;"
+                                                        <div style="background-color: white; border: 1px solid; margin:auto;"
                                                             class="rounded-circle user-avatar-lg">
                                                             <% } else if(recordsets[0][i].STATE == 'C-2'){ %>
-                                                            <div style="background-color: black; border: 3px solid; margin:auto;"
+                                                            <div style="background-color: black; border: 1px solid; margin:auto;"
                                                                 class="rounded-circle user-avatar-lg">
                                                                 <% } else if(recordsets[0][i].STATE == 'R'){ %>
-                                                                <div style="background-color: skyblue; border: 3px solid; margin:auto;"
+                                                                <div style="background-color: skyblue; border: 1px solid; margin:auto;"
                                                                     class="rounded-circle user-avatar-lg">
                                                                     <% } else if(recordsets[0][i].STATE == 'E'){ %>
-                                                                    <div style="background-color: red; border: 31px solid; margin:auto;"
+                                                                    <div style="background-color: red; border: 1px solid; margin:auto;"
                                                                         class="rounded-circle user-avatar-lg">
                                                                         <% } else { %>
-                                                                        <div style="background-color: yellow; border: 3px solid; margin:auto;"
+                                                                        <div style="background-color: yellow; border: 1px solid; margin:auto;"
                                                                             class="rounded-circle user-avatar-lg">
                                                                             <% } %>
                                                                         </div>
