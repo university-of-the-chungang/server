@@ -71,17 +71,12 @@
                         <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 설정 <i class="far fa-sun"></i> </a>
                         <ul class="dropdown-menu dropdown-menu-right connection-dropdown">
                             <li class="connection-list">
-                                <div class="row">
-                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                        <a href="#" class="connection-item"><span>CPE</span></a>
+                               <div class="row">
+                                    <div class="col-xl-12 col-lg-4 col-md-6 col-sm-12 col-12 ">
+                                        <a href="../policy" class="connection-item"><span>정책관리</span></a>
                                     </div>
-                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                        <a href="#" class="connection-item"> <span>CCE</span></a>
-                                    </div>
-                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                        <a href="#" class="connection-item"> <span>OVAL</span></a>
-                                    </div>
-                                    </div>
+                                    
+                                </div>
                             </li>
                         </ul>
                     </li>
@@ -139,9 +134,9 @@
 
 
             <div class="row">
-               <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-8">
+               <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                   <div class="card" style="height: 400px; overflow: scroll;">
-                    <h4 class="card-header text-center">평가 문항 추출</h4>
+                        <h3 class="card-header text-center">평가 문항 추출</h3>
                     <div class="card-body p-0">   
                         <div class="row"> 
 
@@ -174,21 +169,61 @@
 
                         </div>
              
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead class="bg-light">
-                                    <tr class="border-0">
-                                        <th class="border-0 text-center">check</th>
-                                        <th class="border-0 text-center">상태</th>
-                                        <th class="border-0 text-center ">IP</th>
-                                        <th class="border-0 text-center">운영체제 버전</th>
-                                        <th class="border-0 text-center">용도</th>
+                        
+                         <div class="panel-body">
+                          <table id="mytable" class="table" style="margin-bottom:10px">
+                             <thead></thead>
+
+                                    <tbody>
+                                    <tr>
+                                        <td class="table-primary" colspan="1">
+                                             <label class="custom-control custom-checkbox">
+                                                <input type="checkbox" id="checkall" class="custom-control-input"><span class="custom-control-label"></span>
+                                            </label>
+                                        </td>
+                                        <td class="table-primary" colspan="11"> 그룹 3(1일) </td>
+                                        
                                     </tr>
-                                </thead>
-                                <tbody>      
-                                </tbody>
-                            </table>
-                        </div>
+                                    <tr>
+                                        <td colspan="12">- 그룹명: 기관보안관리를 위한 필수적 정책-ver3 </td>
+                                   
+                                    <tr>
+                                        <td colspan="12">- 그룹설명: 기관 보안관리 수준을 준수하기 위한 필수 정책 50가지, 2019년 3월 10일 기준 </td>
+                                    </tr>
+                                    <tr>
+                                        <td> 생성시간(2019.01.02.10:20:20) </td>
+                                        <td> 활성화 시간(2019.01.30.15:30:55) </td>
+                                        <td> 에이전트 수(100) </td>
+                                    </tr>
+
+                                     <tr>
+                                        <td class="table-primary" colspan="1">
+                                             <label class="custom-control custom-checkbox">
+                                                <input type="checkbox" id="checkall" class="custom-control-input"><span class="custom-control-label"></span>
+                                            </label>
+                                        </td>
+                                        <td class="table-primary" colspan="11"> 그룹 3(1일) </td>
+                                        
+                                    </tr>
+                                    <tr>
+                                        <td colspan="12">- 그룹명: 기관보안관리를 위한 필수적 정책-ver3 </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="12">- 그룹설명: 기관 보안관리 수준을 준수하기 위한 필수 정책 50가지, 2019년 3월 10일 기준 </td>
+                                    </tr>
+                                    <tr>
+                                        <td> 생성시간(2019.01.02.10:20:20) </td>
+                                        <td> 활성화 시간(2019.01.30.15:30:55) </td>
+                                        <td> 에이전트 수(100) </td>
+                                    </tr>
+
+                                   
+                                    </tbody>
+                                </table>
+                            </div>
+
+
+
                     </div>
                 </div>
               </div>
@@ -196,9 +231,9 @@
 <!-- ============================================================== -->            
 <!-- ============================================================== -->
 <!-- 로그 관리 카드 시작 -->
-        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-8">
-            <div class="card">
-                <h5 class="card-header text-center">로그관리</h5>
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <div class="card" style="height: 400px; overflow: scroll;">
+                <h3 class="card-header text-center">로그 관리</h3>
                     <div class="card-body p-0">
                         <div class="row"> 
 
@@ -207,15 +242,19 @@
                                     <tr class="border-0">
 
                                         <td class="border-0">
-                                        </td>
-                                        <td class="border-0 text-center">
-                                             <div class="input-group input-search">
+                                            <div class="input-group input-search col-10">
                                                 <input class="form-control" type="text" placeholder="Search "><span class="input-group-btn">
                                                 <button class="btn btn-secondary" type="button"><i class="fas fa-search"></i></button></span>
                                             </div>
                                         </td>
                                         <td class="border-0 text-center">
-                                            <a href="#" class="col-10 btn btn-outline-danger" data-toggle="modal" data-target="#xccdfModal"> 로그 다운로드 <span class="icon-circle-small icon-box-xs text-danger bg-danger-light bg-danger-light "><i class="fa fa-fw fa-arrow-down"></i></span><span ></span></a>
+                                             <div class="input-group input-search col-10">
+                                                <input class="form-control" type="text" placeholder="상세 필터링 "><span class="input-group-btn">
+                                                <button class="btn btn-primary" type="button"><i class="fas fa-search"></i></button></span>
+                                            </div>
+                                        </td>
+                                        <td class="border-0 text-center">
+                                            <a href="#" class="col-11 btn btn-outline-danger" data-toggle="modal" data-target="#xccdfModal"> 로그 다운로드 <span class="icon-circle-small icon-box-xs text-danger bg-danger-light bg-danger-light "><i class="fa fa-fw fa-arrow-down"></i></span><span ></span></a>
                                         </td>
 
                                     </tr>
