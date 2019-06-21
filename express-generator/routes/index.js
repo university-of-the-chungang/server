@@ -210,6 +210,11 @@ router.use('/group', group);
 router.use('/oldgroup', oldgroup);
 router.use('/newgroup', newgroup);
 
+// 정책
+const oval = require('./policy/oval');
+const uploads = require('./')
+
+router.use('/oval', oval);
 
 
 ///////////////// 테스트용 API ////////////////////
