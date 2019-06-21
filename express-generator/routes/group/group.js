@@ -5,8 +5,12 @@ const DB = require('../../db');
 router.get('/', function (req, res, next) {
 
   DB.total_group_info().then(result => {
-    console.log(result);
-    res.render('./main/GroupPolicy/group');
+    let len = result.recordset.length;
+    console.log(result.recordset[0]);
+    res.render('./main/GroupPolicy/group', {
+      data: result.recordset,
+      length: len
+    });
   });
 
 }); // 그룹페이지 홈
