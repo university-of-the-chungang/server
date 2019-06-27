@@ -274,12 +274,18 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <% if (typeof(reason) !='undefined' && reason == 'error'){ %>
+                                    <script>alert("ERROR");</script>
+                                    <% }  %>
+
+                                    <% for(let i = 0 ; i < recordsets[0].length ; i+=1){ %>
                                     <tr>
-                                        <td class="text-center"><%= recordsets[0][1].LOG_ID %></td>
-                                        <td><h5><%= recordsets[0][1].LOG_TYPE %></h5></td>
+                                        <td class="text-center"><%= recordsets[0][i].LOG_ID %></td>
+                                        <td><h5><%= recordsets[0][i].LOG_TYPE %></h5></td>
                                         <td class="text-center">높음 </td>
                                         <td class="text-center">6 </td>
                                     </tr>
+                                    <!--
                                     <tr>
                                         <td class="text-center">1</td>
                                         <td><h5>각종 로그기록</h5></td>
@@ -292,6 +298,8 @@
                                         <td class="text-center">높음 </td>
                                         <td class="text-center">6 </td>
                                     </tr>
+                                    -->
+                                    <% } %>
                                 </tbody>
                             </table>
                         </div>
