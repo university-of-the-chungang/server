@@ -104,6 +104,17 @@ router.get('/agent/:keyword', (req, res, next) => {
   });
 
 })
+
+router.get('/log/:keyword2', (req, res, next) => {
+  DB.search_log_info(req.params.keyword2).then(result => {
+    result.sess_name = req.session.username;
+    res.render('./main/Log/log', result);
+  }).catch(err => {
+    console.log(err);
+  });
+
+})
+
 router.post('/agent/del_agent_info', (req, res, next) => {
   if (req.body.del_agent_cd.length === 0) {
     DB.get_agent_info().then(result => {
