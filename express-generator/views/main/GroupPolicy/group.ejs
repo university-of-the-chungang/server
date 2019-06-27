@@ -202,7 +202,7 @@
                                     <div class="col-xl-1" style="height: 70px"> <!-- check box left side-->
                                         <form>
                                             <label class="custom-control custom-checkbox">
-                                                <input type="checkbox" id="checkall" onclick="test()"class="custom-control-input"><span class="custom-control-label">모두 선택</span>
+                                                <input type="checkbox" id="checkall" onclick="test()" class="custom-control-input"><span class="custom-control-label">모두 선택</span>
                                             </label>
                                         </form>
                                        
@@ -218,15 +218,24 @@
 
                                     <div class="col-7 text-right">
                                         <div class="pull-right">
-
                                             <div class="row">
-                                                <button class="btn btn-success btn-lg" id="change_ginfo">
-                                                    수정(내용조회)
-                                                </button>
-
-                                                <button class="btn btn-warning btn-lg" data-target="pending">
-                                                    <input type="radio" name="options" id="option2" autocomplete="off"> 삭제
-                                                </button>
+                                                <form action="/oldgroup" method = "POST"
+                                                      class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+                                                    <input type="hidden" name="change_group_NAME" id="change_group_NAME" value="">
+                                                    <input type="submit" id="GroupChangeBtn"
+                                                           class="btn btn-success btn-lg"
+                                                           value = "수정" style="height: 55px">
+                                                </form>
+                                                <form action="/group/del_group_info" method = "POST"
+                                                      class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+                                                    <input type="hidden" name="del_group_set_cd" id="del_group_set_cd" value="">
+                                                    <input type="submit" id="groupDelBtn"
+                                                           class="btn btn-warning btn-lg"
+                                                           value="삭제" style="height: 55px">
+                                                <!--<button type="submit" name="c_option" value="delete" class="btn btn-warning btn-lg" data-target="pending">
+                                                    삭제
+                                                </button> -->
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
@@ -237,8 +246,7 @@
                             <!-- ============================================================== -->
                             <div class="panel-body">
 
-
-                                <% for(var i=0; i<length; i++){ %>
+                                <% for(var i=0; i<recordsets[0].length; i++){ %>
 
 
                                 <table id="mytable" class="table table-bordered" style="margin-bottom:10px">
@@ -246,15 +254,14 @@
                                     <tr class="table-success">
                                         <td>
                                              <label class="custom-control custom-checkbox">
-                                                <input type="checkbox" id="checkall" class="custom-control-input"><span class="custom-control-label"></span>
+                                                <input type="checkbox" id='<%=i%>' name = "chkbox" class="custom-control-input"><span class="custom-control-label"></span>
                                             </label>
                                         </td>
-
                                         <td colspan="2">그룹<%=i+1%></td>
                                         <td colspan="2">오프라인 정보시스템 포함</td>
                                         <td> 정책활성
                                             <div class="switch-button switch-button-yesno">
-                                                <input type="checkbox" <%if(data[i].ACTIVE_STATE === "active"){%> checked="" <%}%> name="switch19" id=<%=i%>><span>
+                                                <input type="checkbox" class="custom-control-input chkbox" <%if(recordsets[0][i].ACTIVE_STATE === "active"){%> checked="" <%}%> name="switch19" id='<%=i%>'><span>
                                                 <label for=<%=i%>></label></span>
                                             </div>
                                         </td>
@@ -262,21 +269,21 @@
 
                                     <tr>   
                                         <td> - 그룹명</td>
-                                        <td colspan="4"><%=data[i].NAME%></td>
+                                        <td colspan="4"><%=recordsets[0][i].NAME%></td>
                                     </tr>
 
                                     <tr>   
                                         <td>- 그룹설명</td>
-                                        <td colspan="4"><%=data[i].DISCRIPTION%></td>
+                                        <td colspan="4"><%=recordsets[0][i].DISCRIPTION%></td>
                                         <td>
                                          <i class="fas fa-cloud-upload-alt"></i> 오프라인 점검 결과 업로드
                                         </td>
                                     </tr>
 
                                      <tr>   
-                                        <td colspan="2">- 생성시간 (<%=data[i].CREATE_TIME%>)</td>
-                                        <td colspan="2">- 활성화 시간 (<%=data[i].ACTIVE_TIME%>)</td>
-                                        <td colspan="2">- 에이전트 수 (<%=data[i].AGENT_COUNTING%>)</td>
+                                        <td colspan="2">- 생성시간 (<%=recordsets[0][i].CREATE_TIME%>)</td>
+                                        <td colspan="2">- 활성화 시간 (<%=recordsets[0][i].ACTIVE_TIME%>)</td>
+                                        <td colspan="2">- 에이전트 수 (<%=recordsets[0][i].AGENT_COUNTING%>)</td>
                                     </tr>      
                                     </tbody>
                                 </table>
@@ -363,12 +370,6 @@
     <!-- ============================================================== -->
     <!-- Optional JavaScript -->
     <!-- jquery 3.3.1 -->
-
-    
- 
-    
-    
-    
     <script src="assets/vendor/full-calendar/js/calendar.js"></script>
     <script src="assets/vendor/full-calendar/js/jquery-ui.min.js"></script>
     <script src="assets/vendor/full-calendar/js/fullcalendar.js"></script>
@@ -395,22 +396,49 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <script type="text/javascript">
+        let flag = 0;
 
-        $('#change_ginfo').click(() => {
-            let cnt = $("input[class='custom-control-input']:checked").length;
-            if (cnt == 0) {
-                alert("선택 된 에이전트가 없습니다.");
-                $('#changeinfomodal').modal('hide');
-            }
-            else if (cnt != 1) {
-                alert("한번에 한가지만 수정 가능합니다.");
-                $('#changeinfomodal').modal('hide');
-            }
-            else{
-                location.replace("/oldgroup");
-            }
+        $('#groupDelBtn').click(() => {
+           let arr=[];
+           let chk_arr = $('input:checkbox[name="chkbox"]:checked');
+           if(chk_arr.length == 0) {
+               alert("선택된 그룹이 없습니다.");
+               return;
+           }else {
+               chk_arr.each((idx, elem) => {
+                   let id = elem.id;
+                   let recordsets = JSON.parse('<%- JSON.stringify(recordsets[0]) %>');
+                   alert(recordsets[id]);
+                   arr.push(recordsets[id].GROUP_SET_CD);
+               });
+               alert(arr);
+               $('#del_group_set_cd').val(JSON.stringify(arr));
+               $('#groupDelBtn').submit();
+           }
         });
 
+        $('#GroupChangeBtn').click(() => {
+     //let cnt = $("input[class='custom-control-input']:checked").length;
+            let arr=[];
+            let chk_arr = $('input:checkbox[name="chkbox"]:checked');
+
+            if (chk_arr.length == 0) {
+                alert("선택 된 에이전트가 없습니다.");
+                return;
+            }
+            else if (chk_arr.length != 1) {
+                return;
+            } else{
+                chk_arr.each((idx,elem)=>{
+                    let id = elem.id;
+                    let recordsets = JSON.parse('<%-JSON.stringify(recordsets[0]) %>');
+                    arr.push(recordsets[id].NAME);
+                })
+
+                $('#change_group_NAME').val(JSON.stringify(arr));
+                $('#groupChangeBtn').submit();
+            }
+        });
 
     </script>
 </body>

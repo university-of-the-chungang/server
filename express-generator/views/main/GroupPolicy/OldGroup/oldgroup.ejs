@@ -143,14 +143,12 @@
 
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                
-                                
                                     <div class="row" style="margin-bottom: 50px">
                                             <div class="col-xl-1">
                                                 <label for="validationServer01">그룹명</label>
                                             </div>
                                             <div class="col-xl-6">
-                                                 <input type="text" class="form-control is-valid" id="validationServer01" placeholder="기관보안관리를 위한 필수정책" value="기관보안관리를 위한 필수정책" required="">
+                                                 <input type="text" class="form-control is-valid" id="validationServer01" placeholder="<%=recordsets[0][0].NAME%>" value="" required="">
                                             </div>
                                     </div>    
 
@@ -159,7 +157,7 @@
                                             <label for="validationServer01">그룹설명</label>
                                         </div>
                                         <div class="col-xl-6">
-                                            <input type="text" class="form-control is-valid" id="validationServer01"  required="" style="height: 200px">
+                                            <input type="text" class="form-control is-valid" id="validationServer01"  placeholder="<%=recordsets[0][0].DISCRIPTION %>" equired="" value = "" style="height: 200px">
                                         </div>
                                     </div>  
 
@@ -185,7 +183,7 @@
                                                 <option value="finish">매 월 말일</option>
                                             </select>
 
-                                            <a type="date" id="datepicker" class="col-3 btn btn-outline-brand" style="margin-left: 5px; text-align: center;"><h5 style="margin-top: 7px;">적용</h5></a>
+                                            <!--<a type="date" id="datepicker" class="col-3 btn btn-outline-brand" style="margin-left: 5px; text-align: center;"><h5 style="margin-top: 7px;">적용</h5></a> -->
                                             </div>
                                         </div>   
                                     </div>               
