@@ -127,6 +127,29 @@ exports.get_agent_info = (agent_cd = null) => {
         });
     });
 }
+exports.get_log_info = (log_id = null) => {
+    // 에이전트 코드가 agent_cd인 Agent들의 정보를 검색
+    // agent_cd를 넣지않으면 전체검색
+    sql_adder = "";
+    if (log_id) {
+        //sql_adder = " WHERE ( AGENT_CD = '" + agent_cd + "' ) AND DEL_FLAG = 0";
+        sql_adder = " WHERE ( LOG_ID = '" + log_id + "' )";
+    }else{
+        //sql_adder = " WHERE DEL_FLAG = 0";
+        sql_adder = "";
+    }
+    return new Promise((resolve, reject) => {
+        new sql.Request().query(`SELECT * FROM TBL_LOG` + sql_adder, (err, result) => {
+            console.log(`SELECT * FROM TBL_LOG` + sql_adder);
+            if (err) {
+                print(err);
+            }
+            console.log(result);
+            resolve(result);
+        });
+    });
+}
+
 exports.search_agent_info = (keyword = "") => {
     let search_key = `LIKE '%${keyword}%'`;
     let query = `
