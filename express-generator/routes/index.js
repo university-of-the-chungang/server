@@ -82,6 +82,19 @@ router.get('/agent', function (req, res, next) {
   res.render('./main/User/login');
 }
 });// 에이전트 페이지
+/*
+router.get('/agent', function (req, res, next) {
+  DB.get_agent_info().then(result => {
+    res.render('./main/Agent/agent', result);
+  });
+});
+*/
+router.get('/log', function (req, res, next) {
+  DB.get_log_info().then(result => {
+    res.render('./main/Log/log', result);
+  });
+}); // 평가문항 및 로그 추출 페이지
+
 router.get('/agent/:keyword', (req, res, next) => {
   DB.search_agent_info(req.params.keyword).then(result => {
     result.sess_name = req.session.username;
@@ -91,6 +104,17 @@ router.get('/agent/:keyword', (req, res, next) => {
   });
 
 })
+
+router.get('/log/:keyword2', (req, res, next) => {
+  DB.search_log_info(req.params.keyword2).then(result => {
+    result.sess_name = req.session.username;
+    res.render('./main/Log/log', result);
+  }).catch(err => {
+    console.log(err);
+  });
+
+})
+
 router.post('/agent/del_agent_info', (req, res, next) => {
   if (req.body.del_agent_cd.length === 0) {
     DB.get_agent_info().then(result => {
@@ -171,9 +195,7 @@ router.post('/activate_agent_info', (req, res, next) => {
     });
   });
 });
-router.get('/log', function (req, res, next) {
-  res.render('./main/Log/log');
-}); // 평가문항 및 로그 추출 페이지
+
 router.post('/make_xlsx',function(req,res,next){
   let param = req.body;
   let now = new Date().toISOString().slice(0,10); 
