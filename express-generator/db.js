@@ -10,7 +10,7 @@ let config = {
     // 해당 설정 부분은 설정파일 생기면 그리 옮길것 
     "user": "developer", //default is sa
     "password": "ang0511",
-    "server": "localhost", // for local machine
+    "server": "52.231.155.141", // for local machine
     "port": 1444,
     "database": "nsrang", // name of database
     "options": {
@@ -108,6 +108,7 @@ exports.get_group_agents = (group_set_cd) => {
         });
     });
 }
+
 exports.get_agent_info = (agent_cd = null) => {
     // 에이전트 코드가 agent_cd인 Agent들의 정보를 검색
     // agent_cd를 넣지않으면 전체검색
@@ -128,6 +129,7 @@ exports.get_agent_info = (agent_cd = null) => {
         });
     });
 }
+
 exports.get_log_info = (log_id = null) => {
     // 에이전트 코드가 agent_cd인 Agent들의 정보를 검색
     // agent_cd를 넣지않으면 전체검색
@@ -228,7 +230,7 @@ exports.total_group_info = () =>{
 
 exports.update_group_info = (cd, name, ctime, atime, counting, period, active_state, discription, del_flag) => {
     return new Promise((resolve, reject) => {
-        let query = `UPDATE TBL_AGENT_INFO SET GROUP_SET_CD='${cd}', NAME = '${name}', CREATE_TIME = '${ctime}', ACTIVE_TIME = '${atime}', AGENT_COUNTING = '${counting}', INSPECTION_PERIOD = ${period}, ACTIVE_STATE = ${'active_state'}, DISCRIPTION = '${discription}', DEL_FLAG = '${del_flag}' WHERE GROUP_SET_CD = '${cd}'`;
+        let query = `UPDATE TBL_AGENT_INFO SET GROUP_SET_CD='${cd}', NAME = N'${name}', CREATE_TIME = '${ctime}', ACTIVE_TIME = '${atime}', AGENT_COUNTING = '${counting}', INSPECTION_PERIOD = ${period}, ACTIVE_STATE = ${'active_state'}, DISCRIPTION = N'${discription}', DEL_FLAG = '${del_flag}' WHERE GROUP_SET_CD = '${cd}'`;
         console.log(query);
         new sql.Request().query(query, (err, result) => {
             if (err) {
@@ -240,11 +242,8 @@ exports.update_group_info = (cd, name, ctime, atime, counting, period, active_st
 };
 
 
-exports.get_group_set_cd = (group_name = null) => {
-
-}
-
-let view_admin = (column_name) => {
+exports.get_group_set_cd = (group_name = null) => {}
+    let view_admin = (column_name) => {
     return new Promise((resolve, reject) => {
         query_select(column_name, "TBL_ADMIN_INFO").then((result) => {
             console.log(result);
@@ -337,6 +336,7 @@ exports.view_tbl_xccdf_set_list = () => {
         });
     });
 }
+
 exports.add_admin = (data) => {
     return new Promise((resolve, reject) => {
         let query = `INSERT INTO TBL_ADMIN_INFO (NAME, PASSWD, TEL_NO, EMAIL, DIVISION, POSITION, LOCK_STAT,  ROLE_CD, LOCK_COUNT, LOCK_DATE, LAST_LOGIN) VALUES(`;
@@ -345,8 +345,8 @@ exports.add_admin = (data) => {
         arr.push(`'` + data.passwd + `'`);
         arr.push(`'` + data.tel_no + `'`);
         arr.push(`'` + data.email + `'`);
-        arr.push(`'` + data.division + `'`);
-        arr.push(`'` + data.position + `'`);
+        arr.push(`N'` + data.division + `'`);
+        arr.push(`N'` + data.position + `'`);
         arr.push(data.lock_stat);
         arr.push(`NULL`);
         arr.push(data.lock_count);
@@ -366,7 +366,7 @@ exports.add_admin = (data) => {
 exports.add_group_info = (name, create_time, active_time, agent_counting, inspection_period, DESCRIPTION) => {
     return new Promise((resolve, reject) => {
         let query = `INSERT INTO TBL_GROUP_INFO (NAME, CREATE_TIME, ACTIVE_TIME, AGENT_COUNTING, ACTIVE_STATE, INSPECTION_PERIOD, DEL_FLAG, DESCRIPTION) 
-        VALUES ('`+ name + `', CONVERT(CHAR(19), '` + create_time + `', 20), CONVERT(CHAR(19), '` + active_time + `',20), ` + agent_counting + `, 'A',  CONVERT(CHAR(19),'` + inspection_period + `', 20), 0, '` + DESCRIPTION + `')`;
+        VALUES (N'`+ name + `', CONVERT(CHAR(19), '` + create_time + `', 20), CONVERT(CHAR(19), '` + active_time + `',20), ` + agent_counting + `, 'A',  CONVERT(CHAR(19),'` + inspection_period + `', 20), 0, '` + DESCRIPTION + `')`;
 
         new sql.Request().query(query, (err, result) => {
             if (err) {
@@ -379,7 +379,7 @@ exports.add_group_info = (name, create_time, active_time, agent_counting, inspec
 };
 exports.add_agent_info = (ip, mac, os, purpose, owner, desc, state) => {
     return new Promise((resolve, reject) => {
-        let query = `INSERT INTO TBL_AGENT_INFO (IP, MAC_ADDR, OS, PURPOSE, OWNER, DEL_FLAG, DESCRIPTION, STATE ) VALUES('` + ip + `', '` + mac + `', '` + os + `', '` + purpose + `', '` + owner + `', 0, '` + desc + `', '` + state + `')`;
+        let query = `INSERT INTO TBL_AGENT_INFO (IP, MAC_ADDR, OS, PURPOSE, OWNER, DEL_FLAG, DESCRIPTION, STATE ) VALUES('` + ip + `', '` + mac + `', '` + os + `', N'` + purpose + `', N'` + owner + `', 0, N'` + desc + `', '` + state + `')`;
         new sql.Request().query(query, (err, result) => {
             if (err) {
                 reject(err);
@@ -390,7 +390,7 @@ exports.add_agent_info = (ip, mac, os, purpose, owner, desc, state) => {
 };
 exports.add_agent_info_from_xlsx = (ip,purpose,owner)=>{
     return new Promise((resolve,reject)=>{
-        let query = `INSERT INTO TBL_AGENT_INFO (IP, PURPOSE, OWNER) VALUES( '${ip}', '${purpose}', '${owner}')`;
+        let query = `INSERT INTO TBL_AGENT_INFO (IP, PURPOSE, OWNER) VALUES( '${ip}', N'${purpose}', N'${owner}')`;
         console.log(query);
         new sql.Request().query(query,(err,result)=>{
             resolve(result);
@@ -400,7 +400,7 @@ exports.add_agent_info_from_xlsx = (ip,purpose,owner)=>{
 
 exports.update_agent_info = (cd, ip, mac, os, purpose, owner, desc, state) => {
     return new Promise((resolve, reject) => {
-        let query = `UPDATE TBL_AGENT_INFO SET IP='${ip}', MAC_ADDR = '${mac}', OS = '${os}', PURPOSE = '${purpose}', OWNER = '${owner}', DEL_FLAG = 0, DESCRIPTION = '${desc}', STATE = '${state}' WHERE AGENT_CD = '${cd}'`;
+        let query = `UPDATE TBL_AGENT_INFO SET IP='${ip}', MAC_ADDR = '${mac}', OS = '${os}', PURPOSE = N'${purpose}', OWNER = N'${owner}', DEL_FLAG = 0, DESCRIPTION = N'${desc}', STATE = '${state}' WHERE AGENT_CD = '${cd}'`;
         console.log(query);
         new sql.Request().query(query, (err, result) => {
             if (err) {
@@ -424,4 +424,20 @@ exports.activate_agent_info = (agent_cd) => {
             resolve(result);
         });
     });
-}
+};
+
+exports.view_modify_group_info = (group_name) => {
+    return new Promise((resolve, reject) => {
+        let query = `Select TBL_AGENT_INFO.IP
+From  (TBL_GROUP_SET_LIST inner join TBL_AGENT_INFO on TBL_GROUP_SET_LIST.AGENT_CD = TBL_AGENT_INFO.AGENT_CD) 
+inner join TBL_GROUP_INFO On TBL_GROUP_INFO.GROUP_SET_CD = TBL_GROUP_SET_LIST.GROUP_SET_CD
+Where TBL_GROUP_INFO.NAME LIKE '${group_name}%'` ;
+        console.log(query);
+        new sql.Request().query(query, (err, result) => {
+            if(err){
+                reject(err);
+            }
+            resolve(result);
+        });
+    });
+};
