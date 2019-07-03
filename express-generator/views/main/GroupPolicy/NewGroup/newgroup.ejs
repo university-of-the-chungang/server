@@ -2,89 +2,14 @@
 <html lang="en">
  
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap.min.css">
-    <link href="/assets/vendor/fonts/circular-std/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/libs/css/style.css">
-    <link rel="stylesheet" href="/assets/vendor/fonts/fontawesome/css/fontawesome-all.css">
-    <link rel="stylesheet" href="/assets/vendor/charts/chartist-bundle/chartist.css">
-    <link rel="stylesheet" href="/assets/vendor/charts/morris-bundle/morris.css">
-    <link rel="stylesheet" href="/assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="/assets/vendor/charts/c3charts/c3.css">
-    <link rel="stylesheet" href="/assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
-    <title>국가보안연구소</title>
+    <%include ../../../head.ejs%>
 </head>
 
 <body>
 <div class="dashboard-main-wrapper">
     <div class="dashboard-header">
-        <nav class="navbar navbar-expand-lg bg-white fixed-top">
-            <a class="navbar-brand" href="../dashboard">국가보안연구소</a>
-            <div class="collapse navbar-collapse " id="navbarSupportedContent">
-                
-                <ul class="navbar-nav ml-auto navbar-right-top">
-                    <li class="nav-item">
-                        <a class="nav-link" href="../dashboard"  role="button"  aria-haspopup="true" aria-expanded="false">대쉬보드</a>
-                    </li>
+        <%include ../../../header.ejs%>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="../agent"  role="button" aria-haspopup="true" aria-expanded="false">에이전트관리</a>    
-                    </li>
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="../group" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">그룹 및 정책관리</a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="../group">기본 정보 </a>
-                            <a class="dropdown-item" href="../newgroup">신규 그룹 생성</a>
-                            <a class="dropdown-item" href="../oldgroup">기존 그룹 관리</a>
-                            </div>  
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="../log" role="button" aria-haspopup="true" aria-expanded="false">평가문항/로그관리</a>
-                    </li>
-
-                    <li class="nav-item dropdown connection">
-                        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 설정 <i class="far fa-sun"></i> </a>
-                        <ul class="dropdown-menu dropdown-menu-right connection-dropdown">
-                            <li class="connection-list">
-                                <div class="row">
-                                    <div class="col-xl-12 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                        <a href="../policy" class="connection-item"><span>정책관리</span></a>
-                                    </div>
-                                    
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                    
-                    <li class="nav-item dropdown nav-user">
-                        <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">사용자 관리</a>
-                        
-                        <ul class="dropdown-menu dropdown-menu-right connection-dropdown">
-                            <li class="connection-list">
-                                <div class="row">
-                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                        <a href="../login" class="connection-item"><span>로그인</span></a>
-                                    </div>
-                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                        <a href="../login" class="connection-item"> <span>로그아웃</span></a>
-                                    </div>
-                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                        <a href="../changeinfo" class="connection-item"> <span>정보변경</span></a>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                
-                </ul>
-            </div>
-        </nav>
-    </div>
     <!-- ============================================================== -->
     <!-- 헤드 네비게이션 바 종료  -->
     <!-- ============================================================== -->
@@ -301,7 +226,7 @@
 
                         <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div><!-- 더미 div-->
                         
-                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3""><!-- 할당된 에이전트 부분-->
+                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3"><!-- 할당된 에이전트 부분-->
                                 <div class="card" style="height: 300px; overflow:scroll; ">
                                     <h5 class="card-header text-center">할당된 에이전트</h5>
                                    
@@ -633,20 +558,7 @@
             <!-- footer -->
             <!-- ============================================================== -->
             <div class="footer">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                             Copyright © 2018 Concept. All rights reserved. Dashboard by 중앙대학교</a>
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                            <div class="text-md-right footer-links d-none d-sm-block">
-                                <a href="javascript: void(0);">About</a>
-                                <a href="javascript: void(0);">Support</a>
-                                <a href="javascript: void(0);">Contact Us</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <%include ../../../footer.ejs%>
             </div>
             <!-- ============================================================== -->
             <!-- end footer -->

@@ -10,13 +10,14 @@ let config = {
     // 해당 설정 부분은 설정파일 생기면 그리 옮길것 
     "user": "developer", //default is sa
     "password": "ang0511",
-    "server": "52.231.155.141", // for local machine
+    "server": "localhost", // for local machine
     "port": 1444,
     "database": "nsrang", // name of database
     "options": {
         "encrypt": true
     }
 };
+
 let table_list = [];
 sql.connect(config, err => {
     if (err) {
@@ -209,6 +210,40 @@ exports.get_group_info = (group_name = null) => {
         });
     });
 }
+
+
+exports.total_group_info = () =>{
+    return new Promise((resolve,reject)=>{
+        let query = `SELECT * FROM TBL_GROUP_INFO WHERE DEL_FLAG = 0`;
+        //GROUP_SET_CD, NAME, CREATE_TIME, ACTIVE_TIME, AGENT_COUNTING, INSPECTION_PERIOD, ACTIVE_STATE, DISCRIPTION
+        console.log(query);
+        new sql.Request().query(query,(err,result)=>{
+            if(err){
+                reject(err);
+            }
+            resolve(result);
+        });
+    });
+}
+
+exports.update_group_info = (cd, name, ctime, atime, counting, period, active_state, discription, del_flag) => {
+    return new Promise((resolve, reject) => {
+        let query = `UPDATE TBL_AGENT_INFO SET GROUP_SET_CD='${cd}', NAME = '${name}', CREATE_TIME = '${ctime}', ACTIVE_TIME = '${atime}', AGENT_COUNTING = '${counting}', INSPECTION_PERIOD = ${period}, ACTIVE_STATE = ${'active_state'}, DISCRIPTION = '${discription}', DEL_FLAG = '${del_flag}' WHERE GROUP_SET_CD = '${cd}'`;
+        console.log(query);
+        new sql.Request().query(query, (err, result) => {
+            if (err) {
+                reject(err);
+            }
+            resolve(result);
+        });
+    });
+};
+
+
+exports.get_group_set_cd = (group_name = null) => {
+
+}
+
 let view_admin = (column_name) => {
     return new Promise((resolve, reject) => {
         query_select(column_name, "TBL_ADMIN_INFO").then((result) => {
@@ -233,10 +268,12 @@ exports.change_group_state = (group_set_cd, state = false) => {
         });
     });
 };
+
 // 그룹 정보 삭제 (데이터베이스에서 날리지 않고 DEL_FLAG를 1로 설정)
 exports.delete_group_info = (group_set_cd) => {
     return new Promise((resolve, reject) => {
         let query = `UPDATE TBL_GROUP_INFO SET DEL_FLAG = 1 WHERE GROUP_SET_CD = ` + group_set_cd;
+        console.log(query);
         new sql.Request().query(query, (err, result) => {
             if (err) {
                 reject(err);
@@ -245,6 +282,7 @@ exports.delete_group_info = (group_set_cd) => {
         });
     });
 }
+
 //몇번째 XCCDF_CD인지 조회 
 exports.get_new_xccdf_cd = () => {
     return new Promise((resolve, reject) => {
@@ -373,6 +411,7 @@ exports.update_agent_info = (cd, ip, mac, os, purpose, owner, desc, state) => {
         });
     });
 };
+
 exports.activate_agent_info = (agent_cd) => {
     return new Promise((resolve, reject) => {
         let query = `UPDATE TBL_AGENT_INFO SET STATE = 'C-2' WHERE AGENT_CD = ${agent_cd}`;
@@ -382,19 +421,6 @@ exports.activate_agent_info = (agent_cd) => {
                 reject(err);
             }
 
-            resolve(result);
-        });
-    });
-}
-
-exports.total_group_info = () =>{
-    return new Promise((resolve,reject)=>{
-        let query = `SELECT GROUP_SET_CD, NAME, CREATE_TIME, ACTIVE_TIME, AGENT_COUNTING, INSPECTION_PERIOD, ACTIVE_STATE, DISCRIPTION FROM TBL_GROUP_INFO`;
-        console.log(query);
-        new sql.Request().query(query,(err,result)=>{
-            if(err){
-                reject(err);
-            }
             resolve(result);
         });
     });
