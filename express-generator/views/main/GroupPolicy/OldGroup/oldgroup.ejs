@@ -135,8 +135,8 @@
                     
                     <div class="row">
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
-                                <div class="card" style="height: 300px; overflow: scroll;">
-                                    <h4 class="card-header text-center">그룹 정보</h4>
+                                <div class="card" style="height: 300px; width: auto; overflow: scroll;">
+                                    <h4 class="card-header text-center">모든 에이전트</h4>
                                     <div class="card-body p-0">
                                         <div class="table-responsive">
                                             <table class="table">
@@ -150,6 +150,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    <% for(var i=0; i<recordsets3.length; i++){ %>
                                                     <tr>
                                                         <td>
                                                             <label class="custom-control custom-checkbox" style="margin-left: 10px" >
@@ -159,12 +160,13 @@
                                                         <td>
                                                             <div class="m-r-10 text-center"><img src="assets/images/pass.png" alt="user" class="rounded" width="45"></div>
                                                         </td>
-                                                        <td class="text-center">192.168.1.1 </td>
-                                                        <td class="text-center">windows 10 sp3 </td>
-                                                        <td class="text-center">DB 서버</td>
+                                                        <td class="text-center"><%=recordsets3[i].IP%> </td>
+                                                        <td class="text-center"><%=recordsets3[i].OS%></td>
+                                                        <td class="text-center"><%=recordsets3[i].PURPOSE%></td>
                                                     </tr>
+                                                    <%}%>
 
-                                                    <tr>
+                                                    <!--<tr>
                                                         <td>
                                                             <label class="custom-control custom-checkbox" style="margin-left: 10px">
                                                                 <input class="custom-control-input checkboxes" type="checkbox" value="1" id="one"><span class="custom-control-label"></span>
@@ -178,7 +180,7 @@
                                                         <td class="text-center">DB 서버</td>
                                                         
                                                         
-                                                    </tr>
+                                                    </tr>-->
 
                                                      
                                                 </tbody>
@@ -226,10 +228,9 @@
 
                         <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div><!-- 더미 div-->
                         
-                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3""><!-- 할당된 에이전트 부분-->
+                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3"><!-- 할당된 에이전트 부분-->
                                 <div class="card" style="height: 300px; overflow:scroll; ">
                                     <h5 class="card-header text-center">할당된 에이전트</h5>
-                                   
                                       <div class="table-responsive">
                                             <table class="table">
                                                 <thead class="bg-light">
@@ -238,10 +239,13 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr><td class="text-center">192.168.1.1</td></tr>
-                                                    <tr><td class="text-center">192.168.1.1</td></tr>
-                                                    <tr><td class="text-center">192.168.1.1</td></tr>
-                                                    <tr><td class="text-center">192.168.1.1</td></tr>      
+                                                <% for(var i=0; i<recordsets2.length; i++){ %>
+                                                    <tr>
+                                                        <td class="text-center">
+                                                            <%=recordsets2[i].IP%>
+                                                        </td>
+                                                    </tr>
+                                                <%}%>
                                                 </tbody>
                                             </table>
 
