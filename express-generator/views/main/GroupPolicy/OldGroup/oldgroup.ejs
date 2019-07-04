@@ -2,91 +2,14 @@
 <html lang="en">
  
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap.min.css">
-    <link href="/assets/vendor/fonts/circular-std/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/libs/css/style.css">
-    <link rel="stylesheet" href="/assets/vendor/fonts/fontawesome/css/fontawesome-all.css">
-    <link rel="stylesheet" href="/assets/vendor/charts/chartist-bundle/chartist.css">
-    <link rel="stylesheet" href="/assets/vendor/charts/morris-bundle/morris.css">
-    <link rel="stylesheet" href="/assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="/assets/vendor/charts/c3charts/c3.css">
-    <link rel="stylesheet" href="/assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
-    <link rel="stylesheet" href="/assets/vendor/datepicker/tempusdominus-bootstrap-4.css">
-    <title>국가보안연구소</title>
+    <%include ../../../head.ejs%>
 </head>
 
 <body>
   
 <div class="dashboard-main-wrapper">
     <div class="dashboard-header">
-        <nav class="navbar navbar-expand-lg bg-white fixed-top">
-            <a class="navbar-brand" href="../dashboard">국가보안연구소</a>
-            <div class="collapse navbar-collapse " id="navbarSupportedContent">
-                
-                <ul class="navbar-nav ml-auto navbar-right-top">
-                    <li class="nav-item">
-                        <a class="nav-link" href="../dashboard"  role="button"  aria-haspopup="true" aria-expanded="false">대쉬보드</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="../agent"  role="button" aria-haspopup="true" aria-expanded="false">에이전트관리</a>    
-                    </li>
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="../group" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">그룹 및 정책관리</a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="../group">기본 정보 </a>
-                            <a class="dropdown-item" href="../newgroup">신규 그룹 생성</a>
-                            <a class="dropdown-item" href="../oldgroup">기존 그룹 관리</a>
-                            </div>  
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="../log" role="button" aria-haspopup="true" aria-expanded="false">평가문항/로그관리</a>
-                    </li>
-
-                    <li class="nav-item dropdown connection">
-                        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 설정 <i class="far fa-sun"></i> </a>
-                        <ul class="dropdown-menu dropdown-menu-right connection-dropdown">
-                            <li class="connection-list">
-                                <div class="row">
-                                    <div class="col-xl-12 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                        <a href="../policy" class="connection-item"><span>정책관리</span></a>
-                                    </div>
-                                    
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                    
-                    <li class="nav-item dropdown nav-user">
-                        <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">사용자 관리 </a>
-                        
-                        <ul class="dropdown-menu dropdown-menu-right connection-dropdown">
-                            <li class="connection-list">
-                                <div class="row">
-                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                        <a href="../login" class="connection-item"><span>로그인</span></a>
-                                    </div>
-                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                        <a href="../login" class="connection-item"> <span>로그아웃</span></a>
-                                    </div>
-                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                        <a href="../changeinfo" class="connection-item"> <span>정보변경</span></a>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                
-                </ul>
-            </div>
-        </nav>
-    </div>
+        <%include ../../../header.ejs%>
     <!-- ============================================================== -->
     <!-- 헤드 네비게이션 바 종료  -->
     <!-- ============================================================== -->
@@ -143,27 +66,23 @@
 
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                <div class="row" style="margin-bottom: 50px">
-                                        
-                                        <div class="col-1">
-                                            <label for="validationServer02">그룹명</label>
-                                        </div>
-                                        
-                                      
-                                        <div class="col-xl-6">
-                                             <input type="text" class="form-control is-valid" id="validationServer01" placeholder="" value="" required="">
-                                        </div>
-                                    
-                                </div>    
+                                    <div class="row" style="margin-bottom: 50px">
+                                            <div class="col-xl-1">
+                                                <label for="validationServer01">그룹명</label>
+                                            </div>
+                                            <div class="col-xl-6">
+                                                 <input type="text" class="form-control is-valid" id="validationServer01" placeholder="<%=recordsets[0].NAME%>" value="" required="">
+                                            </div>
+                                    </div>    
 
-                        <div class="row" style="margin-bottom: 50px">   
-                            <div class="col-xl-1">
-                                <label for="validationServer01">그룹설명</label>
-                            </div>
-                            <div class="col-xl-6">
-                                <input type="text" class="form-control is-valid" id="validationServer01"  placeholder="" equired="" value = "" style="height: 200px">
-                            </div>
-                        </div>  
+                                    <div class="row" style="margin-bottom: 50px">   
+                                        <div class="col-xl-1">
+                                            <label for="validationServer01">그룹설명</label>
+                                        </div>
+                                        <div class="col-xl-6">
+                                            <input type="text" class="form-control is-valid" id="validationServer01"  placeholder="<%=recordsets[0].DISCRIPTION %>" equired="" value = "" style="height: 200px">
+                                        </div>
+                                    </div>  
 
                                    <div class="row">   
 
@@ -172,11 +91,11 @@
 
                                         </div>
 
-                                        
-                                        <div class="form-group">
-                                        <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-                                           
-                                           <!-- <select type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1">
+                                        <div class="col-4">
+                                            <div class="input-group-append be-addon">
+                                               
+                                               <select class="col-5 custom-select d-block w-100" style="height: 70px; margin-top: 1px; ">
+
                                                 <option selected="">현재 점검 주기 : 매 월 1 일</option>
                                                 <option value="10-20">매 주 월요일</option>
                                                 <option value="20-30">매 주 수요일</option>
@@ -186,14 +105,11 @@
                                                 <option value="15">매 월 15 일</option>
                                                 <option value="finish">매 월 말일</option>
                                             </select>
-                                        -->
-                                        <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1">
-                                            <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
-                                                <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
+
+                                            <!--<a type="date" id="datepicker" class="col-3 btn btn-outline-brand" style="margin-left: 5px; text-align: center;"><h5 style="margin-top: 7px;">적용</h5></a> -->
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>               
+                                        </div>   
+                                    </div>               
                              
                          
                             </div>
@@ -218,9 +134,9 @@
                     </div>
                     
                     <div class="row">
-                            <div class="col-xl-4 col-lg-4 col-md-5 col-sm-5 col-5">
-                                <div class="card" style="height: 300px; overflow: scroll;">
-                                    <h4 class="card-header text-center">그룹 정보</h4>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
+                                <div class="card" style="height: 300px; width: auto; overflow: scroll;">
+                                    <h4 class="card-header text-center">모든 에이전트</h4>
                                     <div class="card-body p-0">
                                         <div class="table-responsive">
                                             <table class="table">
@@ -234,6 +150,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    <% for(var i=0; i<recordsets3.length; i++){ %>
                                                     <tr>
                                                         <td>
                                                             <label class="custom-control custom-checkbox" style="margin-left: 10px" >
@@ -243,12 +160,13 @@
                                                         <td>
                                                             <div class="m-r-10 text-center"><img src="assets/images/pass.png" alt="user" class="rounded" width="45"></div>
                                                         </td>
-                                                        <td class="text-center">192.168.1.1 </td>
-                                                        <td class="text-center">windows 10 sp3 </td>
-                                                        <td class="text-center">DB 서버</td>
+                                                        <td class="text-center"><%=recordsets3[i].IP%> </td>
+                                                        <td class="text-center"><%=recordsets3[i].OS%></td>
+                                                        <td class="text-center"><%=recordsets3[i].PURPOSE%></td>
                                                     </tr>
+                                                    <%}%>
 
-                                                    <tr>
+                                                    <!--<tr>
                                                         <td>
                                                             <label class="custom-control custom-checkbox" style="margin-left: 10px">
                                                                 <input class="custom-control-input checkboxes" type="checkbox" value="1" id="one"><span class="custom-control-label"></span>
@@ -262,7 +180,7 @@
                                                         <td class="text-center">DB 서버</td>
                                                         
                                                         
-                                                    </tr>
+                                                    </tr>-->
 
                                                      
                                                 </tbody>
@@ -273,7 +191,7 @@
                                     </div>
                                 </div>
 
-                        <div class="row col-12">
+                            <div class="row col-12">
                                 <div class="col-3"></div>
                                 <div class="col-4">
 
@@ -291,57 +209,28 @@
                                     </ul>
                                 </nav>
 
-
                                 </div>
-                        </div>
+                            </div>
 
                         </div><!--그룹정보 카드 끝-->
 
+                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>   <!-- 더미 div-->
 
-                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-                                    
-
-                        <div class="row col-12"> <!-- 버튼 시작-->
-                             
-                            
-                        <div class="col-4"></div>
-
-                        <div class="col-6">
-                            <button type="button" class="btn btn-outline-light" data-method="move" data-option="10" data-second-option="0" title="Move Right" style=" width: 130px; height: 90px; margin-top: 35px;">
+                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"> <!-- 버튼 시작-->
+                               
+                               <button type="button" class="btn btn-outline-light" data-method="move" data-option="10" data-second-option="0" title="Move Right" style=" width: 130px; height: 90px; margin-top: 100px;">
 
                                 <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="" data-original-title="$().cropper(&quot;move&quot;, 10, 0)">
                                  <span class="fa fa-arrow-right"></span>
                                 </span>
                             </button>
-                        </div>
-                         
-
-                        <div class="col-2"></div>   
-                        
                         </div><!-- 버튼 끝-->
 
-
-                        <div class="row col-12"> <!-- 버튼 시작-->
+                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div><!-- 더미 div-->
                         
-                            <div class="col-4"></div>
-                        <div class="col-6">                               
-                            <button type="button" class="btn btn-outline-light" data-method="move" data-option="10" data-second-option="0" title="Move Right" style=" width: 130px; height: 90px; margin-top: 50px;">
-
-                                <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="" data-original-title="$().cropper(&quot;move&quot;, 10, 0)">
-                                 <span class="fa fa-arrow-left"></span>
-                                </span>
-                            </button>
-                        </div>
-                        <div class="col-2"></div>
-                        </div><!-- 버튼 끝-->
-                    </div>   <!-- 더미 div-->
-
-                       
-
-                        <div class="col-xl-3 col-lg-3 col-md-5 col-sm-5 col-3""><!-- 할당된 에이전트 부분-->
+                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3"><!-- 할당된 에이전트 부분-->
                                 <div class="card" style="height: 300px; overflow:scroll; ">
                                     <h5 class="card-header text-center">할당된 에이전트</h5>
-                                   
                                       <div class="table-responsive">
                                             <table class="table">
                                                 <thead class="bg-light">
@@ -350,10 +239,13 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr><td class="text-center">192.168.1.1</td></tr>
-                                                    <tr><td class="text-center">192.168.1.1</td></tr>
-                                                    <tr><td class="text-center">192.168.1.1</td></tr>
-                                                    <tr><td class="text-center">192.168.1.1</td></tr>      
+                                                <% for(var i=0; i<recordsets2.length; i++){ %>
+                                                    <tr>
+                                                        <td class="text-center">
+                                                            <%=recordsets2[i].IP%>
+                                                        </td>
+                                                    </tr>
+                                                <%}%>
                                                 </tbody>
                                             </table>
 
@@ -468,31 +360,30 @@
                     </div><!-- 에이전트 할당 탭 끝-->
 
                 <!-- 정책 적용 탭 시작-->
+                   
                     <div class="tab-pane" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                         <div class="row">
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
                                 <div class="card" style="height: 300px; overflow: scroll;">
                                     <h4 class="card-header text-center">그룹에 포함된 운영체제 버전</h4>
                                    
-                                      <div class="card-body p-0">
+                                    <div class="card-body p-0">
                                         <table class="table table-bordered">
                                         
                                         <tbody>
                                             <tr>
-                                                <td><img src="assets/circle/blue.png" alt="User Avatar" class="rounded-circle user-avatar-lg"> Windows 7</td>
-                                                <td><img src="assets/circle/blue.png" alt="User Avatar" class="rounded-circle user-avatar-lg"> Windows 10</td>
+                                                <td>Windows 7</td>
+                                                <td>Windows 10</td>
                                             </tr>
                                             <tr>
                                              
-                                                <td><img src="assets/circle/red.png" alt="User Avatar" class="rounded-circle user-avatar-lg"> Windows 10</td>
-                                                <td><img src="assets/circle/blue.png" alt="User Avatar" class="rounded-circle user-avatar-lg"> Windows 7</td>
+                                                <td>Windows 10</td>
+                                                <td>Windows 7</td>
                                             </tr>
                                             <tr>
                                                
-                                                <td><img src="assets/circle/blue.png" alt="User Avatar" class="rounded-circle user-avatar-lg"> Windows 10</td>
-
-                                                <td> <img src="assets/circle/blue.png" alt="User Avatar" class="rounded-circle user-avatar-lg"> Windows 10</td>
-
+                                                <td>Windows 10</td>
+                                                <td>Windows 7</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -579,7 +470,7 @@
                                 </div>
                                 
                                 <!-- 운영체제 버전에 대한 div 끝이면서 운영체제 별 정책 할당 결과 div시작-->
-                                                               <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-5">
+                                <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-5">
                                     <div class="card" style="height: 500px; overflow: scroll;">
                                     <h4 class="card-header text-center">운영체제 별 정책 할당 결과</h4>
                                       <div class="card-body p-0">
@@ -589,19 +480,19 @@
                                         <tbody>
                                             <tr>
                                                 <th scope="row">1</th>
-                                                <td><img src="assets/circle/grey.png" alt="User Avatar" class="rounded-circle user-avatar-lg"></td>
+                                                <td>색깔</td>
                                                 <td>Windows 10</td>
                                                 <td>Windows 10 bench mark</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">2</th>
-                                                <td><img src="assets/circle/blue.png" alt="User Avatar" class="rounded-circle user-avatar-lg"></td>
+                                                <td>색깔</td>
                                                 <td>Windows 10</td>
                                                 <td>Windows 10 bench mark</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">3</th>
-                                                <td><img src="assets/circle/blue.png" alt="User Avatar" class="rounded-circle user-avatar-lg"></td>
+                                                <td>색깔</td>
                                                 <td>Windows 10</td>
                                                 <td>Windows 10 bench mark</td>
                                             </tr>
@@ -612,27 +503,25 @@
                                     </div>
                                 </div>
 
+
                                  
                         <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-                            <div class="card " overflow="scroll" style="height: 500px;">
-                            <div class="card-header">README</div>
-                            <div class="card-body">
-
-                                <h3> ①  정책적용이 끝난 의미</h3>
-                                <p class="card-text"> - 파랑색 원은 windows7sp3에 대한 정책적용이 완료</p>
-                                <p class="card-text"> - 회색인 경우 정책적용 필요</p>
-
-                                <h3> ② 운영체제별 정책 할당 결과</h3>
-                            
-                                <p class="card-text"> - 파랑색의 결과는 window7sp3에 대한 정책 할당의 결과</p>       
-                            </div>
-                                <div class="card-footer p-0 text-center">
-                                    <div class="card-footer-item card-footer-item-bordered">
-                                        <a href="#" class="card-link"></a>
+                                    <div class="card " overflow="scroll" style="height: 500px;">
+                                    <div class="card-header">
+                                    README
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="card-text"> 파란색은 ~~~~ 의미입니다. </p>
+                                        <p class="card-text"> 빨간색은 ~~~의미 입니다. </p>
+                                        <p class="card-text"> 노란색은 ~~~의미입니다.</p>
+                                    </div>
+                                    <div class="card-footer p-0 text-center">
+                                        <div class="card-footer-item card-footer-item-bordered">
+                                            <a href="#" class="card-link"> 설명서 다운로드 </a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                                </div>
 
                             <div class="col-9" style="margin-top: 3px;">
                                 <a href="#" class="col-12 btn btn-warning btn-lg" data-toggle="modal" data-target="#xccdfModal"> 정책 다운로드 확인 </a>
@@ -759,37 +648,26 @@
             <!-- footer -->
             <!-- ============================================================== -->
             <div class="footer">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                             Copyright © 2018 Concept. All rights reserved. Dashboard by 중앙대학교</a>
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                            <div class="text-md-right footer-links d-none d-sm-block">
-                                <a href="javascript: void(0);">About</a>
-                                <a href="javascript: void(0);">Support</a>
-                                <a href="javascript: void(0);">Contact Us</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <%include ../../../footer.ejs%>
             </div>
             <!-- ============================================================== -->
             <!-- end footer -->
             <!-- ============================================================== -->
     </div>
     
-    <script src="/assets/vendor/jquery/jquery-3.3.1.min.js"></script>
+    <!-- jquery 3.3.1 -->
+    <script src="assets/vendor/jquery/jquery-3.3.1.min.js"></script>
     <!-- bootstap bundle js -->
-    <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
     <!-- slimscroll js -->
-    <script src="/assets/vendor/slimscroll/jquery.slimscroll.js"></script>
+    <script src="assets/vendor/slimscroll/jquery.slimscroll.js"></script>
     <!-- main js -->
-    <script src="/assets/libs/js/main-js.js"></script>
-    <script src="/assets/vendor/datepicker/moment.js"></script>
-    <script src="/assets/vendor/datepicker/tempusdominus-bootstrap-4.js"></script>
-    <script src="/assets/vendor/datepicker/datepicker.js"></script>
-    
+    <script src="assets/libs/js/main-js.js"></script>
+    <script src="../assets/vendor/full-calendar/js/calendar.js"></script>
+    <script src="../assets/vendor/full-calendar/js/jquery-ui.min.js"></script>
+    <script src="../assets/vendor/full-calendar/js/fullcalendar.js"></script>
+    <script src="../assets/vendor/full-calendar/js/moment.min.js"></script>
+
     
 </body>
 </html>
