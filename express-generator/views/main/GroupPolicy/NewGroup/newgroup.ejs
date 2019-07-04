@@ -72,7 +72,7 @@
                                                 <label for="validationServer01">그룹명</label>
                                             </div>
                                             <div class="col-8">
-                                                 <input type="text" class="form-control is-valid" id="validationServer01" placeholder="기관보안관리를 위한 필수정책" value="기관보안관리를 위한 필수정책" required="" maxlength="100">
+                                                 <input type="text" class="form-control is-valid" id="validationServer01" required="" maxlength="100">
                                             </div>
                                     </div>    
 
@@ -106,8 +106,6 @@
                                                 <option value="15">매 월 15 일</option>
                                                 <option value="finish">매 월 말일</option>
                                             </select>
-
-                                            <a type="date" id="datepicker" class="col-3 btn btn-outline-brand" style="margin-left: 5px; text-align: center;"><h5 style="margin-top: 7px;">적용</h5></a>
                                             </div>
                                         </div>   
                                     </div>           
@@ -150,37 +148,39 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td>
-                                                            <label class="custom-control custom-checkbox" style="margin-left: 10px" >
-                                                                <input class="custom-control-input checkboxes text-center" type="checkbox" value="1" id="one"><span class="custom-control-label "></span>
-                                                            </label>
-                                                        </td>
-                                                        <td>
-                                                            <div class="m-r-10 text-center"><img src="assets/images/pass.png" alt="user" class="rounded" width="45"></div>
-                                                        </td>
-                                                        <td class="text-center">192.168.1.1 </td>
-                                                        <td class="text-center">windows 10 sp3 </td>
-                                                        <td class="text-center">DB 서버</td>
-                                                    </tr>
+                                                <% for(var i=0; i<recordsets3.length; i++){ %>
+                                                <tr>
+                                                    <td>
+                                                        <label class="custom-control custom-checkbox" style="margin-left: 10px" >
+                                                            <input class="custom-control-input checkboxes text-center" type="checkbox" value="1" id="one"><span class="custom-control-label "></span>
+                                                        </label>
+                                                    </td>
+                                                    <td>
+                                                        <div class="m-r-10 text-center"><img src="assets/images/pass.png" alt="user" class="rounded" width="45"></div>
+                                                    </td>
+                                                    <td class="text-center"><%=recordsets3[i].IP%> </td>
+                                                    <td class="text-center"><%=recordsets3[i].OS%></td>
+                                                    <td class="text-center"><%=recordsets3[i].PURPOSE%></td>
+                                                </tr>
+                                                <%}%>
 
-                                                    <tr>
-                                                        <td>
-                                                            <label class="custom-control custom-checkbox" style="margin-left: 10px">
-                                                                <input class="custom-control-input checkboxes" type="checkbox" value="1" id="one"><span class="custom-control-label"></span>
-                                                            </label>
-                                                        </td>
-                                                        <td>
-                                                            <div class="m-r-10 text-center"><img src="assets/images/fail.png" alt="user" class="rounded" width="45"></div>
-                                                        </td>
-                                                        <td class="text-center">192.168.1.1 </td>
-                                                        <td class="text-center">windows 10 sp3 </td>
-                                                        <td class="text-center">DB 서버</td>
-                                                        
-                                                        
-                                                    </tr>
+                                                <!--<tr>
+                                                    <td>
+                                                        <label class="custom-control custom-checkbox" style="margin-left: 10px">
+                                                            <input class="custom-control-input checkboxes" type="checkbox" value="1" id="one"><span class="custom-control-label"></span>
+                                                        </label>
+                                                    </td>
+                                                    <td>
+                                                        <div class="m-r-10 text-center"><img src="assets/images/fail.png" alt="user" class="rounded" width="45"></div>
+                                                    </td>
+                                                    <td class="text-center">192.168.1.1 </td>
+                                                    <td class="text-center">windows 10 sp3 </td>
+                                                    <td class="text-center">DB 서버</td>
 
-                                                     
+
+                                                </tr>-->
+
+
                                                 </tbody>
                                             </table>
 
@@ -542,7 +542,7 @@
             <div class="row">
                 <div class="col-xl-4 col-sm-4 col-lg-4 col-4"></div>
                 <div class="col-xl-3 col-sm-3 col-lg-3" style="margin-top: 25px">
-                    <button type="submit" class="btn btn-space btn-primary col-5">수정</button>
+                    <button type="submit" class="btn btn-space btn-primary col-5">생성</button>
                     <button class="btn btn-space btn-secondary col-5">취소</button>
                 </div>
             </div>
