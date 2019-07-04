@@ -6,13 +6,22 @@ const DB = require('../../db');
 router.post('/', function (req, res, next) {
   if(req.body.change_group_NAME.length === 0) {
     res.redirect('/group');
-  }else{
-    console.log(req.body.change_group_NAME);
+  }else {
     DB.get_group_info(JSON.parse(req.body.change_group_NAME)).then(result => {
-      console.log(result);
-      res.render('./main/GroupPolicy/OldGroup/oldgroup', result);
+      DB.view_modify_group_info(JSON.parse(req.body.change_group_NAME)).then(result2 => {
+        DB.get_agent_info().then(result3 => {
+          console.log(result);
+          console.log(result2);
+          console.log(result3);
+          res.render('./main/GroupPolicy/OldGroup/oldgroup', {
+            recordsets: result.recordset,
+            recordsets2: result2.recordset,
+            recordsets3: result3.recordset
+          });
+        });
+      });
     })
-  }
+}
 });// 기존 그룹페이지
 
 module.exports = router;

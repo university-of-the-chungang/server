@@ -74,14 +74,14 @@ router.get('/policy', function (req, res, next) {
 router.get('/agent', function (req, res, next) {
   console.log(req.session.username);
   if(req.session.username){
-  DB.get_agent_info().then(result => {
-    result.sess_name = req.session.username;
-    res.render('./main/Agent/agent', result);
-  });
-}else{
-  res.render('./main/User/login');
+    DB.get_agent_info().then(result => {
+      result.sess_name = req.session.username;
+      res.render('./main/Agent/agent', result);
+    });
+  }else{
+    res.render('./main/User/login');
 }
-});// 에이전트 페이지
+});// 에이전트 페이
 /*
 router.get('/agent', function (req, res, next) {
   DB.get_agent_info().then(result => {
@@ -103,8 +103,6 @@ router.get('/agent/:keyword', (req, res, next) => {
     console.log(err);
   });
 
-})
-
 router.get('/log/:keyword2', (req, res, next) => {
   DB.search_log_info(req.params.keyword2).then(result => {
     result.sess_name = req.session.username;
@@ -114,6 +112,7 @@ router.get('/log/:keyword2', (req, res, next) => {
   });
 
 })
+});
 
 router.post('/agent/del_agent_info', (req, res, next) => {
   if (req.body.del_agent_cd.length === 0) {
@@ -123,6 +122,7 @@ router.post('/agent/del_agent_info', (req, res, next) => {
     });
   } else {
     DB.delete_agent_info(JSON.parse(req.body.del_agent_cd)).then(() => {
+      console.log(req.body.del_agent_cd);
       LOGS.make_log("AGENT",req.session.username,"삭제");
       DB.get_agent_info().then(result => {
         result.sess_name = req.session.username;
@@ -161,6 +161,7 @@ router.post('/add_manual_agent', (req, res, next) => {
     });
   }
 });
+
 router.post('/update_agent_info', (req, res, next) => {
   let arr = [req.body.txtIP, req.body.txtMac, req.body.txtOS, req.body.txtUseful, req.body.txtOwner, req.body.txtDesc, req.body.state];
   let cd = req.body.cd;
@@ -196,6 +197,10 @@ router.post('/activate_agent_info', (req, res, next) => {
   });
 });
 
+router.get('/log', function (req, res, next) {
+  res.render('./main/Log/log');
+}); // 평가문항 및 로그 추출 페이지
+
 router.post('/make_xlsx',function(req,res,next){
   let param = req.body;
   let now = new Date().toISOString().slice(0,10); 
@@ -215,6 +220,7 @@ router.post('/agent/upload_xlsx',upload.single('xlsx_file'),(req,res,next)=>{
     console.log(err);
   });
 });
+
 router.post('/agent/refresh_xlsx',upload.single('xlsx_file'),(req,res,next)=>{
   LOGS.refresh_xlsx(req.file.path).then(result=>{
     DB.get_agent_info().then(result2 => {
@@ -223,7 +229,6 @@ router.post('/agent/refresh_xlsx',upload.single('xlsx_file'),(req,res,next)=>{
       res.render('./main/Agent/agent', result2);
     });
     })
-  
 });
 
 
