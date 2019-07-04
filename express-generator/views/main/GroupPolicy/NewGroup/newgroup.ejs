@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="/assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="/assets/vendor/charts/c3charts/c3.css">
     <link rel="stylesheet" href="/assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
+    <li></li>nk rel="stylesheet" href="/assets/vendor/datepicker/tempusdominus-bootstrap-4.css">
     <title>국가보안연구소</title>
 </head>
 
@@ -160,18 +161,15 @@
                                         </div>
                                     </div>  
 
-                                    <div class="row">   
+                            <div class="row">   
 
-                                        <div class="col-1">
-                                            <label for="validationServer01">점검 주기 설정</label>
-
-                                        </div>
-
-                                        <div class="col-4">
-                                            <div class="input-group-append be-addon">
-                                               
-                                               <select class="col-5 custom-select d-block w-100" style="height: 70px; margin-top: 1px; ">
-
+                                <div class="col-1"><label for="validationServer01">점검 주기 설정</label></div>
+                                <div class="col-3">
+       
+                                    <div class="form-group">
+                                        <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+                                           
+                                           <!-- <select type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1">
                                                 <option selected="">현재 점검 주기 : 매 월 1 일</option>
                                                 <option value="10-20">매 주 월요일</option>
                                                 <option value="20-30">매 주 수요일</option>
@@ -181,11 +179,15 @@
                                                 <option value="15">매 월 15 일</option>
                                                 <option value="finish">매 월 말일</option>
                                             </select>
-
-                                            <a type="date" id="datepicker" class="col-3 btn btn-outline-brand" style="margin-left: 5px; text-align: center;"><h5 style="margin-top: 7px;">적용</h5></a>
+                                        -->
+                                        <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1">
+                                            <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
                                             </div>
-                                        </div>   
-                                    </div>           
+                                        </div>
+                                    </div>
+                                </div></div>           
+                                
                                 </div><!-- 기본정보 탭 끝 -->
 
 
@@ -287,19 +289,44 @@
 
                         </div><!--그룹정보 카드 끝-->
 
-                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>   <!-- 더미 div-->
+ <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+                                    
 
-                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"> <!-- 버튼 시작-->
-                               
-                               <button type="button" class="btn btn-outline-light" data-method="move" data-option="10" data-second-option="0" title="Move Right" style=" width: 130px; height: 90px; margin-top: 100px;">
+                        <div class="row col-12"> <!-- 버튼 시작-->
+                             
+                            
+                        <div class="col-4"></div>
+
+                        <div class="col-6">
+                            <button type="button" class="btn btn-outline-light" data-method="move" data-option="10" data-second-option="0" title="Move Right" style=" width: 130px; height: 90px; margin-top: 35px;">
 
                                 <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="" data-original-title="$().cropper(&quot;move&quot;, 10, 0)">
                                  <span class="fa fa-arrow-right"></span>
                                 </span>
                             </button>
+                        </div>
+                         
+
+                        <div class="col-2"></div>   
+                        
                         </div><!-- 버튼 끝-->
 
-                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div><!-- 더미 div-->
+
+                        <div class="row col-12"> <!-- 버튼 시작-->
+                        
+                            <div class="col-4"></div>
+                        <div class="col-6">                               
+                            <button type="button" class="btn btn-outline-light" data-method="move" data-option="10" data-second-option="0" title="Move Right" style=" width: 130px; height: 90px; margin-top: 50px;">
+
+                                <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="" data-original-title="$().cropper(&quot;move&quot;, 10, 0)">
+                                 <span class="fa fa-arrow-left"></span>
+                                </span>
+                            </button>
+                        </div>
+                        <div class="col-2"></div>
+                        </div><!-- 버튼 끝-->
+                    </div>   <!-- 더미 div-->
+
                         
                         <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3""><!-- 할당된 에이전트 부분-->
                                 <div class="card" style="height: 300px; overflow:scroll; ">
@@ -444,18 +471,20 @@
                                         
                                         <tbody>
                                             <tr>
-                                                <td>Windows 7</td>
-                                                <td>Windows 10</td>
+                                                <td><img src="assets/circle/blue.png" alt="User Avatar" class="rounded-circle user-avatar-lg"> Windows 7</td>
+                                                <td><img src="assets/circle/blue.png" alt="User Avatar" class="rounded-circle user-avatar-lg"> Windows 10</td>
                                             </tr>
                                             <tr>
                                              
-                                                <td>Windows 10</td>
-                                                <td>Windows 7</td>
+                                                <td><img src="assets/circle/blue.png" alt="User Avatar" class="rounded-circle user-avatar-lg"> Windows 10</td>
+                                                <td><img src="assets/circle/blue.png" alt="User Avatar" class="rounded-circle user-avatar-lg"> Windows 7</td>
                                             </tr>
                                             <tr>
                                                
-                                                <td>Windows 10</td>
-                                                <td>Windows 7</td>
+                                                <td><img src="assets/circle/blue.png" alt="User Avatar" class="rounded-circle user-avatar-lg"> Windows 10</td>
+
+                                                <td> <img src="assets/circle/blue.png" alt="User Avatar" class="rounded-circle user-avatar-lg"> Windows 10</td>
+
                                             </tr>
                                         </tbody>
                                     </table>
@@ -554,19 +583,19 @@
                                         <tbody>
                                             <tr>
                                                 <th scope="row">1</th>
-                                                <td>색깔</td>
+                                                <td><img src="assets/circle/grey.png" alt="User Avatar" class="rounded-circle user-avatar-lg"></td>
                                                 <td>Windows 10</td>
                                                 <td>Windows 10 bench mark</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">2</th>
-                                                <td>색깔</td>
+                                                <td><img src="assets/circle/blue.png" alt="User Avatar" class="rounded-circle user-avatar-lg"></td>
                                                 <td>Windows 10</td>
                                                 <td>Windows 10 bench mark</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">3</th>
-                                                <td>색깔</td>
+                                                <td><img src="assets/circle/blue.png" alt="User Avatar" class="rounded-circle user-avatar-lg"></td>
                                                 <td>Windows 10</td>
                                                 <td>Windows 10 bench mark</td>
                                             </tr>
@@ -580,26 +609,29 @@
 
                                  
                         <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-                                    <div class="card " overflow="scroll" style="height: 500px;">
-                                    <div class="card-header">
-                                    README
-                                    </div>
-                                    <div class="card-body">
-                                        <p class="card-text"> 파란색은 ~~~~ 의미입니다. </p>
-                                        <p class="card-text"> 빨간색은 ~~~의미 입니다. </p>
-                                        <p class="card-text"> 노란색은 ~~~의미입니다.</p>
-                                    </div>
-                                    <div class="card-footer p-0 text-center">
-                                        <div class="card-footer-item card-footer-item-bordered">
-                                            <a href="#" class="card-link"> 설명서 다운로드 </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                </div>
+                            <div class="card " overflow="scroll" style="height: 500px;">
+                            <div class="card-header">README</div>
+                            <div class="card-body">
 
-                            <div class="col-9" style="margin-top: 3px;">
-                                <a href="#" class="col-12 btn btn-warning btn-lg" data-toggle="modal" data-target="#xccdfModal"> 정책 다운로드 확인 </a>
+                                <h3> ①  정책적용이 끝난 의미</h3>
+                                <p class="card-text"> - 파랑색 원은 windows7sp3에 대한 정책적용이 완료</p>
+                                <p class="card-text"> - 회색인 경우 정책적용 필요</p>
+
+                                <h3> ② 운영체제별 정책 할당 결과</h3>
+                            
+                                <p class="card-text"> - 파랑색의 결과는 window7sp3에 대한 정책 할당의 결과</p>       
                             </div>
+                                <div class="card-footer p-0 text-center">
+                                    <div class="card-footer-item card-footer-item-bordered">
+                                        <a href="#" class="card-link"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-9" style="margin-top: 3px;">
+                            <a href="#" class="col-12 btn btn-warning btn-lg" data-toggle="modal" data-target="#xccdfModal"> 정책 다운로드 확인 </a>
+                        </div>
                        
 
                     </div>
@@ -617,7 +649,7 @@
             <div class="row">
                 <div class="col-xl-4 col-sm-4 col-lg-4 col-4"></div>
                 <div class="col-xl-3 col-sm-3 col-lg-3" style="margin-top: 25px">
-                    <button type="submit" class="btn btn-space btn-primary col-5">수정</button>
+                    <button type="submit" class="btn btn-space btn-primary col-5">임시저장</button>
                     <button class="btn btn-space btn-secondary col-5">취소</button>
                 </div>
             </div>
@@ -662,19 +694,9 @@
     <script src="/assets/vendor/slimscroll/jquery.slimscroll.js"></script>
     <!-- main js -->
     <script src="/assets/libs/js/main-js.js"></script>
-    <!-- chart chartist js -->
-    <script src="/assets/vendor/charts/chartist-bundle/chartist.min.js"></script>
-    <!-- sparkline js -->
-    <script src="/assets/vendor/charts/sparkline/jquery.sparkline.js"></script>
-    <!-- morris js -->
-    <!-- <script src="assets/vendor/charts/morris-bundle/raphael.min.js"></script> -->
-    <!-- <script src="assets/vendor/charts/morris-bundle/morris.js"></script> -->
-    <!-- chart c3 js -->
-    <script src="/assets/vendor/charts/c3charts/c3.min.js"></script>
-    <script src="/assets/vendor/charts/c3charts/d3-5.4.0.min.js"></script>
-    <script src="/assets/vendor/charts/c3charts/C3chartjs.js"></script>
-    <!-- <script src="assets/libs/js/dashboard-ecommerce.js"></script> -->
-
+    <script src="/assets/vendor/datepicker/moment.js"></script>
+    <script src="/assets/vendor/datepicker/tempusdominus-bootstrap-4.js"></script>
+    <script src="/assets/vendor/datepicker/datepicker.js"></script>
     
 </body>
 </html>
