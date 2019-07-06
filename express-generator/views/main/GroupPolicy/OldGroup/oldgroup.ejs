@@ -371,20 +371,16 @@
                                         <table class="table table-bordered">
                                         
                                         <tbody>
-                                            <tr>
-                                                <td>Windows 7</td>
-                                                <td>Windows 10</td>
-                                            </tr>
-                                            <tr>
-                                             
-                                                <td>Windows 10</td>
-                                                <td>Windows 7</td>
-                                            </tr>
-                                            <tr>
-                                               
-                                                <td>Windows 10</td>
-                                                <td>Windows 7</td>
-                                            </tr>
+                                            <%for(var i=0; i<(recordsets4.length/2); i++){ %>
+                                                <tr>
+                                                    <td>
+                                                        <%=recordsets4[i*2].OS%>
+                                                    </td>
+                                                    <td>
+                                                        <%=recordsets4[i*2+1].OS%>
+                                                    </td>
+                                                </tr>
+                                            <%}%>
                                         </tbody>
                                     </table>
                                         
