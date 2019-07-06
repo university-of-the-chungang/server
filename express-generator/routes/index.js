@@ -40,7 +40,7 @@ router.post('/signin',(req,res,next)=>{
         res.redirect('/'+data.referer);
         // res.render(data.referer,{sess_name:data.name});
       else
-        res.render('./dashboard',{sess_name:data.name});
+      res.redirect('/dashboard');
     }else{
       req.session.username = null;
       res.render('./main/User/login');
