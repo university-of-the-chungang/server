@@ -21,7 +21,7 @@ let upload = multer({
 });
 
 router.get('/', function (req, res, next) {
-  res.render('./main/Policy/oval');
+  res.render('./main/policy');
 });// 기존 그룹페이지
 
 router.post('/', upload.single('imgFile'), (req, res, next) => {
@@ -32,7 +32,7 @@ router.post('/', upload.single('imgFile'), (req, res, next) => {
     size: file.size
   };
 
-  res.render('./main/Policy/oval');
+  res.render('./main/policy');
 });
 
 

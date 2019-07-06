@@ -2,20 +2,7 @@
 <html lang="en">
  
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css">
-    <link href="assets/vendor/fonts/circular-std/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/libs/css/style.css">
-    <link rel="stylesheet" href="assets/vendor/fonts/fontawesome/css/fontawesome-all.css">
-    <link rel="stylesheet" href="assets/vendor/charts/chartist-bundle/chartist.css">
-    <link rel="stylesheet" href="assets/vendor/charts/morris-bundle/morris.css">
-    <link rel="stylesheet" href="assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="assets/vendor/charts/c3charts/c3.css">
-    <link rel="stylesheet" href="assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
-    <title>국가보안연구소</title>
+    <%include ../../head.ejs%>
 
     <style>
 
@@ -41,75 +28,7 @@
 
 <div class="dashboard-main-wrapper">
     <div class="dashboard-header">
-        <nav class="navbar navbar-expand-lg bg-white fixed-top">
-            <a class="navbar-brand" href="../dashboard">국가보안연구소</a>
-            <div class="collapse navbar-collapse " id="navbarSupportedContent">
-                
-                <ul class="navbar-nav ml-auto navbar-right-top">
-                    <li class="nav-item">
-                        <a class="nav-link" href="../dashboard"  role="button"  aria-haspopup="true" aria-expanded="false">대쉬보드</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="../agent"  role="button" aria-haspopup="true" aria-expanded="false">에이전트관리</a>    
-                    </li>
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="../group" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">그룹 및 정책관리</a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="../group">기본 정보 </a>
-                            <a class="dropdown-item" href="../newgroup">신규 그룹 생성</a>
-                            <a class="dropdown-item" href="../oldgroup">기존 그룹 관리</a>
-                            </div>  
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="../log" role="button" aria-haspopup="true" aria-expanded="false">평가문항/로그관리</a>
-                    </li>
-
-                    <li class="nav-item dropdown connection">
-                        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 설정 <i class="far fa-sun"></i> </a>
-                        <ul class="dropdown-menu dropdown-menu-right connection-dropdown">
-                            <li class="connection-list">
-                                <div class="row">
-                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                        <a href="#" class="connection-item"><span>CPE</span></a>
-                                    </div>
-                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                        <a href="#" class="connection-item"> <span>CCE</span></a>
-                                    </div>
-                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                        <a href="#" class="connection-item"> <span>OVAL</span></a>
-                                    </div>
-                                    </div>
-                            </li>
-                        </ul>
-                    </li>
-                    
-                    <li class="nav-item dropdown nav-user">
-                        <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">사용자 관리 </a>
-                        
-                        <ul class="dropdown-menu dropdown-menu-right connection-dropdown">
-                            <li class="connection-list">
-                                <div class="row">
-                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                        <a href="../login" class="connection-item"><span>로그인</span></a>
-                                    </div>
-                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                        <a href="../login" class="connection-item"> <span>로그아웃</span></a>
-                                    </div>
-                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                        <a href="../changeinfo" class="connection-item"> <span>정보변경</span></a>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                
-                </ul>
-            </div>
-        </nav>
-    </div>
+        <%include ../../header.ejs%>
     <!-- ============================================================== -->
     <!-- 헤드 네비게이션 바 종료  -->
     <!-- ============================================================== -->
@@ -140,8 +59,8 @@
 
             <div class="row">
                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                  <div class="card" style="height: 600px; overflow: scroll;">
-                    <h4 class="card-header text-center">평가 문항 추출</h4>
+                  <div class="card" style="height: 400px; overflow: scroll;">
+                        <h3 class="card-header text-center">평가 문항 추출</h3>
                     <div class="card-body p-0">   
                         <div class="row"> 
 
@@ -165,7 +84,7 @@
                                             </div>
                                         </td>
                                         <td class="border-0 text-center">
-                                            <button type="submit"  class="btn btn-space btn-primary">점검결과 추출</button> 
+                                            <a href="#" class="col-11 btn btn-outline-danger" data-toggle="modal" data-target="#xccdfModal"> 결과 다운로드 <span class="icon-circle-small icon-box-xs text-danger bg-danger-light bg-danger-light "><i class="fa fa-fw fa-arrow-down"></i></span><span ></span></a>
                                         </td>
 
                                     </tr>
@@ -174,21 +93,61 @@
 
                         </div>
              
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead class="bg-light">
-                                    <tr class="border-0">
-                                        <th class="border-0 text-center">check</th>
-                                        <th class="border-0 text-center">상태</th>
-                                        <th class="border-0 text-center ">IP</th>
-                                        <th class="border-0 text-center">운영체제 버전</th>
-                                        <th class="border-0 text-center">용도</th>
+                        
+                         <div class="panel-body">
+                          <table id="mytable" class="table" style="margin-bottom:10px">
+                             <thead></thead>
+
+                                    <tbody>
+                                    <tr>
+                                        <td class="table-primary" colspan="1">
+                                             <label class="custom-control custom-checkbox">
+                                                <input type="checkbox" id="checkall" class="custom-control-input"><span class="custom-control-label"></span>
+                                            </label>
+                                        </td>
+                                        <td class="table-primary" colspan="11"> 그룹 3(1일) </td>
+                                        
                                     </tr>
-                                </thead>
-                                <tbody>      
-                                </tbody>
-                            </table>
-                        </div>
+                                    <tr>
+                                        <td colspan="12">- 그룹명: 기관보안관리를 위한 필수적 정책-ver3 </td>
+                                   
+                                    <tr>
+                                        <td colspan="12">- 그룹설명: 기관 보안관리 수준을 준수하기 위한 필수 정책 50가지, 2019년 3월 10일 기준 </td>
+                                    </tr>
+                                    <tr>
+                                        <td> 생성시간(2019.01.02.10:20:20) </td>
+                                        <td> 활성화 시간(2019.01.30.15:30:55) </td>
+                                        <td> 에이전트 수(100) </td>
+                                    </tr>
+
+                                     <tr>
+                                        <td class="table-primary" colspan="1">
+                                             <label class="custom-control custom-checkbox">
+                                                <input type="checkbox" id="checkall" class="custom-control-input"><span class="custom-control-label"></span>
+                                            </label>
+                                        </td>
+                                        <td class="table-primary" colspan="11"> 그룹 3(1일) </td>
+                                        
+                                    </tr>
+                                    <tr>
+                                        <td colspan="12">- 그룹명: 기관보안관리를 위한 필수적 정책-ver3 </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="12">- 그룹설명: 기관 보안관리 수준을 준수하기 위한 필수 정책 50가지, 2019년 3월 10일 기준 </td>
+                                    </tr>
+                                    <tr>
+                                        <td> 생성시간(2019.01.02.10:20:20) </td>
+                                        <td> 활성화 시간(2019.01.30.15:30:55) </td>
+                                        <td> 에이전트 수(100) </td>
+                                    </tr>
+
+                                   
+                                    </tbody>
+                                </table>
+                            </div>
+
+
+
                     </div>
                 </div>
               </div>
@@ -196,8 +155,9 @@
 <!-- ============================================================== -->            
 <!-- ============================================================== -->
 <!-- 로그 관리 카드 시작 -->
-            <div class="card">
-                <h5 class="card-header text-center">로그관리</h5>
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <div class="card" style="height: 400px; overflow: scroll;">
+                <h3 class="card-header text-center">로그 관리</h3>
                     <div class="card-body p-0">
                         <div class="row"> 
 
@@ -206,15 +166,19 @@
                                     <tr class="border-0">
 
                                         <td class="border-0">
-                                        </td>
-                                        <td class="border-0 text-center">
-                                             <div class="input-group input-search">
-                                                <input class="form-control" type="text" placeholder="Search "><span class="input-group-btn">
-                                                <button class="btn btn-secondary" type="button"><i class="fas fa-search"></i></button></span>
+                                            <div class="input-group input-search col-10">
+                                                <input id="search_keyword" class="form-control" type="text" placeholder="Search "><span class="input-group-btn">
+                                                <button class="btn btn-secondary" type="button" id="searchBtn"><i class="fas fa-search"></i></button></span>
                                             </div>
                                         </td>
                                         <td class="border-0 text-center">
-                                            <button type="submit"  class="btn btn-space btn-success">점검결과 추출</button> 
+                                             <div class="input-group input-search col-10">
+                                                <input class="form-control" type="text" placeholder="상세 필터링 "><span class="input-group-btn">
+                                                <button class="btn btn-primary" type="button"><i class="fas fa-search"></i></button></span>
+                                            </div>
+                                        </td>
+                                        <td class="border-0 text-center">
+                                            <a href="#" class="col-11 btn btn-outline-danger" data-toggle="modal" data-target="#xccdfModal"> 로그 다운로드 <span class="icon-circle-small icon-box-xs text-danger bg-danger-light bg-danger-light "><i class="fa fa-fw fa-arrow-down"></i></span><span ></span></a>
                                         </td>
 
                                     </tr>
@@ -234,6 +198,18 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <% if (typeof(reason) !='undefined' && reason == 'error'){ %>
+                                    <script>alert("ERROR");</script>
+                                    <% }  %>
+
+                                    <% for(let i = 0 ; i < recordsets[0].length ; i+=1){ %>
+                                    <tr>
+                                        <td class="text-center"><%= recordsets[0][i].LOG_ID %></td>
+                                        <td><h5><%= recordsets[0][i].LOG_TYPE %></h5></td>
+                                        <td class="text-center">높음 </td>
+                                        <td class="text-center">6 </td>
+                                    </tr>
+                                    <!--
                                     <tr>
                                         <td class="text-center">1</td>
                                         <td><h5>각종 로그기록</h5></td>
@@ -246,17 +222,14 @@
                                         <td class="text-center">높음 </td>
                                         <td class="text-center">6 </td>
                                     </tr>
-                                    <tr>
-                                        <td class="text-center">1</td>
-                                        <td><h5>각종 로그기록</h5></td>
-                                        <td class="text-center">높음 </td>
-                                        <td class="text-center">6 </td>
-                                    </tr>
+                                    -->
+                                    <% } %>
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
+            </div>
 <!-- 로그 관리 카드 끝 -->
 <!-- ============================================================== -->
 <!-- ============================================================== -->
@@ -268,7 +241,8 @@
             <!-- footer -->
             <!-- ============================================================== -->
             <div class="footer">
-                <div class="container-fluid">
+                <%include ../../footer.ejs%>
+                <!--<div class="container-fluid">
                     <div class="row">
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
                              Copyright © 2018 Concept. All rights reserved. Dashboard by 중앙대학교
@@ -281,7 +255,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>-->
             </div>
             <!-- ============================================================== -->
             <!-- end footer -->
@@ -296,26 +270,35 @@
     <!-- ============================================================== -->
     <!-- Optional JavaScript -->
     <!-- jquery 3.3.1 -->
-    <script src="assets/vendor/jquery/jquery-3.3.1.min.js"></script>
+    <script src="/assets/vendor/jquery/jquery-3.3.1.min.js"></script>
     <!-- bootstap bundle js -->
-    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
     <!-- slimscroll js -->
-    <script src="assets/vendor/slimscroll/jquery.slimscroll.js"></script>
+    <script src="/assets/vendor/slimscroll/jquery.slimscroll.js"></script>
     <!-- main js -->
-    <script src="assets/libs/js/main-js.js"></script>
+    <script src="/assets/libs/js/main-js.js"></script>
     <!-- chart chartist js -->
-    <script src="assets/vendor/charts/chartist-bundle/chartist.min.js"></script>
+    <script src="/assets/vendor/charts/chartist-bundle/chartist.min.js"></script>
     <!-- sparkline js -->
-    <script src="assets/vendor/charts/sparkline/jquery.sparkline.js"></script>
+    <script src="/assets/vendor/charts/sparkline/jquery.sparkline.js"></script>
     <!-- morris js -->
-    <script src="assets/vendor/charts/morris-bundle/raphael.min.js"></script>
-    <script src="assets/vendor/charts/morris-bundle/morris.js"></script>
+    <script src="/assets/vendor/charts/morris-bundle/raphael.min.js"></script>
+    <script src="/assets/vendor/charts/morris-bundle/morris.js"></script>
     <!-- chart c3 js -->
-    <script src="assets/vendor/charts/c3charts/c3.min.js"></script>
-    <script src="assets/vendor/charts/c3charts/d3-5.4.0.min.js"></script>
-    <script src="assets/vendor/charts/c3charts/C3chartjs.js"></script>
-    <script src="assets/libs/js/dashboard-ecommerce.js"></script>
-
+    <script src="/assets/vendor/charts/c3charts/c3.min.js"></script>
+    <script src="/assets/vendor/charts/c3charts/d3-5.4.0.min.js"></script>
+    <script src="/assets/vendor/charts/c3charts/C3chartjs.js"></script>
+    <script src="/assets/libs/js/dashboard-ecommerce.js"></script>
+    <script>
+        $('#searchBtn').click(() => {
+            location.href = "/log/" + $('#search_keyword').val();
+        });
+        $('#search_keyword').keydown((key) => {
+            if (key.keyCode === 13) {
+                $('#searchBtn').click();
+            }
+        });
+    </script>
  
 </body>
 </html>

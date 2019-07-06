@@ -2,93 +2,15 @@
 <html lang="ko">
  
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css">
-    <link href="assets/vendor/fonts/circular-std/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/libs/css/style.css">
-    <link rel="stylesheet" href="assets/vendor/fonts/fontawesome/css/fontawesome-all.css">
-    <link rel="stylesheet" href="assets/vendor/charts/chartist-bundle/chartist.css">
-    <link rel="stylesheet" href="assets/vendor/charts/morris-bundle/morris.css">
-    <link rel="stylesheet" href="assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="assets/vendor/charts/c3charts/c3.css">
-    <link rel="stylesheet" href="assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
-    <title>국가보안연구소</title>
+    <%include ./head.ejs%>
 </head>
 
 <body>
     
 <div class="dashboard-main-wrapper">
     <div class="dashboard-header">
-        <nav class="navbar navbar-expand-lg bg-white fixed-top">
-            <a class="navbar-brand" href="../dashboard">국가보안연구소</a>
-            <div class="collapse navbar-collapse " id="navbarSupportedContent">
-                
-                <ul class="navbar-nav ml-auto navbar-right-top">
-                    <li class="nav-item">
-                        <a class="nav-link" href="../dashboard"  role="button"  aria-haspopup="true" aria-expanded="false">대쉬보드</a>
-                    </li>
+        <%include ./header.ejs%>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="../agent"  role="button" aria-haspopup="true" aria-expanded="false">에이전트관리</a>    
-                    </li>
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="../group" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">그룹 및 정책관리</a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="../group">기본 정보 </a>
-                            <a class="dropdown-item" href="../newgroup">신규 그룹 생성</a>
-                            <a class="dropdown-item" href="../oldgroup">기존 그룹 관리</a>
-                            </div>  
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="../log" role="button" aria-haspopup="true" aria-expanded="false">평가문항/로그관리</a>
-                    </li>
-
-                    <li class="nav-item dropdown connection">
-                        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 설정 <i class="far fa-sun"></i> </a>
-                        <ul class="dropdown-menu dropdown-menu-right connection-dropdown">
-                            <li class="connection-list">
-                                <div class="row">
-                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                        <a href="#" class="connection-item"><span>CPE</span></a>
-                                    </div>
-                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                        <a href="#" class="connection-item"> <span>CCE</span></a>
-                                    </div>
-                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                        <a href="#" class="connection-item"> <span>OVAL</span></a>
-                                    </div>
-                                    </div>
-                            </li>
-                        </ul>
-                    </li>
-                    
-                    <li class="nav-item dropdown nav-user">
-                        <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">사용자 관리</a>
-                        
-                        <ul class="dropdown-menu dropdown-menu-right connection-dropdown">
-                            <li class="connection-list">
-                                <div class="row">
-                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                        <a href="../login" class="connection-item"><span>로그인</span></a>
-                                    </div>
-                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                        <a href="../login" class="connection-item"> <span>로그아웃</span></a>
-                                    </div>
-                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                        <a href="../changeinfo" class="connection-item"> <span>정보변경</span></a>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                
-                </ul>
-            </div>
-        </nav>
-    </div>
     <!-- ============================================================== -->
     <!-- 헤드 네비게이션 바 종료  -->
     <!-- ============================================================== -->
@@ -117,28 +39,31 @@
                   <div class="ecommerce-widget">
                         <div class="row">
                             <div class="col-xl-7 col-lg-7 col-md-7 col-sm-7 col-7">
-                                <div class="card" style="height: 600px; overflow: scroll;">
-                                    <h4 class="card-header text-center">점검 규정명(정보보안 관리실태평가) / 점검 그룹명(점검일자)</h4>
+                                <div class="card" style="height: 600px; overflow: scroll; margin-bottom: ">
+                                    <h3 class="card-header text-center">점검 규정명(정보보안 관리실태평가) / 점검 그룹명(점검일자)</h3>
                                     <div class="card-body p-0">
-\   
-                    <div class="row">
+   
+                    <div class="row" style="margin-top: 15px; height: 70px;">
                           
-                        <div class="col-xl-3">
+                        <div class="col-3">
                           <label class="custom-control custom-checkbox" style="margin-left: 50px">
                                 <input id="ck1" name="ck1" type="checkbox" class="custom-control-input"><span class="custom-control-label">모두 선택</span>
                             </label>
                         </div>
 
-                            <div class="col-xl-5" style="height: 70px">
+                            <div class="col-4" >
                                 <div class="input-group input-search">
                                     <input class="form-control" type="text" placeholder="Search "><span class="input-group-btn">
                                     <button class="btn btn-secondary" type="button"><i class="fas fa-search"></i></button></span>
                                 </div>
                             </div>
-
-                            <div class="col-xl-4" style="">
-                              <button type="submit" class="btn btn-space btn-primary"> 점겸결과 저장</button> 
+                            <div class="col-1"></div>
+                            <div class="col-4">
+                              <button type="submit" class="btn btn-outline-primary btn-lg"> 점겸결과 저장</button> 
                             </div>
+
+
+
                     </div>
              
 
@@ -262,7 +187,7 @@
                                
                             <div class="col-xl-5 col-lg-5 col-md-5 col-sm-12 col-12">
                             <div class="card" style="height: 600px; overflow:hidden;">
-                                <h5 class="card-header text-center">규정 준수 점검 요약</h5>
+                                <h3 class="card-header text-center">규정 준수 점검 요약</h3>
                                 <div class="card-body">
                                     <h5 class="text-center">Windows 10 (16)</h5>
                                     <div id="account" style="height: 260px; max-height: 300px; position: relative; text-align: center; "><svg width="305.8000183105469" height="300" style="overflow: hidden;"><defs><clipPath id="c3-1556807982926-clip"><rect width="305.8000183105469" height="256"></rect></clipPath><clipPath id="c3-1556807982926-clip-xaxis"><rect x="-31" y="-20" width="367.8000183105469" height="60"></rect></clipPath><clipPath id="c3-1556807982926-clip-yaxis"><rect x="-29" y="-4" width="20" height="280"></rect></clipPath><clipPath id="c3-1556807982926-clip-grid"><rect width="305.8000183105469" height="256"></rect></clipPath><clipPath id="c3-1556807982926-clip-subchart"><rect width="305.8000183105469" height="0"></rect></clipPath></defs><g transform="translate(0.5,4.5)"><text class="c3-text c3-empty" text-anchor="middle" dominant-baseline="middle" x="152.90000915527344" y="128" style="opacity: 0;"></text><g clip-path="url(file:///C:/Users/Sean/Desktop/example/concept/dashboard-finance.html#c3-1556807982926-clip)" class="c3-regions" style="visibility: hidden;"></g><g clip-path="url(file:///C:/Users/Sean/Desktop/example/concept/dashboard-finance.html#c3-1556807982926-clip-grid)" class="c3-grid" style="visibility: hidden;"><g class="c3-xgrid-focus"><line class="c3-xgrid-focus" x1="-10" x2="-10" y1="0" y2="256" style="visibility: hidden;"></line></g></g><g clip-path="url(file:///C:/Users/Sean/Desktop/example/concept/dashboard-finance.html#c3-1556807982926-clip)" class="c3-chart"><g class="c3-chart-bars"><g class="c3-chart-bar c3-target c3-target-30-days" style="pointer-events: none;"><g class=" c3-shapes c3-shapes-30-days c3-bars c3-bars-30-days" style="cursor: pointer;"></g></g><g class="c3-chart-bar c3-target c3-target-60-days" style="pointer-events: none;"><g class=" c3-shapes c3-shapes-60-days c3-bars c3-bars-60-days" style="cursor: pointer;"></g></g><g class="c3-chart-bar c3-target c3-target-90-days" style="pointer-events: none;"><g class=" c3-shapes c3-shapes-90-days c3-bars c3-bars-90-days" style="cursor: pointer;"></g></g><g class="c3-chart-bar c3-target c3-target-90+-Days" style="pointer-events: none;"><g class=" c3-shapes c3-shapes-90+-Days c3-bars c3-bars-90+-Days" style="cursor: pointer;"></g></g></g><g class="c3-chart-lines"><g class="c3-chart-line c3-target c3-target-30-days" style="opacity: 1; pointer-events: none;"><g class=" c3-shapes c3-shapes-30-days c3-lines c3-lines-30-days"></g><g class=" c3-shapes c3-shapes-30-days c3-areas c3-areas-30-days"></g><g class=" c3-selected-circles c3-selected-circles-30-days"></g><g class=" c3-shapes c3-shapes-30-days c3-circles c3-circles-30-days" style="cursor: pointer;"></g></g><g class="c3-chart-line c3-target c3-target-60-days" style="opacity: 1; pointer-events: none;"><g class=" c3-shapes c3-shapes-60-days c3-lines c3-lines-60-days"></g><g class=" c3-shapes c3-shapes-60-days c3-areas c3-areas-60-days"></g><g class=" c3-selected-circles c3-selected-circles-60-days"></g><g class=" c3-shapes c3-shapes-60-days c3-circles c3-circles-60-days" style="cursor: pointer;"></g></g><g class="c3-chart-line c3-target c3-target-90-days" style="opacity: 1; pointer-events: none;"><g class=" c3-shapes c3-shapes-90-days c3-lines c3-lines-90-days"></g><g class=" c3-shapes c3-shapes-90-days c3-areas c3-areas-90-days"></g><g class=" c3-selected-circles c3-selected-circles-90-days"></g><g class=" c3-shapes c3-shapes-90-days c3-circles c3-circles-90-days" style="cursor: pointer;"></g></g><g class="c3-chart-line c3-target c3-target-90+-Days" style="opacity: 1; pointer-events: none;"><g class=" c3-shapes c3-shapes-90+-Days c3-lines c3-lines-90+-Days"></g><g class=" c3-shapes c3-shapes-90+-Days c3-areas c3-areas-90+-Days"></g><g class=" c3-selected-circles c3-selected-circles-90+-Days"></g><g class=" c3-shapes c3-shapes-90+-Days c3-circles c3-circles-90+-Days" style="cursor: pointer;"></g></g></g><g class="c3-chart-arcs" transform="translate(152.90000915527344,123)"><text class="c3-chart-arcs-title" style="text-anchor: middle; opacity: 0;"></text><g class="c3-chart-arc c3-target c3-target-30-days"><g class=" c3-shapes c3-shapes-30-days c3-arcs c3-arcs-30-days"><path class=" c3-shape c3-shape c3-arc c3-arc-30-days" transform="" style="fill: rgb(89, 105, 255); cursor: pointer;" d="M7.154998924018411e-15,-116.85A116.85,116.85,0,0,1,39.9650537476044,109.80308273883338L0,0Z"></path></g></g><g class="c3-chart-arc c3-target c3-target-60-days"><g class=" c3-shapes c3-shapes-60-days c3-arcs c3-arcs-60-days"><path class=" c3-shape c3-shape c3-arc c3-arc-60-days" transform="" style="fill: rgb(255, 64, 123); cursor: pointer;" d="M39.9650537476044,109.80308273883338A116.85,116.85,0,0,1,-111.94107451406487,33.512957742290936L0,0Z"></path></g></g><g class="c3-chart-arc c3-target c3-target-90-days"><g class=" c3-shapes c3-shapes-90-days c3-arcs c3-arcs-90-days"><path class=" c3-shape c3-shape c3-arc c3-arc-90-days" transform="" style="fill: rgb(37, 213, 242); cursor: pointer;" d="M-111.94107451406487,33.512957742290936A116.85,116.85,0,0,1,-75.10973219187214,-89.51229317845257L0,0Z"></path></g>></g><g class="c3-chart-arc c3-target c3-target-90+-Days"><g class=" c3-shapes c3-shapes-90+-Days c3-arcs c3-arcs-90+-Days"><path class=" c3-shape c3-shape c3-arc c3-arc-90+-Days" transform="" style="fill: rgb(255, 199, 80); cursor: pointer;" d="M-75.10973219187214,-89.51229317845257A116.85,116.85,0,0,1,-2.146499677205523e-14,-116.85L0,0Z"></path></g></g></g><g class="c3-chart-texts"><g class="c3-chart-text c3-target c3-target-30-days" style="opacity: 1; pointer-events: none;"><g class=" c3-texts c3-texts-30-days"></g></g><g class="c3-chart-text c3-target c3-target-60-days" style="opacity: 1; pointer-events: none;"><g class=" c3-texts c3-texts-60-days"></g></g><g class="c3-chart-text c3-target c3-target-90-days" style="opacity: 1; pointer-events: none;"><g class=" c3-texts c3-texts-90-days"></g></g><g class="c3-chart-text c3-target c3-target-90+-Days" style="opacity: 1; pointer-events: none;"><g class=" c3-texts c3-texts-90+-Days"></g></g></g><g class="c3-event-rects" style="fill-opacity: 0;"><rect class="c3-event-rect" x="0" y="0" width="305.8000183105469" height="256"></rect></g></g><g clip-path="url(file:///C:/Users/Sean/Desktop/example/concept/dashboard-finance.html#c3-1556807982926-clip-grid)" class="c3-grid c3-grid-lines"><g class="c3-xgrid-lines"></g><g class="c3-ygrid-lines"></g></g><g class="c3-axis c3-axis-x" clip-path="url(file:///C:/Users/Sean/Desktop/example/concept/dashboard-finance.html#c3-1556807982926-clip-xaxis)" transform="translate(0,256)" style="visibility: visible; opacity: 0;"><text class="c3-axis-x-label" transform="" style="text-anchor: end;" x="305.8000183105469" dx="-0.5em" dy="-0.5em"></text><g class="tick" transform="translate(153, 0)" style="opacity: 1;"><line x1="0" x2="0" y2="6"></line><text x="0" y="9" transform="" style="text-anchor: middle; display: block;"><tspan x="0" dy=".71em" dx="0">0</tspan></text></g><path class="domain" d="M0,6V0H305.8000183105469V6"></path></g><g class="c3-axis c3-axis-y" clip-path="url(file:///C:/Users/Sean/Desktop/example/concept/dashboard-finance.html#c3-1556807982926-clip-yaxis)" transform="translate(0,0)" style="visibility: visible; opacity: 0;"><text class="c3-axis-y-label" transform="rotate(-90)" style="text-anchor: end;" x="0" dx="-0.5em" dy="1.2em"></text><g class="tick" transform="translate(0,235)" style="opacity: 1;"><line x2="-6"></line><text x="-9" y="0" style="text-anchor: end;"><tspan x="-9" dy="3">30</tspan></text></g><g class="tick" transform="translate(0,212)" style="opacity: 1;"><line x2="-6"></line><text x="-9" y="0" style="text-anchor: end;"><tspan x="-9" dy="3">40</tspan></text></g><g class="tick" transform="translate(0,188)" style="opacity: 1;"><line x2="-6"></line><text x="-9" y="0" style="text-anchor: end;"><tspan x="-9" dy="3">50</tspan></text></g><g class="tick" transform="translate(0,164)" style="opacity: 1;"><line x2="-6"></line><text x="-9" y="0" style="text-anchor: end;"><tspan x="-9" dy="3">60</tspan></text></g><g class="tick" transform="translate(0,141)" style="opacity: 1;"><line x2="-6"></line><text x="-9" y="0" style="text-anchor: end;"><tspan x="-9" dy="3">70</tspan></text></g><g class="tick" transform="translate(0,117)" style="opacity: 1;"><line x2="-6"></line><text x="-9" y="0" style="text-anchor: end;"><tspan x="-9" dy="3">80</tspan></text></g><g class="tick" transform="translate(0,94)" style="opacity: 1;"><line x2="-6"></line><text x="-9" y="0" style="text-anchor: end;"><tspan x="-9" dy="3">90</tspan></text></g><g class="tick" transform="translate(0,70)" style="opacity: 1;"><line x2="-6"></line><text x="-9" y="0" style="text-anchor: end;"><tspan x="-9" dy="3">100</tspan></text></g><g class="tick" transform="translate(0,46)" style="opacity: 1;"><line x2="-6"></line><text x="-9" y="0" style="text-anchor: end;"><tspan x="-9" dy="3">110</tspan></text></g><g class="tick" transform="translate(0,23)" style="opacity: 1;"><line x2="-6"></line><text x="-9" y="0" style="text-anchor: end;"><tspan x="-9" dy="3">120</tspan></text></g><path class="domain" d="M-6,1H0V256H-6"></path></g><g class="c3-axis c3-axis-y2" transform="translate(305.8000183105469,0)" style="visibility: hidden; opacity: 0;"><text class="c3-axis-y2-label" transform="rotate(-90)" style="text-anchor: end;" x="0" dx="-0.5em" dy="-0.5em"></text><g class="tick" transform="translate(0,256)" style="opacity: 1;"><line x2="6"></line><text x="9" y="0" style="text-anchor: start;"><tspan x="9" dy="3">0</tspan></text></g><g class="tick" transform="translate(0,231)" style="opacity: 1;"><line x2="6"></line><text x="9" y="0" style="text-anchor: start;"><tspan x="9" dy="3">0.1</tspan></text></g><g class="tick" transform="translate(0,205)" style="opacity: 1;"><line x2="6"></line><text x="9" y="0" style="text-anchor: start;"><tspan x="9" dy="3">0.2</tspan></text></g><g class="tick" transform="translate(0,180)" style="opacity: 1;"><line x2="6"></line><text x="9" y="0" style="text-anchor: start;"><tspan x="9" dy="3">0.3</tspan></text></g><g class="tick" transform="translate(0,154)" style="opacity: 1;"><line x2="6"></line><text x="9" y="0" style="text-anchor: start;"><tspan x="9" dy="3">0.4</tspan></text></g><g class="tick" transform="translate(0,129)" style="opacity: 1;"><line x2="6"></line><text x="9" y="0" style="text-anchor: start;"><tspan x="9" dy="3">0.5</tspan></text></g><g class="tick" transform="translate(0,103)" style="opacity: 1;"><line x2="6"></line><text x="9" y="0" style="text-anchor: start;"><tspan x="9" dy="3">0.6</tspan></text></g><g class="tick" transform="translate(0,78)" style="opacity: 1;"><line x2="6"></line><text x="9" y="0" style="text-anchor: start;"><tspan x="9" dy="3">0.7</tspan></text></g><g class="tick" transform="translate(0,52)" style="opacity: 1;"><line x2="6"></line><text x="9" y="0" style="text-anchor: start;"><tspan x="9" dy="3">0.8</tspan></text></g><g class="tick" transform="translate(0,27)" style="opacity: 1;"><line x2="6"></line><text x="9" y="0" style="text-anchor: start;"><tspan x="9" dy="3">0.9</tspan></text></g><g class="tick" transform="translate(0,1)" style="opacity: 1;"><line x2="6"></line><text x="9" y="0" style="text-anchor: start;"><tspan x="9" dy="3">1</tspan></text></g><path class="domain" d="M6,1H0V256H6"></path></g></g><g transform="translate(0.5,300.5)" style="visibility: hidden;"><g clip-path="url(file:///C:/Users/Sean/Desktop/example/concept/dashboard-finance.html#c3-1556807982926-clip-subchart)" class="c3-chart"><g class="c3-chart-bars"></g><g class="c3-chart-lines"></g></g><g clip-path="url(file:///C:/Users/Sean/Desktop/example/concept/dashboard-finance.html#c3-1556807982926-clip)" class="c3-brush" fill="none" pointer-events="all" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><rect class="overlay" pointer-events="all" cursor="crosshair" x="0" y="0" width="305.8000183105469" height="0"></rect><rect class="selection" cursor="move" fill="#777" fill-opacity="0.3" stroke="#fff" shape-rendering="crispEdges" style="display: none;"></rect><rect class="handle handle--e" cursor="ew-resize" style="display: none;"></rect><rect class="handle handle--w" cursor="ew-resize" style="display: none;"></rect></g><g class="c3-axis-x" transform="translate(0,0)" clip-path="url(file:///C:/Users/Sean/Desktop/example/concept/dashboard-finance.html#c3-1556807982926-clip-xaxis)" style="opacity: 0;"><g class="tick" transform="translate(153, 0)" style="opacity: 1;"><line x1="0" x2="0" y2="6"></line><text x="0" y="9" transform="" style="text-anchor: middle; display: block;"><tspan x="0" dy=".71em" dx="0">0</tspan></text></g><path class="domain" d="M0,6V0H305.8000183105469V6"></path></g></g><g transform="translate(0,260)"></svg></div>
@@ -305,7 +230,7 @@
 
                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                 <div class="card" >
-                                    <h5 class="card-header text-center">TOP 10 미준수 점검항목</h5>
+                                    <h3 class="card-header text-center">TOP 10 미준수 점검항목</h3>
                                     <div class="card-body p-0">
                                         <div class="table-responsive">
                                             <table class="table">
@@ -353,7 +278,8 @@
             <!-- footer -->
             <!-- ============================================================== -->
             <div class="footer">
-                <div class="container-fluid">
+                <%include ./footer.ejs%>
+                <!--<div class="container-fluid">
                     <div class="row">
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
                              Copyright © 2018 Concept. All rights reserved. Dashboard by 중앙대학교</a>
@@ -366,7 +292,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>-->
             </div>
             <!-- ============================================================== -->
             <!-- end footer -->

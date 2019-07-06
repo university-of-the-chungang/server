@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+<<<<<<< HEAD
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -17,83 +18,16 @@
     <link rel="stylesheet" href="/assets/vendor/charts/c3charts/c3.css">
     <link rel="stylesheet" href="/assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
     <title>국가보안연구소</title>
+=======
+    <%include ../../head.ejs%>
+>>>>>>> origin/master
 </head>
 
 <body>
     <div class="dashboard-main-wrapper">
         <div class="dashboard-header">
-            <nav class="navbar navbar-expand-lg bg-white fixed-top">
-                <a class="navbar-brand" href="../dashboard">국가보안연구소</a>
-                <div class="collapse navbar-collapse " id="navbarSupportedContent">
+            <%include ../../header.ejs%>
 
-                    <ul class="navbar-nav ml-auto navbar-right-top">
-                        <li class="nav-item">
-                            <a class="nav-link" href="../dashboard" role="button" aria-haspopup="true"
-                                aria-expanded="false">대쉬보드</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="../agent" role="button" aria-haspopup="true"
-                                aria-expanded="false">에이전트관리</a>
-                        </li>
-
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="../group" id="navbarDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">그룹 및 정책관리</a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="../group">기본 정보 </a>
-                                <a class="dropdown-item" href="../newgroup">신규 그룹 생성</a>
-                                <a class="dropdown-item" href="../oldgroup">기존 그룹 관리</a>
-                            </div>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="../log" role="button" aria-haspopup="true"
-                                aria-expanded="false">평가문항/로그관리</a>
-                        </li>
-
-                        <li class="nav-item dropdown connection">
-                            <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false"> 설정 <i class="far fa-sun"></i> </a>
-                            <ul class="dropdown-menu dropdown-menu-right connection-dropdown">
-                                <li class="connection-list">
-                                    <div class="row">
-                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                            <a href="#" class="connection-item"><span>CPE</span></a>
-                                        </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                            <a href="#" class="connection-item"> <span>CCE</span></a>
-                                        </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                            <a href="#" class="connection-item"> <span>OVAL</span></a>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="nav-item dropdown nav-user">
-                            <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">사용자 관리 </a>
-
-                            <ul class="dropdown-menu dropdown-menu-right connection-dropdown">
-                                <li class="connection-list">
-                                    <div class="row">
-                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                            <a href="../logout" class="connection-item"> <span>로그아웃</span></a>
-                                        </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                            <a href="../changeinfo" class="connection-item"> <span>정보변경</span></a>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-
-                    </ul>
-                </div>
-            </nav>
-        </div>
         <!-- ============================================================== -->
         <!-- 헤드 네비게이션 바 종료  -->
         <!-- ============================================================== -->
@@ -157,10 +91,17 @@
 
 
                                             <form class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+<<<<<<< HEAD
                                                 <input type="button"
                                                     class="btn btn-outline-success col-xl-12 col-lg-12 col-md-12 col-sm-12"
                                                     id="changeAgentInfoBtn" data-toggle="modal" style="height: 55px"
                                                     value="정보수정"></button>
+=======
+                                                <input type="button" 
+                                                    class="btn btn-outline-success col-xl-12 col-lg-12 col-md-12 col-sm-12"
+                                                     id="changeAgentInfoBtn"
+                                                    data-toggle="modal" style="height: 55px" value="정보수정"></button>
+>>>>>>> origin/master
 
                                             </form>
 
@@ -247,9 +188,15 @@
                                             <form action="/activate_agent_info" method="POST"
                                                 class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
                                                 <input type="hidden" name="agent_cd" id="agent_cd" value="">
+<<<<<<< HEAD
                                                 <button
                                                     class="btn btn-outline-primary col-xl-12 col-lg-12 col-md-12 col-sm-12"
                                                     id="activateBtn" style="height: 55px">등록</button>
+=======
+                                                <button 
+                                                    class="btn btn-outline-primary col-xl-12 col-lg-12 col-md-12 col-sm-12"
+                                                    id="activateBtn" style="height: 55px" >등록</button>
+>>>>>>> origin/master
                                             </form>
 
                                             <form action="/agent/del_agent_info" method="POST"
@@ -258,7 +205,11 @@
                                                 <input type="hidden" name="sess_name" value="<%= sess_name %>">
                                                 <input type="submit" id="agentDelBtn"
                                                     class="btn btn-outline-secondary btn-lg col-xl-12 col-lg-12 col-md-12 col-sm-12"
+<<<<<<< HEAD
                                                     value="삭제" style="height: 55px">
+=======
+                                                    value="삭제" style="height: 55px">  
+>>>>>>> origin/master
 
                                             </form>
 
@@ -269,6 +220,7 @@
                                         </div>
 
                                         <div class="row col-xl-3 col-lg-3 col-md-3 col-sm-3">
+<<<<<<< HEAD
 
                                             <div class="col-6 "
                                                 style="line-height:30px;display:inline-block; text-align: center; vertical-align: middle;">
@@ -279,6 +231,12 @@
                                                 if(recordsets[0][i].STATE === 'O')
                                                     cnt +=1;
                                                } %> <%= cnt %> )
+=======
+                                            
+                                            <div class="col-6" role="alert" align="text-center">
+                                                <h5>에이전트수(오프라인)</h5>
+                                               <h5 align="text-center">900(20)/<%=recordsets[0].length %></h5>
+>>>>>>> origin/master
                                             </div>
 
                                             <div class="col-3" style="margin-left: 25px ; cursor:pointer;"
@@ -320,19 +278,19 @@
                                                     </td>
                                                     <td style="text-align: center">
                                                         <% if(recordsets[0][i].STATE == 'C'){ %>
-                                                        <div style="background-color: white; border: 3px solid; margin:auto;"
+                                                        <div style="background-color: white; border: 1px solid; margin:auto;"
                                                             class="rounded-circle user-avatar-lg">
                                                             <% } else if(recordsets[0][i].STATE == 'C-2'){ %>
-                                                            <div style="background-color: black; border: 3px solid; margin:auto;"
+                                                            <div style="background-color: black; border: 1px solid; margin:auto;"
                                                                 class="rounded-circle user-avatar-lg">
                                                                 <% } else if(recordsets[0][i].STATE == 'R'){ %>
-                                                                <div style="background-color: skyblue; border: 3px solid; margin:auto;"
+                                                                <div style="background-color: skyblue; border: 1px solid; margin:auto;"
                                                                     class="rounded-circle user-avatar-lg">
                                                                     <% } else if(recordsets[0][i].STATE == 'E'){ %>
-                                                                    <div style="background-color: red; border: 31px solid; margin:auto;"
+                                                                    <div style="background-color: red; border: 1px solid; margin:auto;"
                                                                         class="rounded-circle user-avatar-lg">
                                                                         <% } else { %>
-                                                                        <div style="background-color: yellow; border: 3px solid; margin:auto;"
+                                                                        <div style="background-color: yellow; border: 1px solid; margin:auto;"
                                                                             class="rounded-circle user-avatar-lg">
                                                                             <% } %>
                                                                         </div>
@@ -707,20 +665,7 @@
     <!-- footer -->
     <!-- ============================================================== -->
     <div class="footer">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                    Copyright © 2018 Concept. All rights reserved. Dashboard by 중앙대학교
-                </div>
-                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                    <div class="text-md-right footer-links d-none d-sm-block">
-                        <a href="javascript: void(0);">About</a>
-                        <a href="javascript: void(0);">Support</a>
-                        <a href="javascript: void(0);">Contact Us</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <%include ../../footer.ejs%>
     </div>
     <!-- ============================================================== -->
     <!-- end footer -->
@@ -789,6 +734,7 @@
                 chk_arr.each((idx, elem) => {
                     let id = elem.id;
                     let recordsets = JSON.parse('<%- JSON.stringify(recordsets[0]) %>');
+                    alert(recordsets[id]);
                     arr.push(recordsets[id].AGENT_CD);
                 });
 
