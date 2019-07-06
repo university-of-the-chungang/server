@@ -3,8 +3,11 @@ let xlsx = require("xlsx");
 let fs = require("fs");
 let DB = require('./db');
 let moment = require('moment');
+
+
+
 exports.make_xlsx = (file_name, obj) => {
-    let data = new Array(obj)
+    let data = obj
     let file_path = __dirname + '\\public\\logs\\' + file_name + '.xlsx';
     try {
         if (fs.existsSync(file_path)) {
@@ -17,14 +20,19 @@ exports.make_xlsx = (file_name, obj) => {
             let sheet = xlsx.utils.json_to_sheet(first_data);
             workBook.Sheets[file_name] = sheet;
             xlsx.writeFile(workBook, file_path);
+            console.log(file_path);
             return first_data;
+        }else{
+            let sheet = xlsx.utils.json_to_sheet(data);
+            let workBook = xlsx.utils.book_new();
+            xlsx.utils.book_append_sheet(workBook, sheet, file_name);
+            workBook.Sheets[file_name] = sheet;
+            xlsx.writeFile(workBook, file_path);
+            return file_path;
         }
     } catch (err) {
         console.log(err);
-        let sheet = xlsx.utils.json_to_sheet(data);
-        let workBook = xlsx.utils.book_new();
-        xlsx.utils.book_append_sheet(workBook, sheet, file_name);
-        xlsx.writeFile(workBook, file_path);
+        
         return null;
     }
 };

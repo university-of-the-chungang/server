@@ -236,6 +236,20 @@ router.use('/oval', oval);
 
 
 ///////////////// 테스트용 API ////////////////////
+router.get('/test_test',(req,res,next)=>{
+  let obj = [
+    {
+    이름 : '김선광',
+    학년 : '1학년'
+    },{
+      이름 : '홍길동',
+      학년 : '2학년'
+    }
+  ]
+  LOGS.make_xlsx("test_test",obj);
+  res.redirect('dashboard');
+});
+
 router.post('/test_signin', (req, res, next) => {
   DB.login_admin(req.body['login_name'], req.body['login_pw']).then((result) => {
     if (result === 1) {
