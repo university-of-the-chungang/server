@@ -49,6 +49,9 @@
                             <input class="custom-control-input" type="checkbox"><span class="custom-control-label">기억하기</span>
                         </label>
                     </div>
+                    <% if (typeof(referer) != 'undefined') {%>
+                    <input type="hidden" name="referer" value="<%= referer %>">
+                    <% } %>
                     <input type="submit" class="btn btn-primary btn-lg btn-block" value="로그인">
                 </form>
             </div>
