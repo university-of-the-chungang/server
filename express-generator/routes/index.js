@@ -11,7 +11,14 @@ router.get('/', (req, res, next) => {
   res.render('index', { title: 'Express' });
 });
 router.get('/dashboard', function (req, res, next) {
-  res.render('dashboard');
+  if(req.session.username){
+  DB.get_agent_info().then(result => {
+    result.sess_name = req.session.username;
+    res.render('dashboard', result);
+  });
+}else{
+  res.render('./main/User/login',{referer:'dashboard'});
+}
 });
 
 
@@ -30,7 +37,7 @@ router.post('/signin',(req,res,next)=>{
       req.session.username = data.name;
       LOGS.make_log("USER",req.session.username,"로그인");
       if(data.referer)
-        res.redirect('/agent');
+        res.redirect('/'+data.referer);
         // res.render(data.referer,{sess_name:data.name});
       else
         res.render('./dashboard',{sess_name:data.name});

@@ -3,6 +3,7 @@
  
 <head>
     <%include ./head.ejs%>
+    <link rel="stylesheet" href="/assets/vendor/jquery/datatables.min.css">
 </head>
 
 <body>
@@ -39,27 +40,27 @@
                   <div class="ecommerce-widget">
                         <div class="row">
                             <div class="col-xl-7 col-lg-7 col-md-7 col-sm-7 col-7">
-                                <div class="card" style="height: 600px; overflow: scroll; margin-bottom: ">
+                                <div class="card" style="height: 600px;">
                                     <h3 class="card-header text-center">점검 규정명(정보보안 관리실태평가) / 점검 그룹명(점검일자)</h3>
                                     <div class="card-body p-0">
    
                     <div class="row" style="margin-top: 15px; height: 70px;">
                           
-                        <div class="col-3">
+                        <div class="col-3" style="position:relative; top:55%">
                           <label class="custom-control custom-checkbox" style="margin-left: 50px">
-                                <input id="ck1" name="ck1" type="checkbox" class="custom-control-input"><span class="custom-control-label">모두 선택</span>
+                                <input id="chk_all" name="chk_all" type="checkbox" class="custom-control-input"><span class="custom-control-label">모두 선택</span>
                             </label>
                         </div>
 
-                            <div class="col-4" >
+                            <!-- <div class="col-4" >
                                 <div class="input-group input-search">
                                     <input class="form-control" type="text" placeholder="Search "><span class="input-group-btn">
                                     <button class="btn btn-secondary" type="button"><i class="fas fa-search"></i></button></span>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="col-1"></div>
-                            <div class="col-4">
-                              <button type="submit" class="btn btn-outline-primary btn-lg"> 점겸결과 저장</button> 
+                            <div class="col-4" style="position:relative; left:40%; top:40%">
+                              <button type="submit"  class="btn btn-outline-primary btn-lg"> 점겸결과 저장</button> 
                             </div>
 
 
@@ -69,8 +70,8 @@
 
                                                        
                                                        
-                                        <div class="table-responsive">
-                                            <table class="table">
+                                        <div class="table-responsive" style="margin-top:-50px;">
+                                            <table id="agent_table" class="table">
                                                 <thead class="bg-light">
                                                     <tr class="border-0">
                                                         <th class="border-0 text-center">check</th>
@@ -81,103 +82,46 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td>
-                                                            <label class="custom-control custom-checkbox" style="margin-left: 50px ">
-                                                                <input class="custom-control-input checkboxes text-center" type="checkbox" value="1" id="one"><span class="custom-control-label "></span>
-                                                            </label>
-                                                        </td>
-                                                        <td>
-                                                            <div class="m-r-10 text-center"><img src="assets/images/pass.png" alt="user" class="rounded" width="45"></div>
-                                                        </td>
-                                                        <td class="text-center" >192.168.1.1 </td>
-                                                        <td class="text-center">windows 10 sp3 </td>
-                                                        <td class="text-center">DB 서버</td>
+                                                    <% for(let i = 0 ; i < recordsets[0].length ; i+=1){ %>
+                                                        <tr style="text-align: center">
+                                                            <td style="text-align:center; vertical-align: middle;"><label
+                                                                    class="custom-control custom-checkbox"><input
+                                                                        type="checkbox" id='<%=i %>'
+                                                                        class="custom-control-input chkbox"><span
+                                                                        class="custom-control-label"
+                                                                        style="position: absolute;left:40%; top:0"></span></label>
+                                                            </td>
+                                                            <td style="text-align: center">
+                                                                <!-- <% if(recordsets[0][i].STATE == 'C'){ %>
+                                                                <div style="background-color: white; border: 1px solid; margin:auto;"
+                                                                    class="rounded-circle user-avatar-lg">
+                                                                    <% } else if(recordsets[0][i].STATE == 'C-2'){ %>
+                                                                    <div style="background-color: black; border: 1px solid; margin:auto;"
+                                                                        class="rounded-circle user-avatar-lg">
+                                                                        <% } else if(recordsets[0][i].STATE == 'R'){ %>
+                                                                        <div style="background-color: skyblue; border: 1px solid; margin:auto;"
+                                                                            class="rounded-circle user-avatar-lg">
+                                                                            <% } else if(recordsets[0][i].STATE == 'E'){ %>
+                                                                            <div style="background-color: red; border: 1px solid; margin:auto;"
+                                                                                class="rounded-circle user-avatar-lg">
+                                                                                <% } else { %>
+                                                                                <div style="background-color: yellow; border: 1px solid; margin:auto;"
+                                                                                    class="rounded-circle user-avatar-lg">
+                                                                                    <% } %>
+                                                                                </div> -->
+                                                            </td>
+                                                            <!-- 여기에 STATE 값 별로 그림 이미지좀 출력해줘 -->
+                                                            <!-- 이미지는 public/assets/images 에 넣어놓을꼐-->
+                                                            <!-- 흰색/검은색/파란색/빨간색/주황색 존재 PPT  4page참고
                                                         
-                                                    </tr>
-
-                                                    <tr>
-                                                        
-                                                        <td>
-                                                            <label class="custom-control custom-checkbox" style="margin-left: 50px">
-                                                                <input class="custom-control-input checkboxes" type="checkbox" value="1" id="one"><span class="custom-control-label"></span>
-                                                            </label>
-                                                        </td>    
-
-                                                        <td>
-                                                            <div class="m-r-10 text-center"><img src="assets/images/pass.png" alt="user" class="rounded" width="45"></div>
-                                                        </td>
-                                                        <td class="text-center" >192.168.1.1 </td>
-                                                        <td class="text-center">windows 10 sp3 </td>
-                                                        <td class="text-center">DB 서버</td>
-                                                        
-                                                        
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td>
-                                                            <label class="custom-control custom-checkbox" style="margin-left: 50px">
-                                                                <input class="custom-control-input checkboxes" type="checkbox" value="1" id="one"><span class="custom-control-label"></span>
-                                                            </label>
-                                                        </td>
-                                                        <td>
-                                                            <div class="m-r-10 text-center"><img src="assets/images/pass.png" alt="user" class="rounded" width="45"></div>
-                                                        </td>
-                                                        <td class="text-center" >192.168.1.1 </td>
-                                                        <td class="text-center">windows 10 sp3 </td>
-                                                        <td class="text-center">DB 서버</td>
-                                                        
-                                                        
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td>
-                                                            <label class="custom-control custom-checkbox" style="margin-left: 50px">
-                                                                <input class="custom-control-input checkboxes" type="checkbox" value="1" id="one"><span class="custom-control-label"></span>
-                                                            </label>
-                                                        </td>
-                                                        <td>
-                                                            <div class="m-r-10 text-center"><img src="assets/images/fail.png" alt="user" class="rounded" width="45"></div>
-                                                        </td>
-                                                        <td class="text-center" >192.168.1.1 </td>
-                                                        <td class="text-center">windows 10 sp3 </td>
-                                                        <td class="text-center">DB 서버</td>
-                                                        
-                                                        
-                                                    </tr>
-
-                                                     <tr>
-                                                        <td>
-                                                            <label class="custom-control custom-checkbox" style="margin-left: 50px">
-                                                                <input class="custom-control-input checkboxes" type="checkbox" value="1" id="one"><span class="custom-control-label"></span>
-                                                            </label>
-                                                        </td>
-                                                        <td>
-                                                            <div class="m-r-10 text-center"><img src="assets/images/fail.png" alt="user" class="rounded" width="45"></div>
-                                                        </td>
-                                                        <td class="text-center" >192.168.1.1 </td>
-                                                        <td class="text-center">windows 10 sp3 </td>
-                                                        <td class="text-center">DB 서버</td>
-                                                        
-                                                        
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <label class="custom-control custom-checkbox" style="margin-left: 50px">
-                                                                <input class="custom-control-input checkboxes" type="checkbox" value="1" id="one"><span class="custom-control-label"></span>
-                                                            </label>
-                                                        </td>
-                                                        <td>
-                                                            <div class="m-r-10 text-center"><img src="assets/images/fail.png" alt="user" class="rounded" width="45"></div>
-                                                        </td>
-                                                        <td class="text-center" >192.168.1.1 </td>
-                                                        <td class="text-center">windows 10 sp3 </td>
-                                                        <td class="text-center">DB 서버</td>
-                                                        
-                                                    </tr>   
-                                                    <tr>
-                                                        
-                                                    </tr>
+                                                            <img src="../assets/images/avatar-2.jpg" alt="User Avatar" class="rounded-circle user-avatar-lg">
+                                                            
+                                                             -->
+                                                            <td><%= recordsets[0][i].IP %></td>
+                                                            <td><%= recordsets[0][i].OS %></td>
+                                                            <td><%= recordsets[0][i].PURPOSE %></td>
+                                                        </tr>
+                                                        <% } %>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -307,25 +251,63 @@
     <!-- ============================================================== -->
     <!-- Optional JavaScript -->
     <!-- jquery 3.3.1 -->
-    <script src="assets/vendor/jquery/jquery-3.3.1.min.js"></script>
+    <script src="/assets/vendor/jquery/jquery-3.3.1.min.js"></script>
     <!-- bootstap bundle js -->
-    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
     <!-- slimscroll js -->
-    <script src="assets/vendor/slimscroll/jquery.slimscroll.js"></script>
+    <script src="/assets/vendor/slimscroll/jquery.slimscroll.js"></script>
     <!-- main js -->
-    <script src="assets/libs/js/main-js.js"></script>
+    <script src="/assets/libs/js/main-js.js"></script>
     <!-- chart chartist js -->
-    <script src="assets/vendor/charts/chartist-bundle/chartist.min.js"></script>
+    <script src="/assets/vendor/charts/chartist-bundle/chartist.min.js"></script>
     <!-- sparkline js -->
-    <script src="assets/vendor/charts/sparkline/jquery.sparkline.js"></script>
+    <script src="/assets/vendor/charts/sparkline/jquery.sparkline.js"></script>
     <!-- morris js -->
-    <script src="assets/vendor/charts/morris-bundle/raphael.min.js"></script>
-    <script src="assets/vendor/charts/morris-bundle/morris.js"></script>
+    <script src="/assets/vendor/charts/morris-bundle/raphael.min.js"></script>
     <!-- chart c3 js -->
-    <script src="assets/vendor/charts/c3charts/c3.min.js"></script>
-    <script src="assets/vendor/charts/c3charts/d3-5.4.0.min.js"></script>
-    <script src="assets/vendor/charts/c3charts/C3chartjs.js"></script>
-    <script src="assets/libs/js/dashboard-ecommerce.js"></script>
+    <script src="/assets/vendor/charts/c3charts/c3.min.js"></script>
+    <script src="/assets/vendor/charts/c3charts/d3-5.4.0.min.js"></script>
+    <script src="/assets/vendor/charts/c3charts/C3chartjs.js"></script>
+    <script src="/assets/vendor/charts/morris-bundle/morris.js"></script>
+    <script src="/assets/vendor/jquery/datatables.min.js"></script>
+    <!-- <script src="/assets/libs/js/dashboard-ecommerce.js"></script> -->
+    <style>
+            div.dataTables_info {
+                position: absolute
+            }
+
+            .dataTables_wrapper .dataTables_filter {
+                width:100%;
+                text-align: center;
+                margin-bottom:20px;
+                line-height:40px;
+            }
+            div.dataTables_wrapper div.dataTables_paginate {
+                float: none;
+                text-align: center
+            }
+        </style>
+<script>
+$('#agent_table').DataTable({
+            lengthChange: false,
+            info: false,
+            searching: true,
+            scrollY: 320,
+            language:{
+                search : "",
+                searchPlaceholder : "Search..."
+            }
+        });
+        $('#chk_all').click(() => {
+            let chk = $('#chk_all').is(":checked");//.attr('checked');
+            if (chk) $(".chkbox").prop('checked', true);
+            else $(".chkbox").prop('checked', false);
+        });
+</script>
+
 </body>
- 
+
+
+
+
 </html>
