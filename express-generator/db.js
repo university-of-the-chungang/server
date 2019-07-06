@@ -10,7 +10,7 @@ let config = {
     // 해당 설정 부분은 설정파일 생기면 그리 옮길것 
     "user": "developer", //default is sa
     "password": "ang0511",
-    "server": "localhost", // for local machine
+    "server": "52.231.155.141", // for local machine
     "port": 1444,
     "database": "nsrang", // name of database
     "options": {
@@ -361,4 +361,36 @@ exports.total_group_info = () =>{
             resolve(result);
         });
     });
-}
+};
+
+//그룹 수정 페이지 정보 띄우기
+exports.view_modify_group_info = (group_name) => {
+    return new Promise((resolve, reject) => {
+        let query = `Select TBL_AGENT_INFO.IP
+From  (TBL_GROUP_SET_LIST inner join TBL_AGENT_INFO on TBL_GROUP_SET_LIST.AGENT_CD = TBL_AGENT_INFO.AGENT_CD) 
+inner join TBL_GROUP_INFO On TBL_GROUP_INFO.GROUP_SET_CD = TBL_GROUP_SET_LIST.GROUP_SET_CD
+Where TBL_GROUP_INFO.NAME LIKE '${group_name}%'` ;
+        new sql.Request().query(query, (err, result) => {
+            if(err){
+                reject(err);
+            }
+            resolve(result);
+        });
+    });
+};
+
+exports.view_modify_group_os_info = (group_name) => {
+    return new Promise((resolve, reject) => {
+        let query = `Select TBL_AGENT_INFO.OS
+From  (TBL_GROUP_SET_LIST inner join TBL_AGENT_INFO on TBL_GROUP_SET_LIST.AGENT_CD = TBL_AGENT_INFO.AGENT_CD) 
+inner join TBL_GROUP_INFO On TBL_GROUP_INFO.GROUP_SET_CD = TBL_GROUP_SET_LIST.GROUP_SET_CD
+Where TBL_GROUP_INFO.NAME LIKE '${group_name}%'` ;
+        console.log(query);
+        new sql.Request().query(query, (err, result) => {
+            if(err){
+                reject(err);
+            }
+            resolve(result);
+        });
+    });
+};
