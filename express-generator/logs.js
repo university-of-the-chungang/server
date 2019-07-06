@@ -62,11 +62,15 @@ exports.read_xlsx = (file_path) => {
             console.log(elem['IP']);
             console.log(elem['용도']);
             console.log(elem['소유자']);
-            DB.add_agent_info_from_xlsx(elem['IP'], elem['용도'], elem['소유자']).then(result => {
-                console.log(result);
-            }).catch(err => {
-                console.log(err);
-            });
+            if (typeof (elem['IP']) != 'undefined' && typeof (elem['용도']) != 'undefined' && typeof (elem['소유자']) != 'undefined') {
+                DB.add_agent_info_from_xlsx(elem['IP'], elem['용도'], elem['소유자']).then(result => {
+                    console.log(result);
+                }).catch(err => {
+                    console.log(err);
+                });
+            }else{
+                reject(false);
+            }
         });
         resolve(true);
     }
@@ -75,7 +79,7 @@ exports.read_xlsx = (file_path) => {
     )
 };
 
-exports.make_log = (log_type,sess_name,act)=>{
-    let now =  moment().format('YYYY-MM-DD HH:mm:ss');
-    DB.add_log(log_type,`${sess_name} 가 ${act}을(를) 하였음`, now);
+exports.make_log = (log_type, sess_name, act) => {
+    let now = moment().format('YYYY-MM-DD HH:mm:ss');
+    DB.add_log(log_type, `${sess_name} 가 ${act}을(를) 하였음`, now);
 };

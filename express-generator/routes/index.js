@@ -29,7 +29,11 @@ router.post('/signin',(req,res,next)=>{
     if(result === 1){
       req.session.username = data.name;
       LOGS.make_log("USER",req.session.username,"로그인");
-      res.render('./dashboard');
+      if(data.referer)
+        res.redirect('/agent');
+        // res.render(data.referer,{sess_name:data.name});
+      else
+        res.render('./dashboard',{sess_name:data.name});
     }else{
       req.session.username = null;
       res.render('./main/User/login');
@@ -68,14 +72,17 @@ router.get('/changeinfo', function (req, res, next) {
 
 // User 기능과 관련된 페이지 끝
 router.get('/agent', function (req, res, next) {
-  console.log(req.session.username);
+  let body = req.query; 
   if(req.session.username){
   DB.get_agent_info().then(result => {
     result.sess_name = req.session.username;
+    if (typeof(body.err_msg) !="undefined"){
+      result.reason = body.err_msg;
+    }
     res.render('./main/Agent/agent', result);
   });
 }else{
-  res.render('./main/User/login');
+  res.render('./main/User/login',{referer:'./main/Agent/agent'});
 }
 });// 에이전트 페이지
 router.get('/agent/:keyword', (req, res, next) => {
@@ -128,6 +135,7 @@ router.post('/add_manual_agent', (req, res, next) => {
       
       LOGS.make_log("AGENT",req.session.username,"에이전트 등록");
       DB.get_agent_info().then(result2 => {
+        result2.sess_name = req.session.username;
         res.render('./main/Agent/agent', result2);
       });
     });
@@ -178,16 +186,19 @@ router.post('/make_xlsx',function(req,res,next){
 });
 let upload = multer({dest:'public/uploads/'})
 router.post('/agent/upload_xlsx',upload.single('xlsx_file'),(req,res,next)=>{
+  try{
   LOGS.read_xlsx(req.file.path).then(result=>{
-    
-    DB.get_agent_info().then(result2 => {
-      LOGS.make_log("AGENT",req.session.username,"엑셀등록");
-      result2.sess_name = req.session.username;
-      res.render('./main/Agent/agent', result2);
-    });
+    LOGS.make_log("AGENT",req.session.username,"엑셀등록");
+    res.redirect('/agent');
   }).catch(err=>{
     console.log(err);
+    
+    res.redirect('/agent?err_msg=엑셀 파일이 올바르지 않습니다.');
   });
+}catch(e){
+  console.log(e);
+  res.redirect('/agent?err_msg=error');
+}
 });
 router.post('/agent/refresh_xlsx',upload.single('xlsx_file'),(req,res,next)=>{
   LOGS.refresh_xlsx(req.file.path).then(result=>{
@@ -210,6 +221,11 @@ router.use('/group', group);
 router.use('/oldgroup', oldgroup);
 router.use('/newgroup', newgroup);
 
+// 정책
+const oval = require('./policy/oval');
+const uploads = require('./')
+
+router.use('/oval', oval);
 
 
 ///////////////// 테스트용 API ////////////////////

@@ -118,11 +118,11 @@ exports.get_agent_info = (agent_cd = null) => {
     }
     return new Promise((resolve, reject) => {
         new sql.Request().query(`SELECT * FROM TBL_AGENT_INFO` + sql_adder, (err, result) => {
-            console.log(`SELECT * FROM TBL_AGENT_INFO` + sql_adder);
+            // console.log(`SELECT * FROM TBL_AGENT_INFO` + sql_adder);
             if (err) {
                 print(err);
             }
-            console.log(result);
+            // console.log(result);
             resolve(result);
         });
     });
