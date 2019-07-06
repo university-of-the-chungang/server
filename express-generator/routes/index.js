@@ -89,7 +89,7 @@ router.get('/agent', function (req, res, next) {
     res.render('./main/Agent/agent', result);
   });
 }else{
-  res.render('./main/User/login',{referer:'./main/Agent/agent'});
+  res.render('./main/User/login',{referer:'agent'});
 }
 });// 에이전트 페이지
 router.get('/agent/:keyword', (req, res, next) => {
