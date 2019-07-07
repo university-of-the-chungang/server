@@ -106,7 +106,11 @@
                                                 <option value="finish">매 월 말일</option>
                                             </select>
 
-                                            <!--<a type="date" id="datepicker" class="col-3 btn btn-outline-brand" style="margin-left: 5px; text-align: center;"><h5 style="margin-top: 7px;">적용</h5></a> -->
+                                           <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+                                <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                                    <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
+                                </div>
+                                        </div>
                                             </div>
                                         </div>   
                                     </div>               
@@ -214,21 +218,46 @@
 
                         </div><!--그룹정보 카드 끝-->
 
-                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>   <!-- 더미 div-->
+                          <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+                                    
 
-                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"> <!-- 버튼 시작-->
-                               
-                               <button type="button" class="btn btn-outline-light" data-method="move" data-option="10" data-second-option="0" title="Move Right" style=" width: 130px; height: 90px; margin-top: 100px;">
+                        <div class="row col-12"> <!-- 버튼 시작-->
+                             
+                            
+                        <div class="col-4"></div>
+
+                        <div class="col-6">
+                            <button type="button" class="btn btn-outline-light" data-method="move" data-option="10" data-second-option="0" title="Move Right" style=" width: 130px; height: 90px; margin-top: 35px;">
 
                                 <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="" data-original-title="$().cropper(&quot;move&quot;, 10, 0)">
                                  <span class="fa fa-arrow-right"></span>
                                 </span>
                             </button>
+                        </div>
+                         
+
+                        <div class="col-2"></div>   
+                        
                         </div><!-- 버튼 끝-->
 
-                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div><!-- 더미 div-->
+
+                        <div class="row col-12"> <!-- 버튼 시작-->
                         
-                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3"><!-- 할당된 에이전트 부분-->
+                            <div class="col-4"></div>
+                        <div class="col-6">                               
+                            <button type="button" class="btn btn-outline-light" data-method="move" data-option="10" data-second-option="0" title="Move Right" style=" width: 130px; height: 90px; margin-top: 50px;">
+
+                                <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="" data-original-title="$().cropper(&quot;move&quot;, 10, 0)">
+                                 <span class="fa fa-arrow-left"></span>
+                                </span>
+                            </button>
+                        </div>
+                        <div class="col-2"></div>
+                        </div><!-- 버튼 끝-->
+                        
+                    </div>   <!-- 더미 div-->
+
+                        <div class="col-3"><!-- 할당된 에이전트 부분-->
                                 <div class="card" style="height: 300px; overflow:scroll; ">
                                     <h5 class="card-header text-center">할당된 에이전트</h5>
                                       <div class="table-responsive">
@@ -257,51 +286,13 @@
                                 <div class="row">
                                     <div class="col-2"></div>
 
-                                    <div class="col-4" style="margin-right: 10px">
+                                    <div class="col-4">
                                         <div class="metric-label d-inline-block float-right text-success font-weight-bold">
-                                        <a href="#" class="btn btn-outline-dark" data-toggle="modal" data-target="#directmodal"> 직접 작성 <span class="icon-circle-small icon-box-xs"><i class="fas fa-edit"></i></span></a>
+                                        <a href="#" class="btn btn-outline-dark" data-toggle="modal" data-target="#ipdirectmodal"> 직접 작성 <span class="icon-circle-small icon-box-xs"><i class="fas fa-edit"></i></span></a>
                                         </div>
                                     </div>
                                     
-                                    <!-- 직접쓰기  모달 시작-->
-                                     <div class="modal fade" id="directmodal" tabindex="-1" role="dialog"
-                                            aria-labelledby="exampleModalLabel" aria-hidden="true"
-                                            style="display: none;">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="directmodal">에이전트 직접 할당</h5>
-                                                        <a href="#" class="close" data-dismiss="modal"
-                                                            aria-label="Close">
-                                                            <span aria-hidden="true">×</span>
-                                                        </a>
-                                                    </div>
-
-
-                                                    <form action="" method="POST">
-                                                        <div class="modal-body">
-
-                                                         <div class="form-group">
-                                                                <label for="inputText1"
-                                                                    class="col-form-label">IP</label>
-                                                                <input name="txtIP" type="text" class="form-control">
-                                                            </div>
-                                                                
-                                                        
-
-
-                                                        </div>
-
-                                                        <div class="modal-footer">
-                                                            <a href="#" class="btn btn-secondary"
-                                                                data-dismiss="modal">닫기</a>
-                                                            <a href="#" class="btn btn-primary" type="submit">할당</a>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- 직접 쓰기 모달 끝-->
+                                
                                     <div class="col-4">
                                         <div class="metric-label d-inline-block float-right text-success font-weight-bold">
                                                 <a href="#" class="btn btn-outline-success" data-toggle="modal" data-target="#csvModal"> 파일 업로드 <span class="icon-circle-small icon-box-xs text-success bg-success-light"><i class="fa fa-fw fa-arrow-up"></i></span><span class="ml-1"></span></a>     
@@ -309,51 +300,6 @@
                                     </div>
 
 
-                                        <!-- 파일 업로드 모달-->
-                                     <div class="modal fade" id="csvModal" tabindex="-1" role="dialog"
-                                            aria-labelledby="exampleModalLabel" aria-hidden="true"
-                                            style="display: none;">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-
-
-                                                        <h5 class="modal-title" id="csvModal">파일 업로드</h5>
-                                                        <a href="#" class="close" data-dismiss="modal"
-                                                            aria-label="Close">
-                                                            <span aria-hidden="true">×</span>
-                                                        </a>
-                                                    </div>
-
-                                                     
-
-                                                    <form action="" method="POST">
-                                                        <div class="modal-body">
-
-                                                            <div class="form-group">
-                                                                <label for="inputText1"
-                                                                    class="col-form-label">파일 경로</label>
-                                                                <input name="txtIP" type="text" class="form-control">
-                                                            </div>
-
-                                                            <label class="col-12 btn btn-outline-success btn-lg">
-                                                             파일 첨부하기<input type="file" style="display: none;">
-                                                            </label>
-
-                                                        </div>
-
-                                                        <div class="modal-footer">
-                                                            <a href="#" class="btn btn-secondary"
-                                                                data-dismiss="modal">닫기</a>
-                                                            <a href="#" class="btn btn-primary" type="submit">변경 저장</a>
-                                                        </div>
-
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- 파일업로드 모달 끝-->
-                                   
                                 </div>
                              </div>
                         </div>
@@ -465,8 +411,8 @@
 
                                 </div>
                                 
-                                <!-- 운영체제 버전에 대한 div 끝이면서 운영체제 별 정책 할당 결과 div시작-->
-                                <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-5">
+                                   <!-- 운영체제 버전에 대한 div 끝이면서 운영체제 별 정책 할당 결과 div시작-->
+                                                               <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-5">
                                     <div class="card" style="height: 500px; overflow: scroll;">
                                     <h4 class="card-header text-center">운영체제 별 정책 할당 결과</h4>
                                       <div class="card-body p-0">
@@ -476,19 +422,19 @@
                                         <tbody>
                                             <tr>
                                                 <th scope="row">1</th>
-                                                <td>색깔</td>
+                                                <td><img src="assets/circle/grey.png" alt="User Avatar" class="rounded-circle user-avatar-lg"></td>
                                                 <td>Windows 10</td>
                                                 <td>Windows 10 bench mark</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">2</th>
-                                                <td>색깔</td>
+                                                <td><img src="assets/circle/blue.png" alt="User Avatar" class="rounded-circle user-avatar-lg"></td>
                                                 <td>Windows 10</td>
                                                 <td>Windows 10 bench mark</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">3</th>
-                                                <td>색깔</td>
+                                                <td><img src="assets/circle/blue.png" alt="User Avatar" class="rounded-circle user-avatar-lg"></td>
                                                 <td>Windows 10</td>
                                                 <td>Windows 10 bench mark</td>
                                             </tr>
@@ -499,25 +445,27 @@
                                     </div>
                                 </div>
 
-
                                  
                         <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-                                    <div class="card " overflow="scroll" style="height: 500px;">
-                                    <div class="card-header">
-                                    README
-                                    </div>
-                                    <div class="card-body">
-                                        <p class="card-text"> 파란색은 ~~~~ 의미입니다. </p>
-                                        <p class="card-text"> 빨간색은 ~~~의미 입니다. </p>
-                                        <p class="card-text"> 노란색은 ~~~의미입니다.</p>
-                                    </div>
-                                    <div class="card-footer p-0 text-center">
-                                        <div class="card-footer-item card-footer-item-bordered">
-                                            <a href="#" class="card-link"> 설명서 다운로드 </a>
-                                        </div>
+                            <div class="card " overflow="scroll" style="height: 500px;">
+                            <div class="card-header">README</div>
+                            <div class="card-body">
+
+                                <h3> ①  정책적용이 끝난 의미</h3>
+                                <p class="card-text"> - 파랑색 원은 windows7sp3에 대한 정책적용이 완료</p>
+                                <p class="card-text"> - 회색인 경우 정책적용 필요</p>
+
+                                <h3> ② 운영체제별 정책 할당 결과</h3>
+                            
+                                <p class="card-text"> - 파랑색의 결과는 window7sp3에 대한 정책 할당의 결과</p>       
+                            </div>
+                                <div class="card-footer p-0 text-center">
+                                    <div class="card-footer-item card-footer-item-bordered">
+                                        <a href="#" class="card-link"></a>
                                     </div>
                                 </div>
-                                </div>
+                            </div>
+                        </div>
 
                             <div class="col-9" style="margin-top: 3px;">
                                 <a href="#" class="col-12 btn btn-warning btn-lg" data-toggle="modal" data-target="#xccdfModal"> 정책 다운로드 확인 </a>
@@ -651,6 +599,89 @@
             <!-- ============================================================== -->
     </div>
     
+
+<!-- 직접 입력 모달 시작 -->
+<div class="modal" id="ipdirectmodal" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">에이전트 수동 입력</h5>
+                <a href="#" class="close" data-dismiss="modal"
+                    aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </a>
+            </div>
+
+
+            <form action="/add_manual_group" method="POST">
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="inputText1"
+                            class="col-form-label">IP</label>
+                        <input name="txtIP" type="text" class="form-control">
+                    </div>
+
+                    
+                </div>
+
+                <input type="hidden" name="sess_name" value="">
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-secondary"
+                        data-dismiss="modal">닫기</a>
+                    <button class="btn btn-primary" type="submit">변경 저장</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div><!-- 직접입력 모달 끝 -->
+
+<!-- 파일 업로드 모달 시작-->
+<div class="modal" id="csvModal" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true"
+    style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+
+                <h5 class="modal-title" id="csvModal">파일 업로드</h5>
+                <a href="#" class="close" data-dismiss="modal"
+                    aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </a>
+            </div>
+
+             
+
+            <form action="" method="POST">
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="inputText1"
+                            class="col-form-label">파일 경로</label>
+                        <input name="txtIP" type="text" class="form-control">
+                    </div>
+
+                    <label class="col-12 btn btn-outline-success btn-lg">
+                     파일 첨부하기<input type="file" style="display: none;">
+                    </label>
+
+                </div>
+
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-secondary"
+                        data-dismiss="modal">닫기</a>
+                    <a href="#" class="btn btn-primary" type="submit">변경 저장</a>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+<!-- 파일업로드 모달 끝-->
+
     <!-- jquery 3.3.1 -->
     <script src="assets/vendor/jquery/jquery-3.3.1.min.js"></script>
     <!-- bootstap bundle js -->
@@ -659,11 +690,9 @@
     <script src="assets/vendor/slimscroll/jquery.slimscroll.js"></script>
     <!-- main js -->
     <script src="assets/libs/js/main-js.js"></script>
-    <script src="../assets/vendor/full-calendar/js/calendar.js"></script>
-    <script src="../assets/vendor/full-calendar/js/jquery-ui.min.js"></script>
-    <script src="../assets/vendor/full-calendar/js/fullcalendar.js"></script>
-    <script src="../assets/vendor/full-calendar/js/moment.min.js"></script>
+    <script src="/assets/vendor/datepicker/moment.js"></script>
+    <script src="/assets/vendor/datepicker/tempusdominus-bootstrap-4.js"></script>
+    <script src="/assets/vendor/datepicker/datepicker.js"></script>
 
-    
 </body>
 </html>
