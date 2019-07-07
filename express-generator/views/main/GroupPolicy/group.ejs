@@ -118,24 +118,19 @@
                 <!-- 안에 테이블 시작 -->
                 <!-- ============================================================== -->
                 <div class="row">
-                    <div class="col-md-12">
-                        <div class="panel panel-default panel-table">
-                            <!-- ============================================================== -->
-                            <!--  판넬 헤딩(수정(내용조회,삭제 들어가는 부분)) -->
-                            <!-- ============================================================== -->
-                            <div class="panel-heading">
-                                <div class="row">
-
-                                    <div class="col-xl-1" style="height: 70px"> <!-- check box left side-->
-                                        <form>
-                                            <label class="custom-control custom-checkbox">
+                    <div class="col-12">
+                        <div class="row" style="margin-top: 20px">
+                            <div class="col-1"> <!-- check box left side-->
+                                <form>
+                                    <label class="custom-control custom-checkbox custom-control-inline">
                                                 <input type="checkbox" id="checkall" onclick="test()" class="custom-control-input"><span class="custom-control-label">모두 선택</span>
-                                            </label>
-                                        </form>
-                                       
-                                    </div>
+                                    </label>
+                                    
+                                </form>
+                               
+                            </div>
 
-                                    <div class="col-xl-3" style="height: 70px">
+                                    <div class="col-2" style="height: 70px">
                                         <div class="input-group input-search">
                                             <input class="form-control" type="text" placeholder="Search "><span class="input-group-btn">
                                             <button class="btn btn-secondary" type="button"><i class="fas fa-search"></i></button></span>
@@ -143,22 +138,21 @@
                                     </div>
 
 
-                                    <div class="col-7 text-right">
+                                    <div class="col-9">
                                         <div class="pull-right">
                                             <div class="row">
-                                                <form action="/oldgroup" method = "POST"
-                                                      class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+                                                <form action="/oldgroup" method = "POST">
                                                     <input type="hidden" name="change_group_NAME" id="change_group_NAME" value="">
                                                     <input type="submit" id="GroupChangeBtn"
-                                                           class="btn btn-success btn-lg"
-                                                           value = "수정" style="height: 55px">
+                                                           class="btn btn-outline-success btn-lg"
+                                                           value = "수정" style="width: 150px;">
                                                 </form>
                                                 <form action="/group/del_group_info" method = "POST"
-                                                      class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+                                                      class="col-6">
                                                     <input type="hidden" name="del_group_set_cd" id="del_group_set_cd" value="">
                                                     <input type="submit" id="groupDelBtn"
-                                                           class="btn btn-warning btn-lg"
-                                                           value="삭제" style="height: 55px">
+                                                           class="btn btn-outline-warning btn-lg"
+                                                           value="삭제" style="width: 150px; margin-right: 30px;">
                                                 <!--<button type="submit" name="c_option" value="delete" class="btn btn-warning btn-lg" data-target="pending">
                                                     삭제
                                                 </button> -->
@@ -166,8 +160,10 @@
                                             </div>
                                         </div>
                                     </div>
+
+
                                 </div>
-                            </div>
+                            
                             <!-- ============================================================== -->
                             <!--  판넬 바디 시작(그룹명 정책명 이런거 들어가는거) -->
                             <!-- ============================================================== -->
@@ -217,12 +213,8 @@
                                     <%}%>
                             </div>
 
-                    <!-- 패널 푸터 시작-->       
-
-                            
-                    <!-- 패널 푸터 끝-->
-
-                        </div>
+                  
+                        
                     </div>
                 </div>
                 <!-- 테이블 끝-->
@@ -284,10 +276,7 @@
     <!-- ============================================================== -->
     <!-- Optional JavaScript -->
     <!-- jquery 3.3.1 -->
-    <script src="assets/vendor/full-calendar/js/calendar.js"></script>
-    <script src="assets/vendor/full-calendar/js/jquery-ui.min.js"></script>
-    <script src="assets/vendor/full-calendar/js/fullcalendar.js"></script>
-    <script src="assets/vendor/full-calendar/js/moment.min.js"></script>
+    
     <script src="assets/vendor/jquery/jquery-3.3.1.min.js"></script>
     <!-- bootstap bundle js -->
     <script src="assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
@@ -296,19 +285,11 @@
     <!-- main js -->
     <script src="assets/libs/js/main-js.js"></script>
     <!-- chart chartist js -->
-    <script src="assets/vendor/charts/chartist-bundle/chartist.min.js"></script>
-    <!-- sparkline js -->
-    <script src="assets/vendor/charts/sparkline/jquery.sparkline.js"></script>
     <!-- morris js -->
     <script src="assets/vendor/charts/morris-bundle/raphael.min.js"></script>
-    <script src="assets/vendor/charts/morris-bundle/morris.js"></script>
-    <!-- chart c3 js -->
-    <script src="assets/vendor/charts/c3charts/c3.min.js"></script>
-    <script src="assets/vendor/charts/c3charts/d3-5.4.0.min.js"></script>
-    <script src="assets/vendor/charts/c3charts/C3chartjs.js"></script>
-    <script src="assets/libs/js/dashboard-ecommerce.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="assets/vendor/inputmask/js/jquery.inputmask.bundle.js"></script>
     <script type="text/javascript">
         let flag = 0;
 

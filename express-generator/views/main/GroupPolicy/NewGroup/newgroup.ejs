@@ -367,12 +367,59 @@
                             </div>
 
                            <div class="col-12" style="margin-top: 15px;">
-                                <a href="#" class="col-11 btn btn-outline-danger" data-toggle="modal" data-target="#xccdfModal"> 오프라인 점검용 정책 다운로드 <span class="icon-circle-small icon-box-xs text-danger bg-danger-light bg-danger-light "><i class="fa fa-fw fa-arrow-down"></i></span><span ></span></a>
+                                <a href="#" class="col-11 btn btn-outline-danger" data-toggle="modal" data-target="#xccdfModal2"> 오프라인 점검용 정책 다운로드 <span class="icon-circle-small icon-box-xs text-danger bg-danger-light bg-danger-light "><i class="fa fa-fw fa-arrow-down"></i></span><span ></span></a>
                             </div>
                         
 
                              <!-- 정책 적용 모달 시작 -->
-                                     <div class="modal fade" id="xccdfModal" tabindex="-1" role="dialog"
+                                     <div class="modal" id="xccdfModal" tabindex="-1" role="dialog"
+                                            aria-labelledby="exampleModalLabel" aria-hidden="true"
+                                            style="display: none;">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+
+
+                                                        <h5 class="modal-title" id="xccdfModal">정책 적용</h5>
+                                                        <a href="#" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">×</span>
+                                                        </a>
+                                                    </div>
+
+                                                     
+
+                                                    <form action="" method="POST">
+                                                        <div class="modal-body">
+
+                                                            <div class="form-group">
+                                                                <label for="inputText1"
+                                                                    class="col-form-label">적용할 정책 파일 경로</label>
+                                                                <input name="txtIP" type="text" class="form-control">
+                                                            </div>
+
+                                                            <a href="download path" download="" class="col-12 btn btn-outline-success btn-lg">
+                                                             적용할 정책 파일 찾기<input type="file" style="display: none;">
+                                                            </a>
+
+                                                      
+                                                        </div>
+
+                                                        <div class="modal-footer">
+                                                            <a href="#" class="btn btn-secondary"
+                                                                data-dismiss="modal">닫기</a>
+                                                            
+                                                        </div>
+
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <!-- 정책 적용 모달 끝-->
+
+
+                             <!-- 오프라인 점검용 정책 다운로드 모달 시작 -->
+                                     <div class="modal" id="xccdfModal2" tabindex="-1" role="dialog"
                                             aria-labelledby="exampleModalLabel" aria-hidden="true"
                                             style="display: none;">
                                             <div class="modal-dialog" role="document">
@@ -394,12 +441,12 @@
 
                                                             <div class="form-group">
                                                                 <label for="inputText1"
-                                                                    class="col-form-label">다운로드 할 정책 명</label>
+                                                                    class="col-form-label">다운로드 할 정책 파일 경로</label>
                                                                 <input name="txtIP" type="text" class="form-control">
                                                             </div>
 
                                                             <a href="download path" download="" class="col-12 btn btn-outline-danger btn-lg">
-                                                             정책 파일 다운로드<input type="file" style="display: none;">
+                                                             다운로드 할 정책 파일 찾기<input type="file" style="display: none;">
                                                             </a>
 
                                                       
@@ -415,7 +462,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    <!-- 정책 적용 모달 끝-->
+                                    <!-- 오프라인 점검용 정책 다운로드 모달 끝-->
                                                 
 
                                 </div>
