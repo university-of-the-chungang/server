@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+ 
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+
+    <style type="text/css">
+        .btn-group .btn {
+    transition: background-color .3s ease;
+}
+.panel-table .panel-body {
+    padding: 0;
+}
+.table > thead > tr > th {
+    border-bottom: none;
+}
+.panel-footer, .panel-table .panel-body .table-bordered {
+    border-style: none;
+    margin: 0;
+}
+.panel-table .panel-body .table-bordered > thead > tr > th:first-of-type {
+    text-align: center;
+    width: 50px;
+}
+.panel-table .panel-body .table-bordered > thead > tr > th.col-tools {
+    text-align: center;
+    width: 120px;
+}
+.panel-table .panel-body .table-bordered > thead > tr > th:last-of-type,
+.panel-table .panel-body .table-bordered > tbody > tr > td:last-of-type {
+    border-right: 0;
+}
+.panel-table .panel-body .table-bordered > thead > tr > th:first-of-type,
+.panel-table .panel-body .table-bordered > tbody > tr > td:first-of-type {
+    border-left: 0;
+}
+.panel-table .panel-body .table-bordered > tbody > tr:first-of-type > td {
+    border-bottom: 0;
+}
+.panel-table .panel-body .table-bordered > thead > tr:first-of-type > th {
+    border-top: 0;
+}
+.pagination > li > a, .pagination > li > span {
+    border-radius: 50% !important;
+    margin: 0 5px;
+}
+.pagination {
+    margin: 0;
+}
+    </style>
+    <%include ../../head.ejs%>
+</head>
+
+<body>
+    
+<div class="dashboard-main-wrapper">
+    <div class="dashboard-header">
+        <%include ../../header.ejs%>
+
+    <!-- ============================================================== -->
+    <!-- 헤드 네비게이션 바 종료  -->
+    <!-- ============================================================== -->
+
+        <div class="">
+            <div class="dashboard-ecommerce">
+                <div class="container-fluid dashboard-content ">
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="page-header">
+                                <h2 class="pageheader-title">그룹 및 정책 관리 </h2>
+                                <div class="page-breadcrumb">
+                                    <nav aria-label="breadcrumb">
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">MENU</a></li>
+                                            <li class="breadcrumb-item active" aria-current="page">대쉬보드</li>
+                                            <li class="breadcrumb-item active" aria-current="page">그룹 및 정책 관리</li>
+                                            <li class="breadcrumb-item active" aria-current="page">기본 정보</li>
+                                        </ol>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        <!-- ============================================================== -->
+        <!-- end pageheader  -->
+        <!-- ============================================================== -->
+
+        <!-- ============================================================== -->
+        <!-- Search Bar 시작 -->
+        <!-- ============================================================== -->
+        <div class="ecommerce-widget">
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="card" style="height: 600px; overflow: scroll;">
+        
+                        <div class="card-header">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 text-right">
+                                <a href="../newgroup"><button type="submit" class="col-2 btn btn-outline-primary btn-lg">신규 그룹 생성</button></a>
+                            </div>
+                        </div>
+
+                <div class="card-body p-0">                    
+                <!-- ============================================================== -->
+                <!-- 안에 테이블 시작 -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-default panel-table">
+                            <!-- ============================================================== -->
+                            <!--  판넬 헤딩(수정(내용조회,삭제 들어가는 부분)) -->
+                            <!-- ============================================================== -->
+                            <div class="panel-heading">
+                                <div class="row">
+
+                                    <div class="col-xl-1" style="height: 70px"> <!-- check box left side-->
+                                        <form>
+                                            <label class="custom-control custom-checkbox">
+                                                <input type="checkbox" id="checkall" onclick="test()" class="custom-control-input"><span class="custom-control-label">모두 선택</span>
+                                            </label>
+                                        </form>
+                                       
+                                    </div>
+
+                                    <div class="col-xl-3" style="height: 70px">
+                                        <div class="input-group input-search">
+                                            <input class="form-control" type="text" placeholder="Search "><span class="input-group-btn">
+                                            <button class="btn btn-secondary" type="button"><i class="fas fa-search"></i></button></span>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-7 text-right">
+                                        <div class="pull-right">
+                                            <div class="row">
+                                                <form action="/oldgroup" method = "POST"
+                                                      class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+                                                    <input type="hidden" name="change_group_NAME" id="change_group_NAME" value="">
+                                                    <input type="submit" id="GroupChangeBtn"
+                                                           class="btn btn-success btn-lg"
+                                                           value = "수정" style="height: 55px">
+                                                </form>
+                                                <form action="/group/del_group_info" method = "POST"
+                                                      class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+                                                    <input type="hidden" name="del_group_set_cd" id="del_group_set_cd" value="">
+                                                    <input type="submit" id="groupDelBtn"
+                                                           class="btn btn-warning btn-lg"
+                                                           value="삭제" style="height: 55px">
+                                                <!--<button type="submit" name="c_option" value="delete" class="btn btn-warning btn-lg" data-target="pending">
+                                                    삭제
+                                                </button> -->
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ============================================================== -->
+                            <!--  판넬 바디 시작(그룹명 정책명 이런거 들어가는거) -->
+                            <!-- ============================================================== -->
+                            <div class="panel-body">
+
+                                <% for(var i=0; i<recordsets[0].length; i++){ %>
+                                <table id="mytable" class="table table-bordered" style="margin-bottom:10px">
+                                    <tbody>
+                                    <tr class="table-success">
+                                        <td>
+                                             <label class="custom-control custom-checkbox">
+                                                <input type="checkbox" id='<%=i%>' name = "chkbox" class="custom-control-input"><span class="custom-control-label"></span>
+                                            </label>
+                                        </td>
+                                        <td colspan="2">그룹<%=i+1%></td>
+                                        <td colspan="2">오프라인 정보시스템 포함</td>
+                                        <td> 정책활성
+                                            <div class="switch-button switch-button-yesno">
+                                                <input type="checkbox" class="custom-control-input chkbox" <%if(recordsets[0][i].ACTIVE_STATE === "active"){%> checked="" <%}%> name="switch19" id='<%=i%>'><span>
+                                                <label for=<%=i%>></label></span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>   
+                                        <td> - 그룹명</td>
+                                        <td colspan="4"><%=recordsets[0][i].NAME%></td>
+                                    </tr>
+                                    <tr>   
+                                        <td>- 그룹설명</td>
+                                        <td colspan="4"><%=recordsets[0][i].DISCRIPTION%></td>
+                                        <td>
+                                         <i class="fas fa-cloud-upload-alt"></i> 오프라인 점검 결과 업로드
+                                        </td>
+                                    </tr>
+                                     <tr>   
+                                        <td colspan="2">- 생성시간 (<%=recordsets[0][i].CREATE_TIME%>)</td>
+                                        <td colspan="2">- 활성화 시간 (<%=recordsets[0][i].ACTIVE_TIME%>)</td>
+                                        <td colspan="2">- 에이전트 수 (<%=recordsets[0][i].AGENT_COUNTING%>)</td>
+                                    </tr>      
+                                    </tbody>
+                                </table>
+                                    <%}%>
+                            </div>
+
+                    <!-- 패널 푸터 시작-->       
+
+                            
+                    <!-- 패널 푸터 끝-->
+
+                        </div>
+                    </div>
+                </div>
+                <!-- 테이블 끝-->
+                </div> 
+                <!-- 카드 바디 끝-->
+                </div>
+
+
+<!-- 아래 화살표 12345 시작-->
+                <div class="col-xs-12 ">
+                    <nav aria-label="Page navigation">
+                        <div class="col-xs-5"></div>
+                        <div class="col-xs-4">
+                            <ul class="pagination" style="text-align: center;">
+                                <li>
+                                    <a href="#" aria-label="Previous">
+                                        <span aria-hidden="true">«</span>
+                                    </a>
+                                </li>
+                                <li class="active"><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#">5</a></li>
+                                <li>
+                                    <a href="#" aria-label="Next">
+                                        <span aria-hidden="true">»</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+<!-- 화살 표 12345 끝 -->
+
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+    </div>
+    </div>
+            <!-- ============================================================== -->
+            <!-- footer -->
+            <!-- ============================================================== -->
+            <div class="footer">
+                <%include ../../footer.ejs%>
+            </div>
+            <!-- ============================================================== -->
+            <!-- end footer -->
+            <!-- ============================================================== -->
+       
+        <!-- ============================================================== -->
+        <!-- end wrapper  -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- end main wrapper  -->
+    <!-- ============================================================== -->
+    <!-- Optional JavaScript -->
+    <!-- jquery 3.3.1 -->
+    <script src="assets/vendor/full-calendar/js/calendar.js"></script>
+    <script src="assets/vendor/full-calendar/js/jquery-ui.min.js"></script>
+    <script src="assets/vendor/full-calendar/js/fullcalendar.js"></script>
+    <script src="assets/vendor/full-calendar/js/moment.min.js"></script>
+    <script src="assets/vendor/jquery/jquery-3.3.1.min.js"></script>
+    <!-- bootstap bundle js -->
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+    <!-- slimscroll js -->
+    <script src="assets/vendor/slimscroll/jquery.slimscroll.js"></script>
+    <!-- main js -->
+    <script src="assets/libs/js/main-js.js"></script>
+    <!-- chart chartist js -->
+    <script src="assets/vendor/charts/chartist-bundle/chartist.min.js"></script>
+    <!-- sparkline js -->
+    <script src="assets/vendor/charts/sparkline/jquery.sparkline.js"></script>
+    <!-- morris js -->
+    <script src="assets/vendor/charts/morris-bundle/raphael.min.js"></script>
+    <script src="assets/vendor/charts/morris-bundle/morris.js"></script>
+    <!-- chart c3 js -->
+    <script src="assets/vendor/charts/c3charts/c3.min.js"></script>
+    <script src="assets/vendor/charts/c3charts/d3-5.4.0.min.js"></script>
+    <script src="assets/vendor/charts/c3charts/C3chartjs.js"></script>
+    <script src="assets/libs/js/dashboard-ecommerce.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript">
+        let flag = 0;
+        $('#groupDelBtn').click(() => {
+           let arr=[];
+           let chk_arr = $('input:checkbox[name="chkbox"]:checked');
+           if(chk_arr.length == 0) {
+               alert("선택된 그룹이 없습니다.");
+               return;
+           }else {
+               chk_arr.each((idx, elem) => {
+                   let id = elem.id;
+                   let recordsets = JSON.parse('<%- JSON.stringify(recordsets[0]) %>');
+                   arr.push(recordsets[id].GROUP_SET_CD);
+               });
+               $('#del_group_set_cd').val(JSON.stringify(arr));
+               $('#groupDelBtn').submit();
+           }
+        });
+        $('#GroupChangeBtn').click(() => {
+     //let cnt = $("input[class='custom-control-input']:checked").length;
+            let arr=[];
+            let chk_arr = $('input:checkbox[name="chkbox"]:checked');
+            if (chk_arr.length == 0) {
+                alert("선택 된 그룹이 없습니다.");
+                return;
+            }
+            else if (chk_arr.length != 1) {
+                alert("한번에 하나의 그룹만 수정 가능합니다.")
+                return;
+            } else{
+                chk_arr.each((idx,elem)=>{
+                    let id = elem.id;
+                    let recordsets = JSON.parse('<%-JSON.stringify(recordsets[0]) %>');
+                    arr.push(recordsets[id].NAME);
+                })
+                $('#change_group_NAME').val(JSON.stringify(arr));
+                $('#groupChangeBtn').submit();
+            }
+        });
+    </script>
+</body>
+ 
+</html>
