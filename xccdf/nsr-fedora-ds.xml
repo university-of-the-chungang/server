@@ -1,0 +1,1439 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ds:data-stream-collection xmlns:ds="http://scap.nist.gov/schema/scap/source/1.2" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:cat="urn:oasis:names:tc:entity:xmlns:xml:catalog" id="scap_org.open-scap_collection_from_xccdf_nsr-fedora-xccdf.xml" schematron-version="1.2"><ds:data-stream id="scap_org.open-scap_datastream_from_xccdf_nsr-fedora-xccdf.xml" scap-version="1.2" use-case="OTHER"><ds:checklists><ds:component-ref id="scap_org.open-scap_cref_nsr-fedora-xccdf.xml" xlink:href="#scap_org.open-scap_comp_nsr-fedora-xccdf.xml"><cat:catalog><cat:uri name="nsr-fedora-oval.xml" uri="#scap_org.open-scap_cref_nsr-fedora-oval.xml"/><cat:uri name="nsr-fedora-ocil.xml" uri="#scap_org.open-scap_cref_nsr-fedora-ocil.xml"/></cat:catalog></ds:component-ref></ds:checklists><ds:checks><ds:component-ref id="scap_org.open-scap_cref_nsr-fedora-oval.xml" xlink:href="#scap_org.open-scap_comp_nsr-fedora-oval.xml"/><ds:component-ref id="scap_org.open-scap_cref_nsr-fedora-ocil.xml" xlink:href="#scap_org.open-scap_comp_nsr-fedora-ocil.xml"/></ds:checks></ds:data-stream><ds:component id="scap_org.open-scap_comp_nsr-fedora-oval.xml" timestamp="2017-08-09T18:22:51"><oval_definitions xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:ind="http://oval.mitre.org/XMLSchema/oval-definitions-5#independent" xmlns:unix="http://oval.mitre.org/XMLSchema/oval-definitions-5#unix" xmlns:linux="http://oval.mitre.org/XMLSchema/oval-definitions-5#linux" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://oval.mitre.org/XMLSchema/oval-common-5 oval-common-schema.xsd http://oval.mitre.org/XMLSchema/oval-definitions-5 oval-definitions-schema.xsd http://oval.mitre.org/XMLSchema/oval-definitions-5#independent independent-definitions-schema.xsd http://oval.mitre.org/XMLSchema/oval-definitions-5#unix unix-definitions-schema.xsd http://oval.mitre.org/XMLSchema/oval-definitions-5#linux linux-definitions-schema.xsd">
+	<generator>
+		<oval:product_name>SublimeText</oval:product_name>
+		<oval:product_version>3125</oval:product_version>
+		<oval:schema_version>5.11</oval:schema_version>
+		<oval:timestamp>2017-07-11T09:30:30</oval:timestamp>
+	</generator>
+	<definitions>
+		<definition class="compliance" id="oval:nsr-sshd_disable_root_login:def:1" version="1">
+			<metadata>
+				<title>sshd root 계정 원격 접속 제한</title>
+				<affected family="unix"> </affected>
+				<description>sshd에서 root 계정으로 직접 로그인하도록 허용하면 불법적인 침입자의 목표가 될 수 있음으로 root 계정 접속에 대한 관리가 중요하다. root 계정의 SSH 접속 허용은 공격자에게 더 좋은기회를 제공할 수 있음으로 root 계정에 대한 원격 접속은 금지해야 한다. 
+				</description>
+				<reference ref_id="sshd_disable_root_login" source="nsr"/>
+			</metadata>
+			<criteria operator="OR">
+				<criterion comment="PermitRootLogin 값 확인 (/etc/ssh/sshd_config)" negate="true" test_ref="oval:nsr-test_sshd_permitrootlogin_no:tst:1"/>
+			</criteria>
+		</definition>
+		<definition class="compliance" id="oval:nsr-no_direct_root_logins:def:1" version="1">
+			<metadata>
+				<title>직접 Root 로그인 비 허용(PTS 비허용 ) </title>
+				<affected family="unix"/>
+				<description> PTS 터미널을 막는다. </description>
+				<reference ref_id="no_direct_root_logins" source="nsr"/>
+			</metadata>
+			<criteria operator="AND">
+				<criterion comment="check pty /etc/securetty" negate="true" test_ref="oval:nsr-test_no_direct_root_logins:tst:1"/>
+				<criterion comment="check auth * pam_securetty.so" test_ref="oval:nsr-test_no_direct_root_logins_pam:tst:1"/>
+			</criteria>
+		</definition>
+		<definition class="compliance" id="oval:nsr-accounts_password_minlen_login_defs:def:1" version="1">
+			<metadata> 
+				<title> 최소 패스워드 길이 (legacy) </title>				
+				<affected family="unix"/>
+				<description> 최소 패스워드 길이가 적절히 정의 되어야 한다. (우선 순위가 낮음) </description>
+				<reference ref_id="accounts_password_minlen_login_defs" source="nsr"/>
+			</metadata>
+			<criteria operator="AND">
+				<criterion test_ref="oval:nsr-test_pass_min_len:tst:1"/>
+			</criteria>
+		</definition>
+		<definition class="compliance" id="oval:nsr-pam_password_len_check_defs:def:1" version="1">
+			<metadata>
+				<title> 최소 패스워드 길이 (pam.d) </title>
+				<affected family="unix"/>
+				<description> 최소 패스워드 길이가 적절이 정의 되어야 한다. (우선 순위가 높음) </description>
+				<reference ref_id="pam_password_len_check_defs" version="1" source="nsr"/>
+			</metadata>
+			<criteria operator="AND" comment="(우선선위 높음) 시스템이 pam_pwquality 사용 설정 체크"> 
+				<extend_definition comment="pwm_pwquility.so exists in current system" definition_ref="oval:nsr-password_pam_pwquality:def:1"/>
+				<criterion comment="pam_pwquality minlen" test_ref="oval:nsr-test_password_pam_pwquility_minlen:tst:1"/>
+			</criteria>				
+		</definition>	
+		<definition class="compliance" id="oval:nsr-password_pam_pwquality:def:1" version="1">
+			<metadata>
+				<title> pam_pwquaility 설정 체크 (/etc/pam.d/system-auth)</title>
+				<affected family="unix">
+					<platform>Fedora 23</platform>
+					<platform>Fedora 24</platform>
+					 <platform>Red Hat Enterprise Linux 7</platform>
+            </affected>
+            <description> pam_pwquality.so 존재 유무 확인 </description>
+            <reference ref_id="nsr-password_pam_pwquality" soruce="nsr"/>            
+        	</metadata>
+	        <criteria>
+	        	<criterion comment="pam_pwquality 에 대한 조건 매칭" test_ref="oval:nsr-test_password_pam_pwquility:tst:1"/>
+	        </criteria>
+	    </definition>
+	    <definition class="compliance" id="oval:nsr-accounts_password_pam_ocredit:def:1" version="1">
+	    	<metadata>
+	    		<title> ocredit 값 확인 (/etc/security/pwquality.conf) </title>
+	    		<affected family="unix"/>
+	    		<description> 한 개 이상의 특수문자가 패스워드 정책에 포함되어야 한다 </description>
+	    	</metadata>
+	    	<criteria operator="AND" comment="ocredit -1보다 작거나 같은 경우">
+	    		<extend_definition comment="check pam_pwquality.so exists in current system" definition_ref="oval:nsr-password_pam_pwquality:def:1"/>
+	    		<criterion comment="pam_pwquality ocredit" test_ref="oval:nsr-test_password_pam_pwquility_ocredit:tst:1"/>
+	    	</criteria>
+	    </definition>	    
+	    <definition class="compliance" id="oval:nsr-accounts_password_pam_dcredit:def:1" version="1">
+	    	<metadata>
+	    		<title> dcredit 값 확인 (/etc/security/pwquality.conf) </title>
+	    		<affected family="unix"/>
+	    		<description> 한 개 이상의 숫자가 패스워드 정책에 포함되어야 한다 </description>
+	    	</metadata>
+	    	<criteria operator="AND" comment="dcredit -1보다 작거나 같은 경우">
+	    		<extend_definition comment="check pam_pwquality.so exists in current system" definition_ref="oval:nsr-password_pam_pwquality:def:1"/>
+	    		<criterion comment="pam_pwquality dcredit" test_ref="oval:nsr-test_password_pam_pwquility_dcredit:tst:1"/>
+	    	</criteria>
+	    </definition>	    
+	    <definition class="compliance" id="oval:nsr-accounts_password_pam_lcredit:def:1" version="1">
+	    	<metadata>
+	    		<title> lcredit 값 확인 (/etc/security/pwquality.conf) </title>
+	    		<affected family="unix"/>
+	    		<description> 한 개 이상의 숫자가 영문 소문자가 정책에 포함되어야 한다 </description>
+	    	</metadata>
+	    	<criteria operator="AND" comment="lcredit -1보다 작거나 같은 경우">
+	    		<extend_definition comment="check pam_pwquality.so exists in current system" definition_ref="oval:nsr-password_pam_pwquality:def:1"/>
+	    		<criterion comment="pam_pwquality lcredit" test_ref="oval:nsr-test_password_pam_pwquility_lcredit:tst:1"/>
+	    	</criteria>
+	    </definition>	    
+	    <definition class="compliance" id="oval:nsr-accounts_password_pam_ucredit:def:1" version="1">
+	    	<metadata>
+	    		<title> ucredit 값 확인 (/etc/security/pwquality.conf) </title>
+	    		<affected family="unix"/>
+	    		<description> 한 개 이상의 숫자가 영문 대문자가 정책에 포함되어야 한다 </description>
+	    	</metadata>
+	    	<criteria operator="AND" comment="ucredit -1보다 작거나 같은 경우">
+	    		<extend_definition comment="check pam_pwquality.so exists in current system" definition_ref="oval:nsr-password_pam_pwquality:def:1"/>
+	    		<criterion comment="pam_pwquality ucredit" test_ref="oval:nsr-test_password_pam_pwquility_ucredit:tst:1"/>
+	    	</criteria>
+	    </definition>
+	    <definition class="compliance" id="oval:nsr-accounts_password_pam_deny:def:1" version="1">
+	    	<metadata>
+	    		<title> 계정 잠금 설정 </title>
+	    		<affected family="unix"/>
+	    		<description> 로그인 횟수 설정이 되어 있는 검증 </description>
+	    	</metadata>	    	
+	    	<criteria operator="AND">
+	    		<criterion test_ref="oval:nsr-test_accounts_password_pam_deny_silent_system-auth:tst:1" comment="pam_faillock.so preauth silent set in sysetm-auth"/>
+	    		<criterion test_ref="oval:nsr-test_accounts_password_pam_deny_authfail_system-auth:tst:1" comment="pam_faillock.so authfail deny value set in system-auth"/>
+	    		<criterion test_ref="oval:nsr-test_accounts_password_pam_deny_phase_system-auth:tst:1" comment="pam_fillock.so set in account phase of sysetm-auth"/>
+	    		<criterion test_ref="oval:nsr-test_accounts_password_pam_deny_silent_password-auth:tst:1" comment="pam_fillock.so preauth silent set in password-auth"/>
+	    		<criterion test_ref="oval:nsr-test_accounts_password_pam_deny_authfail_password-auth:tst:1" comment="pam_faillock.so authfail deny value set in password-auth"/>
+	    		<criterion test_ref="oval:nsr-test_accounts_password_pam_deny_account_password-auth:tst:1" comment="pam_faillock.so set in account phase of password-auth"/>
+	    		<extend_definition comment="check unlock_timeout" definition_ref="oval:nsr-accounts_password_pam_unlock_timeout:def:1"/>
+	    	</criteria>
+	    </definition>
+	    <definition class="compliance" id="oval:nsr-accounts_password_pam_unlock_timeout:def:1" version="1">
+	    	<metadata>
+	    		<title> 계정 잠금 설정 - 타임 아웃</title>
+	    		<affected family="unix"/>
+	    		<description> 계정 잠금 타임 아웃 설정 </description>
+	    	</metadata>
+	    	<criteria operator="AND">
+	    		<criterion comment="preauth unlock_timeout set in system-auth" test_ref="oval:nsr-test_accounts_password_pam_unlock_time_silent_system-auth:tst:1"/>
+	    		<criterion comment="authfail unlock_timeout set in sysetm-auth" test_ref="oval:nsr-test_accounts_password_pam_unlock_time_authfail_system-auth:tst:1"/>
+	    		<criterion comment="preauth unlock_timeout set in password-auth" test_ref="oval:nsr-test_accounts_password_pam_unlock_time_slient_password-auth:tst:1"/>
+	    		<criterion comment="authfail unlock_timeout set in password-auth" test_ref="oval:nsr-test_accounts_password_pam_unlock_time_authfail_password-auth:tst:1"/>
+	    	</criteria>
+	    </definition>	    	
+	    <definition class="compliance" id="oval:nsr-accounts_password_protection:def:1" version="1">
+	    	<metadata>
+	    		<title> 패스워드 파일 보호 </title>
+	    		<affected family="unix"/>
+	    		<description> 패스워드가 파일에 노출된 경우 확인 2번째 필드 root:($[0-9]) 무시함.</description>
+	    	</metadata>
+	    	<criteria operator="AND"> 
+	    		<criterion comment="find out password $HASH to be appear in /etc/passwd" negate="true" test_ref="oval:nsr-test_accounts_password_exposure_etc-passwd:tst:1"/>
+	    	</criteria>
+	    </definition>	  
+	    <definition class="compliance" id="oval:nsr-users_uid_zero:def:1" version="1">
+	    	<metadata>
+	    		<title> 일반 사용자 계정이 UID 0 금지 </title>
+	    		<affected family="unix"/>
+	    		<description> 일반 사용자가 UID 값이 0 으로 정의된 경우 </description>
+	    	</metadata>
+	    	<criteria operator="AND"> 
+	    		<criterion comment="find users having zero UID without root" negate="true" test_ref="oval:nsr-users_uid_zero_etc-passwd:tst:1"/>
+	    	</criteria>
+	    </definition>
+	    <definition class="compliance" id="oval:nsr-root_su_restriction:def:1" version="1">
+	    	<metadata>
+	    		<title> root 계정 su 제한</title>
+	    		<affected family="unix"/>
+	    		<description>su 명령어를 사용하기 위한 그룹을 설정해야 한다. </description>
+	    	</metadata>
+	    	<criteria operator="AND">
+	    		<criterion comment="check file permission 4750" test_ref="oval:nsr-test_root_su_restriction-su_permission:tst:1"/>
+	    		<!--
+	    		<criteria operator="OR">
+	    			<criterion comment="check su group is set or not" test_ref="oval:nsr-test_root_su_restriction-group:tst:1"/>
+	    			<criterion comment="check su pam is set or not" test_ref="oval:nsr-test_root_su_restriction-pam:tst:1"/>	    			
+	    		</criteria>
+	    	-->
+	    	</criteria>
+	    </definition>
+	    <definition class="compliance" id="oval:nsr-password_max_age:def:1" version="1">
+	    	<metadata>
+	    		<title> 패스워드 최대 사용 기간 설정</title>
+	    		<affected family="unix"/>
+	    		<description>패스워드 최대 사용 기간을 설정해야 한다.</description>
+	    	</metadata>
+	    	<criteria operator="AND">
+	    		<criterion comment="check max age of password" test_ref="oval:nsr-test_password_max_age:tst:1"/>
+	    	</criteria>
+	    </definition>
+	    <definition class="compliance" id="oval:nsr-password_min_day:def:1" version="1">
+	    	<metadata>
+	    		<title> 패스워드 최소 사용기간 설정 </title>
+	    		<affected family="unix"/>
+	    		<description>패스워드 최소 사용긱나을 설정해야 한다.</description>
+	    	</metadata>
+	    	<criteria operator="AND">
+	    		<criterion comment="check PASS_MIN_DASYS less than equal 1" test_ref="oval:nar-test_password_min_day:tst:1"/>
+	    	</criteria>
+	    </definition>
+	    <definition class="compliance" id="oval:nsr-useless_accounts:def:1" version="1">
+	    	<metadata>
+	    		<title>불필요한 계정 제거 </title>
+	    		<affected family="unix"/>
+	    		<description>불필요한 계정을 제거해야 한다.</description>
+	    	</metadata>
+	    	<criteria> 
+	    		<criterion comment="check nuucp|adm|lp|sync|shutdown|halt|news|uucp|operator|games|gopher|nfsnobody|squid in /etc/passwd" negate="true" test_ref="oval:nsr-test_useless_acounts:tst:1"/>
+	    	</criteria>
+	    </definition>
+	</definitions>
+	<tests>
+		<ind:textfilecontent54_test check="all" check_existence="none_exist" comment="Tests the value of PermitRootLogin[\s]*(&lt;:nocomment:&gt;*) setting in the /etc/ssh/sshd_config file" id="oval:nsr-test_sshd_permitrootlogin_no:tst:1" version="1">
+			<ind:object object_ref="oval:nsr-obj_sshd_permitrootlogin_no:obj:1"/>
+		</ind:textfilecontent54_test>
+		<ind:textfilecontent54_test check="all" check_existence="all_exist" comment="no entries in /etc/securetty" id="oval:nsr-test_no_direct_root_logins:tst:1" version="1">
+			<ind:object object_ref="oval:nsr-obj_etc_securetty_exists:obj:1"/>
+		</ind:textfilecontent54_test>
+		<ind:textfilecontent54_test check="all" check_existence="none_exist" comment="check auth pam_securetty.so" id="oval:nsr-test_no_direct_root_logins_pam:tst:1" version="1"> 
+			<ind:object object_ref="oval:nsr-obj_pam_secetty:obj:1"/>
+		</ind:textfilecontent54_test>
+		<ind:variable_test id="oval:nsr-test_pass_min_len:tst:1" check="all" comment="The vluae of PASS_MIN_LEN should be set appropriately in /etc/logins.def" version="1">
+			<ind:object object_ref="oval:nsr-object_last_pass_min_len_instance_value:obj:1"/>
+			<ind:state state_ref="oval:nsr-state_last_pass_min_len_instance_value:ste:1"/>
+		</ind:variable_test> 
+		<ind:textfilecontent54_test check="all" comment="설정 파일을 확인 /etc/pam.d/system-auth" id="oval:nsr-test_password_pam_pwquility:tst:1" version="1">
+			<ind:object object_ref="oval:nsr-obj_password_pam_pwquility:obj:1"/>
+		</ind:textfilecontent54_test>
+		<ind:textfilecontent54_test check="all" comment="minlen check /etc/security/pwquality.conf" id="oval:nsr-test_password_pam_pwquility_minlen:tst:1" version="1">
+			<ind:object object_ref="oval:nsr-obj_password_pam_pwquility_minlen:obj:1"/>
+			<ind:state state_ref="oval:nsr-state_password_pam_pwquility_minlen:ste:1"/>	
+		</ind:textfilecontent54_test>
+		<ind:textfilecontent54_test check="all" comment="ocredit check /etc/secureity/pwquality.conf" id="oval:nsr-test_password_pam_pwquility_ocredit:tst:1" version="1">
+			<ind:object object_ref="oval:nsr-obj_password_pam_pwquility_ocredit:obj:1"/>
+			<ind:state state_ref="oval:nsr-state_password_pam_pwquility_ocredit:ste:1"/>
+		</ind:textfilecontent54_test>
+		<ind:textfilecontent54_test check="all" comment="dcredit check /etc/security/pwquality.conf" id="oval:nsr-test_password_pam_pwquility_dcredit:tst:1" version="1">
+			<ind:object object_ref="oval:nsr-obj_password_pam_pwquility_dcredit:obj:1"/>
+			<ind:state state_ref="oval:nsr-state_password_pam_pwquility_dcredit:ste:1"/>
+		</ind:textfilecontent54_test>
+		<ind:textfilecontent54_test check="all" comment="lcredit check /etc/security/pwquality.conf" id="oval:nsr-test_password_pam_pwquility_lcredit:tst:1" version="1">
+			<ind:object object_ref="oval:nsr-obj_password_pam_pwquility_lcredit:obj:1"/>
+			<ind:state state_ref="oval:nsr-state_password_pam_pwquility_lcredit:ste:1"/>
+		</ind:textfilecontent54_test>
+		<ind:textfilecontent54_test check="all" comment="ucredit check /etc/security/pwquality.conf" id="oval:nsr-test_password_pam_pwquility_ucredit:tst:1" version="1">
+			<ind:object object_ref="oval:nsr-obj_password_pam_pwquility_ucredit:obj:1"/>
+			<ind:state state_ref="oval:nsr-state_password_pam_pwquility_ucredit:ste:1"/>
+		</ind:textfilecontent54_test>
+		<ind:textfilecontent54_test check="all" comment="pam_faillock preauth silent set in system-auth" id="oval:nsr-test_accounts_password_pam_deny_silent_system-auth:tst:1" version="1">
+			<ind:object object_ref="oval:nsr-object_accounts_password_pam-deny_silent_system-auth:obj:1"/>
+			<ind:state state_ref="oval:nsr-state_accounts_password_pam-deny_silent_system-auth:ste:1"/>
+		</ind:textfilecontent54_test>
+		<ind:textfilecontent54_test check="all" comment="authfail deny set in system-auth" id="oval:nsr-test_accounts_password_pam_deny_authfail_system-auth:tst:1" version="1">
+			<ind:object object_ref="oval:nsr-object_accounts_password_pam-deny_authfail_sysetm-auth:obj:1"/>
+			<ind:state state_ref="oval:nsr-state_accounts_password_pam-deny_authfail_system-auth:ste:1"/>
+		</ind:textfilecontent54_test>
+		<ind:textfilecontent54_test check="all" comment="phase pam_faillock.so" id="oval:nsr-test_accounts_password_pam_deny_phase_system-auth:tst:1" version="1">
+			<ind:object object_ref="oval:nsr-object_accounts_password_pam_deny_phase_system-auth:obj:1"/>
+		</ind:textfilecontent54_test>
+		<ind:textfilecontent54_test check="all" comment="pam_fiallock preauth sileint set in password-auth" id="oval:nsr-test_accounts_password_pam_deny_silent_password-auth:tst:1" version="1">
+			<ind:object object_ref="oval:nsr-object_accounts_password_pam-deny_slient_password-auth:obj:1"/>
+			<ind:state state_ref="oval:nsr-state_accounts_password_pam-deny_slient_password-auth:ste:1"/>
+		</ind:textfilecontent54_test>
+		<ind:textfilecontent54_test check="all" comment="deny authfail set in password-auth" id="oval:nsr-test_accounts_password_pam_deny_authfail_password-auth:tst:1" version="1">
+			<ind:object object_ref="oval:nsr-object_accounts_password_pam_deny_authfail_password-auth:obj:1"/>
+			<ind:state state_ref="oval:nsr-state_accounts_password_pam_deny_authfail_password-auth:ste:1"/>
+		</ind:textfilecontent54_test>
+		<ind:textfilecontent54_test check="all" comment="phase pam_faillock.so" id="oval:nsr-test_accounts_password_pam_deny_account_password-auth:tst:1" version="1">
+			<ind:object object_ref="oval:nsr-object_accounts_password_pam_deny_account_password-auth:obj:1"/>
+		</ind:textfilecontent54_test>
+		<ind:textfilecontent54_test check="all" comment="preauth unlock_timeout set in sysetm-auth" id="oval:nsr-test_accounts_password_pam_unlock_time_silent_system-auth:tst:1" version="1">
+			<ind:object object_ref="oval:nsr-object_accounts_password_pam_unlock_time_silent_system-auth:obj:1"/>
+			<ind:state state_ref="oval:nsr-state_accounts_password_pam_unlock_time_silent_system-auth:ste:1"/>
+		</ind:textfilecontent54_test>
+		<ind:textfilecontent54_test check="all" comment="authfail unlock_timeout set in sysetm-auth" id="oval:nsr-test_accounts_password_pam_unlock_time_authfail_system-auth:tst:1" version="1">
+			<ind:object object_ref="oval:nsr-object_accounts_password_pam_unlock_time_authfail_system-auth:obj:1"/>
+			<ind:state state_ref="oval:nsr-state_accounts_password_pam_unlock_time_authfail_system-auth:ste:1"/>
+		</ind:textfilecontent54_test>
+		<ind:textfilecontent54_test check="all" comment="preauth unlock_timeout set in password-auth" id="oval:nsr-test_accounts_password_pam_unlock_time_slient_password-auth:tst:1" version="1">
+			<ind:object object_ref="oval:nsr-object_accounts_password_pam_unlock_time_slient_password-auth:obj:1"/>
+			<ind:state state_ref="oval:nsr-state_accounts_password_pam_unlock_time_slient_password-auth:ste:1"/>
+		</ind:textfilecontent54_test>
+		<ind:textfilecontent54_test check="all" comment="authfail unlock_timeout set in password-auth" id="oval:nsr-test_accounts_password_pam_unlock_time_authfail_password-auth:tst:1" version="1">
+			<ind:object object_ref="oval:nsr-object_accounts_password_pam_unlock_time_authfail_password-auth:obj:1"/>
+			<ind:state state_ref="oval:nsr-state_accounts_password_pam_unlock_time_authfail_password-auth:ste:1"/>
+		</ind:textfilecontent54_test>
+		<ind:textfilecontent54_test check="all" comment="check password exposure in passwd (x|!!|*) ignored" id="oval:nsr-test_accounts_password_exposure_etc-passwd:tst:1" version="1">
+			<ind:object object_ref="oval:nsr-object_accounts_password_exposure_etc-passwd:obj:1"/>
+		</ind:textfilecontent54_test>
+		<ind:variable_test check="all" check_existence="all_exist" comment="check UID if having zero or not by users" id="oval:nsr-users_uid_zero_etc-passwd:tst:1" version="1">
+			<ind:object object_ref="oval:nsr-object_users_uid_zero_etc-passwd_value:obj:1"/>
+			<ind:state state_ref="oval:nsr-state_users_uid_zero_etc-passwd_value:ste:1"/>
+		</ind:variable_test>
+		<unix:file_test check="all" check_existence="all_exist" comment="chmod 4750 in /bin/su" id="oval:nsr-test_root_su_restriction-su_permission:tst:1" version="1">
+			<unix:object object_ref="oval:nsr-object_root_su_restriction-su_permission:obj:1"/>
+			<unix:state state_ref="oval:nsr-state_root_su_restriction-su_permission:ste:1"/>
+		</unix:file_test>
+		<ind:variable_test check="all" comment="check PASS_MAX_DAYS /etc/login.defs" id="oval:nsr-test_password_max_age:tst:1" version="1">
+			<ind:object object_ref="oval:nsr-object_password_max_age_value:obj:1"/>
+			<ind:state state_ref="oval:nsr-state_password_max_age:ste:1"/>
+		</ind:variable_test>
+		<ind:textfilecontent54_test check="all" comment="check PASS_MIN_DAYS equal 1" id="oval:nar-test_password_min_day:tst:1" version="1">
+			<ind:object object_ref="oval:nsr-object_password_min_day:obj:1"/>
+			<ind:state state_ref="oval:nsr-state_password_min_day:ste:1"/>
+		</ind:textfilecontent54_test>
+		<ind:textfilecontent54_test check="all" comment="check useless accounts in /etc/passwd" id="oval:nsr-test_useless_acounts:tst:1" version="1">
+			<ind:object object_ref="oval:nsr-object_useless_acounts:obj:1"/>			
+		</ind:textfilecontent54_test>
+
+		<!--
+		<ind:textfilecontent54_test check="all" comment="check wheel has users or not in /etc/group" id="oval:nsr-test_root_su_restriction-group:tst:1" version="1">
+			<ind:object object_ref="oval:nsr-object_root_su_restriction-group:obj:1"/>
+			<ind:state state_ref="oval:nsr-state_root_su_restriction-group:obj:1"/>
+		</ind:textfilecontent54_test>
+		-->
+	</tests>
+	<objects>
+		<ind:textfilecontent54_object id="oval:nsr-obj_sshd_permitrootlogin_no:obj:1" version="2">
+			<ind:filepath>/etc/ssh/sshd_config</ind:filepath>
+			<ind:pattern operation="pattern match">^[\s]*(?i)PermitRootLogin(?-i)[\s]+no[\s]*(?:|(?:#.*))?$</ind:pattern>
+			<ind:instance datatype="int">1</ind:instance>
+		</ind:textfilecontent54_object>
+		<ind:textfilecontent54_object comment="no entries pts/[0-9]+ /etc/securetty" id="oval:nsr-obj_etc_securetty_exists:obj:1" version="1">
+			<ind:filepath>/etc/securetty</ind:filepath>
+			<ind:pattern operation="pattern match">^\s*pts\/[0-9]+$</ind:pattern>
+			<ind:instance datatype="int" operation="greater than or equal">1</ind:instance>
+		</ind:textfilecontent54_object>
+		<ind:textfilecontent54_object comment="check entry auth * pam_securetty.so" id="oval:nsr-obj_pam_secetty:obj:1" version="1"> 
+			<ind:filepath>/etc/pam.d/login</ind:filepath>
+			<ind:pattern operation="pattern match">^[[:space:]]*auth\s+\[?.*]?\s+.*pam_securetty.so$</ind:pattern>
+			<ind:instance datatype="int" operation="equals">1</ind:instance>
+		</ind:textfilecontent54_object>
+		<ind:variable_object id="oval:nsr-object_last_pass_min_len_instance_value:obj:1" version="1">
+			<ind:var_ref>oval:nsr-variable_last_pass_min_len_instance_value:var:1</ind:var_ref>
+		</ind:variable_object>		
+		<ind:textfilecontent54_object id="oval:nsr-object_last_pass_min_len_from_etc_login_defs:obj:1" version="1">
+			<ind:behaviors singleline="true"/>
+			<ind:filepath>/etc/login.defs</ind:filepath>
+			<ind:pattern operation="pattern match">.*\n[^#]*(PASS_MIN_LEN\s+\d+)\s*\n</ind:pattern>
+			<ind:instance datatype="int" operation="greater than or equal">1</ind:instance>
+		</ind:textfilecontent54_object>
+		<ind:textfilecontent54_object id="oval:nsr-obj_password_pam_pwquility:obj:1" version="1">
+			<ind:filepath>/etc/pam.d/system-auth</ind:filepath>
+			<ind:pattern operation="pattern match">^\s*password\s+(?:(?:required)|(?:requisite))\s+pam_pwquality\.so.*$</ind:pattern>
+			<ind:instance datatype="int">1</ind:instance>
+		</ind:textfilecontent54_object>
+		<ind:textfilecontent54_object id="oval:nsr-obj_password_pam_pwquility_minlen:obj:1" version="1">
+			<ind:filepath>/etc/security/pwquality.conf</ind:filepath>
+			<ind:pattern operation="pattern match">^[\s]*minlen[\s]*=[\s]*(-?\d+)(?:[\s]|$) </ind:pattern>
+			<ind:instance datatype="int" operation="greater than or equal">1</ind:instance>
+		</ind:textfilecontent54_object>
+		<ind:textfilecontent54_object id="oval:nsr-obj_password_pam_pwquility_ocredit:obj:1" version="1">
+			<ind:filepath>/etc/security/pwquality.conf</ind:filepath>
+			<ind:pattern operation="pattern match">^[\s]*ocredit[\s]*=[\s]*(-?\d+)(?:[\s]|$)</ind:pattern>
+			<ind:instance datatype="int" operation="less than or equal">1</ind:instance>
+		</ind:textfilecontent54_object>
+		<ind:textfilecontent54_object id="oval:nsr-obj_password_pam_pwquility_dcredit:obj:1" version="1">
+			<ind:filepath>/etc/security/pwquality.conf</ind:filepath>
+			<ind:pattern operation="pattern match">^[\s]*dcredit[\s]*=[\s]*(-?\d+)(?:[\s]|$)</ind:pattern>
+			<ind:instance datatype="int" operation="less than or equal">1</ind:instance>
+		</ind:textfilecontent54_object>
+		<ind:textfilecontent54_object id="oval:nsr-obj_password_pam_pwquility_lcredit:obj:1" version="1">
+			<ind:filepath>/etc/security/pwquality.conf</ind:filepath>
+			<ind:pattern operation="pattern match">^[\s]*lcredit[\s]*=[\s]*(-?\d+)(?:[\s]|$)</ind:pattern>
+			<ind:instance datatype="int" operation="less than or equal">1</ind:instance>
+		</ind:textfilecontent54_object>
+		<ind:textfilecontent54_object id="oval:nsr-obj_password_pam_pwquility_ucredit:obj:1" version="1">
+			<ind:filepath>/etc/security/pwquality.conf</ind:filepath>
+			<ind:pattern operation="pattern match">^[\s]*ucredit[\s]*=[\s]*(-?\d+)(?:[\s]|$)</ind:pattern>
+			<ind:instance datatype="int" operation="less than or equal">1</ind:instance>
+		</ind:textfilecontent54_object>
+		<ind:textfilecontent54_object id="oval:nsr-object_accounts_password_pam-deny_silent_system-auth:obj:1" version="1">
+			<ind:behaviors singleline="true"/>
+			<ind:filepath>/etc/pam.d/system-auth</ind:filepath>
+			<ind:pattern operation="pattern match">
+				[\n][\s]*auth[\s]+required[\s]+pam_faillock\.so[\s]+preauth[\s]+[^\n]*silent[\s]+[^\n]*deny=([0-9]+)[\s]*(?s).*[\n][\s]*auth[\s]+(?:(?:sufficient)|(?:\[.*default=die.*\]))[\s]+pam_unix\.so[^\n]*[\n]
+			</ind:pattern>
+			<ind:instance datatype="int" operation="equals">1</ind:instance>
+		</ind:textfilecontent54_object>
+		<ind:textfilecontent54_object id="oval:nsr-object_accounts_password_pam-deny_authfail_sysetm-auth:obj:1" version="1">
+			<ind:behaviors singleline="true"/>
+			<ind:filepath>/etc/pam.d/system-auth</ind:filepath>
+			<ind:pattern operation="pattern match">
+				[\n][\s]*auth[\s]+(?:(?:sufficient)|(?:\[.*default=die.*\]))[\s]+pam_unix\.so[^\n]+(?s).*[\n][\s]*auth[\s]+\[default=die\][\s]+pam_faillock\.so[\s]+authfail[\s]+[^\n]*deny=([0-9]+)[^\n]*[\n]
+			</ind:pattern>
+			<ind:instance datatype="int" operation="equals">1</ind:instance>
+		</ind:textfilecontent54_object>
+		<ind:textfilecontent54_object id="oval:nsr-object_accounts_password_pam_deny_phase_system-auth:obj:1" version="1">
+			<ind:behaviors singleline="true"/>
+			<ind:filepath>/etc/pam.d/system-auth</ind:filepath>
+			<ind:pattern operation="pattern match"> [\n][\s]*account[\s]+required[\s]+pam_faillock\.so[^\n]*[\n][\s]*account[\s]+required[\s]+pam_unix\.so[^\n]*[\n]
+			</ind:pattern>
+			<ind:instance datatype="int" operation="equals">1</ind:instance>
+		</ind:textfilecontent54_object>
+		<ind:textfilecontent54_object id="oval:nsr-object_accounts_password_pam-deny_slient_password-auth:obj:1" version="1">
+			<ind:behaviors singleline="true"/>
+			<ind:filepath>/etc/pam.d/password-auth</ind:filepath>
+			<ind:pattern operation="pattern match">
+				[\n][\s]*auth[\s]+required[\s]+pam_faillock\.so[\s]+preauth[\s]+[^\n]*silent[\s]+[^\n]*deny=([0-9]+)[\s]*(?s).*[\n][\s]*auth[\s]+(?:(?:sufficient)|(?:\[.*default=die.*\]))[\s]+pam_unix\.so[^\n]*[\n]
+			</ind:pattern>
+			<ind:instance datatype="int" operation="equals">1</ind:instance>
+		</ind:textfilecontent54_object>
+		<ind:textfilecontent54_object id="oval:nsr-object_accounts_password_pam_deny_authfail_password-auth:obj:1" version="1">
+			<ind:behaviors singleline="true"/>
+			<ind:filepath>/etc/pam.d/password-auth</ind:filepath>
+			<ind:pattern operation="pattern match">
+				[\n][\s]*auth[\s]+(?:(?:sufficient)|(?:\[.*default=die.*\]))[\s]+pam_unix\.so[^\n]+(?s).*[\n][\s]*auth[\s]+\[default=die\][\s]+pam_faillock\.so[\s]+authfail[\s]+[^\n]*deny=([0-9]+)[^\n]*[\n]
+			</ind:pattern>
+			<ind:instance datatype="int" operation="equals">1</ind:instance>
+		</ind:textfilecontent54_object>
+		<ind:textfilecontent54_object id="oval:nsr-object_accounts_password_pam_deny_account_password-auth:obj:1" version="1">
+			<ind:behaviors singleline="true"/>
+			<ind:filepath>/etc/pam.d/password-auth</ind:filepath>
+			<ind:pattern operation="pattern match">[\n][\s]*account[\s]+required[\s]+pam_faillock\.so[^\n]*[\n][\s]*account[\s]+required[\s]+pam_unix\.so[^\n]*[\n]
+			</ind:pattern>
+			<ind:instance datatype="int" operation="equals">1</ind:instance>
+		</ind:textfilecontent54_object>			
+		<ind:textfilecontent54_object id="oval:nsr-object_accounts_password_pam_unlock_time_silent_system-auth:obj:1" version="1">
+			<ind:filepath>/etc/pam.d/system-auth</ind:filepath>
+			<ind:pattern operation="pattern match">^\s*auth\s+(?:(?:required))\s+pam_faillock\.so\s+preauth.*unlock_time=([0-9]*).*$
+			</ind:pattern>
+			<ind:instance datatype="int" operation="greater than or equal">1</ind:instance>
+		</ind:textfilecontent54_object>
+		<ind:textfilecontent54_object id="oval:nsr-object_accounts_password_pam_unlock_time_authfail_system-auth:obj:1" version="1">
+			<ind:filepath>/etc/pam.d/system-auth</ind:filepath>
+			<ind:pattern operation="pattern match">^\s*auth\s+(?:(?:sufficient)|(?:\[default=die\]))\s+pam_faillock\.so\s+authfail.*unlock_time=([0-9]*).*$
+			</ind:pattern>
+			<ind:instance datatype="int" operation="greater than or equal">1</ind:instance>
+		</ind:textfilecontent54_object>
+		<ind:textfilecontent54_object id="oval:nsr-object_accounts_password_pam_unlock_time_slient_password-auth:obj:1" version="1">
+			<ind:filepath>/etc/pam.d/password-auth</ind:filepath>
+			<ind:pattern operation="pattern match">^\s*auth\s+(?:(?:required))\s+pam_faillock\.so\s+preauth.*unlock_time=([0-9]*).*$
+			</ind:pattern>
+			<ind:instance datatype="int" operation="greater than or equal">1</ind:instance>
+		</ind:textfilecontent54_object>
+		<ind:textfilecontent54_object id="oval:nsr-object_accounts_password_pam_unlock_time_authfail_password-auth:obj:1" version="1">
+			<ind:filepath>/etc/pam.d/password-auth</ind:filepath>
+			<ind:pattern operation="pattern match">
+				^\s*auth\s+(?:(?:sufficient)|(?:\[default=die\]))\s+pam_faillock\.so\s+authfail.*unlock_time=([0-9]*).*$
+			</ind:pattern>
+			<ind:instance datatype="int" operation="greater than or equal">1</ind:instance>
+		</ind:textfilecontent54_object>
+		<ind:textfilecontent54_object id="oval:nsr-object_accounts_password_exposure_etc-passwd:obj:1" version="1">
+			<ind:filepath>/etc/passwd</ind:filepath>
+			<ind:pattern operation="pattern match">^[^:]+:(?!x|\*|\!)[^:]+:</ind:pattern>
+			<ind:instance datatype="int" operation="greater than or equal">1</ind:instance>
+		</ind:textfilecontent54_object>
+		<ind:textfilecontent54_object id="oval:nsr-object_users_uid_zero_etc-passwd:obj:1" version="1">
+			<ind:filepath>/etc/passwd</ind:filepath>
+			<ind:pattern operation="pattern match">(^[^:?]+):[^:?]+:0:.*$</ind:pattern>
+			<ind:instance datatype="int" operation="greater than or equal">1</ind:instance>
+		</ind:textfilecontent54_object>
+		<ind:variable_object id="oval:nsr-object_users_uid_zero_etc-passwd_value:obj:1" version="1">
+			<ind:var_ref>oval:nsr-variable_users_zero_uid_count:var:1</ind:var_ref>
+		</ind:variable_object>
+		<unix:file_object id="oval:nsr-object_root_su_restriction-su_permission:obj:1" comment="check /bin/su chomd 4750" version="1">
+			<unix:filepath>/bin/su</unix:filepath>
+		</unix:file_object>
+		<ind:textfilecontent54_object id="oval:nsr-object_extract_pass_max_days:obj:1" comment="get PASS_MAX_DAYS" version="1">
+			<ind:behaviors singleline="true"/>
+			<ind:filepath>/etc/login.defs</ind:filepath>						
+			<ind:pattern operation="pattern match">.*\n[^#]*(PASS_MAX_DAYS\s+\d+)\s*\n</ind:pattern>			
+			<ind:instance datatype="int" operation="greater than or equal">1</ind:instance>
+		</ind:textfilecontent54_object>
+		<ind:variable_object id="oval:nsr-object_password_max_age_value:obj:1" version="1">
+			<ind:var_ref>oval:nsr-variable_password_max_age_value:var:1</ind:var_ref>
+		</ind:variable_object>
+		<ind:textfilecontent54_object id="oval:nsr-object_password_min_day:obj:1" comment="check /etc/login.defs" version="1">
+			<ind:filepath>/etc/login.defs</ind:filepath>
+			<ind:pattern>^\s*PASS_MIN_DAYS\s+(\d+)$</ind:pattern>
+			<ind:instance datatype="int" operation="greater than or equal">1</ind:instance>
+		</ind:textfilecontent54_object>	
+		<ind:textfilecontent54_object id="oval:nsr-object_useless_acounts:obj:1" comment="check useless accounts" version="1">
+			<ind:filepath>/etc/passwd</ind:filepath>
+			<ind:pattern>^\s*(nuucp|adm|lp|sync|shutdown|halt|news|uucp|operator|games|gopher|nfsnobody|squid)</ind:pattern>
+			<ind:instance datatype="int" operation="greater than or equal">1</ind:instance>
+		</ind:textfilecontent54_object>
+	</objects>
+	<states>
+		<ind:variable_state id="oval:nsr-state_last_pass_min_len_instance_value:ste:1" version="1"> 
+			<ind:value operation="greater than or equal" var_ref="oval:nsr-var_accounts_password_minlen_login_defs:var:1" datatype="int" var_check="at least one"/>
+		</ind:variable_state>	
+		<ind:textfilecontent54_state id="oval:nsr-state_password_pam_pwquility_minlen:ste:1" version="1"> 
+			<ind:instance datatype="int">1</ind:instance>
+			<ind:subexpression datatype="int" operation="greater than or equal" var_ref="oval:nsr-var_accounts_password_pam_minlen_login_defs:var:1"/>
+		</ind:textfilecontent54_state>
+		<ind:textfilecontent54_state id="oval:nsr-state_password_pam_pwquility_ocredit:ste:1" version="1">
+			<ind:instance datatype="int">1</ind:instance>
+			<ind:subexpression datatype="int" operation="less than or equal">-1</ind:subexpression>
+		</ind:textfilecontent54_state>
+		<ind:textfilecontent54_state id="oval:nsr-state_password_pam_pwquility_dcredit:ste:1" version="1">
+			<ind:instance datatype="int">1</ind:instance>
+			<ind:subexpression datatype="int" operation="less than or equal">-1</ind:subexpression>
+		</ind:textfilecontent54_state>
+		<ind:textfilecontent54_state id="oval:nsr-state_password_pam_pwquility_lcredit:ste:1" version="1">
+			<ind:instance datatype="int">1</ind:instance>
+			<ind:subexpression datatype="int" operation="less than or equal">-1</ind:subexpression>
+		</ind:textfilecontent54_state>
+		<ind:textfilecontent54_state id="oval:nsr-state_password_pam_pwquility_ucredit:ste:1" version="1">
+			<ind:instance datatype="int">1</ind:instance>
+			<ind:subexpression datatype="int" operation="less than or equal">-1</ind:subexpression>
+		</ind:textfilecontent54_state>
+		<ind:textfilecontent54_state id="oval:nsr-state_accounts_password_pam-deny_silent_system-auth:ste:1" version="1">
+			<ind:subexpression datatype="int" operation="less than or equal" var_ref="oval:nsr-var_accounts_password_pam_deny:var:1"/>
+		</ind:textfilecontent54_state>
+		<ind:textfilecontent54_state id="oval:nsr-state_accounts_password_pam-deny_authfail_system-auth:ste:1" version="1">
+			<ind:subexpression datatype="int" operation="less than or equal" var_ref="oval:nsr-var_accounts_password_pam_deny:var:1"/>
+		</ind:textfilecontent54_state>
+		<ind:textfilecontent54_state id="oval:nsr-state_accounts_password_pam-deny_slient_password-auth:ste:1" version="1">
+			<ind:subexpression datatype="int" operation="less than or equal" var_ref="oval:nsr-var_accounts_password_pam_deny:var:1"/>
+		</ind:textfilecontent54_state>
+		<ind:textfilecontent54_state id="oval:nsr-state_accounts_password_pam_deny_authfail_password-auth:ste:1" version="1">
+			<ind:subexpression datatype="int" operation="less than or equal" var_ref="oval:nsr-var_accounts_password_pam_deny:var:1"/>
+		</ind:textfilecontent54_state>
+		<ind:textfilecontent54_state id="oval:nsr-state_accounts_password_pam_unlock_time_silent_system-auth:ste:1" version="1">
+			<ind:subexpression datatype="int" operation="equals" var_ref="oval:nsr-var_accounts_password_pam_unlock_time:var:1"/>
+		</ind:textfilecontent54_state>
+		<ind:textfilecontent54_state id="oval:nsr-state_accounts_password_pam_unlock_time_authfail_system-auth:ste:1" version="1">
+			<ind:subexpression datatype="int" operation="equals" var_ref="oval:nsr-var_accounts_password_pam_unlock_time:var:1"/>
+		</ind:textfilecontent54_state>
+		<ind:textfilecontent54_state id="oval:nsr-state_accounts_password_pam_unlock_time_slient_password-auth:ste:1" version="1">
+			<ind:subexpression datatype="int" operation="equals" var_ref="oval:nsr-var_accounts_password_pam_unlock_time:var:1"/>
+		</ind:textfilecontent54_state>
+		<ind:textfilecontent54_state id="oval:nsr-state_accounts_password_pam_unlock_time_authfail_password-auth:ste:1" version="1">
+			<ind:subexpression datatype="int" operation="equals" var_ref="oval:nsr-var_accounts_password_pam_unlock_time:var:1"/>
+		</ind:textfilecontent54_state>
+		<ind:variable_state id="oval:nsr-state_users_uid_zero_etc-passwd_value:ste:1" version="1">
+			<ind:value datatype="int" operation="greater than">1</ind:value>
+		</ind:variable_state>
+		<unix:file_state id="oval:nsr-state_root_su_restriction-su_permission:ste:1" version="1">
+			<!--	chmod 4750 not root group 
+			done care group and pam setting. -->					
+			<unix:suid datatype="boolean">true</unix:suid>
+			<unix:uread datatype="boolean">true</unix:uread>
+			<unix:uwrite datatype="boolean">true</unix:uwrite>
+			<unix:uexec datatype="boolean">true</unix:uexec>
+			<unix:gread datatype="boolean">true</unix:gread>
+			<unix:gwrite datatype="boolean">false</unix:gwrite>
+			<unix:gexec datatype="boolean">true</unix:gexec>
+			<unix:oread datatype="boolean">false</unix:oread>
+			<unix:owrite datatype="boolean">false</unix:owrite>
+			<unix:oexec datatype="boolean">false</unix:oexec>
+		</unix:file_state>
+		<ind:variable_state id="oval:nsr-state_password_max_age:ste:1" version="1">
+			<ind:value datatype="int" operation="less than or equal" var_ref="oval:nsr-var_password_max_age_defs:var:1"/>
+		</ind:variable_state>
+		<ind:textfilecontent54_state id="oval:nsr-state_password_min_day:ste:1" version="1">
+			<ind:filepath>/etc/login.defs</ind:filepath>
+			<ind:pattern>^\s*PASS_MIN_DAYS\s+(\d+)$</ind:pattern>
+			<ind:subexpression datatype="int" operation="equals">1</ind:subexpression>
+		</ind:textfilecontent54_state>		
+	</states>
+	<variables> 
+		<local_variable id="oval:nsr-variable_last_pass_min_len_instance_value:var:1" datatype="int" comment="The value of last PASS_MIN_LEN directive in /etc/login.defs" version="1">
+			<regex_capture pattern="PASS_MIN_LEN\s+(\d+)">
+				<object_component item_field="subexpression" object_ref="oval:nsr-object_last_pass_min_len_from_etc_login_defs:obj:1"/>
+			</regex_capture>
+		</local_variable>
+		<local_variable id="oval:nsr-variable_users_zero_uid_count:var:1" datatype="int" comment="count user to have zero UID in /etc/passwd" version="1">
+			<count> 
+				<object_component item_field="subexpression" object_ref="oval:nsr-object_users_uid_zero_etc-passwd:obj:1"/>
+			</count>
+		</local_variable>
+		<local_variable id="oval:nsr-variable_password_max_age_value:var:1" datatype="int" comment="PASS_MAX_DAYS in /etc/logins.defs" version="1">
+			<regex_capture pattern="^\s*PASS_MAX_DAYS\s+(\d+)">
+				<object_component item_field="subexpression" object_ref="oval:nsr-object_extract_pass_max_days:obj:1"/>
+			</regex_capture>
+		</local_variable>
+		<external_variable comment="Password minimum length" datatype="int" id="oval:nsr-var_accounts_password_minlen_login_defs:var:1" version="1"/>
+		<external_variable comment="Password minimum length" datatype="int" id="oval:nsr-var_accounts_password_pam_minlen_login_defs:var:1" version="1"/>	
+		<external_variable comment="PAM accounts password deny count" datatype="int" id="oval:nsr-var_accounts_password_pam_deny:var:1" version="1"/>
+		<external_variable comment="PAM accounts password unlock timeout" datatype="int" id="oval:nsr-var_accounts_password_pam_unlock_time:var:1" version="1"/>	
+		<external_variable comment="Passwor maximum age" datatype="int" id="oval:nsr-var_password_max_age_defs:var:1" version="1"/>
+	</variables>
+</oval_definitions></ds:component><ds:component id="scap_org.open-scap_comp_nsr-fedora-ocil.xml" timestamp="2017-08-17T13:25:16"><ocil xmlns="http://scap.nist.gov/schema/ocil/2.0">
+	<generator>
+        <schema_version>2.0</schema_version>
+        <timestamp>2017-07-11T09:43:25Z</timestamp>              
+    </generator>
+    <questionnaires>
+    	<questionnaire id="ocil:nsr-accounts_password_minlen_login_defs_ocil:questionnaire:1">
+    		<title> 패스워드 최소 길이 </title>
+    		<actions>
+    			<test_action_ref>ocil:nsr-accounts_password_minlen_login_defs_action:testaction:1</test_action_ref>
+    		</actions>
+        </questionnaire>
+        <questionnaire id="ocil:nsr-password-max_age_defs_ocil:questionnaire:1">
+            <title>패스워드 만료일</title>
+            <actions>
+                <test_action_ref>ocil:nsr-password_max_age_defs_action:testaction:1</test_action_ref>
+            </actions>
+        </questionnaire>
+    </questionnaires>
+    <test_actions>
+    	<boolean_question_test_action id="ocil:nsr-accounts_password_minlen_login_defs_action:testaction:1" question_ref="ocil:nsr-accounts_password_minlen_login_defs_question:question:1">
+    		<when_true>
+    			<result>PASS</result>
+    		</when_true>
+    		<when_false>
+    			<result>FAIL</result>
+    		</when_false>
+    	</boolean_question_test_action>
+        <boolean_question_test_action id="ocil:nsr-password_max_age_defs_action:testaction:1" question_ref="ocil:nsr-password_max_age_defs_question:question:1">
+        <when_true>
+            <result>PASS</result>
+        </when_true>
+        <when_false>
+            <result>FAIL</result>
+        </when_false>    
+        </boolean_question_test_action>
+    </test_actions>
+    <questions>
+    	<boolean_question id="ocil:nsr-accounts_password_minlen_login_defs_question:question:1">
+    		<question_text>
+    			패스워드 최소 길이를 확인하기 위해서 다음과 같은 명령어를 입력하시오:
+    			$ grep PASS_MIN_LEN /etc/login.defs
+    			최소 길이를 8 이상 설정하는 것을 권고하고 있습니다. 
+    			필요한 값으로 설정되 않은 경우입니까?
+    		</question_text>
+    	</boolean_question>
+        <boolean_question id="ocil:nsr-password_max_age_defs_question:question:1">
+            <question_text>
+                패스워드 만료일을 확인하기 위해서 다음과 같은 명령어를 입력하시오:
+                $grep PASS_MAX_DAYS /etc/login.defs
+                만료일을 90일으로 사용하는 것을 권고하고 있습니다. 
+                필요한 값으로 설정되지 않은 경우입니까?
+            </question_text>
+        </boolean_question>
+    </questions>
+</ocil></ds:component><ds:component id="scap_org.open-scap_comp_nsr-fedora-xccdf.xml" timestamp="2017-08-17T13:53:35"><Benchmark xmlns="http://checklists.nist.gov/xccdf/1.2" xmlns:html="http://www.w3.org/1999/xhtml" id="xccdf_com.jiransnc_benchmark_server_major_base" resolved="1" xml:lang="en-US" style="SCAP_1.2">
+	<status date="2017-07-10">draft</status> 
+	<title xml:lang="ko"> 주요정보통신 기반시설 기술적 취약점 분석·평가 보안 가이드 </title>
+	<description xml:lang="ko">「정보통신기반 보호법」 제 9조에 따라 주요정보통신기반시설 관리기관은 매년 취약점 분석·평가를 실시하여야 한다. 취약점 분석·평가는 453개의 관리적/물리적/기술적 점검항목에 대한 취약여부를 점검하고 모의해킹, 침투테스트 등을 수행하는 종합적인 위험진단에 해당한다. 
+	<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+ 	한편 취약점 분석ㆍ평가를 수행함에 있어 기술적 점검은, 시스템에 대한 실제 보안값 설정에 관한 것으로 각 시스템에 대한 명령어 코드 (Command), 메뉴 구성(UI)과 같은 기술적인 사항을 알아야만 가능하기에, 주요정보통신기반시설 담당자들의 어려움이 따르게 된다. 
+ 	<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+ 	이러한 기술적 점검에 대한 어려움을 해소하고 주요정보통신기반시설 담당자들의 이해를 돕기 위해, 안전행정부는 전체 313개의 기술적 점검항목에 대한 점검 방법 및 조치방법 상세 메뉴얼을 개발하게 되었다. 
+ 	<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+ 	각각의 점검항목이 의미하는 위험내역 설명과 함께, 점검방법 및 조치방법을 실제 시스템 입력화면 등을 활용하여 상세 설명하였으며, 특정 벤더사의 제품으로 한정하지 않고 대표적인 벤더사 제품별로 구분하여 설명을 제시하였다. 
+ 	</description> 	
+ 	<notice> 본 보안 가이드는 국보연 공동과제를 목적으로 주요정보통신기반시설 기술적 취약점 분석/평가 방법 상세 가이드를 토대로 기술되었다. 
+ 		<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+ 		<html:strong xmlns:html="http://www.w3.org/1999/xhtml">
+ 		보안 가이드에 대한 수정/배포는 국보연 정책을 따른다. </html:strong>
+ 	</notice>
+ 	<front-matter xml:lang="en-US">
+        <html:p xmlns:html="http://www.w3.org/1999/xhtml" xmlns:ns2="http://www.w3.org/2000/svg">
+          <ns2:svg enable-background="new 30 100 330 150" height="140px" id="Layer_1" version="1.1" viewBox="30 100 330 150" width="350px" x="0px" y="0px" xml:space="preserve">
+        <ns2:g fill="#3A3B3B">
+          <ns2:path d="m197.1 150.3s-10.1-1.2-14.4-1.2c-7.2 0-11.0 2.6-11.0 8.3 0 6.6 3.5 7.7 12.3 9.6 10.1 2.3 14.5 4.7 14.5 13.6 0 11.2-6.1 15.6-16.1 15.6-6.0 0-16.0-1.6-16.0-1.6l0.6-4.7s9.9 1.3 15.1 1.3c7.2 0 10.8-3.1 10.8-10.2 0-5.7-3.0-7.3-11.2-8.9-10.4-2.3-15.7-4.7-15.7-14.4 0-9.8 6.4-13.6 16.3-13.6 6.0 0 15.3 1.5 15.3 1.5l-0.5 4.8z"/>
+          <ns2:path d="m238.7 194.6c-3.6 0.7-9.1 1.5-13.9 1.5-15.1 0-18.5-9.2-18.5-25.9 0-17.1 3.3-26.1 18.5-26.1 5.2 0 10.7 1.0 13.9 1.6l-0.2 4.7c-3.3-0.6-9.2-1.3-13.1-1.3-11.2 0-13.2 6.7-13.2 21.1 0 14.1 1.8 20.8 13.4 20.8 4.1 0 9.5-0.7 13.0-1.3l0.2 4.8z"/>
+          <ns2:path d="m257.5 144.9h12.3l13.9 50.5h-5.6l-3.7-13.0h-21.6l-3.7 13.0h-5.5l13.9-50.5zm-3.4 32.5h19.1l-7.7-27.7h-3.8l-7.7 27.7z"/>
+          <ns2:path d="m297.2 178.4v17.0h-5.6v-50.5h18.5c11.0 0 16.1 5.3 16.1 16.3 0 11.0-5.1 17.2-16.1 17.2h-12.9zm12.8-5.0c7.4 0 10.4-4.5 10.4-12.3 0-7.7-3.1-11.3-10.4-11.3h-12.8v23.6h12.8z"/>
+        </ns2:g>
+        <ns2:g fill="#676767">
+          <ns2:path d="m176.8 211.2s-2.8-0.3-4.0-0.3c-1.5 0-2.2 0.5-2.2 1.4 0 0.9 0.5 1.2 2.8 1.9 2.9 0.9 3.8 1.8 3.8 4.0 0 3.0-2.0 4.3-4.7 4.3-1.9 0-4.5-0.6-4.5-0.6l0.3-2.1s2.7 0.4 4.1 0.4c1.5 0 2.1-0.7 2.1-1.8 0-0.8-0.5-1.2-2.4-1.8-3.1-0.9-4.2-1.9-4.2-4.1 0-2.8 1.9-4.0 4.6-4.0 1.8 0 4.5 0.5 4.5 0.5l-0.2 2.2z"/>
+          <ns2:path d="m180.6 208.7h8.8v2.4h-6.0v3.2h4.8v2.4h-4.9v3.3h6.0v2.4h-8.8v-13.6z"/>
+          <ns2:path d="m201.2 222.1c-0.9 0.2-2.7 0.5-4.0 0.5-4.2 0-5.2-2.3-5.2-7.0 0-5.2 1.2-7.0 5.2-7.0 1.4 0 3.1 0.3 4.0 0.5l-0.1 2.2c-0.9-0.1-2.6-0.3-3.5-0.3-2.1 0-2.8 0.7-2.8 4.6 0 3.7 0.5 4.6 2.8 4.6 0.9 0 2.6-0.2 3.4-0.3l0.1 2.3z"/>
+          <ns2:path d="m209.5 220.2c1.6 0 2.4-0.8 2.4-2.4v-9.1h2.8v9.0c0 3.4-1.8 4.8-5.2 4.8-3.4 0-5.2-1.4-5.2-4.8v-9.0h2.8v9.1c0 1.6 0.8 2.4 2.4 2.4z"/>
+          <ns2:path d="m221.3 217.8v4.6h-2.8v-13.6h5.3c3.1 0 4.8 1.4 4.8 4.5 0 1.9-0.8 3.1-2.0 3.9l1.9 5.2h-3.0l-1.6-4.6h-2.7zm2.5-6.7h-2.5v4.3h2.6c1.4 0 1.9-1.0 1.9-2.2 0-1.3-0.7-2.2-2.0-2.2z"/>
+          <ns2:path d="m231.9 208.7h2.8v13.6h-2.8v-13.6z"/>
+          <ns2:path d="m237.4 208.7h10.0v2.4h-3.6v11.2h-2.8v-11.2h-3.6v-2.4z"/>
+          <ns2:path d="m255.7 222.3h-2.8v-5.5l-4.2-8.1h3.1l2.5 5.4 2.5-5.4h3.1l-4.2 8.1v5.5z"/>
+          <ns2:path d="m273.4 215.1h4.0v7.1s-2.9 0.5-4.6 0.5c-4.4 0-5.6-2.5-5.6-7.0 0-5.0 1.4-7.0 5.5-7.0 2.1 0 4.7 0.6 4.7 0.6l-0.1 2.1s-2.4-0.3-4.2-0.3c-2.4 0-3.1 0.8-3.1 4.6 0 3.6 0.5 4.6 3.0 4.6 0.8 0 1.7-0.1 1.7-0.1v-2.6h-1.2v-2.4z"/>
+          <ns2:path d="m286 220.2c1.6 0 2.4-0.8 2.4-2.4v-9.1h2.8v9.0c0 3.4-1.8 4.8-5.2 4.8s-5.2-1.4-5.2-4.8v-9.0h2.8v9.1c0 1.6 0.8 2.4 2.4 2.4z"/>
+          <ns2:path d="m295.0 208.7h2.8v13.6h-2.8v-13.6z"/>
+          <ns2:path d="m301.8 222.3v-13.6h4.6c4.7 0 5.8 2.0 5.6 6.5 0 4.6-0.9 7.1-5.8 7.1h-4.6zm4.6-11.2h-1.8v8.8h1.8c2.7 0 2.9-1.6 2.9-4.7 0-3.0-0.3-4.1-3.0-4.1z"/>
+          <ns2:path d="m315.5 208.7h8.8v2.4h-6.0v3.2h4.8v2.4h-4.8v3.3h6.0v2.4h-8.8v-13.6z"/>
+        </ns2:g>
+        <ns2:path d="m116.0 204.9h-2.8c-1.5 0-2.8 1.2-2.8 2.7v19.2c0 1.5 1.3 2.7 2.8 2.7h27.9c1.5 0 2.8-1.2 2.8-2.7v-19.2c0-1.5-1.3-2.7-2.8-2.7h-2.8v-8.2c0-6.1-5.0-11.0-11.2-11.0-6.2 0-11.2 4.9-11.2 11.0v8.2zm5.6-8.2c0-3.0 2.5-5.5 5.6-5.4 3.1 0 5.6 2.4 5.6 5.5v8.2h-11.2v-8.2z" fill="#6D0B2B"/>
+        <ns2:g fill="#AD1D3F">
+          <ns2:path d="m106.4 214.7c-16.4 11.4-37.5 7.8-50.0-3.4l11.9-11.7c2.3-1.9 3.4-5.4 1.2-8.8-0.1-0.1-6.7-11.0 2.3-19.8 7.3-7.2 17.8-5.8 23.3-0.3 3.2 3.1 4.9 7.1 4.9 11.4v0.1c0 4.3-1.8 8.5-5.1 11.7-4.0 3.9-9.6 5.4-15.4 4.1-2.1-0.5-4.3 0.8-4.8 2.9-0.5 2.1 0.8 4.2 2.9 4.7 8.4 2.0 16.9-0.3 22.8-6.1 4.9-4.8 7.5-10.9 7.4-17.4-0.0-6.3-2.6-12.3-7.3-16.8-8.2-8.1-23.8-10.3-34.5 0.3-10.7 10.5-6.6 23.8-3.7 28.8l-12.8 12.6c-2.9 2.9-2.3 6.6-0.2 8.7 15.4 15.2 38.7 17.9 56.9 8.2l-0.0-9.1z"/>
+          <ns2:path d="m43.9 188.4c-1.1-7.5-1.1-21.8 11.2-33.9 8.0-7.9 18.5-12.0 29.5-11.7 10.2 0.3 20.1 4.5 27.1 11.4 7.6 7.4 11.8 17.3 11.9 27.8v0.1c1.16-0.3 2.4-0.4 3.6-0.4 1.5 0 2.9 0.2 4.3 0.6 0-0.1 0.0-0.2 0.0-0.3-0.1-12.5-5.2-24.3-14.2-33.2-8.4-8.3-20.2-13.3-32.4-13.7-13.2-0.5-25.8 4.5-35.4 14.0-9.1 8.9-14.0 20.8-14.0 33.3 0 2.4 0.2 4.8 0.5 7.2 0.6 4.0 1.8 8.1 3.7 12.2 0.9 2.0 3.2 2.8 5.2 1.9 2.0-0.9 2.9-3.1 2.0-5.1-1.5-3.3-2.6-6.8-3.1-10.1z"/>
+        </ns2:g>
+        <ns2:circle cx="127.26" cy="218.49" fill="#fff" r="3.233"/>
+      </ns2:svg>
+        </html:p>
+    </front-matter>
+    <rear-matter>
+    	정보시스템 보안관리 수준 자동 검증(평가) 프레임워크 
+    </rear-matter>
+    <platform idref="cpe:/o:fedoraproject:fedora:25"/>
+    <platform idref="cpe:/o:fedoraproject:fedora:24"/>
+    <platform idref="cpe:/o:fedoraproject:fedora:23"/>
+    <platform idref="cpe:/o:fedoraproject:fedora:22"/>
+    <platform idref="cpe:/o:fedoraproject:fedora:21"/>
+    <platform idref="cpe:/o:fedoraproject:fedora:20"/>
+    
+    <version>0.9</version>
+    <model system="urn:xccdf:scoring:default"/>
+    
+     <Profile id="xccdf_com.jiransnc_profile_major_base">
+    	<title xml:lang="ko">주요정보통신기반 시설</title>
+    	<description xml:lang="ko">주요정보통신기반 시설에 대한 취약점을 진단</description>
+    	<select idref="xccdf_com.jiransnc_rule_sshd_disable_root_login" selected="true"/>
+    	<select idref="xccdf_com.jiransnc_rule_no_direct_root_logins" selected="true"/>
+        <select idref="xccdf_com.jiransnc_rule_accounts_password_minlen_login_defs" selected="true"/>
+        <select idref="xccdf_com.jiransnc_rule_pam_password_len_check" selected="true"/>
+        <select idref="xccdf_com.jiransnc_rule_accounts_password_pam_ocredit" selected="true"/>
+        <select idref="xccdf_com.jiransnc_rule_accounts_password_pam_dcredit" selected="true"/>
+        <select idref="xccdf_com.jiransnc_rule_accounts_password_pam_lcredit" selected="true"/>
+        <select idref="xccdf_com.jiransnc_rule_accounts_password_pam_ucredit" selected="true"/>
+        <select idref="xccdf_com.jiransnc_rule_accounts_password_pam_deny" selected="true"/>
+        <select idref="xccdf_com.jiranscn_rule_accounts_password_protection" selected="true"/>
+        <select idref="xccdf_com.jiranscn_rule_users_uid_zero" selected="true"/>
+        <select idref="xccdf_com.jiranscn_rule_root_su_restriction" selected="true"/>
+        <select idref="xccdf_com.jiransnc_rule_password_max_age" selected="true"/>
+        <select idref="xccdf_com.jiransnc_rule_pass_min_day" selected="true"/>
+        <select idref="xccdf_com.jiransnc_rule_useless_accounts" selected="true"/>
+    </Profile>
+    
+    <Group id="xccdf_com.jiransnc_group_account_management">
+    	<title xml:lang="ko"> 계정 관리 취약점 </title>
+    	<description xml:lang="ko"> 계정 관리에 대한 취약점 진단을 수행하기 위한 진단 항목에 대해서 정의한다. </description>
+    	<Group id="xccdf_com.jiransnc_group_root_logins">
+    		<title xml:lang="ko"> root 로그인 제한 </title>
+    		<description xml:lang="ko"> root는 일반적으로 시스템에 패키지를 설치하거나 시스템에 대한 속성을 정보를 변경할 수 있는 관리자 개정이다. 해당 계정이 
+    			직접적으로 로그인을 허용할 경우 보안상 취약하게 된다. 일반적으로 일반 user 계정을 이용해서 sudo, su 명령을 이용해서 사용하는 것을 권고한다. 
+    		</description>    		    	
+    	    	<Rule id="xccdf_com.jiransnc_rule_sshd_disable_root_login" selected="true" severity="high">                    
+    			<title xml:lang="ko"> sshd root 계정 원격 접속 제한 </title>
+                <description xml:lang="ko">
+                  SSH를 이용해서 직접적으로 root 계정에 대한 로그인을 제한해야 한다. 만약에 시스템을 계정을 원하는 경우 <html:code> su , sudo </html:code> 를 통해서 시스템 계정에 접근을 해야 한다. 
+                    <html:br/><html:br/><html:b>판단 기준 </html:b> <html:br/>
+                    <html:code> /etc/sshd/sshd_config </html:code> root 계정에 대한 접근 여부 검증 <html:br/>
+                    <html:b>양호: </html:b> <html:br/>
+                    permitRootLogin no<html:br/>
+                    <html:b>취약: </html:b><html:br/> 
+                    permitRootLogin yes 또는 해당 속성이 주석처리 된 경우 <html:br/><html:br/>
+                    <html:b>조치 방법 </html:b><html:br/>
+<html:pre>
+1. vi 편집기를 이용해서 /etc/sshd/sshd_config 파일을 연다. 
+2. permitRootLogin no 로 설정 
+</html:pre> 
+                </description>    			
+                <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AC-6(2)</reference>
+    			<reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">IA-2(1)</reference>
+    			<reference href="http://iase.disa.mil/stigs/cci/Pages/index.aspx">770</reference>
+    			<reference href="http://www.icqa.or.kr//pds/%EC%A3%BC%EC%9A%94%EC%A0%95%EB%B3%B4%ED%86%B5%EC%8B%A0%EA%B8%B0%EB%B0%98%EC%8B%9C%EC%84%A4.pdf">U-01</reference>
+    			<rationale xml:lang="ko"> root 계정에 대해 SSH 원격 접속을 제한하는 경우 <html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+    				<html:pre xmlns:html="http://www.w3.org/1999/xhtml">PermitRootLogin no (/etc/ssh/sshd_config)</html:pre>
+    			</rationale>
+        		<fix id="sshd_disable_root_login" system="urn:xccdf:fix:script:sh" complexity="high" disruption="medium" strategy="restrict">
+SSHD_CONFIG='/etc/ssh/sshd_config'
+# Obtain line number of first uncommented case-insensitive occurrence of Match
+# block directive (possibly prefixed with whitespace) present in $SSHD_CONFIG
+FIRST_MATCH_BLOCK=$(sed -n '/^[[:space:]]*Match[^\n]*/I{=;q}' $SSHD_CONFIG)
+
+# Obtain line number of first uncommented case-insensitive occurence of
+# PermitRootLogin directive (possibly prefixed with whitespace) present in
+# $SSHD_CONFIG
+FIRST_PERMIT_ROOT_LOGIN=$(sed -n '/^[[:space:]]*PermitRootLogin[^\n]*/I{=;q}' $SSHD_CONFIG)
+
+# Case: Match block directive not present in $SSHD_CONFIG
+if [ -z "$FIRST_MATCH_BLOCK" ]
+then
+
+    # Case: PermitRootLogin directive not present in $SSHD_CONFIG yet
+    if [ -z "$FIRST_PERMIT_ROOT_LOGIN" ]
+    then
+        # Append 'PermitRootLogin no' at the end of $SSHD_CONFIG
+        echo -e "\nPermitRootLogin no" &gt;&gt; $SSHD_CONFIG
+
+    # Case: PermitRootLogin directive present in $SSHD_CONFIG already
+    else
+        # Replace first uncommented case-insensitive occurrence
+        # of PermitRootLogin directive
+        sed -i "$FIRST_PERMIT_ROOT_LOGIN s/^[[:space:]]*PermitRootLogin.*$/PermitRootLogin no/I" $SSHD_CONFIG
+    fi
+
+# Case: Match block directive present in $SSHD_CONFIG
+else
+
+    # Case: PermitRootLogin directive not present in $SSHD_CONFIG yet
+    if [ -z "$FIRST_PERMIT_ROOT_LOGIN" ]
+    then
+        # Prepend 'PermitRootLogin no' before first uncommented
+        # case-insensitive occurrence of Match block directive
+        sed -i "$FIRST_MATCH_BLOCK s/^\([[:space:]]*Match[^\n]*\)/PermitRootLogin no\n\1/I" $SSHD_CONFIG
+
+    # Case: PermitRootLogin directive present in $SSHD_CONFIG and placed
+    #       before first Match block directive
+    elif [ "$FIRST_PERMIT_ROOT_LOGIN" -lt "$FIRST_MATCH_BLOCK" ]
+    then
+        # Replace first uncommented case-insensitive occurrence
+        # of PermitRootLogin directive
+        sed -i "$FIRST_PERMIT_ROOT_LOGIN s/^[[:space:]]*PermitRootLogin.*$/PermitRootLogin no/I" $SSHD_CONFIG
+
+    # Case: PermitRootLogin directive present in $SSHD_CONFIG and placed
+    # after first Match block directive
+    else
+         # Prepend 'PermitRootLogin no' before first uncommented
+         # case-insensitive occurrence of Match block directive
+         sed -i "$FIRST_MATCH_BLOCK s/^\([[:space:]]*Match[^\n]*\)/PermitRootLogin no\n\1/I" $SSHD_CONFIG
+    fi
+fi        		</fix>
+       			<check system="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+       				<check-content-ref name="oval:nsr-sshd_disable_root_login:def:1" href="nsr-fedora-oval.xml"/> 
+       			</check>     
+    		</Rule>                         
+	   		<Rule id="xccdf_com.jiransnc_rule_no_direct_root_logins" selected="true" severity="high">
+    			<title xml:lang="ko"> 원격 root 로그인 비 허용(pts 제한) - TBD </title>
+              	<description xml:lang="ko">
+                    <html:b>판단 기준 </html:b> <html:br/>
+                    <html:b>양호: </html:b> <html:br/>
+                    /etc/pam.d/login 파일에 auth required pam_securetty.so 속성 정의 <html:br/>
+                    /etc/securetty 파일에 pts/0~pts/X 관련 설정이 존재하지 않는 경우 (pts 미 존재) <html:br/>                     
+                    <html:b>취약: </html:b><html:br/> 
+                    /etc/pam.d/login 파일에 auth pam_security.so 속성 정의 <html:br/>
+                    /etc/securetty 파일에서 pts/0~pts/X 가 존재하는 경우 (pts 존재) <html:br/><html:br/>
+                    <html:b>조치 방법 </html:b><html:br/>
+                    <html:pre> 
+1. pts 터미널를 주석 처리  
+# sed 's/^[[:space:]]*pts/#pts/g' -i /etc/securetty <html:br/>
+2. root 접속 관련 pam 설정 <html:br/>
+2-1) vi 편집기를 이용해서 /etc/pam.d/login 파일 수정  <html:br/>
+(수정 전) #auth required pam_securetty.so 로 수정 <html:br/>
+(수정 후) auth required pam_securetty.so 
+                    </html:pre>                  
+                </description>
+    			<reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">IA-2(1)</reference>
+    			<reference href="http://www.icqa.or.kr//pds/%EC%A3%BC%EC%9A%94%EC%A0%95%EB%B3%B4%ED%86%B5%EC%8B%A0%EA%B8%B0%EB%B0%98%EC%8B%9C%EC%84%A4.pdf">U-01</reference>
+    			<rationale xml:lang="ko"> 
+    				/etc/seucretty에 root 계정 접근 인터페이스에 따라서 pts/1~pts/N, ttyN 등에 관련된 터미널 정보가 기술이 되어 있으며 root 접근시 해당 터미널 열리게 된다.   
+    			</rationale>    
+    			<fix id="no_direct_root_logins" system="urn:xccdf:fix:script:sh" complexity="high" disruption="medium" strategy="restrict">
+    				sed 's/^[[:space:]]*pts/#pts/g' -i /etc/securetty 
+    			</fix>
+    			<check system="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+    				<check-content-ref name="oval:nsr-no_direct_root_logins:def:1" href="nsr-fedora-oval.xml"/>
+    			</check>
+    		</Rule>
+    	</Group>   
+        <Group id="xccdf_com.jiransnc_group_password_setting">
+            <title xml:lang="ko"> 패스워드 설정 검증 </title>
+            <description xml:lang="ko"> 계정에 대한 패스워드 설정을 검증 항목을 포함한다. </description>
+                <Value id="xccdf_com.jiransnc_value_var_accounts_password_minlen_login_defs" type="number">
+                    <title xml:lang="ko"> 패스워드 문자열 최소 길이 (계정 생성 시) </title>
+                    <description xml:lang="ko"> 패스워드 문자열 길이 대한 값 정의 </description>
+                    <value>8</value>
+                    <value selector="6">6</value>
+                    <value selector="8">8</value>
+                    <value selector="10">10</value>
+                    <value selector="12">12</value>
+                    <value selector="14">14</value>
+                    <value selector="16">16</value>
+                </Value>
+                <Value id="xccdf_com.jiransnc_value_var_password_pam_deny" type="number">
+                    <title xml:lang="en-US">계정 잠금 시도 횟수 </title>
+                    <description xml:lang="ko">재 시도 횟수</description>
+                    <value>5</value>
+                    <value selector="1">1</value>
+                    <value selector="2">2</value>
+                    <value selector="3">3</value>
+                    <value selector="4">4</value>
+                    <value selector="5">5</value>
+                </Value>
+                <Value id="xccdf_com.jiransnc_value_var_password_pam_deny_unlock_time" type="number">
+                    <title xml:lang="en-US">계정 잠금 시간(Sec)</title>
+                    <description xml:lang="ko">계정 잠금 임계값에 도달했을 경우, 잠금 시간을 초 단위로 설정</description>
+                    <value>120</value>
+                    <value selector="60">120</value>
+                    <value selector="120">120</value>
+                    <value selector="180">180</value>
+                    <value selector="240">240</value>
+                    <value selector="300">300</value>
+                </Value>
+                <Value id="xccdf_com.jiransnc_value_var_password_max_age_day" type="number">
+                    <title xml:lang="en-US">패스워드 만료일 </title>
+                    <value>90</value>
+                    <value selector="30">30</value>
+                    <value selector="60">60</value>
+                    <value selector="90">90</value>
+                    <value selector="120">120</value>
+                    <value selector="150">150</value>
+                    <value selector="180">180</value>
+                </Value>                
+       	        <Rule id="xccdf_com.jiransnc_rule_accounts_password_minlen_login_defs" selected="true" severity="high">
+    		    <title xml:lang="ko"> 패스워드 최소 길이 (Legacy) </title>
+    		    <description xml:lang="ko">
+                     /etc/login.def 에 정의된 PASS_MIN_LEN 속성 값을 확인하며, 이는 pam.d(minlen) 설정에 보다 우선 순위가 낮다. 
+                    <html:br/>만약에 pam.d에 의해서 정의되는 경우 해당 설정은 값은 무시가 된다. <html:br/><html:br/>
+                    <html:b>판단 기준 </html:b> <html:br/>
+                    <html:b>양호: </html:b> <html:br/>
+                        PASS_MIN_LEN &gt;= <sub idref="xccdf_com.jiransnc_value_var_accounts_password_minlen_login_defs" use="legacy"/> <html:br/><html:br/>
+                    <html:b>취약: </html:b><html:br/> 
+                        PASS_MIN_LEN &lt;<sub idref="xccdf_com.jiransnc_value_var_accounts_password_minlen_login_defs" use="legacy"/> <html:br/><html:br/>
+                    <html:b>조치 방법 </html:b><html:br/>
+                    <html:pre> 
+1. vi 편집기를 통해서 /etc/login.def 파일을 연다. <html:br/>
+2. PASS_MIN_LEN 값을 <sub idref="xccdf_com.jiransnc_value_var_accounts_password_minlen_login_defs" user="legacy"/> 로 대체
+ex) PASS_MIN_LEN <sub idref="xccdf_com.jiransnc_value_var_accounts_password_minlen_login_defs" user="legacy"/>
+                    </html:pre>    
+                </description>    		    			
+        		<reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">IA-5(f)</reference>
+                <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">IA-5(1)(a)</reference>
+                <reference href="http://iase.disa.mil/stigs/cci/Pages/index.aspx">205</reference>
+                <reference href="http://www.icqa.or.kr//pds/%EC%A3%BC%EC%9A%94%EC%A0%95%EB%B3%B4%ED%86%B5%EC%8B%A0%EA%B8%B0%EB%B0%98%EC%8B%9C%EC%84%A4.pdf">U-02</reference>
+        	    <rationale xml:lang="ko"> 
+        	    	정의한 임계값 보다 크거나 같은 설정을 해야 한다.      	    	
+        		</rationale>    
+<fix id="accounts_password_minlen_login_defs" system="urn:xccdf:fix:script:sh" complexity="high" disruption="low" strategy="enable">
+declare var_accounts_password_minlen_login_defs
+var_accounts_password_minlen_login_defs="<sub idref="xccdf_com.jiransnc_value_var_accounts_password_minlen_login_defs" use="legacy"/>"
+grep -q ^PASS_MIN_LEN /etc/login.defs &amp;&amp; \
+sed -i "s/PASS_MIN_LEN.*/PASS_MIN_LEN\t$var_accounts_password_minlen_login_defs/g" /etc/login.defs
+if ! [ $? -eq 0 ]
+then
+  echo -e "PASS_MIN_LEN\t$var_accounts_password_minlen_login_defs" &gt;&gt; /etc/login.defs
+fi
+</fix>
+    			<check system="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+    				<check-export export-name="oval:nsr-var_accounts_password_minlen_login_defs:var:1" value-id="xccdf_com.jiransnc_value_var_accounts_password_minlen_login_defs"/>
+    				<check-content-ref name="oval:nsr-accounts_password_minlen_login_defs:def:1" href="nsr-fedora-oval.xml"/>
+    			</check>
+    			<check system="http://scap.nist.got/schema/ocil/2">
+    				<check-content-ref name="ocil:nsr-accounts_password_minlen_login_defs_ocil:questionnaire:1" href="nsr-fedora-ocil.xml"/>
+    			</check>
+		    </Rule>
+		    <Rule id="xccdf_com.jiransnc_rule_pam_password_len_check" selected="true" severity="high">
+        		<title xml:lang="ko"> 패스워드 최소 길이 (pam.d)  </title>
+        		<description xml:lang="ko"> <html:b xmlns:html="http://www.w3.org/1999/xhtml"> 
+        			판단 기준 </html:b><html:br xmlns:html="http://www.w3.org/1999/xhtml"/>     			
+        			<html:b> 양호: </html:b><html:br xmlns:html="http://www.w3.org/1999/xhtml"/>  
+        			1. 우선 순위 높음 (/etc/pam.d/system-auth) <html:br/>
+        			<html:code xmlns:html="http://www.w3.org/1999/xhtml"> password  requisite  pam_pwquality.so  </html:code> <html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+                     /etc/security/pwquality.conf 파일에서 
+                     minlen 값이 존재하는 경우 minlen &gt;= <sub idref="xccdf_com.jiransnc_value_var_accounts_password_minlen_login_defs" use="legacy"/> 
+        			<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+        			2. 우선 순위 낮음 (/etc/login.def) <html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+        			<html:code xmlns:html="http://www.w3.org/1999/xhtml"> PASS_MIN_LEN &gt;= <sub idref="xccdf_com.jiransnc_value_var_accounts_password_minlen_login_defs" use="legacy"/> </html:code><html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+        			<html:b>취약:</html:b> <html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+        			<html:code xmlns:html="http://www.w3.org/1999/xhtml"> password  requisite  pam_pwquality.so </html:code><html:br xmlns:html="http://www.w3.org/1999/xhtml"/> 
+        			존재하는 경우 minlen &lt; <sub idref="xccdf_com.jiransnc_value_var_accounts_password_minlen_login_defs" use="legacy"/> <html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+        			존재하지 않는 경우 <html:code xmlns:html="http://www.w3.org/1999/xhtml"> PASS_MIN_LEN &lt; <sub idref="xccdf_com.jiransnc_value_var_accounts_password_minlen_login_defs" use="legacy"/> </html:code>
+        			<html:br xmlns:html="http://www.w3.org/1999/xhtml"/><html:br/><html:br/>
+        			<html:b>조치 방법: </html:b>
+        			<html:pre xmlns:html="http://www.w3.org/1999/xhtml">
+case 1) 우선 순위 높음 
+1. /etc/pam.d/system-auth 파일에서 password (requisite|required) pam_pwquality.so 존재 유무 확인 
+(없는 경우)
+password (requisite|required) pam_pwquality.so 속성 추가 
+vi /etc/security/pwquality.conf 
+2. minlen = <sub idref="xccdf_com.jiransnc_value_var_accounts_password_minlen_login_defs" use="legacy"/> 로 변경
+case 2) minlen이 존재하지 않는 경우 
+1. vi /etc/login.defs
+2. PASS_MIN_LEN $val  $val 값을  <sub idref="xccdf_com.jiransnc_value_var_accounts_password_minlen_login_defs" use="legacy"/>로 변경 
+        			</html:pre>
+        		</description>		 				
+        		<reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">IA-5(f)</reference>
+                <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">IA-5(1)(a)</reference>
+                <reference href="http://iase.disa.mil/stigs/cci/Pages/index.aspx">205</reference>
+                <reference href="http://www.icqa.or.kr//pds/%EC%A3%BC%EC%9A%94%EC%A0%95%EB%B3%B4%ED%86%B5%EC%8B%A0%EA%B8%B0%EB%B0%98%EC%8B%9C%EC%84%A4.pdf">U-02</reference>
+        	    <rationale xml:lang="ko"> 
+        	    	pam.d 설정에 따라서 PASS_MIN_LEN 값이 오버라이딩 될 수 있으며, minlen에 대한 속성이 존재하지 않는 경우 <html:br/>
+                    minlen 속성 값을 추가하거나, PASS_MIN_LEN의 속성 값을 변경해야 한다.                      
+        		</rationale>    
+    		<fix id="pam_password_len_check_defs" system="urn:xccdf:fix:script:sh" complexity="high" disruption="low" strategy="enable">
+declare var_accounts_password_minlen_login_defs
+var_accounts_password_minlen_login_defs="<sub idref="xccdf_com.jiransnc_value_var_accounts_password_minlen_login_defs" use="legacy"/>"
+grep -q ^PASS_MIN_LEN /etc/login.defs &amp;&amp; \
+sed -i "s/PASS_MIN_LEN.*/PASS_MIN_LEN\t$var_accounts_password_minlen_login_defs/g" /etc/login.defs
+if ! [ $? -eq 0 ]
+then
+  echo -e "PASS_MIN_LEN\t$var_accounts_password_minlen_login_defs" &gt;&gt; /etc/login.defs
+fi
+
+			</fix>
+			    <check system="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+				    <check-export export-name="oval:nsr-var_accounts_password_pam_minlen_login_defs:var:1" value-id="xccdf_com.jiransnc_value_var_accounts_password_minlen_login_defs"/>
+				    <check-content-ref name="oval:nsr-pam_password_len_check_defs:def:1" href="nsr-fedora-oval.xml"/>
+			    </check>
+			    <check system="http://scap.nist.got/schema/ocil/2">
+				    <check-content-ref name="ocil:nsr-accounts_password_minlen_login_defs_ocil:questionnaire:1" href="nsr-fedora-ocil.xml"/>
+			    </check>
+		    </Rule>
+            <Rule id="xccdf_com.jiransnc_rule_accounts_password_pam_ocredit" selected="true" severity="high">
+                <title xml:lang="ko"> 패스워드 정책 (특수 문자 포함) </title>
+                <description xml:lang="ko">
+                    계정 패스워드 정책에 대해서 한 개 이상의 특수문자가 포함되어야 한다.                                           
+                    <html:br/><html:br/><html:b>판단 기준 </html:b> <html:br/>                    
+                    <html:b>양호: </html:b> <html:br/>
+                    cat /etc/pam.d/system-auth 에서 아래의 속성 포함 여부 확인  (포함)
+                    password {required|requisite} pam_pwquility.so 
+                    cat /etc/security/pwquality.conf 에서 ocredit 속성 확인 <html:br/>
+                    ocredit &lt;= -1<html:br/>       
+                    <html:b>취약: </html:b><html:br/> 
+                    경우 1) cat /etc/pam.d/system-auth 에서 아래의 속성 포함 여부 확인 (미 포함) <html:br/>
+                            password {required|requisite} pam_pwquility.so <html:br/>
+                    경우 2) cat /etc/security/pwquality.conf 에서 ocredit 속성 확인 <html:br/>
+                        ocredit &gt; -1 <html:br/>
+                    <html:b>조치 방법 </html:b><html:br/>
+                    <html:pre> 
+1. vi 편집기를 이용해서 /etc/pam.d/system-auth 파일을 열어서 아래의 속성을 추가한다. 
+(속성이 없는 경우) password required pam_pwquality.so 
+              password requisite pam_pwquality.so 
+2. vi 편집기를 통해서 /etc/security/pwquality.conf 파일에서 아래와 속성을 추가한다. 
+(수정 전) # ocredit = 1
+(수정 후) ocredit = -1
+                    </html:pre>                     
+                </description>                          
+                <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">IA-5(b)</reference>
+                <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">IA-5(c)</reference>
+                <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">IA-5(1)(a)</reference>
+                <reference href="http://www.icqa.or.kr//pds/%EC%A3%BC%EC%9A%94%EC%A0%95%EB%B3%B4%ED%86%B5%EC%8B%A0%EA%B8%B0%EB%B0%98%EC%8B%9C%EC%84%A4.pdf">U-02</reference>
+                <rationale xml:lang="ko"> 
+                    패스워드 설정 정책에 하나 이상의 특수 문자를 포햄해야 한다.                
+                </rationale>    
+                <check system="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+                    <check-content-ref name="oval:nsr-accounts_password_pam_ocredit:def:1" href="nsr-fedora-oval.xml"/>
+                </check>                
+            </Rule>
+            <Rule id="xccdf_com.jiransnc_rule_accounts_password_pam_dcredit" selected="true" severity="high">
+                <title xml:lang="ko"> 패스워드 정책 (숫자 포함) </title>
+                <description xml:lang="ko">
+                    계정 패스워드 정책에 대해서 한 개 이상의 숫자가 포함되어야 한다.                                           
+                    <html:br/><html:br/><html:b>판단 기준 </html:b> <html:br/>                    
+                    <html:b>양호: </html:b> <html:br/>
+                    cat /etc/pam.d/system-auth 에서 아래의 속성 포함 여부 확인  (포함) <html:br/>
+                    password {required|requisite} pam_pwquility.so <html:br/>
+                    cat /etc/security/pwquality.conf 에서 dcredit 속성 확인  <html:br/>
+                    dcredit &lt;= -1 <html:br/>       
+                    <html:b>취약: </html:b><html:br/> 
+                    경우 1) cat /etc/pam.d/system-auth 에서 아래의 속성 포함 여부 확인 (미 포함) <html:br/>
+                            password {required|requisite} pam_pwquility.so <html:br/>
+                    경우 2) cat /etc/security/pwquality.conf 에서 dcredit 속성 확인 <html:br/>
+                        dcredit &gt; -1 <html:br/><html:br/>
+                    <html:b>조치 방법 </html:b><html:br/>
+                    <html:pre> 
+1. vi 편집기를 이용해서 /etc/pam.d/system-auth 파일을 열어서 아래의 속성을 추가한다. 
+(속성이 없는 경우) password required pam_pwquality.so 
+              password requisite pam_pwquality.so
+2. vi 편집기를 통해서 /etc/security/pwquality.conf 파일에서 아래와 속성을 추가한다. 
+(수정 전) # dcredit = 1
+(수정 후) dcredit = -1
+                    </html:pre>                     
+                </description>                          
+                <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">IA-5(b)</reference>
+                <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">IA-5(c)</reference>
+                <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">IA-5(1)(a)</reference>
+                <reference href="http://www.icqa.or.kr//pds/%EC%A3%BC%EC%9A%94%EC%A0%95%EB%B3%B4%ED%86%B5%EC%8B%A0%EA%B8%B0%EB%B0%98%EC%8B%9C%EC%84%A4.pdf">U-02</reference>
+                <rationale xml:lang="ko"> 
+                    패스워드 설정 정책에 하나 이상의 숫자를 포함해야 한다.               
+                </rationale>    
+                <check system="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+                    <check-content-ref name="oval:nsr-accounts_password_pam_dcredit:def:1" href="nsr-fedora-oval.xml"/>
+                </check>                
+            </Rule>
+            <Rule id="xccdf_com.jiransnc_rule_accounts_password_pam_lcredit" selected="true" severity="high">
+                <title xml:lang="ko"> 패스워드 정책 (영문 소문자 포함) </title>
+                <description xml:lang="ko">
+                    계정 패스워드 정책에 대해서 한 개 이상의 영문 소문자 포함되어야 한다.                                           
+                    <html:br/><html:br/><html:b>판단 기준 </html:b> <html:br/>                    
+                    <html:b>양호: </html:b> <html:br/>
+                    cat /etc/pam.d/system-auth 에서 아래의 속성 포함 여부 확인  (포함)<html:br/>
+                    password {required|requisite} pam_pwquility.so <html:br/>
+                    cat /etc/security/pwquality.conf 에서 lcredit 속성 확인 <html:br/>
+                    lcredit &lt;= -1 <html:br/>        
+                    <html:b>취약: </html:b><html:br/> 
+                    경우 1) cat /etc/pam.d/system-auth 에서 아래의 속성 포함 여부 확인 (미 포함) <html:br/>
+                            password {required|requisite} pam_pwquility.so <html:br/>
+                    경우 2) cat /etc/security/pwquality.conf 에서 lcredit 속성 확인 <html:br/>
+                            lcredit &gt; -1 <html:br/>
+                    <html:b>조치 방법 </html:b><html:br/>
+                    <html:pre> 
+1. vi 편집기를 이용해서 /etc/pam.d/system-auth 파일을 열어서 아래의 속성을 추가한다. 
+(속성이 없는 경우) password required pam_pwquality.so 
+              password requisite pam_pwquality.so 
+2. vi 편집기를 통해서 /etc/security/pwquality.conf 파일에서 아래와 속성을 추가한다. 
+(수정 전) # lcredit = 1
+(수정 후) lcredit = -1
+                    </html:pre>                     
+                </description>                          
+                <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">IA-5(b)</reference>
+                <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">IA-5(c)</reference>
+                <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">IA-5(1)(a)</reference>
+                <reference href="http://www.icqa.or.kr//pds/%EC%A3%BC%EC%9A%94%EC%A0%95%EB%B3%B4%ED%86%B5%EC%8B%A0%EA%B8%B0%EB%B0%98%EC%8B%9C%EC%84%A4.pdf">U-02</reference>
+                <rationale xml:lang="ko"> 
+                    패스워드 설정 정책에 하나 이상의 영문 소문자를 포함해야 한다.                
+                </rationale>    
+                <check system="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+                    <check-content-ref name="oval:nsr-accounts_password_pam_lcredit:def:1" href="nsr-fedora-oval.xml"/>
+                </check>                
+            </Rule>
+            <Rule id="xccdf_com.jiransnc_rule_accounts_password_pam_ucredit" selected="true" severity="high">
+                <title xml:lang="ko"> 패스워드 정책 (영문 대문자 포함) </title>
+                <description xml:lang="ko">
+                    계정 패스워드 정책에 대해서 한 개 이상의 영문 대문자 포함되어야 한다.                                           
+                    <html:br/><html:br/><html:b>판단 기준 </html:b> <html:br/>                    
+                    <html:b>양호: </html:b> <html:br/>
+                    cat /etc/pam.d/system-auth 에서 아래의 속성 포함 여부 확인  (포함)<html:br/>
+                    password {required|requisite} pam_pwquility.so <html:br/>
+                    cat /etc/security/pwquality.conf 에서 ucredit 속성 확인 <html:br/>
+                    ucredit &lt;= -1 <html:br/>       
+                    <html:b>취약: </html:b><html:br/> 
+                    경우 1) cat /etc/pam.d/system-auth 에서 아래의 속성 포함 여부 확인 (미 포함) <html:br/>
+                            password {required|requisite} pam_pwquility.so <html:br/>
+                    경우 2) cat /etc/security/pwquality.conf 에서 ucredit 속성 확인 <html:br/>
+                            ucredit &gt; -1 <html:br/>
+                    <html:b>조치 방법 </html:b><html:br/>
+                    <html:pre> 
+1. vi 편집기를 이용해서 /etc/pam.d/system-auth 파일을 열어서 아래의 속성을 추가한다. 
+(속성이 없는 경우) password required pam_pwquality.so 
+              password requisite pam_pwquality.so 
+2. vi 편집기를 통해서 /etc/security/pwquality.conf 파일에서 아래와 속성을 추가한다. 
+(수정 전) # ucredit = 1
+(수정 후) ucredit = -1
+                    </html:pre>                     
+                </description>                          
+                <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">IA-5(b)</reference>
+                <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">IA-5(c)</reference>
+                <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">IA-5(1)(a)</reference>
+                <reference href="http://www.icqa.or.kr//pds/%EC%A3%BC%EC%9A%94%EC%A0%95%EB%B3%B4%ED%86%B5%EC%8B%A0%EA%B8%B0%EB%B0%98%EC%8B%9C%EC%84%A4.pdf">U-02</reference>
+                <rationale xml:lang="ko"> 
+                    패스워드 설정 정책에 하나 이상의 영문 대문자를 포함해야 한다.                
+                </rationale>    
+                <check system="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+                    <check-content-ref name="oval:nsr-accounts_password_pam_ucredit:def:1" href="nsr-fedora-oval.xml"/>
+                </check>                
+            </Rule>
+            <Rule id="xccdf_com.jiransnc_rule_accounts_password_pam_deny" selected="true" severity="high">
+                <title xml:lang="ko"> 계정 잠금 임계값 설정 </title>              
+                <description xml:lang="ko">
+                    계정 접근시 실패에 따른 접근 제한이 설정되어야 한다.  
+                    <html:br/><html:br/><html:b>판단 기준 </html:b> <html:br/>
+                    <html:b>양호: </html:b> <html:br/>
+                    #cat /etc/pam.d/system-auth <html:br/>
+                    #cat /etc/pam.d/password-auth <html:br/>
+                    <html:b>auth required pam_faillock.so preauth slient deny=<sub idref="xccdf_com.jiransnc_value_var_password_pam_deny"/> 
+                    unlock_time=<sub idref="xccdf_com.jiransnc_value_var_password_pam_deny_unlock_time"/>" </html:b><html:br/>
+                    auth sufficient pam_unix.so nullok try_first_pass <html:br/>
+                    <html:b> auth [default=die] pam_faillock.so authfail deny=<sub idref="xccdf_com.jiransnc_value_var_password_pam_deny"/> 
+                    unlock_time=<sub idref="xccdf_com.jiransnc_value_var_password_pam_deny_unlock_time"/>" </html:b><html:br/>
+                    <html:b>account required pam_faillock.so </html:b><html:br/>
+                    account required pam_unix.so <html:br/>
+                    deny &lt;=<sub idref="xccdf_com.jiransnc_value_var_password_pam_deny"/> <html:br/>
+                    unlock_timeout &lt;=<sub idref="xccdf_com.jiransnc_value_var_password_pam_deny_unlock_time"/> <html:br/>
+                    <html:b>취약: </html:b><html:br/> 
+                    pam_failock.so 관련 설정이 존재하지 않는 경우 또는 deny, unlock_time 임계치가 기준치보다 큰 값이 설정된 경우 <html:br/>
+                    deny &gt;<sub idref="xccdf_com.jiransnc_value_var_password_pam_deny"/> <html:br/>
+                    unlock_time &gt;<sub idref="xccdf_com.jiransnc_value_var_password_pam_deny_unlock_time"/> <html:br/>
+                    <html:b>조치 방법 </html:b><html:br/>
+                    <html:pre>     
+1. vi 편집기를 통해서 /etc/pam.d/system-auth 파일을 아래와 같이 수정을 한다. 
+2. vi 편집기를 통해서 /etc/pam.d/password-auth 파일을 아래와 같이 수정을 한다.         
+(수정 전)
+...
+auth sufficient pam_unix.so nullok try_first_pass
+...
+account required pam_unix.so
+....
+(수정 후)
+...
+auth required pam_faillock.so preauth slient deny=<sub idref="xccdf_com.jiransnc_value_var_password_pam_deny"/> unlock_time=<sub idref="xccdf_com.jiransnc_value_var_password_pam_deny_unlock_time"/> 
+auth sufficient pam_unix.so nullok try_first_pass
+auth [default=die] pam_faillock.so authfail deny=<sub idref="xccdf_com.jiransnc_value_var_password_pam_deny"/> unlock_time=<sub idref="xccdf_com.jiransnc_value_var_password_pam_deny_unlock_time"/> 
+...
+...
+account required pam_faillock.so
+account required pam_unix.so
+...    
+                    </html:pre>    
+                </description>
+                <reference href="http://www.icqa.or.kr//pds/%EC%A3%BC%EC%9A%94%EC%A0%95%EB%B3%B4%ED%86%B5%EC%8B%A0%EA%B8%B0%EB%B0%98%EC%8B%9C%EC%84%A4.pdf">U-03</reference>
+                <rationale xml:lang="ko"> 
+                    계정 잠금 설정을 통해서 무작위 공격에 대해서 대비를 해야 한다.                 
+                </rationale>    
+                <check system="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+                    <check-export export-name="oval:nsr-var_accounts_password_pam_deny:var:1" value-id="xccdf_com.jiransnc_value_var_password_pam_deny"/>
+                    <check-export export-name="oval:nsr-var_accounts_password_pam_unlock_time:var:1" value-id="xccdf_com.jiransnc_value_var_password_pam_deny_unlock_time"/>
+                    <check-content-ref name="oval:nsr-accounts_password_pam_deny:def:1" href="nsr-fedora-oval.xml"/>
+                </check>      
+            </Rule>
+            <Rule id="xccdf_com.jiranscn_rule_accounts_password_protection" selected="true" severity="high">
+                <title xml:lang="ko">패스워드 파일 보호</title>
+                <description xml:lang="ko">
+                패스워드 정보를 평문으로 저장하는 경우 정보 유출 피해가 발생할 수 있으므로
+                패스워드를 암호화하여 보호하여야 한다. <html:br/> 쉐도우 패스워드를 사용하여 “/etc/shadow”
+                파일에 암호화된 패스워드가 저장되도록 하고 특별 권한이 있는 사용자들만 읽을 수
+                있도록 제한해야 한다. 
+                    <html:br/><html:br/><html:b>판단 기준 </html:b> <html:br/>
+                    <html:b>양호: </html:b> <html:br/>
+                    쉐도우 패스워드를 사용하거나 패스워드를 암호화하여 저장하는 경우 <html:br/>
+                    /etc/shadow 파일 존재 유무 확인 <html:br/>
+                    /etc/passwod 에서 파일내 두 번째 필드가 'x'로 표시되는 확인 <html:br/>
+                    ex) root:x:0:0:root:/root:/bin/bash 
+                    <html:br/><html:b>취약: </html:b><html:br/> 
+                    쉐도우 패스워드를 사용하지 않고 패스워드를 암호화하여 저장하지 않는 경우 <html:br/>
+<html:b>조치 방법 </html:b><html:br/>
+<html:pre>
+1. 관리자 계정으로 로그인 한 후에 아래의 명령어를 수행한다. 
+#pwconv    -- 쉐도우 패스워드 정책 적용 
+#pwunconv  -- 일반 패스워드 정책 적용 
+주의) Trunsted mode 전환 시 파일 시스템에 구조가 변경되어 운영 중인 서비스에 문제가 발생할 있으므로 
+충분한 테스트를 거친 후 Mode 전환을 수행해야 한다. 
+                     </html:pre>    
+                </description>
+                <reference href="http://www.icqa.or.kr//pds/%EC%A3%BC%EC%9A%94%EC%A0%95%EB%B3%B4%ED%86%B5%EC%8B%A0%EA%B8%B0%EB%B0%98%EC%8B%9C%EC%84%A4.pdf">U-04</reference>
+                <rationale xml:lang="ko"> 
+                    패스워드 파일을 보호함으로써, 계정이 노출되는 요소를 줄여야 한다. 
+                </rationale>
+                <check system="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+                    <check-content-ref name="oval:nsr-accounts_password_protection:def:1" href="nsr-fedora-oval.xml"/>
+                </check>
+            </Rule>
+            <Rule id="xccdf_com.jiranscn_rule_users_uid_zero" selected="true" severity="medium">
+                <title xml:lang="ko">root 이외의 UID가 '0' 금지  </title>
+                <description xml:lang="ko">
+                    root(UID=0)와 동일한 UID(User Identification)를 가진 계정 존재시 root 권한으로 시스템 접근이 가능하므로 root의 UID를 가진 계정이 존재하지 않도록 해야 한다. 
+                    <html:br/><html:br/><html:b>판단 기준 </html:b> <html:br/>
+                    <html:b>양호: </html:b> <html:br/>
+                    root 계정과 동일한 UID를 갖는 계정이 존재하지 않는 경우 <html:br/>
+                    ex) 3번째 필드 정보 확인 <html:br/>
+                    root:x:<html:b>0</html:b>:0:root:/root:/bin/bash <html:br/>
+                    jiran:x:<html:b>500</html:b>:0:/home/jiran:/bin/bash<html:br/>
+                    <html:br/><html:b>취약: </html:b><html:br/> 
+                    root 계정과 동일한 UID를 갖는 계정이 존재하는 경우 <html:br/>
+                    root:x:<html:b>0</html:b>:0:root:/root:/bin/bash <html:br/>
+                    jiran:x:<html:b>0</html:b>:0:/home/jiran:/bin/bash<html:br/>
+                    <html:b>조치 방법 </html:b><html:br/>   
+                    <html:pre>
+{SunOS|Linux|HP-UX_Start}
+UID가 0인 계정이 존재 시, 변경할 UID를 확인 후 다른 UID로 변경 및 불필요시 계정 삭제
+참고) 계정이 사용중인 경우 명령어를 통해서 변경 할 수 없으로 /etc/passwd 파일에서 설정을 변경해야 한다. 
+1. usermod 명령으로 UID가 0인 일반 계정의 UID를 100 이상으로 수정 
+- SunOS, HP-UX의 경우 100 이상 
+- LINUX의 경우 500 이상 
+ex) jiran 계정의 UID를 2002로 바꿀 경우 
+# usermod -u 2002 jiran
+{SunOS|Linux|HP-UX_End}
+                    </html:pre>    
+                </description>
+                <reference href="http://www.icqa.or.kr//pds/%EC%A3%BC%EC%9A%94%EC%A0%95%EB%B3%B4%ED%86%B5%EC%8B%A0%EA%B8%B0%EB%B0%98%EC%8B%9C%EC%84%A4.pdf">U-05</reference>
+                <rationale xml:lang="ko"> 
+                    root계정의 UID를 일반 사용자에게 정의하는 경우 보안에 위협이 될 수 있다.  
+                </rationale>
+                <check system="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+                    <check-content-ref name="oval:nsr-users_uid_zero:def:1" href="nsr-fedora-oval.xml"/>
+                </check>
+            </Rule>
+            <Rule id="xccdf_com.jiranscn_rule_root_su_restriction" selected="true" severity="low">
+                <title xml:lang="ko">root 계정 su 제한</title>
+                <description xml:lang="ko">
+                권한이 없는 일반 사용자가 su 명령을 사용하여 로그인을 시도하고 패스워드 무작위 대입 공격(Brute Force Attack)이나 패스워드 추측 공격(Password Guessing)을 
+                통해 root 권한을 획득할 수 있다. su 명령어 사용이 허용된 사용자만 root 계정으로 접속할 수 있도록 해야 한다. 
+                 <html:br/><html:br/><html:b>판단 기준 </html:b> <html:br/>
+                <html:b>양호: </html:b> <html:br/>
+                su 명령어를 특정 그룹에 속한 사용자만 사용할 수 있도록 제한되어 있는 경우 <html:br/>
+                <html:b>취약: </html:b><html:br/> 
+                su 명령어를 모든 사용자가 사용하도록 설정되어 있는 경우 <html:br/>
+                <html:b>조치 방법 </html:b><html:br/>
+                <html:pre> 
+{SunOS|Linux|HP-UX_Start}
+경우1) PAM을 사용하지 않는 경우 
+일반 사용자의 su 명령어 사용 제한
+1. Group 생성(생성할 그룹 요청, 일반적으로 wheel 사용)
+#groupadd wheel
+2. su 명령어의 그룹을 요청받은 그룹으로 변경 
+#chgrp wheel /bin/su 
+3. su 명령어의 권한 변경 
+#chmod 4750 /bin/su
+#ls -l /bin/su
+파일 권한이 인 경우 양호 -rwsr-x--- /bin/su ( 4750 )
+4. su 명령어 사용이 필요한 계정을 새로 생성한 그룹에 추가 (추가할 계정 요청)
+#usermode -G wheel $uid
+또는, 직접 /etc/group 파일을 수정하여 필요한 계정 등록 
+wheel:x:10 -&gt; wheel:x:10:root, jiran       
+참고) Linux의 경우 PAM을 이용한 설정 가능 
+{SunOS|Linux|HP-UX_End}
+경우2) PAM을 사용함 
+1. su 명령어의 그룹을 요청받은 그룹으로 변경 
+#chgrp wheel /bin/su 
+2. wheel 그룹(su 멸여어 사용 그룹) 및 그룹 내 구성원 존재 여부 확인 
+# cat /etc/group
+2-1. 방법 1 - 직접 파일 수정 
+(수정 전)
+wheel:x:10:
+(수정 후)
+wheel:x:10:root, jiran
+2-2. 방법 2 - wheel 그룹에 사용자 추가 
+# usermod -G wheel root
+# usermod -G wheel jiran             
+3. PAM  설정  
+# cat /etc/pam.d/su
+(수정 전)
+...
+#auth           sufficient      pam_wheel.so trust use_uid
+#auth           required        pam_wheel.so use_uid
+...
+(수정 후 - # 주석 제거)
+...
+#auth           sufficient      pam_wheel.so trust use_uid
+auth           required        pam_wheel.so use_uid
+...
+4. su 명령어의 권한 변경 
+#chmod 4750 /bin/su
+참고) 그룹에 추가된 계정들은 모든 세션 종료 후 재로그인 시 명령어 사용 가능
+                </html:pre>   
+            </description>
+             <reference href="http://www.icqa.or.kr//pds/%EC%A3%BC%EC%9A%94%EC%A0%95%EB%B3%B4%ED%86%B5%EC%8B%A0%EA%B8%B0%EB%B0%98%EC%8B%9C%EC%84%A4.pdf">U-06</reference>
+                <rationale xml:lang="ko"> 
+                    일반 사용자가 su 명령어를 이용해서 시스템 계정에 접근할 수 있도록 허용하는 경우 보안상 취약점이 될 수 있다.
+                </rationale>
+                <check system="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+                    <check-content-ref name="oval:nsr-root_su_restriction:def:1" href="nsr-fedora-oval.xml"/>
+                </check>
+            </Rule>
+            <Rule id="xccdf_com.jiransnc_rule_password_max_age" selected="true" severity="medium">
+                <title xml:lang="ko">패스워드 최대 사용 기간 설정</title>
+                <description xml:lang="ko">
+                패스워드 최대 사용기간을 설정하지 않는 경우 일정 기간 경과 후에도 유출된 패스워드로 접속이 가능한다. <html:br/>
+                악의적인 사용자로부터 계속적인 접속을 차단하기 위해 패스워드 최대 사용기간을 설정하여 주기적으로 변경할 수 있도록 해야 한다. <html:br/>
+                <html:br/><html:b>판단 기준 </html:b> <html:br/>
+                <html:b>양호: </html:b> <html:br/>
+                패스워드 최대 사용기간이 <sub idref="xccdf_com.jiransnc_value_var_password_max_age_day" use="legacy"/>일(12주) 이하로 설정되어 있는 경우 <html:br/>
+                <html:b>취약: </html:b><html:br/> 
+                패스워드 최대 사용기간이 <sub idref="xccdf_com.jiransnc_value_var_password_max_age_day" use="legacy"/>일(12주) 초과로 설정된 경우 <html:br/>
+                <html:b>조치 방법</html:b><html:br/>
+                <html:pre>
+{Linux_Start}
+■ LINUX
+1. vi 편집기를 이용하여 "/etc/login.defs" 파일을 연 후
+2. 아래와 같이 수정 또는, 신규 삽입
+(수정 전) PASS_MAX_DAYS 99999
+(수정 후) PASS_MAX_DAYS <sub idref="xccdf_com.jiransnc_value_var_password_max_age_day" use="legacy"/> (단위: 일)
+{Linux_End}
+
+{AIX_Start}
+■ AIX
+1. vi 편집기를 이용하여 "/etc/security/user" 파일을 연 후
+2. default: 부분을 아래와 같이 수정 또는, 신규 삽입
+(수정 전) maxage=0
+(수정 후) maxage=<sub idref="xccdf_com.jiransnc_value_var_password_max_age_day" use="legacy"/>/7 (단위: 주)
+{AIX_End}
+
+{HP-UX_Start}
+■ HP-UX
+1. vi 편집기를 이용하여 "/etc/default/security" 파일을 연 후
+2. 아래와 같이 수정 또는, 신규 삽입
+(수정 전) PASSWORD_MAXDAYS=99999
+(수정 후) PASSWORD_MAXDAYS=<sub idref="xccdf_com.jiransnc_value_var_password_max_age_day" use="legacy"/> (단위: 일)
+{HP-UX_End}
+                </html:pre>    
+                </description>
+                <reference href="http://www.icqa.or.kr//pds/%EC%A3%BC%EC%9A%94%EC%A0%95%EB%B3%B4%ED%86%B5%EC%8B%A0%EA%B8%B0%EB%B0%98%EC%8B%9C%EC%84%A4.pdf">U-08</reference>
+                <rationale xml:lang="ko">
+                    적절한 패스워드 교체 주기를 설정함으로써, 패스워드 노출에 대한 위험을 줄여야 한다.
+                </rationale>                
+                <check system="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+                    <check-export export-name="oval:nsr-var_password_max_age_defs:var:1" value-id="xccdf_com.jiransnc_value_var_password_max_age_day"/>
+                    <check-content-ref name="oval:nsr-password_max_age:def:1" href="nsr-fedora-oval.xml"/>
+                </check>
+                <check system="http://scap.nist.got/schema/ocil/2">
+                    <check-content-ref name="ocil:nsr-password-max_age_defs_ocil:questionnaire:1" href="nsr-fedora-ocil.xml"/>
+                </check>
+            </Rule>       
+            <Rule id="xccdf_com.jiransnc_rule_pass_min_day" selected="true" severity="medium">
+                <title xml:lang="ko">패스워드 최소 사용기간 설정</title>
+                <description xml:lang="ko">
+                패스워드 최소 사용기간을 설정하지 않은 경우 사용자에게 익숙한 패스워드로 변경이 가능하며, 이를 
+                재사용함으로써 패스워드의 정기적인 변경은 무의미해질 수 있다. 이전 암호를 그대로 재사용하는 것을 
+                방지하기 위해 최근 암호 기억 설정을 함께 적용하여 패스워드를 보호해야 한다. 
+                <html:br/><html:br/><html:b>판단 기준 </html:b> <html:br/>
+                <html:b>양호: </html:b> <html:br/>
+                패스워드 최소 사용기간이 1일(1주)로 설정되어 있는 경우 <html:br/>
+                <html:br/><html:b>취약: </html:b><html:br/> 
+                패스워드 최소 사용기간이 1일(1주)보다 초과되어 설정되어 있는 경우 <html:br/>
+                <html:b>조치 방법 </html:b><html:br/>
+                <html:pre> 
+{SunOS_Start}
+■ SunOS
+1. vi 편집기를 이용하여 "/etc/default/passwd" 파일을 연 후
+2. 아래와 같이 수정 또는, 신규 삽입
+(수정 전) MINWEEKS=
+(수정 후) MINWEEKS=1 (단위: 주)
+{SunOS_End}
+
+{Linux_Start}
+■ LINUX
+1. vi 편집기를 이용하여 "/etc/login.defs" 파일을 연 후
+2. 아래와 같이 수정 또는, 신규 삽입
+(수정 전) PASS_MIN_DAYS 0
+(수정 후) PASS_MIN_DAYS 1 (단위: 일)
+{Linux_End}
+
+■ AIX
+1. vi 편집기를 이용하여 "/etc/security/user" 파일을 연 후
+2. default 부분을 아래와 같이 수정 또는, 신규 삽입
+(수정 전) minage=1
+(수정 후) minage=1 (단위: 주)
+
+
+■ HP-UX
+1. vi 편집기를 이용하여 "/etc/default/security" 파일을 연 후
+2. 아래와 같이 수정 또는, 신규 삽입
+(수정 전) PASSWORD_MINDAYS=
+(수정 후) PASSWORD_MINDAYS=1 (단위: 일)
+                </html:pre>    
+                </description>
+                <reference href="http://www.icqa.or.kr//pds/%EC%A3%BC%EC%9A%94%EC%A0%95%EB%B3%B4%ED%86%B5%EC%8B%A0%EA%B8%B0%EB%B0%98%EC%8B%9C%EC%84%A4.pdf">U-09</reference>
+                <rationale> 이전 패스워드와 동일한 패스워드를 재 사용하는 경우 보안에 취약할 수 있다. </rationale>
+                <check system="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+                    <check-content-ref name="oval:nsr-password_min_day:def:1" href="nsr-fedora-oval.xml"/>
+                </check>                
+            </Rule>
+            <Rule id="xccdf_com.jiransnc_rule_useless_accounts" selected="true" severity="low">
+                <title xml:lang="ko">불필요한 계정 제거</title>
+                <description xml:lang="ko">OS나 Package 설치 시 Default로 생성되는 게정은 대부분 Default 패스워드를 사용하는 경우가 많으며
+                 패스워드 추측공격에 악용될 수 있으므로 시스템에서 이요하지 않는 "Ip, uucp, nuucp" 등의 Default 계정 및 의심스러운 특이한 
+                 계정이 존재 유무를 확인 후 삭제하는 것을 권고하고 있다. 또한, 관리되지 않은 불필요한 계정으로 인해 시스템 접속이 가능하므로 퇴직, 
+                 전직, 휴직 등의 이유로 더 이상 사용하지 않는 계정, 불필요한 계정, 의심스러운 계정은 제거해야 한다. 특히, 장기간 패스워드가 변경되지 않은 
+                 미사용 계정은 반복적인 패스워드 추측 공격(Password Guessing)이 가능하고 해당 게정 정보의 유출 여부 확인이 어려울 수 있다. 
+                 <html:br/><html:br/><html:b>판단 기준 </html:b> <html:br/>
+                    <html:b>양호: </html:b> <html:br/>
+                    불필요한 계정이 존재하지 않는 경우<html:br/>
+                    <html:b>취약: </html:b><html:br/> 
+                    불필요한 계정이 존재하는 경우<html:br/><html:br/>
+                    <html:b>조치 방법 </html:b><html:br/>
+<html:pre>
+1. 미사용 계정 및 의심스러운 계정 존재 여부 확인 
+#cat /etc/passwd
+2. 사용하지 않는 Default 계정 점검 
+Default 계정 정보: nuucp|adm|lp|sync|shutdown|halt|news|uucp|operator|games|gopher|nfsnobody|squid
+#cat /etc/passwd | egrep "nuucp|adm|lp|sync|shutdown|halt|news|uucp|operator|games|gopher|nfsnobody|squid"
+3. 등록된 불필요한 사용자 계정을 확인 후, 해당 사용자를 삭제 
+#userdel &lt;user_name&gt;
+</html:pre> 
+                </description>
+                <reference href="http://www.icqa.or.kr//pds/%EC%A3%BC%EC%9A%94%EC%A0%95%EB%B3%B4%ED%86%B5%EC%8B%A0%EA%B8%B0%EB%B0%98%EC%8B%9C%EC%84%A4.pdf">U-10</reference>
+                <rationale xml:lang="ko">
+                 불필요한 계정을 제거함으로써 자료 유출 및 계정 탈취에 위험 요소를 줄이는 것을 권고한다. 
+                </rationale>                
+                <check system="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+                    <check-content-ref name="oval:nsr-useless_accounts:def:1" href="nsr-fedora-oval.xml"/>
+                </check>   
+            </Rule>
+        </Group>
+    </Group>
+</Benchmark></ds:component></ds:data-stream-collection>
