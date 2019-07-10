@@ -8,8 +8,21 @@ router.get('/', function (req, res, next) {
     //console.log(result.recordset[0]);
     res.render('./main/GroupPolicy/group', result);
   });
-
 }); // 그룹페이지 홈
+
+router.get('/:name', (req, res, next) =>{
+  DB.get_group_info(req.params.name).then(result => {
+    DB.view_modify_group_info(req.params.name).then(result2 =>{
+      DB.view_xccdf_included_group(req.params.name).then(result3 =>{
+        res.render('./main/GroupPolicy/GroupInfo/groupinfo', {
+          recordsets: result.recordset,
+          recordsets2: result2.recordset,
+          recordsets3: result3.recordset
+        });
+      });
+    });
+  });
+});
 
 router.post('/del_group_info', (req,res,next) => {
   console.log(req.body.del_group_set_cd.length);
@@ -26,6 +39,5 @@ router.post('/del_group_info', (req,res,next) => {
     })
   }
 });
-
 
 module.exports = router;

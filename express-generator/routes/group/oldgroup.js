@@ -10,14 +10,10 @@ router.post('/', function (req, res, next) {
     DB.get_group_info(JSON.parse(req.body.change_group_NAME)).then(result => {
       DB.view_modify_group_info(JSON.parse(req.body.change_group_NAME)).then(result2 => {
         DB.get_agent_info().then(result3 => {
-            DB.view_modify_group_os_info(JSON.parse(req.body.change_group_NAME)).then(result4 => {
-                console.log(result4);
-                res.render('./main/GroupPolicy/OldGroup/oldgroup', {
-                    recordsets: result.recordset,
-                    recordsets2: result2.recordset,
-                    recordsets3: result3.recordset,
-                    recordsets4: result4.recordset
-                });
+            res.render('./main/GroupPolicy/OldGroup/oldgroup', {
+                recordsets: result.recordset,
+                recordsets2: result2.recordset,
+                recordsets3: result3.recordset
             });
         });
       });

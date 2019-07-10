@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <%include ../../../head.ejs%>
+</head>
+
+<body>
+    <div class = "dashboard-main-wrapper">
+        <div class = "dashboard-header">
+            <%include ../../../header.ejs%>
+            <div class="dashboard-ecommerce">
+                <div class="container-fluid dashboard-content ">
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="page-header">
+                                <h2 class="pageheader-title">그룹 상세 정보 - <%=recordsets[0].NAME%> </h2>
+                                <div class="page-breadcrumb">
+                                    <nav aria-label="breadcrumb">
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">MENU</a></li>
+                                            <li class="breadcrumb-item active" aria-current="page">대쉬보드</li>
+                                            <li class="breadcrumb-item active" aria-current="page">그룹 및 정책 관리</li>
+                                            <li class="breadcrumb-item active" aria-current="page">기본 정보</li>
+                                            <li class="breadcrumb-item active" aria-current="page"> <%=recordsets[0].NAME%> 상세 정보</li>
+                                        </ol>
+                                     </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class = "ecommerce-widget">
+                        <div class = "row">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="section-block">
+                                    <h5 class="section-title"></h5>
+                                    <p></p>
+                                </div>
+                                <div class="tab-regular">
+                                    <ul class="nav nav-tabs " id="myTab" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">기본정보</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">에이전트 정보</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">정책정보</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="report-tab" data-toggle="tab" href="#report" role="tab" aria-controls="report" aria-selected="false">레포팅</a>
+                                        </li>
+                                    </ul>
+
+                                    <div class="tab-content" id="myTabContent">
+                                        <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                            <div class="row col-12">
+                                                <div class="col-6">
+                                                    <div class="row">
+                                                        <label for="validationServer01">그룹명</label>
+                                                    </div>
+                                                    <div class="col-xl-6">
+                                                        <%=recordsets[0].NAME%>
+                                                    </div>
+
+                                                    <div class="row" style="margin-top: 20px">
+                                                        <label for="validationServer01">그룹설명</label>
+                                                    </div>
+                                                    <div class="col-xl-6">
+                                                        <%=recordsets[0].DISCRIPTION %>
+                                                    </div>
+
+                                                    <div class="row" style="margin-top: 20px">
+                                                        <label for="validationServer01">에이전트 개수</label>
+                                                    </div>
+                                                    <div class="col-xl-6">
+                                                        <%=recordsets[0].AGENT_COUNTING %>
+                                                    </div>
+
+                                                    <div class="row" style="margin-top: 20px">
+                                                        <label for="validationServer01">생성 시간</label>
+                                                    </div>
+                                                    <div class="col-xl-6">
+                                                        <%=recordsets[0].CREATE_TIME%>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-6">
+                                                    <div class="row">
+                                                        <label for="validationServer01">활성 상태</label>
+                                                    </div>
+                                                    <div class="col-xl-6">
+                                                        <%=recordsets[0].ACTIVE_STATE%>
+                                                    </div>
+
+                                                    <div class="row" style="margin-top: 20px">
+                                                        <label for="validationServer01">마지막 활성 시간</label>
+                                                    </div>
+                                                    <div class="col-xl-6">
+                                                        <%=recordsets[0].ACTIVE_TIME%>
+                                                    </div>
+
+                                                    <div class="row" style="margin-top: 20px">
+                                                        <label for="validationServer01">시스템 검사 주기</label>
+                                                    </div>
+                                                    <div class="col-xl-6">
+                                                        <%=recordsets[0].INSPECTION_PERIOD%>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                            <div class="card" style="height: 300px; overflow:scroll; ">
+                                                <h5 class="card-header text-center">할당된 에이전트</h5>
+                                                <div class = "card-body p-0">
+                                                    <div class="table-responsive">
+                                                        <table class="table">
+                                                            <thead class="bg-light">
+                                                            <th class="border-0 text-center">상태</th>
+                                                            <th class="border-0 text-center ">IP</th>
+                                                            <th class="border-0 text-center">운영체제 버전</th>
+                                                            <th class="border-0 text-center">용도</th>
+                                                            </thead>
+                                                            <tbody>
+                                                            <% for(var i=0; i<recordsets2.length; i++){ %>
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="m-r-10 text-center"><img src="/assets/images/pass.png" alt="user" class="rounded" width="45"></div>
+                                                                </td>
+                                                                <td class="text-center"><%=recordsets2[i].IP%> </td>
+                                                                <td class="text-center"><%=recordsets2[i].OS%></td>
+                                                                <td class="text-center"><%=recordsets2[i].PURPOSE%></td>
+                                                            </tr>
+                                                            <%}%>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="tab-pane" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                                            <div class="card" style="height: 300px; overflow: scroll;">
+                                                <h5 class="card-header text-center">운영체제 버전 별 할당 XCCDF</h5>
+                                                <div class="card-body p-0">
+                                                    <div class="table-responsive">
+                                                        <table class="table">
+                                                            <thead class="bg-light">
+                                                            <th class="text-center">운영체제 버전</th>
+                                                            <th class="text-center">xccdf</th>
+                                                            </thead>
+                                                            <tbody>
+                                                            <%for(var i=0; i<(recordsets3.length); i++){ %>
+                                                            <tr>
+                                                                <td class="text-center">
+                                                                    <%=recordsets3[i].INSPECT_OS%>
+                                                                </td>
+                                                                <td class="text-center">
+                                                                    <%=recordsets3[i].FILE_NAME%>
+                                                                </td>
+                                                            </tr>
+                                                            <%}%>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="tab-pane" id="report" role="tabpanel" aria-labelledby="report-tab">
+                                            <div class="row">
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                    <div class="card" style="height: 290px; overflow: scroll;">
+                                                        <h4 class="card-header text-center">레포팅(그룹) 이력 조회 및 다운로드
+                                                        </h4>
+                                                        <div class="card-body p-0">
+                                                            <div class="table-responsive">
+                                                                <table class="table">
+                                                                    <thead class="bg-light">
+                                                                    <tr class="border-0">
+                                                                        <th class="border-0 text-center">번호</th>
+                                                                        <th class="border-0 text-center">레포팅 명칭</th>
+                                                                        <th class="border-0 text-center">정책 활성화 시간</th>
+                                                                        <th class="border-0 text-center">생성시간</th>
+                                                                        <th class="border-0 text-center">다운로드</th>
+                                                                    </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                    <tr>
+                                                                        <td class="text-center">1</td>
+                                                                        <td class="text-center">생성시간-그룹ID-그룹명</td>
+                                                                        <td class="text-center">2019.02.09.15:30.58</td>
+                                                                        <td class="text-center">2019.02.10.15:30.58</td>
+                                                                        <td class="text-center">
+                                                                            <span class="icon"><i class="fas fa-paperclip"></i> </span>
+                                                                        </td>
+                                                                    </tr>
+                                                                    </tbody>
+                                                                </table>
+
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                        <form action = "/oldgroup" method = "POST">
+                                          <label class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 text-right" style = "margin-top: 10px;">
+                                             <input type = "hidden" name = "change_group_NAME" id = "chang_group_NAME" value = "<%=JSON.stringify(recordsets[0].NAME)%>">
+                                             <input class = "btn btn-success btn-lg" type="submit" value="수정" style="width:150px;"><!--<span class="custom-control-label">모두 선택</span>-->
+                                         </label>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class = "footer">
+            <%include ../../../footer.ejs%>
+        </div>
+    </div>
+
+    <!-- jquery 3.3.1 -->
+    <script src="/assets/vendor/jquery/jquery-3.3.1.min.js"></script>
+    <!-- bootstap bundle js -->
+    <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+    <!-- slimscroll js -->
+    <script src="/assets/vendor/slimscroll/jquery.slimscroll.js"></script>
+    <!-- main js -->
+    <script src="/assets/libs/js/main-js.js"></script>
+    <script src="/assets/vendor/datepicker/moment.js"></script>
+    <script src="/assets/vendor/datepicker/tempusdominus-bootstrap-4.js"></script>
+    <script src="/assets/vendor/datepicker/datepicker.js"></script>
+</body>
+</html>

@@ -155,12 +155,13 @@
                                     <th class = "border-0 text-center">check</th>
                                     <th class = "border-0 text-center">번호</th>
                                     <th class = "border-0 text-center">그룹 이름</th>
-                                    <th class = "border-0 text-center">그룹 설명</th>
+                                    <!--<th class = "border-0 text-center">그룹 설명</th>-->
                                     <th class = "border-0 text-center">에이전트 수</th>
-                                    <th class = "border-0 text-center">생성시간</th>
+                                    <!--<th class = "border-0 text-center">생성시간</th>
                                     <th class = "border-0 text-center">활성시간</th>
-                                    <th class = "border-0 text-center">오프라인/온라인</th>
+                                    <th class = "border-0 text-center">오프라인/온라인</th>-->
                                     <th class = "border-0 text-center">정책 활성 여부</th>
+                                    <th class = "border-0 text-center">그룹 정보 더 보기</th>
                                     </thead>
                                     <tbody>
                                     <% for(var i=0; i<recordsets[0].length; i++){ %>
@@ -175,17 +176,25 @@
                                         <td>그룹<%=i+1%></td>
                                         <!--<td colspan="4">-->
                                         <td><%=recordsets[0][i].NAME%></td>
-                                        <td><%=recordsets[0][i].DISCRIPTION%></td>
+<!--                                        <td><%=recordsets[0][i].DISCRIPTION%></td>-->
                                         <td><%=recordsets[0][i].AGENT_COUNTING%></td>
-                                        <td><%=recordsets[0][i].CREATE_TIME%></td>
+                                        <!--<td><%=recordsets[0][i].CREATE_TIME%></td>
                                         <td><%=recordsets[0][i].ACTIVE_TIME%></td>
-                                        <!--<td colspan="2">-->
-                                        <td>오프라인 정보시스템 포함</td>
+                                        &lt;!&ndash;<td colspan="2">&ndash;&gt;
+                                        <td>오프라인 정보시스템 포함</td>-->
                                         <td>
                                             <div class="switch-button switch-button-yesno">
                                                 <input type="checkbox" class="switch" data-toggle="toggle" <%if(recordsets[0][i].ACTIVE_STATE === "active"){%> checked <%}%> name='<%=i%>' id='<%=recordsets[0][i].GROUP_SET_CD%>'>
                                                 <span><label for="<%=recordsets[0][i].GROUP_SET_CD%>"></label></span>
                                             </div>
+                                        </td>
+
+                                        <td>
+                                            <form action="/group/<%=recordsets[0][i].NAME%>" method = "GET" style="z-index: 9999;">
+                                                <input type="submit" id="GroupInfoBtn"
+                                                       class="btn btn-lg"
+                                                       value = "정보 더보기" style="width: 150px; z-index:9998">
+                                            </form>
                                         </td>
                                     </tr>
                                     <%}%>
