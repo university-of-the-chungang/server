@@ -60,7 +60,7 @@ let query_select = (data, table_name) => {
 };
 exports.add_log = (log_type,contents,date)=>{
     return new Promise((resolve,reject)=>{
-        console.log(`INSERT INTO TBL_LOG(LOG_TYPE,CONTENTS,CONTENT_DATE) VALUES('${log_type}','${contents}',CONVERT(DATETIME,'${date}'))`);
+        console.log(`INSERT INTO TBL_LOG(LOG_TYPE,CONTENTS,CONTENT_DATE) VALUES('${log_type}',N'${contents}',CONVERT(DATETIME,'${date}'))`);
         new sql.Request().query(`INSERT INTO TBL_LOG(LOG_TYPE,CONTENTS,CONTENT_DATE) VALUES('${log_type}','${contents}',CONVERT(DATETIME,'${date}'))`,(err,result)=>{
             if(err){
                 console.log(err);
@@ -222,7 +222,7 @@ exports.get_new_xccdf_cd = () => {
 };
 exports.put_xccdf = (xccdf_cd, file_name, file_path, inspect_os) => {
     return new Promise((resolve, reject) => {
-        let query = `INSERT INTO TBL_XCCDF (XCCDF_CD, FILE_NAME, FILE_PATH, INSPECT_OS) VALUES (` + xccdf_cd + `, '` + file_name + `', '` + file_path + `', '` + inspect_os + `')`;
+        let query = `INSERT INTO TBL_XCCDF (XCCDF_CD, FILE_NAME, FILE_PATH, INSPECT_OS) VALUES (` + xccdf_cd + `, N'` + file_name + `', '` + file_path + `', '` + inspect_os + `')`;
         new sql.Request().query(query, (err, result) => {
             if (err) {
                 reject({ new_xccdf_cd: err });
@@ -291,7 +291,7 @@ exports.add_admin = (data) => {
 exports.add_group_info = (name, create_time, active_time, agent_counting, inspection_period, DESCRIPTION) => {
     return new Promise((resolve, reject) => {
         let query = `INSERT INTO TBL_GROUP_INFO (NAME, CREATE_TIME, ACTIVE_TIME, AGENT_COUNTING, ACTIVE_STATE, INSPECTION_PERIOD, DEL_FLAG, DESCRIPTION) 
-        VALUES ('`+ name + `', CONVERT(CHAR(19), '` + create_time + `', 20), CONVERT(CHAR(19), '` + active_time + `',20), ` + agent_counting + `, 'A',  CONVERT(CHAR(19),'` + inspection_period + `', 20), 0, '` + DESCRIPTION + `')`;
+        VALUES (N'`+ name + `', CONVERT(CHAR(19), '` + create_time + `', 20), CONVERT(CHAR(19), '` + active_time + `',20), ` + agent_counting + `, 'A',  CONVERT(CHAR(19),'` + inspection_period + `', 20), 0, N'` + DESCRIPTION + `')`;
 
         new sql.Request().query(query, (err, result) => {
             if (err) {
@@ -304,7 +304,7 @@ exports.add_group_info = (name, create_time, active_time, agent_counting, inspec
 };
 exports.add_agent_info = (ip, mac, os, purpose, owner, desc, state) => {
     return new Promise((resolve, reject) => {
-        let query = `INSERT INTO TBL_AGENT_INFO (IP, MAC_ADDR, OS, PURPOSE, OWNER, DEL_FLAG, DESCRIPTION, STATE ) VALUES('` + ip + `', '` + mac + `', '` + os + `', '` + purpose + `', '` + owner + `', 0, '` + desc + `', '` + state + `')`;
+        let query = `INSERT INTO TBL_AGENT_INFO (IP, MAC_ADDR, OS, PURPOSE, OWNER, DEL_FLAG, DESCRIPTION, STATE ) VALUES('` + ip + `', '` + mac + `', '` + os + `', N'` + purpose + `', N'` + owner + `', 0, N'` + desc + `', '` + state + `')`;
         new sql.Request().query(query, (err, result) => {
             if (err) {
                 reject(err);
@@ -315,7 +315,7 @@ exports.add_agent_info = (ip, mac, os, purpose, owner, desc, state) => {
 };
 exports.add_agent_info_from_xlsx = (ip,purpose,owner)=>{
     return new Promise((resolve,reject)=>{
-        let query = `INSERT INTO TBL_AGENT_INFO (IP, PURPOSE, OWNER) VALUES( '${ip}', '${purpose}', '${owner}')`;
+        let query = `INSERT INTO TBL_AGENT_INFO (IP, PURPOSE, OWNER) VALUES( '${ip}', N'${purpose}', '${owner}')`;
         console.log(query);
         new sql.Request().query(query,(err,result)=>{
             resolve(result);
@@ -325,7 +325,7 @@ exports.add_agent_info_from_xlsx = (ip,purpose,owner)=>{
 
 exports.update_agent_info = (cd, ip, mac, os, purpose, owner, desc, state) => {
     return new Promise((resolve, reject) => {
-        let query = `UPDATE TBL_AGENT_INFO SET IP='${ip}', MAC_ADDR = '${mac}', OS = '${os}', PURPOSE = '${purpose}', OWNER = '${owner}', DEL_FLAG = 0, DESCRIPTION = '${desc}', STATE = '${state}' WHERE AGENT_CD = '${cd}'`;
+        let query = `UPDATE TBL_AGENT_INFO SET IP='${ip}', MAC_ADDR = '${mac}', OS = '${os}', PURPOSE = N'${purpose}', OWNER = N'${owner}', DEL_FLAG = 0, DESCRIPTION = N'${desc}', STATE = '${state}' WHERE AGENT_CD = '${cd}'`;
         console.log(query);
         new sql.Request().query(query, (err, result) => {
             if (err) {
