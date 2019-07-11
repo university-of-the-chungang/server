@@ -1,0 +1,290 @@
+[33mcommit 060f7b303b39e62c6d266bb33642e6c057bcccdf[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: 김선광 <blueksg0307@gmail.com>
+Date:   Thu Jul 11 16:58:17 2019 +0900
+
+    2019-07-11 from 선광
+
+[33mcommit ca7c8623554e36b40af6ebeccd900bb99502d4b8[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: nakguan <nakguan@gmail.com>
+Date:   Thu Jul 11 02:41:22 2019 +0900
+
+    그룹 정보 상세보기 기능 추가
+
+[33mcommit 4cc2c3639701698536bc1daf4aed6fb24313c547[m
+Author: nakguan <nakguan@gmail.com>
+Date:   Tue Jul 9 11:16:26 2019 +0900
+
+    그룹 기본페이지 모두선택 & 서치기능 & 테이블 수정
+
+[33mcommit 6733b89077cdd6672d14907e260cb79da7ca3dbc[m
+Author: 김선광 <blueksg0307@gmail.com>
+Date:   Sun Jul 7 23:40:53 2019 +0900
+
+    20190707-04-선광
+
+[33mcommit 9a343b168454647a3d5bc59192de41201eb0b4ae[m
+Author: 김선광 <blueksg0307@gmail.com>
+Date:   Sun Jul 7 23:34:31 2019 +0900
+
+    20190707-3 선광
+
+[33mcommit 05d0ced5a81973d06e1f4e09bfe3dfe0663bad3d[m
+Author: 김선광 <blueksg0307@gmail.com>
+Date:   Sun Jul 7 22:22:38 2019 +0900
+
+    20190707 선광
+
+[33mcommit a9fb79bdd863a01dcf4b50cfb88d856a9967a985[m
+Author: 김선광 <blueksg0307@gmail.com>
+Date:   Sun Jul 7 21:16:25 2019 +0900
+
+    20190707
+
+[33mcommit 16fe944660ce6c6ff60b0949054f2ee629c15e93[m
+Author: nakguan <nakguan@gmail.com>
+Date:   Sat Jul 6 23:56:45 2019 +0900
+
+    그룹 정보 수정 - 포함된 OS 표시
+
+[33mcommit 73efee2b17a9e74b65830da9303e374f773000e8[m
+Author: nakguan <nakguan@gmail.com>
+Date:   Sat Jul 6 23:55:22 2019 +0900
+
+    그룹 정보 수정 쿼리 추가
+
+[33mcommit c3887cc7fe3631932f9b7549ea9b62e20e7e3220[m
+Author: Choi YunJun <dbswnschl@gmail.com>
+Date:   Sat Jul 6 22:07:40 2019 +0900
+
+    test_code
+
+[33mcommit 1d3bd612855cb45cb3632f711d8f8053fccb3c70[m
+Merge: bd085e2 e2b8719
+Author: Choi YunJun <dbswnschl@gmail.com>
+Date:   Sat Jul 6 12:39:54 2019 +0900
+
+    Merge branch 'yunjun'
+
+[33mcommit e2b8719756e7d35fa3dd3704c938a521e7f5e758[m[33m ([m[1;31morigin/yunjun[m[33m)[m
+Author: Choi YunJun <dbswnschl@gmail.com>
+Date:   Sat Jul 6 12:39:41 2019 +0900
+
+    no message
+
+[33mcommit bd085e20b4479c419ff04a9d6c12065422c6f576[m
+Merge: e39a895 020748f
+Author: Choi YunJun <dbswnschl@gmail.com>
+Date:   Sat Jul 6 12:35:39 2019 +0900
+
+    Merge branch 'yunjun'
+
+[33mcommit 020748fa378f6f4452bf930c4d31fa2e6cd2ab02[m
+Author: Choi YunJun <dbswnschl@gmail.com>
+Date:   Sat Jul 6 12:35:26 2019 +0900
+
+    no message
+
+[33mcommit e39a8951a2e8bda3d9ed7bde26cff7fe0cb927cd[m
+Merge: d1dcde9 c990b19
+Author: Choi YunJun <dbswnschl@gmail.com>
+Date:   Sat Jul 6 12:33:22 2019 +0900
+
+    Merge branch 'yunjun'
+
+[33mcommit c990b1916e05bcd3d9d5739f8fae73a53decdf14[m
+Author: Choi YunJun <dbswnschl@gmail.com>
+Date:   Sat Jul 6 12:33:08 2019 +0900
+
+    no message
+
+[33mcommit d1dcde9a730b8ffc87da3971202193a357eab893[m
+Merge: c539860 5e76a3b
+Author: Choi YunJun <dbswnschl@gmail.com>
+Date:   Sat Jul 6 10:12:16 2019 +0900
+
+    Merge branch 'yunjun'
+
+[33mcommit 5e76a3bee989c6389eb19ccc5450a29eeb1c4591[m
+Author: Choi YunJun <dbswnschl@gmail.com>
+Date:   Sat Jul 6 10:11:04 2019 +0900
+
+    dashboard
+
+[33mcommit c5398608e65db65eb3f6ccc405b9498273449323[m
+Author: Choi YunJun <dbswnschl@gmail.com>
+Date:   Sat Jul 6 09:13:07 2019 +0900
+
+    no message
+
+[33mcommit c4faa44509a78092a2365022f0bf3435630cacc9[m
+Author: Choi YunJun <dbswnschl@gmail.com>
+Date:   Sat Jul 6 09:09:02 2019 +0900
+
+    no message
+
+[33mcommit b73be2b6a9cfb7a8956474b918f2b480e37aa2e2[m
+Author: Choi YunJun <dbswnschl@gmail.com>
+Date:   Sat Jul 6 09:04:56 2019 +0900
+
+    no message
+
+[33mcommit 593ec5e41707173b5534b8df4de8302d096e295d[m
+Merge: a89fe53 25371d9
+Author: Choi YunJun <dbswnschl@gmail.com>
+Date:   Sat Jul 6 09:04:13 2019 +0900
+
+    Merge remote-tracking branch 'origin/master' into yunjun
+    
+    # Conflicts:
+    #       express-generator/routes/index.js
+    #       express-generator/views/main/Agent/agent.ejs
+
+[33mcommit a89fe53e4e8664e168a91530850739b972a1ba88[m
+Author: Choi YunJun <dbswnschl@gmail.com>
+Date:   Sat Jul 6 09:01:30 2019 +0900
+
+    no message
+
+[33mcommit e631841e98a6e58ac5c7c3bd55808dc5f232c979[m
+Author: Choi YunJun <dbswnschl@gmail.com>
+Date:   Sat Jul 6 09:00:39 2019 +0900
+
+    bug fix
+
+[33mcommit 25371d98fc699b62ca2adce66ab8f606436022c1[m
+Author: SONG-WONHO <win778500@gmail.com>
+Date:   Thu Jul 4 21:00:32 2019 +0900
+
+    Update newgroup.ejs
+    
+    에이전트 디비에서 가져오기, 수정을 생성으로 수정
+
+[33mcommit 7483a0c8dd22673ca31ea92a55b8f72878a0a425[m
+Author: SONG-WONHO <win778500@gmail.com>
+Date:   Thu Jul 4 21:00:12 2019 +0900
+
+    Update newgroup.js
+    
+    에이전트 디비에서 가져오기
+
+[33mcommit 2c864b56f540e945bb792004a23484df956239d6[m
+Author: SONG-WONHO <win778500@gmail.com>
+Date:   Thu Jul 4 20:32:48 2019 +0900
+
+    신규 그룹 생성 온클릭 추가
+
+[33mcommit b3da9e02836e926caafd64a41a9ab4fa334f93de[m
+Author: SONG-WONHO <win778500@gmail.com>
+Date:   Thu Jul 4 20:22:20 2019 +0900
+
+    revert original
+    
+    revert
+
+[33mcommit 2cbde5bbd61b001023c8fe6c2bcf28b13aa4e134[m[33m ([m[1;31morigin/wonho[m[33m)[m
+Merge: 2df3d59 1b92e88
+Author: 김선광 <blueksg0307@gmail.com>
+Date:   Thu Jul 4 17:47:14 2019 +0900
+
+    button changed from sunkwang
+
+[33mcommit 2df3d59f706c87999a5c487cdff86e82c7f99da3[m
+Author: 김선광 <blueksg0307@gmail.com>
+Date:   Thu Jul 4 17:36:32 2019 +0900
+
+     <- button add
+
+[33mcommit 1b92e88b6f3e17cb2550b52a4db8d1835dc57774[m
+Author: nakguan <nakguan@gmail.com>
+Date:   Thu Jul 4 03:14:25 2019 +0900
+
+    기존그룹 수정 - 에이전트 할당 렌더링
+
+[33mcommit 7966ffe85bd939ff32eb0eb1fc11b2869fb9317f[m
+Author: nakguan <nakguan@gmail.com>
+Date:   Thu Jul 4 02:53:16 2019 +0900
+
+    한글 깨짐 해결
+
+[33mcommit f5887a3c9330d8070eef01801ec45d3721abb616[m
+Author: nakguan <nakguan@gmail.com>
+Date:   Wed Jul 3 23:10:54 2019 +0900
+
+    add head, header, footer.ejs
+
+[33mcommit c1319fd6d4bb83e0a6043d9a70bc3c5d5b7551da[m
+Merge: 9bd871a 3735c7c
+Author: nakguan <nakguan@gmail.com>
+Date:   Fri Jun 28 01:17:11 2019 +0900
+
+    Merge branch 'master' of https://github.com/university-of-the-chungang/server
+
+[33mcommit 9bd871a1a86601f7089914111b3ed0532aa624a2[m
+Author: nakguan <nakguan@gmail.com>
+Date:   Fri Jun 28 01:14:15 2019 +0900
+
+    apply group_delete & render change_group_v1.0
+
+[33mcommit 3735c7ca6143131e0e2aedf1145c282d27118797[m
+Author: HSUABI <seongwooksong2017@gmail.com>
+Date:   Thu Jun 27 21:37:40 2019 +0900
+
+    서치기능 구현
+
+[33mcommit 98c5a713ad4d562613ba532e7009415c65aa750e[m
+Author: HSUABI <seongwooksong2017@gmail.com>
+Date:   Thu Jun 27 14:46:19 2019 +0900
+
+    로그내용 출력 (전부)
+
+[33mcommit b7be4873b0a01ffbc846b0fe3048e4ab14d7877b[m
+Author: HSUABI <seongwooksong2017@gmail.com>
+Date:   Thu Jun 27 14:12:29 2019 +0900
+
+    DB에서 가져온값 출력하는거 (1줄만)
+
+[33mcommit 381fcfd662bd976a2868cd53fce0501c1779def5[m
+Author: HSUABI <seongwooksong2017@gmail.com>
+Date:   Thu Jun 27 13:35:48 2019 +0900
+
+    DB 내용 접근까지
+
+[33mcommit 2120cb5ec2b796fd078f7f724dc4a2e1935b3400[m
+Author: 김선광 <blueksg0307@gmail.com>
+Date:   Fri Jun 21 23:27:17 2019 +0900
+
+    그룹 기본페이지 변경
+
+[33mcommit bade47fd0b0d0a4e151e9421c53d50695b406752[m
+Merge: 67e9cab 8e83de2
+Author: 김선광 <blueksg0307@gmail.com>
+Date:   Fri Jun 21 22:04:20 2019 +0900
+
+    merge
+
+[33mcommit 67e9cab6e3d279d5dc1166b0faef06a70e5fc4da[m
+Author: 김선광 <blueksg0307@gmail.com>
+Date:   Fri Jun 21 22:01:19 2019 +0900
+
+    oldgroup changed
+
+[33mcommit 8e83de22156655b6e872fda4d3f38d8678c4b18d[m
+Author: 순규  배 <nakguan@sungyuui-MacBookPro.local>
+Date:   Fri Jun 21 21:35:39 2019 +0900
+
+    fix error
+
+[33mcommit b2183989968b2a7efe5fc2e180a426cb825593e8[m
+Author: SONG-WONHO <win778500@gmail.com>
+Date:   Fri Jun 21 19:55:17 2019 +0900
+
+    Update package.json
+
+[33mcommit b5c099cdee3aff97732fcc4ed302b708b534d141[m
+Merge: a8eb2a2 2470daf
+Author: SONG-WONHO <win778500@gmail.com>
+Date:   Fri Jun 21 19:52:38 2019 +0900
+
+    merge
+
+[33mcommit a8eb2a2d49f5e92ebb1633dfbfda2b

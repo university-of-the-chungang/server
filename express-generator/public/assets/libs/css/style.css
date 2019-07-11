@@ -359,6 +359,9 @@ address {}
 .custom-control-input:checked~input[type="checkbox"] {
     background: #3d404e;
     border: #7f83a2 1px solid;
+    
+    
+
 }
 
 .custom-control-input {
@@ -369,11 +372,13 @@ address {}
 
 .custom-control-label {
     margin-bottom: 0;
+    
 }
 
 .custom-checkbox .custom-control-input:checked~.custom-control-label::before {
     background-color: #5969ff;
     border-color: #5969ff;
+    zoom: 2.5;
 }
 
 .custom-control-input:checked~.custom-control-label::before {

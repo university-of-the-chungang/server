@@ -158,7 +158,7 @@
                         <div class="table-responsive" style="margin-top:-50px;">
                                 <table id="group_table" class="table">
                                     <thead class="bg-light">
-                                    <th class = "border-0 text-center">check</th>
+                                    <th class = "border-0 text-center">Check</th>
                                     <th class = "border-0 text-center">번호</th>
                                     <th class = "border-0 text-center">그룹 이름</th>
                                     <!--<th class = "border-0 text-center">그룹 설명</th>-->
@@ -172,18 +172,20 @@
                                     <tbody>
                                     <% for(var i=0; i<recordsets[0].length; i++){ %>
                                     <tr class="table" style="text-align: center;">
+
                                         <td style="text-align: center; vertical-align: middle;">
+
                                             <label class="custom-control custom-checkbox">
                                                 <input type="checkbox" id='<%=i%>' name = "chkbox" class="custom-control-input">
                                                 <span class="custom-control-label" style="position: absolute;left:40%; top:0"></span>
                                             </label>
                                         </td>
                                         <!--<td colspan="2">-->
-                                        <td>그룹<%=i+1%></td>
+                                        <td><h4 class="font-16">그룹<%=i+1%></h4></td>
                                         <!--<td colspan="4">-->
-                                        <td><%=recordsets[0][i].NAME%></td>
+                                        <td><h4 class="font-16"><%=recordsets[0][i].NAME%></h4></td>
 <!--                                        <td><%=recordsets[0][i].DISCRIPTION%></td>-->
-                                        <td><%=recordsets[0][i].AGENT_COUNTING%></td>
+                                        <td><h4 class="font-16"><%=recordsets[0][i].AGENT_COUNTING%></h4></td>
                                         <!--<td><%=recordsets[0][i].CREATE_TIME%></td>
                                         <td><%=recordsets[0][i].ACTIVE_TIME%></td>
                                         &lt;!&ndash;<td colspan="2">&ndash;&gt;
