@@ -85,14 +85,6 @@
                                         </div>
                                     </div>  
 
-                                    <div class="row" style="margin-bottom: 25px">   
-                                        <div class="col-1"></div>
-                                        <div class="col-6">
-                                            <label for="validationServer01">그룹 활성화 시간</label>
-                                            <input type="text" class="form-control" id="validationServer01"  required="" style="height: 200px" maxlength="500">
-                                        </div>
-                                    </div>  
-
                             <div class="row">   
 
                                 <div class="col-1"></div>
@@ -268,14 +260,45 @@
                                             <table class="table">
                                                 <thead class="bg-light">
                                                     <tr class="border-0">
+                                                    	<th class="border-0">Check</th> 
                                                       <th class="border-0 text-center ">IP</th> 
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr><td class="text-center">192.168.1.1</td></tr>
-                                                    <tr><td class="text-center">192.168.1.1</td></tr>
-                                                    <tr><td class="text-center">192.168.1.1</td></tr>
-                                                    <tr><td class="text-center">192.168.1.1</td></tr>      
+
+
+
+
+
+                                                    <tr>
+                                                    	<td>
+                                                    		<label class="custom-control custom-checkbox" style="margin-left: 10px;">
+                                                            <input class="custom-control-input checkbox" type="checkbox" value="1" id="one"><span class="custom-control-label "></span>
+                                                        </label>
+                                                    	</td>
+                                                    	<td class="text-center">192.168.1.1</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                    	<td>
+                                                    		<label class="custom-control custom-checkbox" style="margin-left: 10px;">
+                                                            <input class="custom-control-input checkbox" type="checkbox" value="1" id="one"><span class="custom-control-label "></span>
+                                                        </label>
+                                                    	</td>
+                                                    	<td class="text-center">192.168.1.1</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                    	<td>
+                                                    		<label class="custom-control custom-checkbox" style="margin-left: 10px;">
+                                                            <input class="custom-control-input checkbox" type="checkbox" value="1" id="one"><span class="custom-control-label "></span>
+                                                        </label>
+                                                    	</td>
+                                                    	<td class="text-center">192.168.1.1</td>
+                                                    </tr>
+
+
+                                                          
                                                 </tbody>
                                             </table>
 
@@ -321,21 +344,52 @@
                                         
                                         <tbody>
                                             <tr>
-                                                <td><img src="assets/circle/blue.png" alt="User Avatar" class="rounded-circle user-avatar-lg"> Windows 7</td>
-                                                <td><img src="assets/circle/blue.png" alt="User Avatar" class="rounded-circle user-avatar-lg"> Windows 10</td>
-                                            </tr>
-                                            <tr>
-                                             
-                                                <td><img src="assets/circle/blue.png" alt="User Avatar" class="rounded-circle user-avatar-lg"> Windows 10</td>
-                                                <td><img src="assets/circle/blue.png" alt="User Avatar" class="rounded-circle user-avatar-lg"> Windows 7</td>
-                                            </tr>
-                                            <tr>
-                                               
-                                                <td><img src="assets/circle/blue.png" alt="User Avatar" class="rounded-circle user-avatar-lg"> Windows 10</td>
+                                                <td>
+                                                <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input is-valid" id="customControlValidation1" required="">
+                                                <label class="custom-control-label" for="customControlValidation1">Windows 7</label>
+                                            	</div>
+                                                </td>
 
-                                                <td> <img src="assets/circle/blue.png" alt="User Avatar" class="rounded-circle user-avatar-lg"> Windows 10</td>
+                                                <td>
+                                                <div class="custom-control custom-checkbox was-validated">
+                                                <input type="checkbox" class="custom-control-input is-invalid" id="customControlValidation2" required="">
+                                                <label class="custom-control-label" for="customControlValidation2">Windows 10</label>
+                                            	</div>	
+                                                </td>
 
+                                                <td>
+                                                <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input is-valid" id="customControlValidation3 required="">
+                                                <label class="custom-control-label" for="customControlValidation3">Windows 7</label>
+                                            	</div>
+                                                </td>
                                             </tr>
+
+                                            <tr>
+                                                <td>
+                                                <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input is-valid" id="customControlValidation4" required="">
+                                                <label class="custom-control-label" for="customControlValidation4">Windows 7</label>
+                                            	</div>
+                                                </td>
+
+                                                <td>
+                                                <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input is-valid" id="customControlValidation1" required="">
+                                                <label class="custom-control-label" for="customControlValidation1">Windows 7</label>
+                                            	</div>
+                                                </td>
+
+                                                <td>
+                                                <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input is-valid" id="customControlValidation1" required="">
+                                                <label class="custom-control-label" for="customControlValidation1">Windows 7</label>
+                                            	</div>
+                                                </td>
+                                                
+                                            </tr>
+                                            
                                         </tbody>
                                     </table>
                                         

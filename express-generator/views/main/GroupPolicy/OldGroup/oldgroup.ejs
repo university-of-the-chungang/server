@@ -262,12 +262,18 @@
                                             <table class="table">
                                                 <thead class="bg-light">
                                                     <tr class="border-0">
+                                                    <th class="border-0">Check</th> 
                                                       <th class="border-0 text-center ">IP</th> 
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                 <% for(var i=0; i<recordsets2.length; i++){ %>
                                                     <tr>
+                                                        <td>
+                                                            <label class="custom-control custom-checkbox" style="margin-left: 10px;">
+                                                            <input class="custom-control-input checkbox" type="checkbox" value="1" id="one"><span class="custom-control-label "></span>
+                                                        </label>
+                                                        </td>
                                                         <td class="text-center">
                                                             <%=recordsets2[i].IP%>
                                                         </td>
@@ -317,12 +323,21 @@
                                         <tbody>
                                             <%for(var i=0; i<(recordsets2.length/2); i++){ %>
                                                 <tr>
-                                                    <td>
-                                                        <%=recordsets2[i*2].OS%>
+                                                    <td>    
+                                                        <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input is-valid" id="customControlValidation1" required="">
+                                                        <label class="custom-control-label" for="customControlValidation1"><%=recordsets2[i*2].OS%></label>
+                                                        </div>
                                                     </td>
-                                                    <td>
-                                                        <%=recordsets2[i*2+1].OS%>
-                                                    </td>
+                                                    
+                                                    <td>    
+                                                        <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input is-invalid" id="customControlValidation1" required="">
+                                                        <label class="custom-control-label" for="customControlValidation1"><%=recordsets2[i*2+1].OS%></label>
+                                                        </div>
+                                                    </td>    
+
+
                                                 </tr>
                                             <%}%>
                                         </tbody>
