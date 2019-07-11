@@ -6,6 +6,12 @@ const router = express.Router();
 const DB = require('../db');
 const LOGS = require('../logs');
 const multer = require('multer');
+var util = require('util');
+var path = require('path');
+var mime = require('mime');
+var fs = require('fs')
+
+
 /* GET home page. */
 router.get('/', (req, res, next) => {
   res.render('index', { title: 'Express' });
@@ -26,6 +32,33 @@ router.get('/dashboard', function (req, res, next) {
 }
 });
 
+router.get('/download/:fileid', function(req, res){
+  var fileId = req.params.fileid;
+  var origFileNm, savedFileNm,savedPath,fileSize;
+  
+  var data = 'hello filesystem';
+  fs.writeFile('text.txt', data, 'utf8', function(err) {
+      console.log('비동기적 파일 쓰기 완료');
+  });
+  
+  if(fileId == '1'){
+    origFileNm = 'down.txt';
+    savedFileNm = "saveonserver.txt"
+    savedPath = 'C:/Users/gullabjamun/Desktop/nsr/server_mine/express-generator/public/download'
+    fileSize = '10';
+  }
+
+  var file = savedPath + '/'+savedFileNm;
+  mimetype = mime.lookup(origFileNm);
+  res.setHeader('Content-disposition','attachment; filename='+origFileNm);
+  res.setHeader('Content-type',mimetype);
+
+  console.log(fileId)
+  var filestream = fs.createReadStream(file);
+  filestream.pipe(res);
+
+
+});
 
 router.get('/404', function (req, res, next) {
   res.render('./main/etc/404');
@@ -109,6 +142,50 @@ router.get('/agent/:keyword', (req, res, next) => {
   });
 
 })
+
+router.get('/log', function (req, res, next) {
+  DB.get_log_info().then(result => {
+    DB.total_group_info().then(result2 => {
+      res.render('./main/Log/log', {
+        recordsets: result.recordsets,
+        data: result2.recordsets
+      });
+    });    
+    //res.render('./main/Log/log', result);
+  });
+}); // 평가문항 및 로그 추출 페이지
+
+router.get('/log/:keyword2', (req, res, next) => {
+  DB.search_log_info(req.params.keyword2).then(result => {
+    result.sess_name = req.session.username;
+    DB.total_group_info().then(result2 => {
+      res.render('./main/Log/log', {
+        recordsets: result.recordsets,
+        data: result2.recordsets
+      });
+    });    
+  }).catch(err => {
+    console.log(err);
+  });
+
+})
+
+router.get('/log_date/:keyword2', (req, res, next) => {
+  DB.search_logDate_info(req.params.keyword2).then(result => {
+    result.sess_name = req.session.username;
+    DB.total_group_info().then(result2 => {
+      res.render('./main/Log/log', {
+        recordsets: result.recordsets,
+        data: result2.recordsets
+      });
+    });    
+  }).catch(err => {
+    console.log(err);
+  });
+
+})
+
+
 router.post('/agent/del_agent_info', (req, res, next) => {
   if (req.body.del_agent_cd.length === 0) {
     DB.get_agent_info().then(result => {
@@ -190,9 +267,8 @@ router.post('/activate_agent_info', (req, res, next) => {
     });
   });
 });
-router.get('/log', function (req, res, next) {
-  res.render('./main/Log/log');
-}); // 평가문항 및 로그 추출 페이지
+
+
 router.post('/make_xlsx',function(req,res,next){
   let param = req.body;
   let now = new Date().toISOString().slice(0,10); 
