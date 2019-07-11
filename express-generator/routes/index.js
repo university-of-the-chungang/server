@@ -10,6 +10,11 @@ const multer = require('multer');
 router.get('/', (req, res, next) => {
   res.render('index', { title: 'Express' });
 });
+
+router.get('/policy', (req, res, next) => {
+  res.render('policy');
+});
+
 router.get('/dashboard', function (req, res, next) {
   if(req.session.username){
   DB.get_agent_info().then(result => {
@@ -54,6 +59,9 @@ router.post('/signin',(req,res,next)=>{
 router.get('/signup', function (req, res, next) {
   res.render('./main/User/signup');
 });
+
+
+
 router.post('/signup',(req,res,next)=>{
   data = req.body;
   data.lock_stat = 0;

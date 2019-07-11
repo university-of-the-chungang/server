@@ -8,6 +8,10 @@
     <!-- Bootstrap CSS -->
 
     <style type="text/css">
+
+
+</style>
+    <style type="text/css">
         .btn-group .btn {
     transition: background-color .3s ease;
 }
@@ -105,25 +109,27 @@
         <!-- ============================================================== -->
         <div class="ecommerce-widget">
             <div class="row">
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <div class="card" style="height: 600px; overflow: scroll;">
+                <div class="col-1"></div>
+                <div class="col-10">
+                    <div class="card">
                         <div class="card-header">
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 text-right">
                                 <a href="../newgroup"><button type="submit" class="col-2 btn btn-outline-primary btn-lg">신규 그룹 생성</button></a>
                             </div>
                         </div>
 
-                <div class="card-body p-0">                    
+                <div class="card-body">                    
                <!-- ============================================================== -->
                 <!-- 안에 테이블 시작 -->
                 <!-- ============================================================== -->
                 <div class="row">
                     <div class="col-12">
-                        <div class="row">
+                        <div class="row" style="margin-top: 20px;">
                             <div class="col-4" style ="position:relative"> <!-- check box left side-->
-                                <label class="custom-control custom-checkbox custom-control-inline" style="margin-left:50px; z-index:9999">
-                                    <input type="checkbox" id="chk_all" name="chk_all" class="custom-control-input"><span class="custom-control-label">모두 선택</span>
+                                <label class="custom-control custom-checkbox custom-control-inline" style="margin-left:50px; z-index:9999; ">
+                                    <input type="checkbox" id="chk_all" name="chk_all" class="custom-control-input" ><span class="custom-control-label">모두 선택</span>
                                 </label>
+
                             </div>
                             <div class="col-8">
                                 <div class="pull-right">
@@ -156,7 +162,7 @@
                                     <th class = "border-0 text-center">번호</th>
                                     <th class = "border-0 text-center">그룹 이름</th>
                                     <!--<th class = "border-0 text-center">그룹 설명</th>-->
-                                    <th class = "border-0 text-center">에이전트 수</th>
+                                    <th class = "border-0 text-center">에이전트 수(오프라인)</th>
                                     <!--<th class = "border-0 text-center">생성시간</th>
                                     <th class = "border-0 text-center">활성시간</th>
                                     <th class = "border-0 text-center">오프라인/온라인</th>-->
@@ -165,7 +171,7 @@
                                     </thead>
                                     <tbody>
                                     <% for(var i=0; i<recordsets[0].length; i++){ %>
-                                    <tr class="table-success" style="text-align: center;">
+                                    <tr class="table" style="text-align: center;">
                                         <td style="text-align: center; vertical-align: middle;">
                                             <label class="custom-control custom-checkbox">
                                                 <input type="checkbox" id='<%=i%>' name = "chkbox" class="custom-control-input">
@@ -192,8 +198,8 @@
                                         <td>
                                             <form action="/group/<%=recordsets[0][i].NAME%>" method = "GET" style="z-index: 9999;">
                                                 <input type="submit" id="GroupInfoBtn"
-                                                       class="btn btn-lg"
-                                                       value = "정보 더보기" style="width: 150px; z-index:9998">
+                                                       class="btn btn-outline-info btn-lg"
+                                                       value = "Details" style="width: 150px; z-index:9998">
                                             </form>
                                         </td>
                                     </tr>

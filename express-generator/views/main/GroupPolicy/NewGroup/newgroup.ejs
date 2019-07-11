@@ -43,7 +43,7 @@
         <!-- ============================================================== -->
         <div class="ecommerce-widget">
             <div class="row">
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-12">
+                <div class="col-12">
                     <div class="section-block">
 
                        
@@ -68,51 +68,53 @@
                                 
                                 
                                     <div class="row" style="margin-bottom: 50px">
-                                            <div class="col-1">
+                                            <div class="col-1"></div>
+                                            <div class="col-3">
                                                 <label for="validationServer01">그룹명</label>
+                                                 <input type="text" class="form-control" id="validationServer01" required="" maxlength="100">
                                             </div>
-                                            <div class="col-8">
-                                                 <input type="text" class="form-control is-valid" id="validationServer01" required="" maxlength="100">
-                                            </div>
+
+                                            
                                     </div>    
 
                                     <div class="row" style="margin-bottom: 50px">   
-                                        <div class="col-1">
+                                        <div class="col-1"></div>
+                                        <div class="col-6">
                                             <label for="validationServer01">그룹설명</label>
-                                        </div>
-                                        <div class="col-8">
-                                            <input type="text" class="form-control is-valid" id="validationServer01"  required="" style="height: 200px" maxlength="500">
+                                            <input type="text" class="form-control" id="validationServer01"  required="" style="height: 200px" maxlength="500">
                                         </div>
                                     </div>  
 
-                                    <div class="row">   
-
-                                        <div class="col-1">
-                                            <label for="validationServer01">점검 주기 설정</label>
-
+                                    <div class="row" style="margin-bottom: 25px">   
+                                        <div class="col-1"></div>
+                                        <div class="col-6">
+                                            <label for="validationServer01">그룹 활성화 시간</label>
+                                            <input type="text" class="form-control" id="validationServer01"  required="" style="height: 200px" maxlength="500">
                                         </div>
+                                    </div>  
 
+                            <div class="row">   
+
+                                <div class="col-1"></div>
                                 <div class="col-4">
-                                    <div class="input-group-append be-addon">
-                                               
-                                        <select class="col-5 custom-select d-block w-100" style="height: 70px; margin-top: 1px; ">
+                                
+                                    
 
-                                            <option selected="">현재 점검 주기 : 매 월 1 일</option>
-                                            <option value="10-20">매 주 월요일</option>
-                                            <option value="20-30">매 주 수요일</option>
-                                            <option value="30-30">매 주 금요일</option>
-                                            <option value="1">매 월 1 일</option>
-                                            <option value="10">매 월 10 일</option>
-                                            <option value="15">매 월 15 일</option>
-                                            <option value="finish">매 월 말일</option>
-                                        </select>
-                                        <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-                                <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
-                                    <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
-                                </div>
+                                        <label for="validationServer01">정책 적용 시작일</label>
+                                        <div class="input-group date" id="datetimepicker4" data-target-input="nearest">
+                                            <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker4" style="height: 50px;">
+                                            <div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker" >
+                                                <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>   
+                                    
+                                </div>
+
+                                <div class="col-2 form-group">
+                                    <label for="inputText3" class="col-form-label">주기 설정 </label>
+                                    <input id="inputText3" type="text" class="form-control" style="height: 47px;">
+                                </div>
+                            
                             </div>           
                         </div><!-- 기본정보 탭 끝 -->
 
