@@ -241,8 +241,13 @@
                                             </div>
                                         </td>
                                         <td class="border-0 text-center">
-                                            <form action="/update_agent_info" method="POST">
-                                                <a href="#" id="downBtn" class="col-11 btn btn-outline-danger" data-toggle="modal" data-target="#xccdfModal"> 로그 다운로드 <span class="icon-circle-small icon-box-xs text-danger bg-danger-light bg-danger-light "><i class="fa fa-fw fa-arrow-down"></i></span><span ></span></a>
+                                            <form action="/download/" method="POST">
+                                                <input type="hidden" name="hideID" value="caucau">
+                                                <% for(let i = 0 ; i < recordsets[0].length ; i+=1){ %>
+                                                    <input type="hidden" name="logid<%=i%>" value="<%= recordsets[0][i].LOG_ID %>">
+                                                    <input type="hidden" name="logtype<%=i%>" value="<%= recordsets[0][i].LOG_TYPE %>">
+                                                <% } %>
+                                                <input type="submit" value="로그 다운로드" a href="#" id="downBtn" class="col-11 btn btn-outline-danger" data-toggle="modal" data-target="#xccdfModal"><span class="icon-circle-small icon-box-xs text-danger bg-danger-light bg-danger-light "><i class="fa fa-fw fa-arrow-down"></i></span><span ></span></a>
                                             </form>
                                         </td>
 
@@ -363,7 +368,7 @@
             }
         });
         $("#downBtn").click(() => {
-            location.href = "/download/1" ;
+            location.href = "/download/" ;
         });
         $('#dateBtn').click(() => {
             location.href = "/log_date/" + $('#search_date').val();

@@ -32,10 +32,10 @@ router.get('/dashboard', function (req, res, next) {
 }
 });
 
-router.get('/download/:fileid', function(req, res){
-  var fileId = req.params.fileid;
+router.post('/download/', function(req, res){
+  var fileId = 1;
   var origFileNm, savedFileNm,savedPath,fileSize;
-  
+  console.log(req.body)
   var data = 'hello filesystem';
   fs.writeFile('text.txt', data, 'utf8', function(err) {
       console.log('비동기적 파일 쓰기 완료');
@@ -44,7 +44,7 @@ router.get('/download/:fileid', function(req, res){
   if(fileId == '1'){
     origFileNm = 'down.txt';
     savedFileNm = "saveonserver.txt"
-    savedPath = 'C:/Users/gullabjamun/Desktop/nsr/server_mine/express-generator/public/download'
+    savedPath = 'C:/Users/gullabjamun/Desktop/nsr/server/express-generator/public/download'
     fileSize = '10';
   }
 
@@ -53,7 +53,7 @@ router.get('/download/:fileid', function(req, res){
   res.setHeader('Content-disposition','attachment; filename='+origFileNm);
   res.setHeader('Content-type',mimetype);
 
-  console.log(fileId)
+  
   var filestream = fs.createReadStream(file);
   filestream.pipe(res);
 
@@ -167,7 +167,6 @@ router.get('/log/:keyword2', (req, res, next) => {
   }).catch(err => {
     console.log(err);
   });
-
 })
 
 router.get('/log_date/:keyword2', (req, res, next) => {
