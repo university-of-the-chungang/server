@@ -242,7 +242,6 @@
                                         </td>
                                         <td class="border-0 text-center">
                                             <form action="/download/" method="POST">
-                                                <input type="hidden" name="hideID" value="caucau">
                                                 <% for(let i = 0 ; i < recordsets[0].length ; i+=1){ %>
                                                     <input type="hidden" name="logid<%=i%>" value="<%= recordsets[0][i].LOG_ID %>">
                                                     <input type="hidden" name="logtype<%=i%>" value="<%= recordsets[0][i].LOG_TYPE %>">

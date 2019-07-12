@@ -35,19 +35,28 @@ router.get('/dashboard', function (req, res, next) {
 router.post('/download/', function(req, res){
   var fileId = 1;
   var origFileNm, savedFileNm,savedPath,fileSize;
-  console.log(req.body)
-  var data = 'hello filesystem';
-  fs.writeFile('text.txt', data, 'utf8', function(err) {
-      console.log('비동기적 파일 쓰기 완료');
+  var chk=0
+  log_list = Object.values(req.body);
+  
+  var data = "ID\t\tTYPE\n";
+  for(var i =0 ; i < log_list.length-1; i+=2)
+  {
+    data += log_list[i]+"\t\t"+log_list[i+1]+"\n";  
+  }
+  console.log(data)
+  fs.writeFile('log.txt', data, 'utf8', function(err) {
+    console.log("Filewrite success");
+    var chk = 1;
+
   });
   
   if(fileId == '1'){
-    origFileNm = 'down.txt';
-    savedFileNm = "saveonserver.txt"
-    savedPath = 'C:/Users/gullabjamun/Desktop/nsr/server/express-generator/public/download'
-    fileSize = '10';
+    origFileNm = 'log_output.txt';
+    savedFileNm = "log.txt"
+    savedPath = 'C:/Users/gullabjamun/Desktop/nsr/server/express-generator/'
+    fileSize = '1000';
   }
-
+  
   var file = savedPath + '/'+savedFileNm;
   mimetype = mime.lookup(origFileNm);
   res.setHeader('Content-disposition','attachment; filename='+origFileNm);
