@@ -107,6 +107,30 @@ exports.get_group_agents = (group_set_cd) => {
         });
     });
 }
+exports.get_dashboard_datas = ()=>{
+    //대쉬보드에 쓸 데이터 조회 
+    query = "SELECT * FROM TBL_AGENT_INFO t1 LEFT OUTER JOIN TBL_INSPECT_SURVEY t2 ON t1.AGENT_CD = t2.AGENT_CD LEFT OUTER JOIN TBL_INSPECT_STATS t3 ON t2.INSPECT_CD = t3.INSPECT_CD LEFT OUTER JOIN TBL_GROUP_INFO t4 ON t3.GROUP_SET_CD = t4.GROUP_SET_CD ORDER BY IP";
+    return new Promise((resolve,reject)=>{
+        new sql.Request().query(query,(err,result)=>{
+            if(err){
+                reject(err);
+            }
+            resolve(result);
+        })
+    })
+};
+exports.get_dashboard_top10 = ()=>{
+    query = "SELECT top 10 count(*) as cnt, INSPECT_ITEM_CD item_cd FROM TBL_INSPECT_SURVEY  WHERE INSPECT_RESULT = 0 GROUP BY INSPECT_ITEM_CD ORDER BY cnt DESC ";
+    return new Promise((resolve,reject)=>{
+        new sql.Request().query(query,(err,result)=>{
+            if(err){
+                reject(err);
+            }
+            resolve(result);
+        })
+    })
+
+}
 exports.get_agent_info = (agent_cd = null) => {
     // 에이전트 코드가 agent_cd인 Agent들의 정보를 검색
     // agent_cd를 넣지않으면 전체검색

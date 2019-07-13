@@ -1,83 +1,97 @@
 <!doctype html>
 <html lang="ko">
- 
+
 <head>
     <%include ./head.ejs%>
     <link rel="stylesheet" href="/assets/vendor/jquery/datatables.min.css">
-    <link rel="stylesheet" type="text/css" href="path/to/chartjs/dist/Chart.min.css">    
+    <!-- <link rel="stylesheet" type="text/css" href="path/to/chartjs/dist/Chart.min.css">     -->
 
 </head>
 
 <body>
-    
-<div class="dashboard-main-wrapper">
-    <div class="dashboard-header">
-        <%include ./header.ejs%>
 
-    <!-- ============================================================== -->
-    <!-- 헤드 네비게이션 바 종료  -->
-    <!-- ============================================================== -->
-    
-    <div class="">
-        <div class="dashboard-ecommerce">
-            <div class="container-fluid dashboard-content ">
-                    <div class="row">
-                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                            <div class="page-header">
-                                <h2 class="pageheader-title">대쉬보드 </h2>
-                                <div class="page-breadcrumb">
-                                    <nav aria-label="breadcrumb">
-                                        <ol class="breadcrumb">
-                                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">MENU</a></li>
-                                            <li class="breadcrumb-item active" aria-current="page">대쉬보드</li>
-                                        </ol>
-                                    </nav>
+    <div class="dashboard-main-wrapper">
+        <div class="dashboard-header">
+            <%include ./header.ejs%>
+
+            <!-- ============================================================== -->
+            <!-- 헤드 네비게이션 바 종료  -->
+            <!-- ============================================================== -->
+
+            <div class="">
+                <div class="dashboard-ecommerce">
+                    <div class="container-fluid dashboard-content ">
+                        <div class="row">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="page-header">
+                                    <h2 class="pageheader-title">대쉬보드 </h2>
+                                    <div class="page-breadcrumb">
+                                        <nav aria-label="breadcrumb">
+                                            <ol class="breadcrumb">
+                                                <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">MENU</a>
+                                                </li>
+                                                <li class="breadcrumb-item active" aria-current="page">대쉬보드</li>
+                                            </ol>
+                                        </nav>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- ============================================================== -->
-                    <!-- end pageheader  -->
-                    <!-- ============================================================== -->
-                  <div class="ecommerce-widget">
-                        <div class="row">
-                            <div class="col-1"></div>
-                            <div class="col-5">
-                                <div class="card" style="height: 600px;">
-                                    <h3 class="card-header text-center">점검 규정명(정보보안 관리실태평가) / 점검 그룹명(점검일자)</h3>
-                                    <div class="card-body p-0">
-   
-                    <div class="row" style="margin-top: 15px; height: 70px;">
-                          
-                        <div class="col-3" style="position:relative; top:55%">
-                          <label class="custom-control custom-checkbox" style="margin-left: 50px; z-index:9999">
-                                <input id="chk_all" name="chk_all" type="checkbox" class="custom-control-input"><span class="custom-control-label">모두 선택</span>
-                            </label>
-                        </div>
+                        <!-- ============================================================== -->
+                        <!-- end pageheader  -->
+                        <!-- ============================================================== -->
+                        <div class="ecommerce-widget">
+                            <div class="row">
+                                <div class="col-1"></div>
+                                <div class="col-5">
+                                    <div class="card" style="height: 600px;">
+                                        <h3 class="card-header text-center">점검 규정명(정보보안 관리실태평가) / 점검 그룹명(점검일자)</h3>
+                                        <div class="card-body p-0">
 
-                            
-                        <div class="col-1"></div>
-                            <div class="col-4" style="position:relative; left:40%; top:40%">
-                                <button type="submit"  class="btn btn-outline-primary btn-lg"> 점겸결과 저장</button> 
-                            </div>
-                    </div>
-                          
-                                        <div class="table-responsive" style="margin-top:-50px;">
-                                            <table id="agent_table" class="table">
-                                                <thead class="bg-light">
-                                                    <tr class="border-0">
-                                                        <th class="border-0 text-center">check</th>
-                                                        <th class="border-0 text-center">상태</th>
-                                                        <th class="border-0 text-center ">IP</th>
-                                                        <th class="border-0 text-center">운영체제 버전</th>
-                                                        <th class="border-0 text-center">용도</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <% for(let i = 0 ; i < recordsets[0].length ; i+=1){ %>
+                                            <div class="row" style="margin-top: 15px; height: 70px;">
+
+                                                <div class="col-3" style="position:relative; top:55%">
+                                                    <label class="custom-control custom-checkbox"
+                                                        style="margin-left: 50px; z-index:9999">
+                                                        <input id="chk_all" name="chk_all" type="checkbox"
+                                                            class="custom-control-input"><span
+                                                            class="custom-control-label">모두 선택</span>
+                                                    </label>
+                                                </div>
+
+
+                                                <div class="col-1"></div>
+                                                <div class="col-4"
+                                                    style="position:relative; left:40%; top:40%; z-index: 9999;">
+                                                    <button type="button" id="save_result_btn"
+                                                        class="btn btn-outline-primary btn-lg"> 점겸결과 저장</button>
+                                                </div>
+                                            </div>
+
+                                            <div class="table-responsive" style="margin-top:-50px;">
+                                                <table id="agent_table" class="table">
+                                                    <thead class="bg-light">
+                                                        <tr class="border-0">
+                                                            <th class="border-0 text-center">check</th>
+                                                            <th class="border-0 text-center">상태</th>
+                                                            <th class="border-0 text-center ">IP</th>
+                                                            <th class="border-0 text-center">운영체제 버전</th>
+                                                            <th class="border-0 text-center">용도</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <% for(let i = 0 ; i < recordsets[0].length ; i+=1){ %>
+                                                        <% let color = ""; 
+                                                        if(recordsets[0][i].GRD_SCORE !== null && recordsets[0][i].ITEM_CNT !== null){ 
+                                                            if(Number(recordsets[0][i].GRD_SCORE) == Number(recordsets[0][i].ITEM_CNT)){
+                                                        color = "blue";     
+                                                            }else{
+                                                                color = "red";
+                                                            }
+                                                        } %>
                                                         <tr style="text-align: center">
-                                                            <td style="text-align:center; vertical-align: middle;"><label
-                                                                    class="custom-control custom-checkbox"><input
+                                                            <td style="text-align:center; vertical-align: middle;">
+                                                                <label class="custom-control custom-checkbox"><input
                                                                         type="checkbox" id='<%=i %>'
                                                                         class="custom-control-input chkbox"><span
                                                                         class="custom-control-label"
@@ -109,117 +123,158 @@
                                                             <img src="../assets/images/avatar-2.jpg" alt="User Avatar" class="rounded-circle user-avatar-lg">
                                                             
                                                              -->
-                                                            <td><%= recordsets[0][i].IP %></td>
+                                                            <td>
+                                                                <p style="color:<%= color%>"><%= recordsets[0][i].IP %>
+                                                                </p>
+                                                                <input type="hidden"
+                                                                    id="is_search_<%=recordsets[0][i].AGENT_CD[0]%>"
+                                                                    value=<% 
+                                                                if(color.length > 0){
+                                                                %>true<%
+                                                                }else{
+                                                                %>false<% } %>>
+                                                            </td>
                                                             <td><%= recordsets[0][i].OS %></td>
                                                             <td><%= recordsets[0][i].PURPOSE %></td>
                                                         </tr>
                                                         <% } %>
-                                                </tbody>
-                                            </table>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-5 col-lg-5 col-md-5 col-sm-12 col-12">
+                                    <div class="card" style="height: 600px; overflow:hidden;">
+                                        <h3 class="card-header text-center">규정 준수 점검 요약</h3>
+                                        <div class="card-body">
+
+
+                                            <!-- ======  파이 차트 시작 ============================-->
+                                            <div class="chart-container" style="height:25vh;">
+                                                <canvas id="myChart" height="150px;"></canvas>
+                                            </div>
+                                            <!-- ======  파이 차트 끝 ============================-->
+                                            <%
+                                    let total_junsu = 0;
+                                      let junsu = 0
+                                      let not_junsu = 0
+                                      let not_check = 0
+                                      for(let i = 0 ; i < recordsets[0].length ; i+=1){
+                                        if(recordsets[0][i].GRD_SCORE !== null && recordsets[0][i].ITEM_CNT !== null){ 
+                                            if(Number(recordsets[0][i].GRD_SCORE) == Number(recordsets[0][i].ITEM_CNT)){
+                                                junsu += 1;   
+                                            }else{
+                                                not_junsu +=1;
+                                            }
+                                        }else{
+                                            not_check +=1;
+                                        }
+                                        total_junsu +=1;
+
+
+                                      }
+                                      
+                                      
+                                      %>
+                                        </div>
+
+                                        <div class="card-footer text-center bg-white">
+
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <h4>준수</h4>
+                                                        <div class="progress mb-3">
+                                                            <div class="progress-bar progress-bar-striped bg-success"
+                                                                role="progressbar"
+                                                                style="width: <%=Number(junsu/total_junsu * 100)%>%"
+                                                                aria-valuenow="25" aria-valuemin="0"
+                                                                aria-valuemax="100">
+                                                                <%=Number(junsu/total_junsu * 100)%>%</div>
+                                                        </div>
+                                                        <h4>(<%=junsu%>/<%=total_junsu%>)</h4>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <h4>미준수</h4>
+                                                        <div class="progress mb-3">
+                                                            <div class="progress-bar progress-bar-striped bg-danger"
+                                                                role="progressbar"
+                                                                style="width: <%=Number(not_junsu/total_junsu * 100)%>%"
+                                                                aria-valuenow="100" aria-valuemin="0"
+                                                                aria-valuemax="100">
+                                                                <%=Number(not_junsu/total_junsu * 100)%>%</div>
+
+                                                        </div>
+                                                        <h4>(<%=not_junsu%>/<%=total_junsu%>)</h4>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <h5>미점검</h5>
+                                                        <div class="progress mb-3">
+                                                            <div class="progress-bar progress-bar-striped bg-warning"
+                                                                role="progressbar"
+                                                                style="width: <%=Number(not_check/total_junsu * 100)%>%"
+                                                                aria-valuenow="75" aria-valuemin="0"
+                                                                aria-valuemax="100">
+                                                                <%=Number(not_check/total_junsu * 100)%>%</div>
+                                                        </div>
+                                                        <h4>(<%=not_check%>/<%=total_junsu%>)</h4>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                               
-                            <div class="col-xl-5 col-lg-5 col-md-5 col-sm-12 col-12">
-                            <div class="card" style="height: 600px; overflow:hidden;">
-                                <h3 class="card-header text-center">규정 준수 점검 요약</h3>
-                                <div class="card-body">
-                                   
 
-<!-- ======  파이 차트 시작 ============================-->
-<div class="chart-container" style="height:45vh;">
-    <canvas id="myChart" height="150px;"></canvas> 
-</div>
-<!-- ======  파이 차트 끝 ============================-->
-                                      
-                                </div>
-                            
-                                    <div class="card-footer text-center bg-white">
-                                       
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <div class="col-md-4">
-                                                    <h4>준수</h4>
-                                                    <div class="progress mb-3">
-                                                <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 60%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">60%</div>
-                                            </div>
-                                                <h4>(60/100)</h4>   
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <h4>미준수</h4>
-                                                    <div class="progress mb-3">
-                                                <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 30%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">30%</div>
-
-                                            </div>
-                                                <h4>(30/100)</h4>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <h5>미점검</h5>
-                                                    <div class="progress mb-3">
-                                                <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 10%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">10%</div>
-                                            </div>
-                                            <h4>(10/100)</h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                             </div>
-                        </div>
-
-                               <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                <div class="card" >
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="card">
                                     <h3 class="card-header text-center">TOP 10 미준수 점검항목</h3>
                                     <div class="card-body p-0">
                                         <div class="table-responsive">
-                                            <table class="table">
+                                            <table id="top10_table" class="table">
                                                 <thead class="bg-light">
                                                     <tr class="border-0">
                                                         <th class="border-0 text-center">번호</th>
                                                         <th class="border-0">항목</th>
                                                         <th class="border-0 text-center">위험도</th>
                                                         <th class="border-0 text-center">개수</th>
-                                                                                                            </tr>
+                                                    </tr>
                                                 </thead>
                                                 <tbody>
+                                                    <% for(let i = 0 ; i < top10.length ; i+=1 ){ %>
                                                     <tr>
-                                                        <td class="text-center">1</td>
-                                                        <td><h5>시스템의 보안설정을 정말로 잘 관리하고 있는가?</h5></td>
+                                                        <td class="text-center"><%=i+1%></td>
+                                                        <td>
+                                                            <h5><%=top10[i].item_cd %></h5>
+                                                        </td>
                                                         <td class="text-center">높음 </td>
-                                                        <td class="text-center">6 </td>
+                                                        <td class="text-center"><%=top10[i].cnt%> </td>
                                                     </tr>
-            
-                                                    <tr>
-                                                        <td class="text-center">2</td>
-                                                        <td><h5>시스템의 보안설정을 정말로 잘 관리하고 있는가?</h5></td>
-                                                        <td class="text-center">높음 </td>
-                                                        <td class="text-center">6 </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="text-center">3</td>
-                                                        <td><h5>시스템의 보안설정을 정말로 잘 관리하고 있는가?</h5></td>
-                                                        <td class="text-center">높음 </td>
-                                                        <td class="text-center">6 </td>
-                                                    </tr>
-                                                    
+                                                    <% } %>
 
-                                              </tbody>
+
+
+                                                </tbody>
                                             </table>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        
+
+                        </div>
                     </div>
                 </div>
-            </div>
-            <!-- ============================================================== -->
-            <!-- footer -->
-            <!-- ============================================================== -->
-            <div class="footer">
-                <%include ./footer.ejs%>
-                <!--<div class="container-fluid">
+                <form id="hiddenForm" action="/dashboard/download/" method="POST">
+                    <input type="hidden" id="row_arr" name="row_arr">
+                </form>
+                <!-- ============================================================== -->
+                <!-- footer -->
+                <!-- ============================================================== -->
+                <div class="footer">
+                    <%include ./footer.ejs%>
+                    <!--<div class="container-fluid">
                     <div class="row">
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
                              Copyright © 2018 Concept. All rights reserved. Dashboard by 중앙대학교</a>
@@ -233,131 +288,171 @@
                         </div>
                     </div>
                 </div>-->
+                </div>
+                <!-- ============================================================== -->
+                <!-- end footer -->
+                <!-- ============================================================== -->
             </div>
             <!-- ============================================================== -->
-            <!-- end footer -->
+            <!-- end wrapper  -->
             <!-- ============================================================== -->
         </div>
+
+
+        <iframe id="hiddenifr" name="hiddenifr" style="display:none;">
+        </iframe>
+
         <!-- ============================================================== -->
-        <!-- end wrapper  -->
+        <!-- end main wrapper  -->
         <!-- ============================================================== -->
-    </div>
-    <!-- ============================================================== -->
-    <!-- end main wrapper  -->
-    <!-- ============================================================== -->
-    <!-- Optional JavaScript -->
-    <!-- jquery 3.3.1 -->
-    <script src="/assets/vendor/jquery/jquery-3.3.1.min.js"></script>
-    <!-- bootstap bundle js -->
-    <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
-    <!-- slimscroll js -->
-    <script src="/assets/vendor/slimscroll/jquery.slimscroll.js"></script>
-    <!-- main js -->
-    <script src="/assets/libs/js/main-js.js"></script>
-    <!-- chart chartist js -->
-    <script src="/assets/vendor/charts/chartist-bundle/chartist.min.js"></script>
-    <!-- sparkline js -->
-    <script src="/assets/vendor/charts/sparkline/jquery.sparkline.js"></script>
-    <!-- morris js -->
-    <script src="/assets/vendor/charts/morris-bundle/raphael.min.js"></script>
-    <!-- chart c3 js -->
-    <script src="/assets/vendor/charts/c3charts/c3.min.js"></script>
-    <script src="/assets/vendor/charts/c3charts/d3-5.4.0.min.js"></script>
-    <script src="/assets/vendor/charts/c3charts/C3chartjs.js"></script>
-    <script src="/assets/vendor/charts/morris-bundle/morris.js"></script>
-    <script src="/assets/vendor/jquery/datatables.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-    <style>
+        <!-- Optional JavaScript -->
+        <!-- jquery 3.3.1 -->
+        <script src="/assets/vendor/jquery/jquery-3.3.1.min.js"></script>
+        <!-- bootstap bundle js -->
+        <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+        <!-- slimscroll js -->
+        <script src="/assets/vendor/slimscroll/jquery.slimscroll.js"></script>
+        <!-- main js -->
+        <script src="/assets/libs/js/main-js.js"></script>
+        <!-- chart chartist js -->
+        <script src="/assets/vendor/charts/chartist-bundle/chartist.min.js"></script>
+        <!-- sparkline js -->
+        <script src="/assets/vendor/charts/sparkline/jquery.sparkline.js"></script>
+        <!-- morris js -->
+        <script src="/assets/vendor/charts/morris-bundle/raphael.min.js"></script>
+        <!-- chart c3 js -->
+        <script src="/assets/vendor/charts/c3charts/c3.min.js"></script>
+        <script src="/assets/vendor/charts/c3charts/d3-5.4.0.min.js"></script>
+        <script src="/assets/vendor/charts/c3charts/C3chartjs.js"></script>
+        <script src="/assets/vendor/charts/morris-bundle/morris.js"></script>
+        <script src="/assets/vendor/jquery/datatables.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+        <style>
             div.dataTables_info {
                 position: absolute
             }
 
             .dataTables_wrapper .dataTables_filter {
-                width:100%;
+                width: 100%;
                 text-align: center;
-                margin-bottom:20px;
-                line-height:40px;
+                margin-bottom: 20px;
+                line-height: 40px;
             }
+
             div.dataTables_wrapper div.dataTables_paginate {
                 float: none;
                 text-align: center
             }
-    </style>
+        </style>
 
-<script>
-$('#agent_table').DataTable({
-            lengthChange: false,
-            info: false,
-            searching: true,
-            scrollY: 320,
-            language:{
-                search : "",
-                searchPlaceholder : "Search..."
-            }
-        });
-        $('#chk_all').click(() => {
-            let chk = $('#chk_all').is(":checked");//.attr('checked');
-            if (chk) $(".chkbox").prop('checked', true);
-            else $(".chkbox").prop('checked', false);
-        });
-</script>
-<script>
-var ctx = document.getElementById('myChart').getContext('2d');
+        <script>
+            $('#agent_table').DataTable({
+                lengthChange: false,
+                info: false,
+                searching: true,
+                scrollY: 320,
+                language: {
+                    search: "",
+                    searchPlaceholder: "Search..."
+                }
+            });
+            $('#chk_all').click(() => {
+                let chk = $('#chk_all').is(":checked");//.attr('checked');
+                if (chk) $(".chkbox").prop('checked', true);
+                else $(".chkbox").prop('checked', false);
+            });
+        </script>
+        <script>
+            var ctx = document.getElementById('myChart').getContext('2d');
+
 var chart = new Chart(ctx, {
-    // The type of chart we want to create
-    type: 'doughnut',
+                // The type of chart we want to create
+                type: 'doughnut',
 
-    // The data for our dataset
-    data: {
-        labels: ['항목(1)', '항목(2)', '항목(3)','항목(4)','항목(5)','항목(6)'],
-        datasets: [{
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
-            data: [10, 5, 2, 3, 5, 7],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
+                // The data for our dataset
+                data: {
+                    labels: ["미준수","준수","미점검"
             ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
+                    datasets: [{
+                        backgroundColor: 'rgb(255, 99, 132)',
+                        borderColor: 'rgb(255, 99, 132)',
+                        data: [<%=junsu %>,<%=not_junsu%>,<%=not_check%>],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
 
-    // Configuration options go here
-    options: {
+                // Configuration options go here
+                options: {
 
-        scales: {
-        
-        },
-        maintainAspectRatio : false,
-        layout: {
-            padding: {
-                left: 0,
-                right: 0,
-                top: 0,
-                bottom: 5
-            }
-        },
-        title: {
-            display: true,
-            text: 'Windows 10(16)',
-            fontSize: 20,
-            fontStyle: 'bold'
-        }
-    }
-});
-</script>
+                    scales: {
+
+                    },
+                    maintainAspectRatio: false,
+                    layout: {
+                        padding: {
+                            left: 0,
+                            right: 0,
+                            top: 0,
+                            bottom: 5
+                        }
+                    },
+                    title: {
+                    }
+                }
+            });
+
+            $('#save_result_btn').click((e) => {
+                // get check boxs
+                let checkbox_arr = $('.chkbox:checked');
+                if (checkbox_arr.length == 0) {
+                    alert("한개 이상의 에이전트 선택이 필요합니다.");
+                } else {
+                    let recordset = JSON.parse(`<%- JSON.stringify(recordsets[0])%>`);
+                    let record_arr = [];
+                    let is_pass = true;
+                    checkbox_arr.each((idx, elem) => {
+                        let id = elem.id;
+                        if (recordset[id]['ITEM_CNT'] == null) {
+                            alert("점검이 진행된 데이터만 체크해 주세요.");
+                            is_pass = false;
+                            return false;
+                        }
+                    });
+
+                    if (is_pass) {
+                        checkbox_arr.each((idx, elem) => {
+                            // 다운로드 요청으로 넘기기 
+                            let id = elem.id;
+                            $('#hiddenForm').attr('target', 'hiddenifr');
+                            $('#hiddenForm').attr('action', "/dashboard/download");
+                            record_arr.push(recordset[id])
+                        });
+                        $('#row_arr').val(JSON.stringify(record_arr));
+
+                        $('#hiddenForm').submit();
+                    }
+
+                }
+
+            });
+
+        </script>
 </body>
 
 

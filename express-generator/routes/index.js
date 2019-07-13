@@ -4,8 +4,11 @@
 const express = require('express');
 const router = express.Router();
 const DB = require('../db');
+const make_dashboard = require('./make_dashboard_html');
 const LOGS = require('../logs');
 const multer = require('multer');
+const fs = require('fs');
+const archiver = require('archiver');
 /* GET home page. */
 router.get('/', (req, res, next) => {
   res.render('index', { title: 'Express' });
@@ -15,11 +18,18 @@ router.get('/policy', (req, res, next) => {
   res.render('policy');
 });
 
+
+
 router.get('/dashboard', function (req, res, next) {
   if(req.session.username){
-  DB.get_agent_info().then(result => {
-    result.sess_name = req.session.username;
-    res.render('dashboard', result);
+  DB.get_dashboard_datas().then(result => {
+    DB.get_dashboard_top10().then(result2=>{
+      result.sess_name = req.session.username;
+      result.top10 = result2.recordsets[0];
+      console.log(result.top10);
+      res.render('dashboard', result);
+    })
+    
   });
 }else{
   res.render('./main/User/login',{referer:'dashboard'});
@@ -383,7 +393,41 @@ router.get('/grouppolicy', function (req, res, next) {
   res.render('grouppolicy');
 });
 
+router.post("/dashboard/download",(req,res,next)=>{
+  let param = JSON.parse(req.body['row_arr']);
+  // console.log(param);
+  DB.get_dashboard_datas().then(result=>{
+    let paths = [];
+      make_dashboard.make_html(param).then(filepath=>{
+        console.log(filepath);
+        if(filepath.length > 1){
+          let output = fs.createWriteStream(__dirname +'/result.zip');
+          let archive = archiver('zip');
+          output.on('end', function() {
+            console.log('Data has been drained');
+          });
+          output.on('close', function() {
+            console.log(archive.pointer() + ' total bytes');
+            console.log('archiver has been finalized and the output file descriptor has closed.');
+            res.download(output.path);
+          });
+          archive.pipe(output);
+          for (let i = 0 ; i < filepath.length ; i +=1){
+            archive.file(filepath[i],{name:filepath[i].split('/')[filepath[i].split('/').length-1]});
+          }
+          archive.finalize();
+          console.log(output.path);
 
+        }else if(filepath.length ==1){
+          res.download(filepath[0]);
+        }
+      });
+    
+    
+    // res.redirect('/dashboard');
+  });
+
+});
 
 
 module.exports = router;
