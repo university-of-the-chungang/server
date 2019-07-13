@@ -8,15 +8,53 @@ const make_dashboard = require('./make_dashboard_html');
 const LOGS = require('../logs');
 const multer = require('multer');
 const archiver = require('archiver');
+const jwt = require('jsonwebtoken');
 var util = require('util');
 var path = require('path');
 var mime = require('mime');
 var fs = require('fs')
 
+let SECRET = 'token_secret';
 
+let signToken=(id)=>{
+  console.log(`signTOken(${id})`);
+  let token =  jwt.sign({id:id},
+    SECRET,
+    {expiresIn:"30m"});
+    console.log(token);
+    return token;
+}
+
+let isAuthenticatied = (token)=>{
+  let result = false;
+  jwt.verify(token, SECRET, function(err, decoded) {
+    var dateNow = new Date();
+    if (err) {
+        err = {
+          name: 'TokenExpiredError',
+          message: 'jwt expired',
+          expiredAt: dateNow.getTime()/1000
+        }
+      
+    }else{
+      
+      console.log(decoded.exp );
+      console.log(dateNow.getTime()/1000);
+      if(decoded.exp <= dateNow.getTime()/1000){
+        result =  false;
+      }else{
+        result =  decoded.exp;
+      }
+
+    }
+  });
+  return result;
+
+}
 /* GET home page. */
 router.get('/', (req, res, next) => {
-  res.render('index', { title: 'Express' });
+  // res.render('index', { title: 'Express' });
+  res.redirect('/dashboard');
 });
 
 router.get('/policy', (req, res, next) => {
@@ -31,8 +69,14 @@ router.get('/dashboard', function (req, res, next) {
     DB.get_dashboard_top10().then(result2=>{
       result.sess_name = req.session.username;
       result.top10 = result2.recordsets[0];
-      console.log(result.top10);
-      res.render('dashboard', result);
+      result.token = req.session.token;
+      let is_auth = isAuthenticatied(req.session.token)
+      if(is_auth){
+        result.expire = is_auth;
+        res.render('dashboard',result);
+      }else{
+        res.redirect('/login');
+      }
     })
     
   });
@@ -91,6 +135,8 @@ router.post('/signin',(req,res,next)=>{
   DB.login_admin(data.name,data.pass).then(result=>{
     if(result === 1){
       req.session.username = data.name;
+      let token = signToken(data.name);
+      req.session.token = token;
       LOGS.make_log("USER",req.session.username,"로그인");
       if(data.referer)
         res.redirect('/'+data.referer);
@@ -139,17 +185,20 @@ router.get('/changeinfo', function (req, res, next) {
 // User 기능과 관련된 페이지 끝
 router.get('/agent', function (req, res, next) {
   let body = req.query; 
-  if(req.session.username){
   DB.get_agent_info().then(result => {
-    result.sess_name = req.session.username;
     if (typeof(body.err_msg) !="undefined"){
       result.reason = body.err_msg;
     }
-    res.render('./main/Agent/agent', result);
+    result.token = req.session.token;
+    let is_auth = isAuthenticatied(req.session.token);
+    if(is_auth){
+      result.expire = is_auth;
+      res.render('./main/Agent/agent', result);
+    }else{
+      res.redirect('/login');
+    }
   });
-}else{
-  res.render('./main/User/login',{referer:'agent'});
-}
+
 });// 에이전트 페이지
 router.get('/agent/:keyword', (req, res, next) => {
   DB.search_agent_info(req.params.keyword).then(result => {

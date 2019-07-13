@@ -266,6 +266,9 @@
                         </div>
                     </div>
                 </div>
+                <div>
+                    <p id="expire"></p>
+                </div>
                 <form id="hiddenForm" action="/dashboard/download/" method="POST">
                     <input type="hidden" id="row_arr" name="row_arr">
                 </form>
@@ -274,6 +277,7 @@
                 <!-- ============================================================== -->
                 <div class="footer">
                     <%include ./footer.ejs%>
+                    
                     <!--<div class="container-fluid">
                     <div class="row">
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
@@ -451,6 +455,9 @@ var chart = new Chart(ctx, {
                 }
 
             });
+            let play = setInterval(()=>{
+                $('#expire').text(`로그인 세션 만료까지 ${(Number(<%=expire%> - new Date().getTime()/1000)/60).toFixed(1)} 분 남음`);
+            },1000);
 
         </script>
 </body>
