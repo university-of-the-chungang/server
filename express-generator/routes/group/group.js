@@ -2,14 +2,16 @@ const express = require('express');
 const router = express.Router();
 const DB = require('../../db');
 
+// 그룹페이지 홈
 router.get('/', function (req, res, next) {
   DB.total_group_info().then(result => {
     //let len = result.recordset.length;
     //console.log(result.recordset[0]);
     res.render('./main/GroupPolicy/group', result);
   });
-}); // 그룹페이지 홈
+});
 
+//그룹 정보 상세보기
 router.get('/:name', (req, res, next) =>{
   DB.get_group_info(req.params.name).then(result => {
     DB.view_modify_group_info(req.params.name).then(result2 =>{
@@ -24,6 +26,7 @@ router.get('/:name', (req, res, next) =>{
   });
 });
 
+//그룹 정보 삭제
 router.post('/del_group_info', (req,res,next) => {
   console.log(req.body.del_group_set_cd.length);
   if(req.body.del_group_set_cd.length === 0) {
