@@ -73,7 +73,11 @@ router.get('/dashboard', function (req, res, next) {
       let is_auth = isAuthenticatied(req.session.token)
       if(is_auth){
         result.expire = is_auth;
-        res.render('dashboard',result);
+        DB.view_admin('DIVISION, POSITION'," WHERE NAME = '"+result.sess_name+"'").then((result2)=>{
+          result.division = result2.recordsets[0][0]['DIVISION'];
+          result.position = result2.recordsets[0][0]['POSITION'];
+          res.render('dashboard',result);
+        });
       }else{
         res.redirect('/login');
       }
@@ -190,6 +194,7 @@ router.get('/agent', function (req, res, next) {
       result.reason = body.err_msg;
     }
     result.token = req.session.token;
+    result.user_name = req.session.username;
     let is_auth = isAuthenticatied(req.session.token);
     if(is_auth){
       result.expire = is_auth;

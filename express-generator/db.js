@@ -46,9 +46,9 @@ sql.on('error', err => {
     console.log("Sql database connection error ", err);
 })
 
-let query_select = (data, table_name) => {
+let query_select = (data, table_name,where) => {
     return new Promise((resolve, reject) => {
-        new sql.Request().query(`SELECT ` + String(data) + ` FROM ` + table_name, (err, result) => {
+        new sql.Request().query(`SELECT ` + String(data) + ` FROM ` + table_name + where, (err, result) => {
             if (result) {
                 resolve(result);
             } else {
@@ -248,10 +248,9 @@ exports.get_group_info = (group_name = null) => {
         });
     });
 }
-let view_admin = (column_name) => {
+exports.view_admin = (column_name,where="") => {
     return new Promise((resolve, reject) => {
-        query_select(column_name, "TBL_ADMIN_INFO").then((result) => {
-            console.log(result);
+        query_select(column_name, "TBL_ADMIN_INFO",where).then((result) => {
             resolve(result);
         }).catch(e => {
             reject(e);
