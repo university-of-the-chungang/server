@@ -7,8 +7,13 @@ const DB = require('../db');
 const make_dashboard = require('./make_dashboard_html');
 const LOGS = require('../logs');
 const multer = require('multer');
-const fs = require('fs');
 const archiver = require('archiver');
+var util = require('util');
+var path = require('path');
+var mime = require('mime');
+var fs = require('fs')
+
+
 /* GET home page. */
 router.get('/', (req, res, next) => {
   res.render('index', { title: 'Express' });
@@ -36,6 +41,42 @@ router.get('/dashboard', function (req, res, next) {
 }
 });
 
+router.post('/download/', function(req, res){
+  var fileId = 1;
+  var origFileNm, savedFileNm,savedPath,fileSize;
+  var chk=0
+  log_list = Object.values(req.body);
+  
+  var data = "ID\t\tTYPE\n";
+  for(var i =0 ; i < log_list.length-1; i+=2)
+  {
+    data += log_list[i]+"\t\t"+log_list[i+1]+"\n";  
+  }
+  console.log(data)
+  fs.writeFile('log.txt', data, 'utf8', function(err) {
+    console.log("Filewrite success");
+    var chk = 1;
+
+  });
+  
+  if(fileId == '1'){
+    origFileNm = 'log_output.txt';
+    savedFileNm = "log.txt"
+    savedPath = 'C:/Users/gullabjamun/Desktop/nsr/server/express-generator/'
+    fileSize = '1000';
+  }
+  
+  var file = savedPath + '/'+savedFileNm;
+  mimetype = mime.lookup(origFileNm);
+  res.setHeader('Content-disposition','attachment; filename='+origFileNm);
+  res.setHeader('Content-type',mimetype);
+
+  
+  var filestream = fs.createReadStream(file);
+  filestream.pipe(res);
+
+
+});
 
 router.get('/404', function (req, res, next) {
   res.render('./main/etc/404');
@@ -119,6 +160,49 @@ router.get('/agent/:keyword', (req, res, next) => {
   });
 
 })
+
+router.get('/log', function (req, res, next) {
+  DB.get_log_info().then(result => {
+    DB.total_group_info().then(result2 => {
+      res.render('./main/Log/log', {
+        recordsets: result.recordsets,
+        data: result2.recordsets
+      });
+    });    
+    //res.render('./main/Log/log', result);
+  });
+}); // 평가문항 및 로그 추출 페이지
+
+router.get('/log/:keyword2', (req, res, next) => {
+  DB.search_log_info(req.params.keyword2).then(result => {
+    result.sess_name = req.session.username;
+    DB.total_group_info().then(result2 => {
+      res.render('./main/Log/log', {
+        recordsets: result.recordsets,
+        data: result2.recordsets
+      });
+    });    
+  }).catch(err => {
+    console.log(err);
+  });
+})
+
+router.get('/log_date/:keyword2', (req, res, next) => {
+  DB.search_logDate_info(req.params.keyword2).then(result => {
+    result.sess_name = req.session.username;
+    DB.total_group_info().then(result2 => {
+      res.render('./main/Log/log', {
+        recordsets: result.recordsets,
+        data: result2.recordsets
+      });
+    });    
+  }).catch(err => {
+    console.log(err);
+  });
+
+})
+
+
 router.post('/agent/del_agent_info', (req, res, next) => {
   if (req.body.del_agent_cd.length === 0) {
     DB.get_agent_info().then(result => {
@@ -200,9 +284,8 @@ router.post('/activate_agent_info', (req, res, next) => {
     });
   });
 });
-router.get('/log', function (req, res, next) {
-  res.render('./main/Log/log');
-}); // 평가문항 및 로그 추출 페이지
+
+
 router.post('/make_xlsx',function(req,res,next){
   let param = req.body;
   let now = new Date().toISOString().slice(0,10); 
