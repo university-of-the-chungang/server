@@ -12,6 +12,7 @@ yarn-error.log*
 */*/*/*.html
 */*/*/*/*.html
 *.zip
+*.xlsx
 # Runtime data
 pids
 *.pid
