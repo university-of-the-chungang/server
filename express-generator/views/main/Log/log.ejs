@@ -2,38 +2,20 @@
 <html lang="en">
  
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap.min.css">
-    <link href="/assets/vendor/fonts/circular-std/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/libs/css/style.css">
-    <link rel="stylesheet" href="/assets/vendor/fonts/fontawesome/css/fontawesome-all.css">
-    <link rel="stylesheet" href="/assets/vendor/charts/chartist-bundle/chartist.css">
-    <link rel="stylesheet" href="/assets/vendor/charts/morris-bundle/morris.css">
-    <link rel="stylesheet" href="/assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="/assets/vendor/charts/c3charts/c3.css">
-    <link rel="stylesheet" href="/assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
-    <title>국가보안연구소</title>
-
+    <%include ../../head.ejs%>
     <style>
+        td { 
+                vertical-align: middle; 
+                overflow:hidden;
+                white-space : nowrap;
+                text-overflow: ellipsis;
 
-    td { 
-        vertical-align: middle; 
-        overflow:hidden;
-        white-space : nowrap;
-        text-overflow: ellipsis;
+         }
 
-     }
-
-
-
-    td.textOverDefault {
-        white-space : normal; /*기본값*/
-        text-overflow: clip; /*기본값*/
-    }
-
+        td.textOverDefault {
+            white-space : normal; /*기본값*/
+            text-overflow: clip; /*기본값*/
+        }
     </style>
 </head>
 
@@ -41,69 +23,8 @@
 
 <div class="dashboard-main-wrapper">
     <div class="dashboard-header">
-        <nav class="navbar navbar-expand-lg bg-white fixed-top">
-            <a class="navbar-brand" href="../dashboard">국가보안연구소</a>
-            <div class="collapse navbar-collapse " id="navbarSupportedContent">
-                
-                <ul class="navbar-nav ml-auto navbar-right-top">
-                    <li class="nav-item">
-                        <a class="nav-link" href="../dashboard"  role="button"  aria-haspopup="true" aria-expanded="false">대쉬보드</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="../agent"  role="button" aria-haspopup="true" aria-expanded="false">에이전트관리</a>    
-                    </li>
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="../group" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">그룹 및 정책관리</a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="../group">기본 정보 </a>
-                            <a class="dropdown-item" href="../newgroup">신규 그룹 생성</a>
-                            <a class="dropdown-item" href="../oldgroup">기존 그룹 관리</a>
-                            </div>  
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="../log" role="button" aria-haspopup="true" aria-expanded="false">평가문항/로그관리</a>
-                    </li>
-
-                    <li class="nav-item dropdown connection">
-                        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 설정 <i class="far fa-sun"></i> </a>
-                        <ul class="dropdown-menu dropdown-menu-right connection-dropdown">
-                            <li class="connection-list">
-                               <div class="row">
-                                    <div class="col-xl-12 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                        <a href="../policy" class="connection-item"><span>정책관리</span></a>
-                                    </div>
-                                    
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                    
-                    <li class="nav-item dropdown nav-user">
-                        <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">사용자 관리 </a>
-                        
-                        <ul class="dropdown-menu dropdown-menu-right connection-dropdown">
-                            <li class="connection-list">
-                                <div class="row">
-                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                        <a href="../login" class="connection-item"><span>로그인</span></a>
-                                    </div>
-                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                        <a href="../login" class="connection-item"> <span>로그아웃</span></a>
-                                    </div>
-                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                        <a href="../changeinfo" class="connection-item"> <span>정보변경</span></a>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                
-                </ul>
-            </div>
-        </nav>
+         <%include ../../header.ejs%>
+        
     </div>
     <!-- ============================================================== -->
     <!-- 헤드 네비게이션 바 종료  -->
@@ -160,7 +81,7 @@
                                             </div>
                                         </td>
                                         <td class="border-0 text-center">
-                                            <a href="#" class="col-11 btn btn-outline-danger" data-toggle="modal" data-target="#xccdfModal"> 결과 다운로드 <span class="icon-circle-small icon-box-xs text-danger bg-danger-light bg-danger-light "><i class="fa fa-fw fa-arrow-down"></i></span><span ></span></a>
+                                            <a href="#" class="col-9 btn btn-outline-danger" data-toggle="modal" data-target="#xccdfModal"> 결과 다운로드 <span class="icon-circle-small icon-box-xs text-danger bg-danger-light bg-danger-light "><i class="fa fa-fw fa-arrow-down"></i></span><span ></span></a>
                                         </td>
 
                                     </tr>
@@ -185,7 +106,7 @@
                                     </thead>
                                     <tbody>
                                     <% for(var i=0; i<data[0].length; i++){ %>
-                                    <tr class="table-success" style="text-align: center;">
+                                    <tr class="table" style="text-align: center;">
                                         <td style="text-align: center; vertical-align: middle;">
                                             <label class="custom-control custom-checkbox">
                                                 <input type="checkbox" id='<%=i%>' name = "chkbox" class="custom-control-input">
@@ -208,52 +129,50 @@
                                     </tbody>
                                 </table>
                             </div>
-
-
-
                     </div>
                 </div>
               </div>
             </div>
+
+
 <!-- ============================================================== -->            
 <!-- ============================================================== -->
 <!-- 로그 관리 카드 시작 -->
-        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="col-12">
               <div class="card" style="height: 400px; overflow: scroll;">
                 <h3 class="card-header text-center">로그 관리</h3>
                     <div class="card-body p-0">
                         <div class="row"> 
-
                             <table class="table">
                                 <thead>
                                     <tr class="border-0">
-
                                         <td class="border-0">
-                                            <div class="input-group input-search col-10">
-                                                <input id="search_keyword" class="form-control" type="text" placeholder="Search "><span class="input-group-btn">
-                                                <button class="btn btn-secondary" type="button" id="searchBtn"><i class="fas fa-search"></i></button></span>
-                                            </div>
+                                           
+                                        <div class="input-group input-search col-7" style="left: 30%;">
+                                            <input id="search_keyword" class="form-control" type="text" placeholder="Search "><span class="input-group-btn">
+                                            <button class="btn btn-secondary" type="button" id="searchBtn"><i class="fas fa-search"></i></button></span>
+                                        </div>
                                         </td>
-                                        <td class="border-0 text-center">
-                                             <div class="input-group input-search col-10">
+                                        <td class="border-0 text-center" style="left: 10%;">
+                                             <div class="input-group input-search col-7">
                                                 <input id="search_date" class="form-control"  type="date" placeholder="상세 필터링 "><span class="input-group-btn">
                                                 <button class="btn btn-primary" type="button" id="dateBtn" ><i class="fas fa-search"></i></button></span>
                                             </div>
                                         </td>
+
                                         <td class="border-0 text-center">
                                             <form action="/download/" method="POST">
+                                                
                                                 <% for(let i = 0 ; i < recordsets[0].length ; i+=1){ %>
                                                     <input type="hidden" name="logid<%=i%>" value="<%= recordsets[0][i].LOG_ID %>">
                                                     <input type="hidden" name="logtype<%=i%>" value="<%= recordsets[0][i].LOG_TYPE %>">
                                                 <% } %>
-                                                <input type="submit" value="로그 다운로드" a href="#" id="downBtn" class="col-11 btn btn-outline-danger" data-toggle="modal" data-target="#xccdfModal"><span class="icon-circle-small icon-box-xs text-danger bg-danger-light bg-danger-light "><i class="fa fa-fw fa-arrow-down"></i></span><span ></span></a>
+                                                <a href="#" id="downBtn" class="col-9 btn btn-outline-danger" data-toggle="modal" data-target="#xccdfModal"> 로그 다운로드 <span class="icon-circle-small icon-box-xs text-danger bg-danger-light bg-danger-light "><i class="fa fa-fw fa-arrow-down"></i></span></a>
                                             </form>
                                         </td>
-
                                     </tr>
                                 </thead>
                             </table>
-
                         </div>
 
                         <div class="table-responsive">
@@ -261,9 +180,11 @@
                                 <thead class="bg-light">
                                     <tr class="border-0">
                                         <th class="border-0 text-center">번호</th>
-                                        <th class="border-0">항목</th>
-                                        <th class="border-0 text-center">위험도</th>
-                                        <th class="border-0 text-center">개수</th>
+                                        <th class="border-0">USER_ID</th>
+                                        <th class="border-0 text-center">LOG_ID</th>
+                                        <th class="border-0 text-center">LOG_TYPE</th>
+                                        <th class="border-0 text-center">CONTENTS</th>
+                                        <th class="border-0 text-center">CREATED DATE</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -277,21 +198,10 @@
                                         <td><h5><%= recordsets[0][i].LOG_TYPE %></h5></td>
                                         <td class="text-center">높음 </td>
                                         <td class="text-center">6 </td>
-                                    </tr>
-                                    <!--
-                                    <tr>
-                                        <td class="text-center">1</td>
-                                        <td><h5>각종 로그기록</h5></td>
-                                        <td class="text-center">높음 </td>
+                                        <td class="text-center">6 </td>
                                         <td class="text-center">6 </td>
                                     </tr>
-                                    <tr>
-                                        <td class="text-center">1</td>
-                                        <td><h5>각종 로그기록</h5></td>
-                                        <td class="text-center">높음 </td>
-                                        <td class="text-center">6 </td>
-                                    </tr>
-                                    -->
+                                    
                                     <% } %>
                                 </tbody>
                             </table>
