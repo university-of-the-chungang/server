@@ -90,77 +90,67 @@ router.get('/dashboard', function (req, res, next) {
 }
 });
 
-async function downfile(res,a)
+
+function downfile(res,a)
 {
-  console.log("hello")
-  var fileId = 1;
-  var origFileNm, savedFileNm,savedPath,fileSize;
+  console.log("downfile");
+  return new Promise((resolve,reject)=>{
+    var fileId = 1;
+    var origFileNm, savedFileNm,savedPath,fileSize;
 
 
-  origFileNm = 'log_output.txt';
-  savedFileNm = "log.txt"
-  savedPath = 'C:/Users/gullabjamun/Desktop/nsr/server/express-generator/'
-  fileSize = '1000';
-  
-  
-  var file = savedPath + '/'+savedFileNm;
-  mimetype = mime.lookup(origFileNm);
-  res.setHeader('Content-disposition','attachment; filename='+origFileNm);
-  res.setHeader('Content-type',mimetype);
+    origFileNm = 'log_output.txt';
+    savedFileNm = "log.txt"
+    savedPath = __dirname+'/log/'
+    fileSize = '1000';
+    
+    
+    var file = savedPath + '/'+savedFileNm;
+    mimetype = mime.lookup(origFileNm);
+    res.setHeader('Content-disposition','attachment; filename='+origFileNm);
+    res.setHeader('Content-type',mimetype);
 
-  
-  var filestream = fs.createReadStream(file);
-  filestream.pipe(res);
+    
+    var filestream = fs.createReadStream(file);
+    filestream.pipe(res);
 
-  if(a==1){
-    return 1;  
-  }
+    if(a==1){
+      resolve(1);  
+    }
+    else{
+      reject(0);
+    }
+  });
 
-  else
-  {
-    throw 0;
-  }
   
 }
 
-async function makelog(log_list,a)
+function makelog(log_list,a)
 {
   
-  if(a==1)
-  {
-    var data = "ID\t\tTYPE\t\tCONTENTS\t\t\t\t\tDATE\n";
+   return new Promise((resolve,reject)=>{
+    var data = "DATE\t\t\t\t\t\t\t\t\t\t\t\tID\t\tTYPE\t\tCONTENTS\n";
+    console.log(log_list);
     for(var i =0 ; i < log_list.length-1; i+=4)
     {
-      data += log_list[i]+"\t\t"+log_list[i+1]+"\t\t"+log_list[i+2]+"\t\t\t\t"+log_list[i+3]+"\n";  
+      data += log_list[i]+"\t\t"+log_list[i+1]+"\t\t"+log_list[i+2]+"\t\t"+log_list[i+3]+"\n";  
     }
+   fs.writeFileSync(__dirname+'/log/log.txt',data,'utf8');
+   console.log("file make fin");
+   resolve(true);
    
-    fs.writeFile('log.txt', data, 'utf8', function(err) {
-      console.log("Filewrite success");
-      var chk = 1;
-    });
-    return "makelog finish";
-  }
 
-  else{
-    throw 0;
-  }
-
+  });
 
 }
 
-async function downlog(log_list,res){
-  try{
-    const a = await makelog(log_list,1);
-    const b = await downfile(res,a);
-    console.log(b);
-  }
-  catch(e){
-    consol.log(e);
-  }
+function downlog(log_list,res){
+  console.log(log_list);
+  makelog(log_list,1)
+    .then(result =>{downfile(res,1)});
 
 }
 router.post('/download/', function(req, res){
-  
   log_list = Object.values(req.body);
   downlog(log_list,res);
 
