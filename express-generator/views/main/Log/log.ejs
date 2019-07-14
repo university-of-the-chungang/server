@@ -166,8 +166,10 @@
                                                 <% for(let i = 0 ; i < recordsets[0].length ; i+=1){ %>
                                                     <input type="hidden" name="logid<%=i%>" value="<%= recordsets[0][i].LOG_ID %>">
                                                     <input type="hidden" name="logtype<%=i%>" value="<%= recordsets[0][i].LOG_TYPE %>">
+                                                    <input type="hidden" name="logcontent<%=i%>" value="<%= recordsets[0][i].CONTENTS %>">
+                                                    <input type="hidden" name="logdate<%=i%>" value="<%= recordsets[0][i].CONTENT_DATE %>">
                                                 <% } %>
-                                                <a href="#" id="downBtn" class="col-9 btn btn-outline-danger" data-toggle="modal" data-target="#xccdfModal"> 로그 다운로드 <span class="icon-circle-small icon-box-xs text-danger bg-danger-light bg-danger-light "><i class="fa fa-fw fa-arrow-down"></i></span></a>
+                                                <input type="submit" value="로그 다운로드" a href="#" id="downBtn" class="col-11 btn btn-outline-danger" data-toggle="modal" data-target="#xccdfModal"><span class="icon-circle-small icon-box-xs text-danger bg-danger-light bg-danger-light "><i class="fa fa-fw fa-arrow-down"></i></span><span ></span></a>
                                             </form>
                                         </td>
                                     </tr>
@@ -179,8 +181,6 @@
                             <table class="table">
                                 <thead class="bg-light">
                                     <tr class="border-0">
-                                        <th class="border-0 text-center">번호</th>
-                                        <th class="border-0">USER_ID</th>
                                         <th class="border-0 text-center">LOG_ID</th>
                                         <th class="border-0 text-center">LOG_TYPE</th>
                                         <th class="border-0 text-center">CONTENTS</th>
@@ -195,11 +195,9 @@
                                     <% for(let i = 0 ; i < recordsets[0].length ; i+=1){ %>
                                     <tr>
                                         <td class="text-center"><%= recordsets[0][i].LOG_ID %></td>
-                                        <td><h5><%= recordsets[0][i].LOG_TYPE %></h5></td>
-                                        <td class="text-center">높음 </td>
-                                        <td class="text-center">6 </td>
-                                        <td class="text-center">6 </td>
-                                        <td class="text-center">6 </td>
+                                        <td class="text-center"><h5><%= recordsets[0][i].LOG_TYPE %></h5></td>
+                                        <td class="text-center"><%= recordsets[0][i].CONTENTS %> </td>
+                                        <td class="text-center"><%= recordsets[0][i].CONTENT_DATE %></td>
                                     </tr>
                                     
                                     <% } %>

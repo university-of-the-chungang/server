@@ -13,6 +13,7 @@ var util = require('util');
 var path = require('path');
 var mime = require('mime');
 var fs = require('fs')
+var async = require('async');
 
 let SECRET = 'token_secret';
 
@@ -89,30 +90,18 @@ router.get('/dashboard', function (req, res, next) {
 }
 });
 
-router.post('/download/', function(req, res){
+async function downfile(res,a)
+{
+  console.log("hello")
   var fileId = 1;
   var origFileNm, savedFileNm,savedPath,fileSize;
-  var chk=0
-  log_list = Object.values(req.body);
-  
-  var data = "ID\t\tTYPE\n";
-  for(var i =0 ; i < log_list.length-1; i+=2)
-  {
-    data += log_list[i]+"\t\t"+log_list[i+1]+"\n";  
-  }
-  console.log(data)
-  fs.writeFile('log.txt', data, 'utf8', function(err) {
-    console.log("Filewrite success");
-    var chk = 1;
 
-  });
+
+  origFileNm = 'log_output.txt';
+  savedFileNm = "log.txt"
+  savedPath = 'C:/Users/gullabjamun/Desktop/nsr/server/express-generator/'
+  fileSize = '1000';
   
-  if(fileId == '1'){
-    origFileNm = 'log_output.txt';
-    savedFileNm = "log.txt"
-    savedPath = 'C:/Users/gullabjamun/Desktop/nsr/server/express-generator/'
-    fileSize = '1000';
-  }
   
   var file = savedPath + '/'+savedFileNm;
   mimetype = mime.lookup(origFileNm);
@@ -123,6 +112,57 @@ router.post('/download/', function(req, res){
   var filestream = fs.createReadStream(file);
   filestream.pipe(res);
 
+  if(a==1){
+    return 1;  
+  }
+
+  else
+  {
+    throw 0;
+  }
+  
+}
+
+async function makelog(log_list,a)
+{
+  
+  if(a==1)
+  {
+    var data = "ID\t\tTYPE\t\tCONTENTS\t\t\t\t\tDATE\n";
+    for(var i =0 ; i < log_list.length-1; i+=4)
+    {
+      data += log_list[i]+"\t\t"+log_list[i+1]+"\t\t"+log_list[i+2]+"\t\t\t\t"+log_list[i+3]+"\n";  
+    }
+   
+    fs.writeFile('log.txt', data, 'utf8', function(err) {
+      console.log("Filewrite success");
+      var chk = 1;
+    });
+    return "makelog finish";
+  }
+
+  else{
+    throw 0;
+  }
+
+
+}
+
+async function downlog(log_list,res){
+  try{
+    const a = await makelog(log_list,1);
+    const b = await downfile(res,a);
+    console.log(b);
+  }
+  catch(e){
+    consol.log(e);
+  }
+
+}
+router.post('/download/', function(req, res){
+  
+  log_list = Object.values(req.body);
+  downlog(log_list,res);
 
 });
 
