@@ -13,6 +13,7 @@ var util = require('util');
 var path = require('path');
 var mime = require('mime');
 var fs = require('fs')
+var async = require('async');
 
 let SECRET = 'token_secret';
 
@@ -89,40 +90,69 @@ router.get('/dashboard', function (req, res, next) {
 }
 });
 
-router.post('/download/', function(req, res){
-  var fileId = 1;
-  var origFileNm, savedFileNm,savedPath,fileSize;
-  var chk=0
-  log_list = Object.values(req.body);
-  
-  var data = "ID\t\tTYPE\n";
-  for(var i =0 ; i < log_list.length-1; i+=2)
-  {
-    data += log_list[i]+"\t\t"+log_list[i+1]+"\n";  
-  }
-  console.log(data)
-  fs.writeFile('log.txt', data, 'utf8', function(err) {
-    console.log("Filewrite success");
-    var chk = 1;
 
-  });
-  
-  if(fileId == '1'){
+function downfile(res,a)
+{
+  console.log("downfile");
+  return new Promise((resolve,reject)=>{
+    var fileId = 1;
+    var origFileNm, savedFileNm,savedPath,fileSize;
+
+
     origFileNm = 'log_output.txt';
     savedFileNm = "log.txt"
-    savedPath = 'C:/Users/gullabjamun/Desktop/nsr/server/express-generator/'
+    savedPath = __dirname+'/log/'
     fileSize = '1000';
-  }
-  
-  var file = savedPath + '/'+savedFileNm;
-  mimetype = mime.lookup(origFileNm);
-  res.setHeader('Content-disposition','attachment; filename='+origFileNm);
-  res.setHeader('Content-type',mimetype);
+    
+    
+    var file = savedPath + '/'+savedFileNm;
+    mimetype = mime.lookup(origFileNm);
+    res.setHeader('Content-disposition','attachment; filename='+origFileNm);
+    res.setHeader('Content-type',mimetype);
+
+    
+    var filestream = fs.createReadStream(file);
+    filestream.pipe(res);
+
+    if(a==1){
+      resolve(1);  
+    }
+    else{
+      reject(0);
+    }
+  });
 
   
-  var filestream = fs.createReadStream(file);
-  filestream.pipe(res);
+}
 
+function makelog(log_list,a)
+{
+  
+   return new Promise((resolve,reject)=>{
+    var data = "DATE\t\t\t\t\t\t\t\t\t\t\t\tID\t\tTYPE\t\tCONTENTS\n";
+    console.log(log_list);
+    for(var i =0 ; i < log_list.length-1; i+=4)
+    {
+      data += log_list[i]+"\t\t"+log_list[i+1]+"\t\t"+log_list[i+2]+"\t\t"+log_list[i+3]+"\n";  
+    }
+   fs.writeFileSync(__dirname+'/log/log.txt',data,'utf8');
+   console.log("file make fin");
+   resolve(true);
+   
+
+  });
+
+}
+
+function downlog(log_list,res){
+  console.log(log_list);
+  makelog(log_list,1)
+    .then(result =>{downfile(res,1)});
+
+}
+router.post('/download/', function(req, res){
+  log_list = Object.values(req.body);
+  downlog(log_list,res);
 
 });
 
