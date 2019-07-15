@@ -350,11 +350,10 @@
                                             style="margin-left: 5px;" data-toggle="modal"
                                             data-target="#exampleModal">수동입력 </a>
 
-
                                         <a href="#"
                                             class="btn btn-outline-secondary btn-lg col-xl-3 col-lg-3 col-md-3 col-sm-4"
                                             style=" margin-left: 10px;" data-toggle="modal"
-                                            data-target="#knownModal">등록정보갱신</a>
+                                            data-target="#knownModal">일괄정보갱신</a>
 
                                         <!-- 등록정보 갱신  모달  시작 -->
 
@@ -554,12 +553,12 @@
                     <div class="form-group">
                         <label for="inputText1"
                             class="col-form-label">IP</label>
-                        <input name="txtIP" type="text" class="form-control">
+                        <input name="txtIP" type="text" class="form-control" required pattern="^([0-9]{1,3}\.){3}[0-9]{1,3}$">
                     </div>
 
                     <div class="form-group">
                         <label for="inputText2">MAC Address</label>
-                        <input name="txtMac" type="text" class="form-control">
+                        <input name="txtMac" type="text" class="form-control" required pattern="^[a-fA-F0-9:]{17}|[a-fA-F0-9]{12}$">
                     </div>
 
                     <div class="form-group">
