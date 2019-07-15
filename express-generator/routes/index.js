@@ -8,15 +8,54 @@ const make_dashboard = require('./make_dashboard_html');
 const LOGS = require('../logs');
 const multer = require('multer');
 const archiver = require('archiver');
+const jwt = require('jsonwebtoken');
 var util = require('util');
 var path = require('path');
 var mime = require('mime');
 var fs = require('fs')
+var async = require('async');
 
+let SECRET = 'token_secret';
 
+let signToken=(id)=>{
+  console.log(`signTOken(${id})`);
+  let token =  jwt.sign({id:id},
+    SECRET,
+    {expiresIn:"30m"});
+    console.log(token);
+    return token;
+}
+
+let isAuthenticatied = (token)=>{
+  let result = false;
+  jwt.verify(token, SECRET, function(err, decoded) {
+    var dateNow = new Date();
+    if (err) {
+        err = {
+          name: 'TokenExpiredError',
+          message: 'jwt expired',
+          expiredAt: dateNow.getTime()/1000
+        }
+      
+    }else{
+      
+      console.log(decoded.exp );
+      console.log(dateNow.getTime()/1000);
+      if(decoded.exp <= dateNow.getTime()/1000){
+        result =  false;
+      }else{
+        result =  decoded.exp;
+      }
+
+    }
+  });
+  return result;
+
+}
 /* GET home page. */
 router.get('/', (req, res, next) => {
-  res.render('index', { title: 'Express' });
+  // res.render('index', { title: 'Express' });
+  res.redirect('/dashboard');
 });
 
 router.get('/policy', (req, res, next) => {
@@ -31,8 +70,18 @@ router.get('/dashboard', function (req, res, next) {
     DB.get_dashboard_top10().then(result2=>{
       result.sess_name = req.session.username;
       result.top10 = result2.recordsets[0];
-      console.log(result.top10);
-      res.render('dashboard', result);
+      result.token = req.session.token;
+      let is_auth = isAuthenticatied(req.session.token)
+      if(is_auth){
+        result.expire = is_auth;
+        DB.view_admin('DIVISION, POSITION'," WHERE NAME = '"+result.sess_name+"'").then((result2)=>{
+          result.division = result2.recordsets[0][0]['DIVISION'];
+          result.position = result2.recordsets[0][0]['POSITION'];
+          res.render('dashboard',result);
+        });
+      }else{
+        res.redirect('/login');
+      }
     })
     
   });
@@ -41,40 +90,69 @@ router.get('/dashboard', function (req, res, next) {
 }
 });
 
-router.post('/download/', function(req, res){
-  var fileId = 1;
-  var origFileNm, savedFileNm,savedPath,fileSize;
-  var chk=0
-  log_list = Object.values(req.body);
-  
-  var data = "ID\t\tTYPE\n";
-  for(var i =0 ; i < log_list.length-1; i+=2)
-  {
-    data += log_list[i]+"\t\t"+log_list[i+1]+"\n";  
-  }
-  console.log(data)
-  fs.writeFile('log.txt', data, 'utf8', function(err) {
-    console.log("Filewrite success");
-    var chk = 1;
 
-  });
-  
-  if(fileId == '1'){
+function downfile(res,a)
+{
+  console.log("downfile");
+  return new Promise((resolve,reject)=>{
+    var fileId = 1;
+    var origFileNm, savedFileNm,savedPath,fileSize;
+
+
     origFileNm = 'log_output.txt';
     savedFileNm = "log.txt"
-    savedPath = 'C:/Users/gullabjamun/Desktop/nsr/server/express-generator/'
+    savedPath = __dirname+'/log/'
     fileSize = '1000';
-  }
-  
-  var file = savedPath + '/'+savedFileNm;
-  mimetype = mime.lookup(origFileNm);
-  res.setHeader('Content-disposition','attachment; filename='+origFileNm);
-  res.setHeader('Content-type',mimetype);
+    
+    
+    var file = savedPath + '/'+savedFileNm;
+    mimetype = mime.lookup(origFileNm);
+    res.setHeader('Content-disposition','attachment; filename='+origFileNm);
+    res.setHeader('Content-type',mimetype);
+
+    
+    var filestream = fs.createReadStream(file);
+    filestream.pipe(res);
+
+    if(a==1){
+      resolve(1);  
+    }
+    else{
+      reject(0);
+    }
+  });
 
   
-  var filestream = fs.createReadStream(file);
-  filestream.pipe(res);
+}
 
+function makelog(log_list,a)
+{
+  
+   return new Promise((resolve,reject)=>{
+    var data = "DATE\t\t\t\t\t\t\t\t\t\t\t\tID\t\tTYPE\t\tCONTENTS\n";
+    console.log(log_list);
+    for(var i =0 ; i < log_list.length-1; i+=4)
+    {
+      data += log_list[i]+"\t\t"+log_list[i+1]+"\t\t"+log_list[i+2]+"\t\t"+log_list[i+3]+"\n";  
+    }
+   fs.writeFileSync(__dirname+'/log/log.txt',data,'utf8');
+   console.log("file make fin");
+   resolve(true);
+   
+
+  });
+
+}
+
+function downlog(log_list,res){
+  console.log(log_list);
+  makelog(log_list,1)
+    .then(result =>{downfile(res,1)});
+
+}
+router.post('/download/', function(req, res){
+  log_list = Object.values(req.body);
+  downlog(log_list,res);
 
 });
 
@@ -91,6 +169,8 @@ router.post('/signin',(req,res,next)=>{
   DB.login_admin(data.name,data.pass).then(result=>{
     if(result === 1){
       req.session.username = data.name;
+      let token = signToken(data.name);
+      req.session.token = token;
       LOGS.make_log("USER",req.session.username,"로그인");
       if(data.referer)
         res.redirect('/'+data.referer);
@@ -139,17 +219,21 @@ router.get('/changeinfo', function (req, res, next) {
 // User 기능과 관련된 페이지 끝
 router.get('/agent', function (req, res, next) {
   let body = req.query; 
-  if(req.session.username){
   DB.get_agent_info().then(result => {
-    result.sess_name = req.session.username;
     if (typeof(body.err_msg) !="undefined"){
       result.reason = body.err_msg;
     }
-    res.render('./main/Agent/agent', result);
+    result.token = req.session.token;
+    result.user_name = req.session.username;
+    let is_auth = isAuthenticatied(req.session.token);
+    if(is_auth){
+      result.expire = is_auth;
+      res.render('./main/Agent/agent', result);
+    }else{
+      res.redirect('/login');
+    }
   });
-}else{
-  res.render('./main/User/login',{referer:'agent'});
-}
+
 });// 에이전트 페이지
 router.get('/agent/:keyword', (req, res, next) => {
   DB.search_agent_info(req.params.keyword).then(result => {

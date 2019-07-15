@@ -25,146 +25,474 @@
         <div class="dashboard-header">
             <%include ../../header.ejs%>
 
-        <!-- ============================================================== -->
-        <!-- 헤드 네비게이션 바 종료  -->
-        <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- 헤드 네비게이션 바 종료  -->
+            <!-- ============================================================== -->
 
 
-        <div class="">
-            <div class="dashboard-ecommerce">
-                <div class="container-fluid dashboard-content ">
-                    <!-- ============================================================== -->
-                    <!-- pageheader  -->
-                    <!-- ============================================================== -->
+            <div class="">
+                <div class="dashboard-ecommerce">
+                    <div class="container-fluid dashboard-content ">
+                        <!-- ============================================================== -->
+                        <!-- pageheader  -->
+                        <!-- ============================================================== -->
 
-                    <div class="row">
-                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                            <div class="page-header">
-                                <h2 class="pageheader-title">에이전트 관리 </h2>
-                                <div class="page-breadcrumb">
-                                    <nav aria-label="breadcrumb">
-                                        <ol class="breadcrumb">
-                                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">MENU</a>
-                                            </li>
-                                            <li class="breadcrumb-item active" aria-current="page">에이전트 관리 </li>
-                                        </ol>
-                                    </nav>
+                        <div class="row">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                <div class="page-header">
+                                    <h2 class="pageheader-title">에이전트 관리 </h2>
+                                    <div class="page-breadcrumb">
+                                        <nav aria-label="breadcrumb">
+                                            <ol class="breadcrumb">
+                                                <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">MENU</a>
+                                                </li>
+                                                <li class="breadcrumb-item active" aria-current="page">에이전트 관리 </li>
+                                            </ol>
+                                        </nav>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
 
-                    <div class="row">
-                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                            <div class="card">
+                        <div class="row">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                <div class="card">
 
-                                <div class="card-body p-0">
+                                    <div class="card-body p-0">
 
-                                    <div class="row" style="margin-top: 30px; margin-bottom: 30px; ">
-                                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1"></div>
-                                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1">
-                                            <label class="custom-control custom-checkbox">
-                                                <input id="chk_all" name="chk_all" type="checkbox"
-                                                    class="custom-control-input"><span
-                                                    class="custom-control-label">All</span>
-                                            </label>
-                                        </div>
+                                        <div class="row" style="margin-top: 30px; margin-bottom: 30px; ">
+                                            <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1"></div>
+                                            <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1">
+                                                <label class="custom-control custom-checkbox">
+                                                    <input id="chk_all" name="chk_all" type="checkbox"
+                                                        class="custom-control-input"><span
+                                                        class="custom-control-label">All</span>
+                                                </label>
+                                            </div>
 
-                                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3" style="height: 70px">
+                                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3" style="height: 70px">
 
-                                            <div class="input-group input-search">
+                                                <div class="input-group input-search">
 
-                                                <input id="search_keyword" class="form-control" type="text"
-                                                    placeholder="Search "><span class="input-group-btn">
-                                                    <button class="btn btn-secondary" type="button" id="searchBtn"><i
-                                                            class="fas fa-search"></i></button></span>
+                                                    <input id="search_keyword" class="form-control" type="text"
+                                                        placeholder="Search "><span class="input-group-btn">
+                                                        <button class="btn btn-secondary" type="button"
+                                                            id="searchBtn"><i class="fas fa-search"></i></button></span>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="row col-xl-4 col-lg-4 col-md-4 col-sm-4"
+                                                style="text-align: center;">
+
+
+                                                <form class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+                                                    <input type="button"
+                                                        class="btn btn-outline-success col-xl-12 col-lg-12 col-md-12 col-sm-12"
+                                                        id="changeAgentInfoBtn" data-toggle="modal" style="height: 55px"
+                                                        value="정보수정"></button>
+
+                                                </form>
+
+                                                <!-- 정부 수정 모달 시작  -->
+                                                <!-- ================================ -->
+
+                                                <div class="modal fade" id="changeinfomodal" tabindex="-1" role="dialog"
+                                                    aria-labelledby="exampleModalLabel" aria-hidden="true"
+                                                    style="display: none;">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">정보수정</h5>
+                                                                <a href="#" class="close" data-dismiss="modal"
+                                                                    aria-label="Close">
+                                                                    <span aria-hidden="true">×</span>
+                                                                </a>
+                                                            </div>
+
+                                                            <form id="updateForm" action="/update_agent_info"
+                                                                method="POST">
+                                                                <div class="modal-body">
+                                                                    <input type="hidden" name="cd" id="editID" value="">
+                                                                    <div class="form-group">
+                                                                        <label for="inputText1"
+                                                                            class="col-form-label">IP</label>
+                                                                        <input id="updateIP" name="txtIP" type="text"
+                                                                            id="editIP" class="form-control">
+                                                                    </div>
+
+                                                                    <div class="form-group">
+                                                                        <label for="inputText2">MAC Address</label>
+                                                                        <input name="txtMac" type="text" id="editMAC"
+                                                                            class="form-control">
+                                                                    </div>
+
+                                                                    <div class="form-group">
+                                                                        <label for="inputText3">운영체제 버전</label>
+                                                                        <input name="txtOS" type="text" id="editOS"
+                                                                            class="form-control">
+                                                                    </div>
+
+                                                                    <div class="form-group">
+                                                                        <label for="inputText4"
+                                                                            class="col-form-label">용도</label>
+                                                                        <input name="txtUseful" type="text"
+                                                                            id="editUseful" class="form-control">
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="inputText5">소유자</label>
+                                                                        <input name="txtOwner" type="text"
+                                                                            id="editOwner" class="form-control">
+                                                                    </div>
+
+                                                                    <div class="form-group">
+                                                                        <label for="inputText6">설명</label>
+                                                                        <input name="txtDesc" type="text" id="editDesc"
+                                                                            class="form-control">
+                                                                    </div>
+
+                                                                    <div class="form-group">
+                                                                        <label for="inputText7">상태</label>
+                                                                        <input disabled="disabled" type="text" value=""
+                                                                            id="editState" class="form-control">
+                                                                        <input type="hidden" name="state" value="O"
+                                                                            id="editStateValue">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <a href="#" class="btn btn-secondary"
+                                                                        data-dismiss="modal">닫기</a>
+                                                                    <button id="updateBtn" class="btn btn-primary"
+                                                                        type="button">변경
+                                                                        저장</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- ================================ -->
+
+
+                                                <form action="/activate_agent_info" method="POST"
+                                                    class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+                                                    <input type="hidden" name="agent_cd" id="agent_cd" value="">
+                                                    <button
+                                                        class="btn btn-outline-primary col-xl-12 col-lg-12 col-md-12 col-sm-12"
+                                                        id="activateBtn" style="height: 55px">등록</button>
+                                                </form>
+
+                                                <form action="/agent/del_agent_info" method="POST"
+                                                    class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+                                                    <input type="hidden" name="del_agent_cd" id="del_agent_cd" value="">
+                                                    <input type="submit" id="agentDelBtn"
+                                                        class="btn btn-outline-secondary btn-lg col-xl-12 col-lg-12 col-md-12 col-sm-12"
+                                                        value="삭제" style="height: 55px">
+
+                                                </form>
+
+
+
+
+
+                                            </div>
+
+                                            <div class="row col-xl-3 col-lg-3 col-md-3 col-sm-3">
+
+                                                <div class="col-6 "
+                                                    style="line-height:30px;display:inline-block; text-align: center; vertical-align: middle;">
+                                                    에이전트 수 (오프라인)<br />
+                                                    <%=recordsets[0].length %> (<% 
+                                               cnt = 0;
+                                               for(let i = 0 ; i < recordsets[0].length ; i +=1){
+                                                if(recordsets[0][i].STATE === 'O')
+                                                    cnt +=1;
+                                               } %> <%= cnt %> )
+                                                </div>
+
+                                                <div class="col-3" style="margin-left: 25px ; cursor:pointer;"
+                                                    onclick="location.reload();"><i class="fas fa-redo"
+                                                        style="font-size:30px; margin-top: 15px;"></i></div>
                                             </div>
                                         </div>
 
+                                        <div class="table-responsive">
+                                            <table id="agent_list_table" class="table">
+                                                <thead class="bg-light">
+                                                    <tr class="border-0">
+                                                        <th class="border-0 text-center">check</th>
+                                                        <th class="border-0 text-center">상태</th>
+                                                        <th class="border-0 text-center ">IP</th>
+                                                        <th class="border-0 text-center">운영체제 버전</th>
+                                                        <th class="border-0 text-center">용도</th>
+                                                        <th class="border-0 text-center">소유자</th>
+                                                        <th class="border-0 text-center">요청시간</th>
+                                                        <th class="border-0 text-center">등록시간</th>
+                                                    </tr>
+                                                </thead>
 
-                                        <div class="row col-xl-4 col-lg-4 col-md-4 col-sm-4"
-                                            style="text-align: center;">
+                                                <tbody>
+                                                    <% if (typeof(reason) !='undefined' && reason == 'error'){ %>
+                                                    <script>alert("ERROR");</script>
+                                                    <% } else if(typeof(reason) !='undefined'){  %>
+                                                    <script>alert("<%= reason %>");</script>
+                                                    <script>setTimeout(() => {
+                                                        }, 3000);</script>
+                                                    <% }for(let i = 0 ; i < recordsets[0].length ; i+=1){ %>
+                                                    <tr style="text-align: center">
+                                                        <td style="text-align:center; vertical-align: middle;"><label
+                                                                class="custom-control custom-checkbox"><input
+                                                                    type="checkbox" id='<%=i %>'
+                                                                    class="custom-control-input chkbox"><span
+                                                                    class="custom-control-label"
+                                                                    style="position: absolute;left:40%; top:0"></span></label>
+                                                        </td>
+                                                        <td style="text-align: center">
+                                                            <% if(recordsets[0][i].STATE == 'C'){ %>
+                                                            <div style="background-color: white; border: 1px solid; margin:auto;"
+                                                                class="rounded-circle user-avatar-lg">
+                                                                <% } else if(recordsets[0][i].STATE == 'C-2'){ %>
+                                                                <div style="background-color: black; border: 1px solid; margin:auto;"
+                                                                    class="rounded-circle user-avatar-lg">
+                                                                    <% } else if(recordsets[0][i].STATE == 'R'){ %>
+                                                                    <div style="background-color: skyblue; border: 1px solid; margin:auto;"
+                                                                        class="rounded-circle user-avatar-lg">
+                                                                        <% } else if(recordsets[0][i].STATE == 'E'){ %>
+                                                                        <div style="background-color: red; border: 1px solid; margin:auto;"
+                                                                            class="rounded-circle user-avatar-lg">
+                                                                            <% } else { %>
+                                                                            <div style="background-color: yellow; border: 1px solid; margin:auto;"
+                                                                                class="rounded-circle user-avatar-lg">
+                                                                                <% } %>
+                                                                            </div>
+                                                        </td>
+                                                        <td><%= recordsets[0][i].IP %></td>
+                                                        <td><%= recordsets[0][i].OS %></td>
+                                                        <td><%= recordsets[0][i].PURPOSE %></td>
+                                                        <td><%= recordsets[0][i].OWNER %></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <% } %>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-1"></div>
+                            <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 style="text-align: center;">후보에이전트 등록/일괄정보갱신</h3>
+                                    </div>
+
+                                    <div class="card-body">
+                                        <div class="row">
+
+                                            <a class="col-xl-1 col-lg-1 col-md-1 col-sm-1"></a>
+                                            <a href="#"
+                                                class="btn btn-outline-success col-xl-3 col-lg-3 col-md-3 col-sm-3"
+                                                data-toggle="modal" data-target="#excelModal"
+                                                style="margin-right: 5px;">엑셀입력
+                                            </a>
 
 
-                                            <form class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
-                                                <input type="button"
-                                                    class="btn btn-outline-success col-xl-12 col-lg-12 col-md-12 col-sm-12"
-                                                    id="changeAgentInfoBtn" data-toggle="modal" style="height: 55px"
-                                                    value="정보수정"></button>
-
-                                            </form>
-
-                                            <!-- 정부 수정 모달 시작  -->
-                                            <!-- ================================ -->
-
-                                            <div class="modal fade" id="changeinfomodal" tabindex="-1" role="dialog"
+                                            <!-- 엑셀입력 모달 시작-->
+                                            <div class="modal fade" id="excelModal" tabindex="-1" role="dialog"
                                                 aria-labelledby="exampleModalLabel" aria-hidden="true"
                                                 style="display: none;">
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLabel">정보수정</h5>
+                                                            <h5 class="modal-title" id="excelModal">엑셀 입력</h5>
                                                             <a href="#" class="close" data-dismiss="modal"
                                                                 aria-label="Close">
                                                                 <span aria-hidden="true">×</span>
                                                             </a>
                                                         </div>
 
-                                                        <form action="/update_agent_info" method="POST">
+
+                                                        <form action="/agent/upload_xlsx" method="POST"
+                                                            enctype="multipart/form-data">
                                                             <div class="modal-body">
-                                                                <input type="hidden" name="cd" id="editID" value="">
+
+                                                                <label class="col-12 btn btn-outline-success btn-lg">
+                                                                    엑셀 파일 첨부하기<input type="file" name="xlsx_file"
+                                                                        style="display: none;">
+                                                                </label>
+                                                                <span style="color:red">주의 : 중복되는 IP가 있는경우 제외하고
+                                                                    등록됩니다</span>
+
+
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <a href="#" class="btn btn-secondary"
+                                                                    data-dismiss="modal">닫기</a>
+                                                                <input class="btn btn-primary" type="submit"
+                                                                    value="변경 저장">
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- 엑셀입력 모달 끝-->
+
+
+                                            <a href="#"
+                                                class="btn btn-outline-primary btn-lg col-xl-3 col-lg-3 col-md-3 col-sm-3"
+                                                style="margin-left: 5px;" data-toggle="modal"
+                                                data-target="#exampleModal">수동입력 </a>
+
+
+                                        <a href="#"
+                                            class="btn btn-outline-secondary btn-lg col-xl-3 col-lg-3 col-md-3 col-sm-4"
+                                            style=" margin-left: 10px;" data-toggle="modal"
+                                            data-target="#knownModal">일괄정보갱신</a>
+
+
+                                            <!-- 등록정보 갱신  모달  시작 -->
+
+                                            <div class="modal fade" id="knownModal" tabindex="-1" role="dialog"
+                                                aria-labelledby="exampleModalLabel" aria-hidden="true"
+                                                style="display: none;">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="knownModal">등록정보갱신</h5>
+                                                            <a href="#" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
+                                                                <span aria-hidden="true">×</span>
+                                                            </a>
+                                                        </div>
+
+
+                                                        <form action="/agent/refresh_xlsx" method="POST"
+                                                            enctype="multipart/form-data">
+                                                            <div class="modal-body">
+
+
+
+                                                                <label class="col-12 btn btn-outline-secondary btn-lg">
+                                                                    엑셀 파일 첨부하기<input type="file" style="display: none;"
+                                                                        name="xlsx_file">
+                                                                </label>
+                                                                <span style="color:red">주의 : 등록된 IP를 기반으로 용도와 소유자를
+                                                                    변경합니다.</span>
+
+
+
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <a href="#" class="btn btn-secondary"
+                                                                    data-dismiss="modal">닫기</a>
+                                                                <input class="btn btn-primary" type="submit"
+                                                                    value="변경 저장">
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 style="text-align: center;">오프라인 정보시스템 등록</h3>
+                                    </div>
+
+                                    <div class="card-body">
+
+
+                                        <a href="#"
+                                            class="btn btn-outline-warning btn-lg col-xl-12 col-lg-12 col-md-12 col-sm-12"
+                                            data-toggle="modal" data-target="#offlinemodal">오프라인 정보시스템 등록</a>
+
+
+                                        <!-- 오프라인 정보시스템 등록 모달 시작  -->
+                                        <!-- ================================ -->
+                                        <!-- ================================ -->
+
+                                        <div class="modal fade" id="offlinemodal" tabindex="-1" role="dialog"
+                                            aria-labelledby="exampleModalLabel" aria-hidden="true"
+                                            style="display: none;">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">오프라인 정보시스템 등록
+                                                        </h5>
+                                                        <a href="#" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">×</span>
+                                                        </a>
+                                                    </div>
+
+
+                                                    <div class="modal-body">
+                                                        <form id="add_manual_form" action="/add_manual_agent"
+                                                            method="POST">
+                                                            <div class="modal-body">
                                                                 <div class="form-group">
                                                                     <label for="inputText1"
                                                                         class="col-form-label">IP</label>
-                                                                    <input name="txtIP" type="text" id="editIP"
+                                                                    <input id="add_manual_ip" name="txtIP" type="text"
                                                                         class="form-control">
                                                                 </div>
 
                                                                 <div class="form-group">
                                                                     <label for="inputText2">MAC Address</label>
-                                                                    <input name="txtMac" type="text" id="editMAC"
+                                                                    <input name="txtMac" type="text"
                                                                         class="form-control">
                                                                 </div>
 
                                                                 <div class="form-group">
                                                                     <label for="inputText3">운영체제 버전</label>
-                                                                    <input name="txtOS" type="text" id="editOS"
+                                                                    <input name="txtOS" type="text"
                                                                         class="form-control">
                                                                 </div>
 
                                                                 <div class="form-group">
                                                                     <label for="inputText4"
                                                                         class="col-form-label">용도</label>
-                                                                    <input name="txtUseful" type="text" id="editUseful"
+                                                                    <input name="txtUseful" type="text"
                                                                         class="form-control">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="inputText5">소유자</label>
-                                                                    <input name="txtOwner" type="text" id="editOwner"
+                                                                    <input name="txtOwner" type="text"
                                                                         class="form-control">
                                                                 </div>
 
                                                                 <div class="form-group">
                                                                     <label for="inputText6">설명</label>
-                                                                    <input name="txtDesc" type="text" id="editDesc"
+                                                                    <input name="txtDesc" type="text"
                                                                         class="form-control">
                                                                 </div>
 
                                                                 <div class="form-group">
                                                                     <label for="inputText7">상태</label>
-                                                                    <input disabled="disabled" type="text" value=""
-                                                                        id="editState" class="form-control">
-                                                                    <input type="hidden" name="state" value="O"
-                                                                        id="editStateValue">
+                                                                    <input disabled="disabled" type="text" value="오프라인"
+                                                                        class="form-control">
+                                                                    <input type="hidden" name="state" value="O">
                                                                 </div>
                                                             </div>
-                                                            <input type="hidden" name="sess_name"
-                                                                value="<%= sess_name %>">
                                                             <div class="modal-footer">
                                                                 <a href="#" class="btn btn-secondary"
                                                                     data-dismiss="modal">닫기</a>
-                                                                <button class="btn btn-primary" type="submit">변경
+                                                                <button id="add_manual_btn" type="button"
+                                                                    class="btn btn-primary">변경
                                                                     저장</button>
                                                             </div>
                                                         </form>
@@ -172,346 +500,29 @@
                                                 </div>
                                             </div>
 
+                                            <!-- 오프라인 정보시스템 등록 모달 종료  -->
+                                            <!-- ================================ -->
                                             <!-- ================================ -->
 
-
-                                            <form action="/activate_agent_info" method="POST"
-                                                class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
-                                                <input type="hidden" name="agent_cd" id="agent_cd" value="">
-                                                <button
-                                                    class="btn btn-outline-primary col-xl-12 col-lg-12 col-md-12 col-sm-12"
-                                                    id="activateBtn" style="height: 55px">등록</button>
-                                            </form>
-
-                                            <form action="/agent/del_agent_info" method="POST"
-                                                class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
-                                                <input type="hidden" name="del_agent_cd" id="del_agent_cd" value="">
-                                                <input type="hidden" name="sess_name" value="<%= sess_name %>">
-                                                <input type="submit" id="agentDelBtn"
-                                                    class="btn btn-outline-secondary btn-lg col-xl-12 col-lg-12 col-md-12 col-sm-12"
-                                                    value="삭제" style="height: 55px">
-
-                                            </form>
-
-
-
-
-
                                         </div>
-
-                                        <div class="row col-xl-3 col-lg-3 col-md-3 col-sm-3">
-
-                                            <div class="col-6 "
-                                                style="line-height:30px;display:inline-block; text-align: center; vertical-align: middle;">
-                                                에이전트 수 (오프라인)<br />
-                                                <%=recordsets[0].length %> (<% 
-                                               cnt = 0;
-                                               for(let i = 0 ; i < recordsets[0].length ; i +=1){
-                                                if(recordsets[0][i].STATE === 'O')
-                                                    cnt +=1;
-                                               } %> <%= cnt %> )
-                                            </div>
-
-                                            <div class="col-3" style="margin-left: 25px ; cursor:pointer;"
-                                                onclick="location.reload();"><i class="fas fa-redo"
-                                                    style="font-size:30px; margin-top: 15px;"></i></div>
-                                        </div>
-                                    </div>
-
-                                    <div class="table-responsive">
-                                        <table id="agent_list_table" class="table">
-                                            <thead class="bg-light">
-                                                <tr class="border-0">
-                                                    <th class="border-0 text-center">check</th>
-                                                    <th class="border-0 text-center">상태</th>
-                                                    <th class="border-0 text-center ">IP</th>
-                                                    <th class="border-0 text-center">운영체제 버전</th>
-                                                    <th class="border-0 text-center">용도</th>
-                                                    <th class="border-0 text-center">소유자</th>
-                                                    <th class="border-0 text-center">요청시간</th>
-                                                    <th class="border-0 text-center">등록시간</th>
-                                                </tr>
-                                            </thead>
-
-                                            <tbody>
-                                                <% if (typeof(reason) !='undefined' && reason == 'error'){ %>
-                                                <script>alert("ERROR");</script>
-                                                <% } else if(typeof(reason) !='undefined'){  %>
-                                                    <script>alert("<%= reason %>");</script>
-                                                    <script>setTimeout(()=> {
-                                                    },3000);</script>
-                                                <% }for(let i = 0 ; i < recordsets[0].length ; i+=1){ %>
-                                                <tr style="text-align: center">
-                                                    <td style="text-align:center; vertical-align: middle;"><label
-                                                            class="custom-control custom-checkbox"><input
-                                                                type="checkbox" id='<%=i %>'
-                                                                class="custom-control-input chkbox"><span
-                                                                class="custom-control-label"
-                                                                style="position: absolute;left:40%; top:0"></span></label>
-                                                    </td>
-                                                    <td style="text-align: center">
-                                                        <% if(recordsets[0][i].STATE == 'C'){ %>
-                                                        <div style="background-color: white; border: 1px solid; margin:auto;"
-                                                            class="rounded-circle user-avatar-lg">
-                                                            <% } else if(recordsets[0][i].STATE == 'C-2'){ %>
-                                                            <div style="background-color: black; border: 1px solid; margin:auto;"
-                                                                class="rounded-circle user-avatar-lg">
-                                                                <% } else if(recordsets[0][i].STATE == 'R'){ %>
-                                                                <div style="background-color: skyblue; border: 1px solid; margin:auto;"
-                                                                    class="rounded-circle user-avatar-lg">
-                                                                    <% } else if(recordsets[0][i].STATE == 'E'){ %>
-                                                                    <div style="background-color: red; border: 1px solid; margin:auto;"
-                                                                        class="rounded-circle user-avatar-lg">
-                                                                        <% } else { %>
-                                                                        <div style="background-color: yellow; border: 1px solid; margin:auto;"
-                                                                            class="rounded-circle user-avatar-lg">
-                                                                            <% } %>
-                                                                        </div>
-                                                    </td>
-                                                    
-                                                    <td><%= recordsets[0][i].IP %></td>
-                                                    <td><%= recordsets[0][i].OS %></td>
-                                                    <td><%= recordsets[0][i].PURPOSE %></td>
-                                                    <td><%= recordsets[0][i].OWNER %></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
-                                                <% } %>
-                                            </tbody>
-                                        </table>
                                     </div>
                                 </div>
+
                             </div>
+
+
+
                         </div>
+                        </nav>
                     </div>
-
-                    <div class="row">
-                        <div class="col-1"></div>
-                        <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h3 style="text-align: center;">후보에이전트 등록/일괄정보갱신</h3>
-                                </div>
-
-                                <div class="card-body">
-                                    <div class="row">
-
-                                        <a class="col-xl-1 col-lg-1 col-md-1 col-sm-1"></a>
-                                        <a href="#" class="btn btn-outline-success col-xl-3 col-lg-3 col-md-3 col-sm-3"
-                                            data-toggle="modal" data-target="#excelModal"
-                                            style="margin-right: 5px;">엑셀입력
-                                        </a>
-
-
-                                        <!-- 엑셀입력 모달 시작-->
-                                        <div class="modal fade" id="excelModal" tabindex="-1" role="dialog"
-                                            aria-labelledby="exampleModalLabel" aria-hidden="true"
-                                            style="display: none;">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="excelModal">엑셀 입력</h5>
-                                                        <a href="#" class="close" data-dismiss="modal"
-                                                            aria-label="Close">
-                                                            <span aria-hidden="true">×</span>
-                                                        </a>
-                                                    </div>
-
-
-                                                    <form action="/agent/upload_xlsx" method="POST"
-                                                        enctype="multipart/form-data">
-                                                        <div class="modal-body">
-
-                                                            <label class="col-12 btn btn-outline-success btn-lg">
-                                                                엑셀 파일 첨부하기<input type="file" name="xlsx_file"
-                                                                    style="display: none;">
-                                                            </label>
-                                                            <span style="color:red">주의 : 중복되는 IP가 있는경우 제외하고 등록됩니다</span>
-
-
-                                                        </div>
-
-                                                        <input type="hidden" name="sess_name" value="<%= sess_name %>">
-                                                        <div class="modal-footer">
-                                                            <a href="#" class="btn btn-secondary"
-                                                                data-dismiss="modal">닫기</a>
-                                                            <input class="btn btn-primary" type="submit" value="변경 저장">
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!-- 엑셀입력 모달 끝-->
-
-
-                                        <a href="#"
-                                            class="btn btn-outline-primary btn-lg col-xl-3 col-lg-3 col-md-3 col-sm-3"
-                                            style="margin-left: 5px;" data-toggle="modal"
-                                            data-target="#exampleModal">수동입력 </a>
-
-                                        <a href="#"
-                                            class="btn btn-outline-secondary btn-lg col-xl-3 col-lg-3 col-md-3 col-sm-4"
-                                            style=" margin-left: 10px;" data-toggle="modal"
-                                            data-target="#knownModal">일괄정보갱신</a>
-
-                                        <!-- 등록정보 갱신  모달  시작 -->
-
-                                        <div class="modal fade" id="knownModal" tabindex="-1" role="dialog"
-                                            aria-labelledby="exampleModalLabel" aria-hidden="true"
-                                            style="display: none;">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="knownModal">등록정보갱신</h5>
-                                                        <a href="#" class="close" data-dismiss="modal"
-                                                            aria-label="Close">
-                                                            <span aria-hidden="true">×</span>
-                                                        </a>
-                                                    </div>
-
-
-                                                    <form action="/agent/refresh_xlsx" method="POST"
-                                                        enctype="multipart/form-data">
-                                                        <div class="modal-body">
-
-
-
-                                                            <label class="col-12 btn btn-outline-secondary btn-lg">
-                                                                엑셀 파일 첨부하기<input type="file" style="display: none;"
-                                                                    name="xlsx_file">
-                                                            </label>
-                                                            <span style="color:red">주의 : 등록된 IP를 기반으로 용도와 소유자를
-                                                                변경합니다.</span>
-
-
-
-                                                        </div>
-
-                                                        <input type="hidden" name="sess_name" value="<%= sess_name %>">
-                                                        <div class="modal-footer">
-                                                            <a href="#" class="btn btn-secondary"
-                                                                data-dismiss="modal">닫기</a>
-                                                            <input class="btn btn-primary" type="submit" value="변경 저장">
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
-                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h3 style="text-align: center;">오프라인 정보시스템 등록</h3>
-                                </div>
-
-                                <div class="card-body">
-
-
-                                    <a href="#"
-                                        class="btn btn-outline-warning btn-lg col-xl-12 col-lg-12 col-md-12 col-sm-12"
-                                        data-toggle="modal" data-target="#offlinemodal">오프라인 정보시스템 등록</a>
-
-
-                                    <!-- 오프라인 정보시스템 등록 모달 시작  -->
-                                    <!-- ================================ -->
-                                    <!-- ================================ -->
-
-                                    <div class="modal fade" id="offlinemodal" tabindex="-1" role="dialog"
-                                        aria-labelledby="exampleModalLabel" aria-hidden="true" style="display: none;">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">오프라인 정보시스템 등록</h5>
-                                                    <a href="#" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">×</span>
-                                                    </a>
-                                                </div>
-
-
-                                                <div class="modal-body">
-                                                    <form action="/add_manual_agent" method="POST">
-                                                        <div class="modal-body">
-                                                            <div class="form-group">
-                                                                <label for="inputText1"
-                                                                    class="col-form-label">IP</label>
-                                                                <input name="txtIP" type="text" class="form-control">
-                                                            </div>
-
-                                                            <div class="form-group">
-                                                                <label for="inputText2">MAC Address</label>
-                                                                <input name="txtMac" type="text" class="form-control">
-                                                            </div>
-
-                                                            <div class="form-group">
-                                                                <label for="inputText3">운영체제 버전</label>
-                                                                <input name="txtOS" type="text" class="form-control">
-                                                            </div>
-
-                                                            <div class="form-group">
-                                                                <label for="inputText4"
-                                                                    class="col-form-label">용도</label>
-                                                                <input name="txtUseful" type="text"
-                                                                    class="form-control">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="inputText5">소유자</label>
-                                                                <input name="txtOwner" type="text" class="form-control">
-                                                            </div>
-
-                                                            <div class="form-group">
-                                                                <label for="inputText6">설명</label>
-                                                                <input name="txtDesc" type="text" class="form-control">
-                                                            </div>
-
-                                                            <div class="form-group">
-                                                                <label for="inputText7">상태</label>
-                                                                <input disabled="disabled" type="text" value="오프라인"
-                                                                    class="form-control">
-                                                                <input type="hidden" name="state" value="O">
-                                                            </div>
-                                                        </div>
-
-                                                        <input type="hidden" name="sess_name" value="<%= sess_name %>">
-
-                                                        <div class="modal-footer">
-                                                            <a href="#" class="btn btn-secondary"
-                                                                data-dismiss="modal">닫기</a>
-                                                            <button type="submit" class="btn btn-primary">변경
-                                                                저장</button>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!-- 오프라인 정보시스템 등록 모달 종료  -->
-                                        <!-- ================================ -->
-                                        <!-- ================================ -->
-
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-
-
-
-                    </div>
-                    </nav>
                 </div>
             </div>
         </div>
     </div>
     </div>
+
+    <div>
+        <p id="expire"></p>
     </div>
     <!-- ============================================================== -->
     <!-- footer -->
@@ -532,24 +543,23 @@
     <!-- ============================================================== -->
 
 
-<!-- 후보 수동 에이전트 등록 시작 -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-    aria-labelledby="exampleModalLabel" aria-hidden="true"
-    style="display: none;">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">에이전트 수동 입력</h5>
-                <a href="#" class="close" data-dismiss="modal"
-                    aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </a>
-            </div>
+    <!-- 후보 수동 에이전트 등록 시작 -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true" style="display: none;">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">에이전트 수동 입력</h5>
+                    <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </a>
+                </div>
 
 
-            <form action="/add_manual_agent" method="POST">
-                <div class="modal-body">
+                <form id="add_manual_agent_form" action="/add_manual_agent" method="POST">
+                    <div class="modal-body">
 
+<<<<<<< HEAD
                     <div class="form-group">
                         <label for="inputText1"
                             class="col-form-label">IP</label>
@@ -560,49 +570,55 @@
                         <label for="inputText2">MAC Address</label>
                         <input name="txtMac" type="text" class="form-control" required pattern="^[a-fA-F0-9:]{17}|[a-fA-F0-9]{12}$">
                     </div>
+=======
+                        <div class="form-group">
+                            <label for="inputText1" class="col-form-label">IP</label>
+                            <input id="manualIP" name="txtIP" type="text" class="form-control">
+                        </div>
 
-                    <div class="form-group">
-                        <label for="inputText3">운영체제 버전</label>
-                        <input name="txtOS" type="text" class="form-control">
+                        <div class="form-group">
+                            <label for="inputText2">MAC Address</label>
+                            <input name="txtMac" type="text" class="form-control">
+                        </div>
+>>>>>>> d77b462107b8e7d4280c5cceace16ebc6e70b13a
+
+                        <div class="form-group">
+                            <label for="inputText3">운영체제 버전</label>
+                            <input name="txtOS" type="text" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputText4" class="col-form-label">용도</label>
+                            <input name="txtUseful" type="text" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputText5">소유자</label>
+                            <input name="txtOwner" type="text" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputText6">설명</label>
+                            <input name="txtDesc" type="text" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputText7">상태</label>
+                            <input disabled="disabled" type="text" value="수동등록" class="form-control">
+                            <input type="hidden" name="state" value="C">
+                        </div>
+
                     </div>
 
-                    <div class="form-group">
-                        <label for="inputText4"
-                            class="col-form-label">용도</label>
-                        <input name="txtUseful" type="text"
-                            class="form-control">
+                    <div class="modal-footer">
+                        <a href="#" class="btn btn-secondary" data-dismiss="modal">닫기</a>
+                        <button id="addmanualBtn" class="btn btn-primary" type="button">변경 저장</button>
                     </div>
-                    <div class="form-group">
-                        <label for="inputText5">소유자</label>
-                        <input name="txtOwner" type="text" class="form-control">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="inputText6">설명</label>
-                        <input name="txtDesc" type="text" class="form-control">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="inputText7">상태</label>
-                        <input disabled="disabled" type="text" value="수동등록"
-                            class="form-control">
-                        <input type="hidden" name="state" value="C">
-                    </div>
-
-                </div>
-
-                <input type="hidden" name="sess_name" value="<%= sess_name %>">
-                <div class="modal-footer">
-                    <a href="#" class="btn btn-secondary"
-                        data-dismiss="modal">닫기</a>
-                    <button class="btn btn-primary" type="submit">변경 저장</button>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 
-<!-- 후보 수동 에이전트 끝 시작 -->
+    <!-- 후보 수동 에이전트 끝 시작 -->
 
     <!-- Optional JavaScript -->
     <!-- jquery 3.3.1 -->
@@ -637,6 +653,7 @@
         }
     </style>
     <script>
+        let recordsets = JSON.parse('<%- JSON.stringify(recordsets[0]) %>');
         $('#agent_list_table').DataTable({
             lengthChange: false,
             info: false,
@@ -657,7 +674,7 @@
             } else {
                 chk_arr.each((idx, elem) => {
                     let id = elem.id;
-                    let recordsets = JSON.parse('<%- JSON.stringify(recordsets[0]) %>');
+
                     alert(recordsets[id]);
                     arr.push(recordsets[id].AGENT_CD);
                 });
@@ -738,6 +755,51 @@
                 $('#searchBtn').click();
             }
         });
+        $('#addmanualBtn').click(() => {
+            let is_in = false;
+            recordsets.forEach(element => {
+                if ($('#manualIP').val() == element['IP']) {
+                    is_in = true;
+                    return false;
+                }
+            });
+            if (is_in) {
+                alert("중복되는 IP가 있습니다.");
+            } else {
+                $('#add_manual_agent_form').sumbit();
+            }
+        });
+        $('#updateBtn').click(() => {
+            let is_in = false;
+            recordsets.forEach(element => {
+                if ($('#updateIP').val() == element['IP']) {
+                    is_in = true;
+                    return false;
+                }
+            });
+            if (is_in) {
+                alert("중복되는 IP가 있습니다.");
+            } else {
+                $('#update_form').sumbit();
+            }
+        });
+        $('#add_manual_btn').click(() => {
+            let is_in = false;
+            recordsets.forEach(element => {
+                if ($('#add_manual_ip').val() == element['IP']) {
+                    is_in = true;
+                    return false;
+                }
+            });
+            if (is_in) {
+                alert("중복되는 IP가 있습니다.");
+            } else {
+                $('#add_manual_form').sumbit();
+            }
+        });
+        let play = setInterval(() => {
+            $('#expire').text(`로그인 세션 만료까지 ${(Number(<%=expire %> - new Date().getTime() / 1000) / 60).toFixed(1)} 분 남음`);
+        }, 1000);
     </script>
 
 </body>
