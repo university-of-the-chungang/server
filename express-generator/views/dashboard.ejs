@@ -81,7 +81,7 @@
                                                                 color = "red";
                                                             }
                                                         } %>
-                                                        <tr style="text-align: center">
+                                                        <tr style="text-align: center; color:<%= color%>">
                                                             <td style="text-align:center; vertical-align: middle;">
                                                                 <label class="custom-control custom-checkbox"><input
                                                                         type="checkbox" id='<%=i %>'
@@ -90,23 +90,13 @@
                                                                         style="position: absolute;left:40%; top:0"></span></label>
                                                             </td>
                                                             <td style="text-align: center">
-                                                                <!-- <% if(recordsets[0][i].STATE == 'C'){ %>
-                                                                <div style="background-color: white; border: 1px solid; margin:auto;"
-                                                                    class="rounded-circle user-avatar-lg">
-                                                                    <% } else if(recordsets[0][i].STATE == 'C-2'){ %>
-                                                                    <div style="background-color: black; border: 1px solid; margin:auto;"
-                                                                        class="rounded-circle user-avatar-lg">
-                                                                        <% } else if(recordsets[0][i].STATE == 'R'){ %>
-                                                                        <div style="background-color: skyblue; border: 1px solid; margin:auto;"
-                                                                            class="rounded-circle user-avatar-lg">
-                                                                            <% } else if(recordsets[0][i].STATE == 'E'){ %>
-                                                                            <div style="background-color: red; border: 1px solid; margin:auto;"
-                                                                                class="rounded-circle user-avatar-lg">
-                                                                                <% } else { %>
-                                                                                <div style="background-color: yellow; border: 1px solid; margin:auto;"
-                                                                                    class="rounded-circle user-avatar-lg">
-                                                                                    <% } %>
-                                                                                </div> -->
+                                                                <% if(color == "blue"){ %>
+                                                                <div class="m-r-10 text-center"><img src="/assets/images/pass.png" alt="pass" class="rounded" width="45"></div>
+                                                                <% } else if(color == "red"){ %>
+                                                                <div class="m-r-10 text-center"><img src="/assets/images/fail.png" alt="fail" class="rounded" width="45"></div>
+                                                                    <% }else{ %>
+                                                                        <div class="m-r-10 text-center"><img src="/assets/images/default.png" alt="default" class="rounded" width="45"></div>
+                                                                        <% } %>
                                                             </td>
                                                             <!-- 여기에 STATE 값 별로 그림 이미지좀 출력해줘 -->
                                                             <!-- 이미지는 public/assets/images 에 넣어놓을꼐-->
@@ -116,19 +106,19 @@
                                                             
                                                              -->
                                                             <td>
-                                                                <p style="color:<%= color%>"><%= recordsets[0][i].IP %>
-                                                                </p>
-                                                                <input type="hidden"
+                                                                <%= recordsets[0][i].IP %>
+                                                                
+                                                            </td>
+                                                            <td><%= recordsets[0][i].OS %></td>
+                                                            <td><%= recordsets[0][i].PURPOSE %></td>
+                                                        </tr>
+                                                        <input type="hidden"
                                                                     id="is_search_<%=recordsets[0][i].AGENT_CD[0]%>"
                                                                     value=<% 
                                                                 if(color.length > 0){
                                                                 %>true<%
                                                                 }else{
                                                                 %>false<% } %>>
-                                                            </td>
-                                                            <td><%= recordsets[0][i].OS %></td>
-                                                            <td><%= recordsets[0][i].PURPOSE %></td>
-                                                        </tr>
                                                         <% } %>
                                                     </tbody>
                                                 </table>
