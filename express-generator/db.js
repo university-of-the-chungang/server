@@ -5,7 +5,6 @@ let sql = require('mssql');
 
 // DB 정보 
 
-
 let config = {
     // 해당 설정 부분은 설정파일 생기면 그리 옮길것 
     "user": "developer", //default is sa
@@ -61,7 +60,7 @@ let query_select = (data, table_name,where) => {
 exports.add_log = (log_type,contents,date)=>{
     return new Promise((resolve,reject)=>{
         console.log(`INSERT INTO TBL_LOG(LOG_TYPE,CONTENTS,CONTENT_DATE) VALUES('${log_type}',N'${contents}',CONVERT(DATETIME,'${date}'))`);
-        new sql.Request().query(`INSERT INTO TBL_LOG(LOG_TYPE,CONTENTS,CONTENT_DATE) VALUES('${log_type}','${contents}',CONVERT(DATETIME,'${date}'))`,(err,result)=>{
+        new sql.Request().query(`INSERT INTO TBL_LOG(LOG_TYPE,CONTENTS,CONTENT_DATE) VALUES('${log_type}',N'${contents}',CONVERT(DATETIME,'${date}'))`,(err,result)=>{
             if(err){
                 console.log(err);
             }else
