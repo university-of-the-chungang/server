@@ -70,8 +70,9 @@
                                         </td>
                                         <td class="border-0">
                                                 <label class="custom-control custom-checkbox">
-                                                <input id="ck1" name="ck1" type="checkbox" class="custom-control-input" >
-                                                <span class="custom-control-label" style="">모두 선택</span>
+                                                <input id="chk_all" name="chk_all" type="checkbox"
+                                                        class="custom-control-input"><span 
+                                                        class="custom-control-label" style="">모두 선택</span>
                                                 </label>
                                         </td>
                                         <td class="border-0 text-center">
@@ -107,11 +108,12 @@
                                     <tbody>
                                     <% for(var i=0; i<data[0].length; i++){ %>
                                     <tr class="table" style="text-align: center;">
-                                        <td style="text-align: center; vertical-align: middle;">
-                                            <label class="custom-control custom-checkbox">
-                                                <input type="checkbox" id='<%=i%>' name = "chkbox" class="custom-control-input">
-                                                <span class="custom-control-label" style="position: absolute;left:40%; top:0"></span>
-                                            </label>
+                                        <td style="text-align:center; vertical-align: middle;"><label
+                                                class="custom-control custom-checkbox"><input
+                                                    type="checkbox" id='<%=i %>'
+                                                    class="custom-control-input chkbox"><span
+                                                    class="custom-control-label"
+                                                    style="position: absolute;left:40%; top:0"></span></label>
                                         </td>
                                         <!--<td colspan="2">-->
                                         <td>그룹<%=i+1%></td>
@@ -264,6 +266,11 @@
     <script src="/assets/vendor/charts/c3charts/C3chartjs.js"></script>
     <script src="/assets/libs/js/dashboard-ecommerce.js"></script>
     <script>
+        $('#chk_all').click(() => {
+            let chk = $('#chk_all').is(":checked");//.attr('checked');
+            if (chk) $(".chkbox").prop('checked', true);
+            else $(".chkbox").prop('checked', false);
+        });
         $('#searchBtn').click(() => {
             location.href = "/log/" + $('#search_keyword').val();
         });
