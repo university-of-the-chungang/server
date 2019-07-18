@@ -164,10 +164,8 @@
                                             <form action="/download/" method="POST">
                                                 
                                                 <% for(let i = 0 ; i < recordsets[0].length ; i+=1){ %>
-                                                    <input type="hidden" name="logdate<%=i%>" value="<%= recordsets[0][i].CONTENT_DATE %>">
-                                                    <input type="hidden" name="logid<%=i%>" value="<%= recordsets[0][i].LOG_ID %>">
-                                                    <input type="hidden" name="logtype<%=i%>" value="<%= recordsets[0][i].LOG_TYPE %>">
-                                                    <input type="hidden" name="logcontent<%=i%>" value="<%= recordsets[0][i].CONTENTS %>">
+                                                    <input type="hidden" name="logall<%=i%>" value="<%=recordsets[0][i].CONTENT_DATE %> : <%= recordsets[0][i].LOG_ID %> : <%= recordsets[0][i].LOG_TYPE %> : <%=recordsets[0][i].CONTENTS %>">
+                                                    
                                                 <% } %>
                                                 <input type="submit" value="로그 다운로드" a href="#" id="downBtn" class="col-11 btn btn-outline-danger" data-toggle="modal" data-target="#xccdfModal"><span class="icon-circle-small icon-box-xs text-danger bg-danger-light bg-danger-light "><i class="fa fa-fw fa-arrow-down"></i></span><span ></span></a>
                                             </form>
