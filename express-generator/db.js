@@ -189,6 +189,20 @@ exports.search_agent_info = (keyword = "") => {
     });
 }
 
+exports.get_PGMH_info = (keyword2 = "") => {
+    // 그룹 정보 조회
+    let search_key = `LIKE '%${keyword2}%'`;
+    let query = `SELECT * FROM TBL_GROUP_INFO WHERE ( NAME ${search_key} OR AGENT_COUNTING ${search_key} )`;
+    return new Promise((resolve, reject) => {
+        new sql.Request().query(query, (err, result) => {
+            if (err)
+                reject(err);
+            console.log(query);
+            resolve(result);
+        });
+    });
+}
+
 exports.search_log_info = (keyword2 = "") => {
     let search_key = `LIKE '%${keyword2}%'`;
     let query = `SELECT * FROM TBL_LOG WHERE ( LOG_ID ${search_key} OR LOG_TYPE ${search_key} OR CONTENTS ${search_key} )`;
@@ -238,6 +252,7 @@ exports.get_group_info = (group_name = null) => {
         sql_adder = "";
         if (group_name) {
             sql_adder = "WHERE NAME LIKE '" + group_name + "%'";
+
         }
         new sql.Request().query(`SELECT * FROM TBL_GROUP_INFO ` + sql_adder, (err, result) => {
             if (err) {

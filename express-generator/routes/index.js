@@ -260,6 +260,20 @@ router.get('/log', function (req, res, next) {
   });
 }); // 평가문항 및 로그 추출 페이지
 
+router.get('/log_PGMH/:keyword', (req, res, next) => {
+  DB.get_PGMH_info(req.params.keyword).then(result => {
+    result.sess_name = req.session.username;
+    DB.get_log_info().then(result2 => {
+      res.render('./main/Log/log', {
+        recordsets: result2.recordsets,
+        data: result.recordsets
+      });
+    });    
+  }).catch(err => {
+    console.log(err);
+  });
+})
+
 router.get('/log/:keyword2', (req, res, next) => {
   DB.search_log_info(req.params.keyword2).then(result => {
     result.sess_name = req.session.username;
