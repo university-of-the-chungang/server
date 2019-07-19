@@ -70,14 +70,15 @@
                                         </td>
                                         <td class="border-0">
                                                 <label class="custom-control custom-checkbox">
-                                                <input id="ck1" name="ck1" type="checkbox" class="custom-control-input" >
-                                                <span class="custom-control-label" style="">모두 선택</span>
+                                                <input id="chk_all" name="chk_all" type="checkbox"
+                                                        class="custom-control-input"><span 
+                                                        class="custom-control-label" style="">모두 선택</span>
                                                 </label>
                                         </td>
                                         <td class="border-0 text-center">
                                              <div class="input-group input-search">
-                                                <input class="form-control" type="text" placeholder="Search "><span class="input-group-btn">
-                                                <button class="btn btn-secondary" type="button"><i class="fas fa-search"></i></button></span>
+                                                <input id="search_keyword_PyeongGaMunhang" class="form-control" type="text" placeholder="Search "><span class="input-group-btn">
+                                                <button class="btn btn-secondary" type="button" id="searchBtn_PyeongGaMunhang"><i class="fas fa-search"></i></button></span>
                                             </div>
                                         </td>
                                         <td class="border-0 text-center">
@@ -99,6 +100,7 @@
                                     <th class = "border-0 text-center">그룹 이름</th>
                                     <!--<th class = "border-0 text-center">그룹 설명</th>-->
                                     <th class = "border-0 text-center">에이전트 수</th>
+                                    <th class = "border-0 text-center">그룹 정보 더 보기</th>
                                     <!--<th class = "border-0 text-center">생성시간</th>
                                     <th class = "border-0 text-center">활성시간</th>
                                     <th class = "border-0 text-center">오프라인/온라인</th>-->
@@ -107,11 +109,12 @@
                                     <tbody>
                                     <% for(var i=0; i<data[0].length; i++){ %>
                                     <tr class="table" style="text-align: center;">
-                                        <td style="text-align: center; vertical-align: middle;">
-                                            <label class="custom-control custom-checkbox">
-                                                <input type="checkbox" id='<%=i%>' name = "chkbox" class="custom-control-input">
-                                                <span class="custom-control-label" style="position: absolute;left:40%; top:0"></span>
-                                            </label>
+                                        <td style="text-align:center; vertical-align: middle;"><label
+                                                class="custom-control custom-checkbox"><input
+                                                    type="checkbox" id='<%=i %>'
+                                                    class="custom-control-input chkbox"><span
+                                                    class="custom-control-label"
+                                                    style="position: absolute;left:40%; top:0"></span></label>
                                         </td>
                                         <!--<td colspan="2">-->
                                         <td>그룹<%=i+1%></td>
@@ -123,6 +126,13 @@
                                         <td><%=data[0][i].ACTIVE_TIME%></td>
                                         &lt;!&ndash;<td colspan="2">&ndash;&gt;
                                         <td>오프라인 정보시스템 포함</td>-->
+                                        <td>
+                                            <form action="/group/<%=data[0][i].NAME%>" method = "GET" style="z-index: 9999;">
+                                                <input type="submit" id="GroupInfoBtn"
+                                                       class="btn btn-outline-info btn-lg"
+                                                       value = "Details" style="width: 150px; z-index:9998">
+                                            </form>
+                                        </td>
 
                                     </tr>
                                     <%}%>
@@ -164,10 +174,8 @@
                                             <form action="/download/" method="POST">
                                                 
                                                 <% for(let i = 0 ; i < recordsets[0].length ; i+=1){ %>
-                                                    <input type="hidden" name="logdate<%=i%>" value="<%= recordsets[0][i].CONTENT_DATE %>">
-                                                    <input type="hidden" name="logid<%=i%>" value="<%= recordsets[0][i].LOG_ID %>">
-                                                    <input type="hidden" name="logtype<%=i%>" value="<%= recordsets[0][i].LOG_TYPE %>">
-                                                    <input type="hidden" name="logcontent<%=i%>" value="<%= recordsets[0][i].CONTENTS %>">
+                                                    <input type="hidden" name="logall<%=i%>" value="<%=recordsets[0][i].CONTENT_DATE %> : <%= recordsets[0][i].LOG_ID %> : <%= recordsets[0][i].LOG_TYPE %> : <%=recordsets[0][i].CONTENTS %>">
+                                                    
                                                 <% } %>
                                                 <input type="submit" value="로그 다운로드" a href="#" id="downBtn" class="col-11 btn btn-outline-danger" data-toggle="modal" data-target="#xccdfModal"><span class="icon-circle-small icon-box-xs text-danger bg-danger-light bg-danger-light "><i class="fa fa-fw fa-arrow-down"></i></span><span ></span></a>
                                             </form>
@@ -266,6 +274,19 @@
     <script src="/assets/vendor/charts/c3charts/C3chartjs.js"></script>
     <script src="/assets/libs/js/dashboard-ecommerce.js"></script>
     <script>
+        $('#chk_all').click(() => {
+            let chk = $('#chk_all').is(":checked");//.attr('checked');
+            if (chk) $(".chkbox").prop('checked', true);
+            else $(".chkbox").prop('checked', false);
+        });
+        $('#searchBtn_PyeongGaMunhang').click(() => {
+            location.href = "/log_PGMH/" + $('#search_keyword_PyeongGaMunhang').val();
+        });
+        $('#search_keyword_PyeongGaMunhang').keydown((key) => {
+            if (key.keyCode === 13) {
+                $('#searchBtn_PyeongGaMunhang').click();
+            }
+        });
         $('#searchBtn').click(() => {
             location.href = "/log/" + $('#search_keyword').val();
         });

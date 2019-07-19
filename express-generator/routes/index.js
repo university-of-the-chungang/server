@@ -129,11 +129,12 @@ function makelog(log_list,a)
 {
   
    return new Promise((resolve,reject)=>{
-    var data = "DATE\t\t\t\t\t\t\t\t\t\t\t\tID\t\tTYPE\t\tCONTENTS\n";
-    console.log(log_list);
-    for(var i =0 ; i < log_list.length-1; i+=4)
+    var data = "DATE\t\t\t\t\t\t\t\t\t\t\t\tID\t\tTYPE\t\t\tCONTENTS\n";
+    
+    for(var i =0 ; i < log_list.length; i+=1)
     {
-      data += log_list[i]+"\t\t"+log_list[i+1]+"\t\t"+log_list[i+2]+"\t\t"+log_list[i+3]+"\n";  
+      var strarray = log_list[i].split(' : ');
+      data += strarray[0]+"\t\t"+strarray[1]+"\t\t"+strarray[2]+"\t\t\t"+strarray[3]+"\n";  
     }
    fs.writeFileSync(__dirname+'/log/log.txt',data,'utf8');
    console.log("file make fin");
@@ -145,12 +146,14 @@ function makelog(log_list,a)
 }
 
 function downlog(log_list,res){
-  console.log(log_list);
+
   makelog(log_list,1)
     .then(result =>{downfile(res,1)});
 
 }
 router.post('/download/', function(req, res){
+  
+  //console.log(Object.values(req.body))
   log_list = Object.values(req.body);
   downlog(log_list,res);
 
@@ -256,6 +259,20 @@ router.get('/log', function (req, res, next) {
     //res.render('./main/Log/log', result);
   });
 }); // 평가문항 및 로그 추출 페이지
+
+router.get('/log_PGMH/:keyword', (req, res, next) => {
+  DB.get_PGMH_info(req.params.keyword).then(result => {
+    result.sess_name = req.session.username;
+    DB.get_log_info().then(result2 => {
+      res.render('./main/Log/log', {
+        recordsets: result2.recordsets,
+        data: result.recordsets
+      });
+    });    
+  }).catch(err => {
+    console.log(err);
+  });
+})
 
 router.get('/log/:keyword2', (req, res, next) => {
   DB.search_log_info(req.params.keyword2).then(result => {
