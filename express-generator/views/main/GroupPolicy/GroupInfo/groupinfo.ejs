@@ -127,7 +127,23 @@
                                                             <% for(var i=0; i<recordsets2.length; i++){ %>
                                                             <tr>
                                                                 <td>
-                                                                    <div class="m-r-10 text-center"><img src="/assets/images/pass.png" alt="user" class="rounded" width="45"></div>
+                                                                    <% if(recordsets2[i].STATE == 'C'){ %>
+                                                                    <div style="background-color: white; border: 1px solid; margin:auto;"
+                                                                         class="rounded-circle user-avatar-lg">
+                                                                        <% } else if(recordsets2[i].STATE == 'C-2'){ %>
+                                                                        <div style="background-color: black; border: 1px solid; margin:auto;"
+                                                                             class="rounded-circle user-avatar-lg">
+                                                                            <% } else if(recordsets2[i].STATE == 'R'){ %>
+                                                                            <div style="background-color: skyblue; border: 1px solid; margin:auto;"
+                                                                                 class="rounded-circle user-avatar-lg">
+                                                                                <% } else if(recordsets2[i].STATE == 'E'){ %>
+                                                                                <div style="background-color: red; border: 1px solid; margin:auto;"
+                                                                                     class="rounded-circle user-avatar-lg">
+                                                                                    <% } else { %>
+                                                                                    <div style="background-color: yellow; border: 1px solid; margin:auto;"
+                                                                                         class="rounded-circle user-avatar-lg">
+                                                                                        <% } %>
+                                                                                    </div>
                                                                 </td>
                                                                 <td class="text-center"><%=recordsets2[i].IP%> </td>
                                                                 <td class="text-center"><%=recordsets2[i].OS%></td>
