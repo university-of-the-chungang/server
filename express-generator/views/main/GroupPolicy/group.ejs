@@ -129,7 +129,6 @@
                                 <label class="custom-control custom-checkbox custom-control-inline" style="margin-left:50px; z-index:9999; ">
                                     <input type="checkbox" id="chk_all" name="chk_all" class="custom-control-input" ><span class="custom-control-label">모두 선택</span>
                                 </label>
-
                             </div>
                             <div class="col-8">
                                 <div class="pull-right">
@@ -191,10 +190,15 @@
                                         &lt;!&ndash;<td colspan="2">&ndash;&gt;
                                         <td>오프라인 정보시스템 포함</td>-->
                                         <td>
-                                            <div class="switch-button switch-button-yesno">
-                                                <input type="checkbox" class="switch" data-toggle="toggle" <%if(recordsets[0][i].ACTIVE_STATE === "active"){%> checked <%}%> name='<%=i%>' id='<%=recordsets[0][i].GROUP_SET_CD%>'>
-                                                <span><label for="<%=recordsets[0][i].GROUP_SET_CD%>"></label></span>
-                                            </div>
+                                            <form action="/group/active_state" method="post" id = "state_change<%-recordsets[0][i].GROUP_SET_CD%>">
+                                                <div class="switch-button switch-button-yesno">
+                                                    <input type="hidden" name="state" value="<%=recordsets[0][i].ACTIVE_STATE%>">
+                                                    <input type="hidden" name="cd" value="<%=recordsets[0][i].GROUP_SET_CD%>">
+                                                    <input type="checkbox" class="switch" data-toggle="toggle" <%if(recordsets[0][i].ACTIVE_STATE === 'A'){%> checked <%}%>
+                                                           name="state_switch" id = "<%=recordsets[0][i].GROUP_SET_CD%>" value = <%=recordsets[0][i].GROUP_SET_CD%>>
+                                                    <span><label for="<%=recordsets[0][i].GROUP_SET_CD%>"></label></span>
+                                                </div>
+                                            </form>
                                         </td>
 
                                         <td>
@@ -341,6 +345,23 @@
             else $('input:checkbox[name="chkbox"]').prop('checked', false);
         });
 
+
+        $('input[name="state_switch"]').change(function() {
+            let checked = $(this).prop('checked');// checked 상태 (true, false)
+            let chk_arr = $('input:checkbox[name="state_switch"]:checked');
+            let change = '#state_change' + $(this).val();
+
+            if(checked){
+                if(chk_arr.length > 1){
+                    alert("하나의 그룹만 활성화 될 수 있습니다. 다른 그룹을 비활성화 시켜주세요");
+                    $(this).prop('checked', false);
+                }else{
+                    $(change).submit();
+                }
+            }else{
+                $(change).submit();
+            }
+        });
     </script>
 </body>
  

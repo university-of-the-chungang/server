@@ -246,6 +246,21 @@ exports.delete_agent_info = (agent_cd_arr)=>{
     });
 }
 
+
+exports.insert_group_set_list = (group_set_cd, agent_cd) => {
+    return new Promise((resolve, reject) => {
+        let query = `INSERT INTO TBL_GROUP_SET_LIST (GROUP_SET_CD, AGENT_CD) VALUES (` + group_set_cd + `, ` + agent_cd +`)`;
+        console.log(query);
+        console.log(agent_cd);
+        new sql.Request().query(query, (err,result) => {
+            if(err){
+                reject(err);
+            }
+            resolve(result);
+        });
+    });
+};
+
 exports.get_group_info = (group_name = null) => {
     // 그룹 정보 조회
     return new Promise((resolve, reject) => {
@@ -288,7 +303,7 @@ exports.change_group_state = (group_set_cd, state = false) => {
 // 그룹 정보 삭제 (데이터베이스에서 날리지 않고 DEL_FLAG를 1로 설정)
 exports.delete_group_info = (group_set_cd) => {
     return new Promise((resolve, reject) => {
-        let query = `UPDATE TBL_GROUP_INFO SET DEL_FLAG = 1 WHERE GROUP_SET_CD = ` + group_set_cd;
+        let query = `UPDATE TBL_GROUP_INFO SET DEL_FLAG = 1, ACTIVE_STATE = 'D' WHERE GROUP_SET_CD = ` + group_set_cd;
         new sql.Request().query(query, (err, result) => {
             if (err) {
                 reject(err);
@@ -425,6 +440,21 @@ exports.update_agent_info = (cd, ip, mac, os, purpose, owner, desc, state) => {
         });
     });
 };
+
+exports.update_group_info = (cd, name, start_date, period, disc) => {
+    return new Promise((resolve, reject) =>{
+        let query = `UPDATE TBL_GROUP_INFO SET NAME = N'${name}', INSPECTION_START_DATE = '${start_date}', INSPECTION_PERIOD='${period}', DISCRIPTION = N'${disc}' WHERE GROUP_SET_CD = '${cd}'`
+        console.log(query);
+        new sql.Request().query(query, (err, result) => {
+            if(err){
+                reject(err);
+            }
+            resolve(result);
+        });
+    });
+};
+
+
 exports.activate_agent_info = (agent_cd) => {
     return new Promise((resolve, reject) => {
         let query = `UPDATE TBL_AGENT_INFO SET STATE = 'C-2' WHERE AGENT_CD = ${agent_cd}`;
@@ -439,9 +469,30 @@ exports.activate_agent_info = (agent_cd) => {
     });
 }
 
+exports.activate_group_info = (group_set_cd, state) =>{
+    let ch_state;
+
+    if(state === 'D')
+        ch_state = 'A';
+    else
+        ch_state = 'D';
+
+    return new Promise((resolve, reject) =>{
+        let query = `UPDATE TBL_GROUP_INFO SET ACTIVE_STATE = '` + ch_state + `' WHERE GROUP_SET_CD = ${group_set_cd}`;
+        console.log(query);
+        new sql.Request().query(query, (err, result) => {
+            if(err){
+                reject(err);
+            }
+
+            resolve(result);
+        });
+    });
+};
+
 exports.total_group_info = () =>{
     return new Promise((resolve,reject)=>{
-        let query = `SELECT GROUP_SET_CD, NAME, CREATE_TIME, ACTIVE_TIME, AGENT_COUNTING, INSPECTION_PERIOD, ACTIVE_STATE, DISCRIPTION FROM TBL_GROUP_INFO`;
+        let query = `SELECT GROUP_SET_CD, NAME, CREATE_TIME, ACTIVE_TIME, AGENT_COUNTING, INSPECTION_PERIOD, ACTIVE_STATE, DISCRIPTION FROM TBL_GROUP_INFO WHERE DEL_FLAG = 0`;
         console.log(query);
         new sql.Request().query(query,(err,result)=>{
             if(err){
@@ -458,7 +509,22 @@ exports.view_modify_group_info = (group_name) => {
         let query = `Select *
 From  (TBL_GROUP_SET_LIST inner join TBL_AGENT_INFO on TBL_GROUP_SET_LIST.AGENT_CD = TBL_AGENT_INFO.AGENT_CD) 
 inner join TBL_GROUP_INFO On TBL_GROUP_INFO.GROUP_SET_CD = TBL_GROUP_SET_LIST.GROUP_SET_CD
-Where TBL_GROUP_INFO.NAME LIKE '${group_name}%'` ;
+Where TBL_GROUP_INFO.NAME = '${group_name}'` ;
+        new sql.Request().query(query, (err, result) => {
+            if(err){
+                reject(err);
+            }
+            resolve(result);
+        });
+    });
+};
+
+exports.view_modify_group_IP_info = (group_name) => {
+    return new Promise((resolve, reject) => {
+        let query = `Select IP
+From  (TBL_GROUP_SET_LIST inner join TBL_AGENT_INFO on TBL_GROUP_SET_LIST.AGENT_CD = TBL_AGENT_INFO.AGENT_CD) 
+inner join TBL_GROUP_INFO On TBL_GROUP_INFO.GROUP_SET_CD = TBL_GROUP_SET_LIST.GROUP_SET_CD
+Where TBL_GROUP_INFO.NAME = '${group_name}'` ;
         new sql.Request().query(query, (err, result) => {
             if(err){
                 reject(err);
@@ -473,7 +539,7 @@ exports.view_modify_os_group_info = (group_name) => {
         let query = `Select TBL_GROUP_INFO.OS
 From  (TBL_GROUP_SET_LIST inner join TBL_AGENT_INFO on TBL_GROUP_SET_LIST.AGENT_CD = TBL_AGENT_INFO.AGENT_CD) 
 inner join TBL_GROUP_INFO On TBL_GROUP_INFO.GROUP_SET_CD = TBL_GROUP_SET_LIST.GROUP_SET_CD
-Where TBL_GROUP_INFO.NAME LIKE '${group_name}%'` ;
+Where TBL_GROUP_INFO.NAME = '${group_name}'` ;
         console.log(query);
         new sql.Request().query(query, (err, result) => {
             if(err){
@@ -489,7 +555,7 @@ exports.view_xccdf_included_group = (group_name) => {
         let query=`Select *
 From  (TBL_XCCDF_SET_LIST inner join TBL_XCCDF on TBL_XCCDF_SET_LIST.XCCDF_CD = TBL_XCCDF.XCCDF_CD) 
 inner join TBL_GROUP_INFO On TBL_GROUP_INFO.GROUP_SET_CD = TBL_XCCDF_SET_LIST.GROUP_SET_CD
-Where TBL_GROUP_INFO.NAME LIKE '${group_name}%'` ;
+Where TBL_GROUP_INFO.NAME = '${group_name}'` ;
         console.log(query);
         new sql.Request().query(query, (err, result) => {
             if(err){
@@ -498,4 +564,18 @@ Where TBL_GROUP_INFO.NAME LIKE '${group_name}%'` ;
             resolve(result);
         })
     })
-}
+};
+
+
+exports.delete_group_set_list = (group_set_cd) => {
+    return new Promise((resolve, reject) =>{
+        let query = `DELETE FROM TBL_GROUP_SET_LIST WHERE GROUP_SET_CD = ${group_set_cd}`;
+        console.log(query);
+        new sql.Request().query(query, (err, result) => {
+            if(err){
+                reject(err);
+            }
+            resolve(result);
+        });
+    });
+};

@@ -2,10 +2,25 @@
 <html lang="en">
  
 <head>
-    <%include ../../../head.ejs%>
+   <%include ../../../head.ejs%>
+    <script>
+        function init(){
+            var t = '<%-tab%>'
+            if(t == '2'){
+                $('.nav-tabs').find('a').eq(0).removeClass('active');
+                $('.nav-tabs').find('a').eq(1).addClass('active').siblings().removeClass();
+                $('.tab-content').find('#profile').addClass('active in').siblings().removeClass('active in');
+
+            } else if(t=='3'){
+                $('.nav-tabs').find('a').eq(0).removeClass('active');
+                $('.nav-tabs').find('a').eq(2).addClass('active').siblings().removeClass();
+                $('.tab-content').find('#contact').addClass('active in').siblings().removeClass('active in');
+            }
+        }
+    </script>
 </head>
 
-<body>
+<body onLoad = "init()">
   
 <div class="dashboard-main-wrapper">
     <div class="dashboard-header">
@@ -49,7 +64,7 @@
                                 <p></p>
                     </div>
                     <div class="tab-regular">
-                        <ul class="nav nav-tabs " id="myTab" role="tablist">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">기본정보</a>
                             </li>
@@ -59,286 +74,147 @@
                             <li class="nav-item">
                                 <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">정책적용</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="report-tab" data-toggle="tab" href="#report" role="tab" aria-controls="report" aria-selected="false">레포팅</a>
-                            </li>
                         </ul>
 
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                               <div class="row" style="margin-bottom: 50px">
-                                                   <div class="col-1"></div>
-
-                                                   <div class="col-1">
-                                                        <label for="validationServer01">그룹 ID</label>
-                                                       <input type="text" class="form-control" id="validationServer01" placeholder="" value="" required="">
-                                                   </div>
-
-                                                   <div class="col-3">
-                                                        <label for="validationServer01">그룹명</label>
-                                                       <input type="text" class="form-control" id="validationServer01" placeholder="<%=recordsets[0].NAME%>" value="" required="">
-                                                   </div>
-
-                                                   <div class="col-2">
-                                                        <label for="validationServer01">그룹 에이전트 수</label>
-                                                       <h4 align="text-center">10</h4>
-                                                   </div>
-                                                </div>
-
-                                                <div class="row" style="margin-bottom: 10px">
-                                                   <div class="col-1"></div>
-                                                   <div class="col-2">
-                                                       <label for="validationServer01">그룹 생성 시간</label>
-                                                       <h4>언제언제 </h4>
-                                                   </div>
-
-                                                   <div class="col-2">
-                                                       <label for="validationServer01">그룹 활성화 시간</label>
-                                                       <h4>언제언제 </h4>
-                                                   </div>
-                                               </div>
-
-                                               <div class="row" style="margin-bottom: 50px">
-                                                   <div class="col-1"></div>
-                                                   <div class="col-6">
-                                                       <label for="validationServer01">그룹설명</label>
-                                                       <input type="text" class="form-control" id="validationServer01"  placeholder="<%=recordsets[0].DISCRIPTION %>" equired="" value = "" style="height: 200px">
-                                                   </div>
-                                               </div>
-
-                            <div class="row">   
-
-                                <div class="col-1"></div>
-                                <div class="col-4">
-                                
-                                    
-
-                                        <label for="validationServer01">정책 적용 시작일</label>
-                                        <div class="input-group date" id="datetimepicker4" data-target-input="nearest">
-                                            <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker4" style="height: 50px;">
-                                            <div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker" >
-                                                <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
-                                            </div>
+                                <form id="change_basic_info" action="/oldgroup/change_basic_info" method="POST">
+                                    <div class="row" style="margin-bottom: 50px">
+                                        <div class="col-1">
+                                             <input type="hidden" class="form-control" name="editCD" placeholder="" value="<%=recordsets[0].GROUP_SET_CD%>" required="">
                                         </div>
-                                    
-                                </div>
 
-                                <div class="col-2 form-group">
-                                    <label for="inputText3" class="col-form-label">주기 설정 </label>
-                                    <input id="inputText3" type="text" class="form-control" style="height: 47px;">
-                                </div>
-                            
-                            </div>   
-                             
-                         
+                                        <div class="col-3">
+                                            <label for="validationServer01">그룹명</label>
+                                            <input type="text" class="form-control" name="editNAME" placeholder="" value="<%=recordsets[0].NAME%>" required="">
+                                        </div>
+
+                                        <div class="col-2">
+                                            <label for="validationServer01">그룹 에이전트 수</label>
+                                            <h4 align="text-center">10</h4>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-bottom: 10px">
+                                        <div class="col-1"></div>
+                                        <div class="col-2">
+                                            <label for="validationServer01">그룹 생성 시간</label>
+                                            <h4><%=recordsets[0].CREATE_TIME%></h4>
+                                        </div>
+                                        <div class="col-2">
+                                            <label for="validationServer01">그룹 활성화 시간</label>
+                                            <h4><%=recordsets[0].ACTIVE_TIME%></h4>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-bottom: 50px">
+                                        <div class="col-1"></div>
+                                        <div class="col-6">
+                                            <label for="validationServer01">그룹설명</label>
+                                            <input type="text" class="form-control" name="editDISCRIPTION"  placeholder="" equired="" value = "<%=recordsets[0].DISCRIPTION %>" style="height: 200px">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+
+                                        <div class="col-1"></div>
+                                        <div class="col-4">
+                                            <label for="validationServer01">정책 적용 시작일</label>
+                                            <div class="input-group date" id="datetimepicker4" data-target-input="nearest">
+                                                <input type="text" name = "editINSPECTION_START_DATE" placeholder="<%=recordsets[0].INSPECTION_START_DATE%>" value = "<%=recordsets[0].INSPECTION_START_DATE%>" class="form-control datetimepicker-input" data-target="#datetimepicker4" style="height: 50px;">
+                                                <div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker" >
+                                                    <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-2 form-group">
+                                            <label for="inputText3" class="col-form-label">주기 설정 </label>
+                                            <input name="editINSPECTION_PERIOD" type="text" value = "<%=recordsets[0].INSPECTION_PERIOD%>" class="form-control" style="height: 47px;">
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-10"></div>
+                                        <div class="col-2" style="margin-top: 20px">
+                                            <button type="submit" class="btn btn-space btn-primary">기본 정보 수정</button>
+                                        </div>
+
+                                    </div>
+                                </form>
                             </div>
-
                  <!-- 에이전트 할당 탭 시작-->
                             <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                    <div class="row">
-                        <div class="col-xl-1">
-                          <label class="custom-control custom-checkbox" style="margin-left: 10px">
-                                <input id="ck1" name="ck1" type="checkbox" class="custom-control-input"><span class="custom-control-label">모두 선택</span>
-                            </label>
-                        </div>
-
-                        <div class="col-xl-3" style="height: 70px">
-                            <div class="input-group input-search">
-                                <input class="form-control" type="text" placeholder="Search "><span class="input-group-btn">
-                                <button class="btn btn-secondary" type="button"><i class="fas fa-search"></i></button></span>
-                            </div>
-                        </div>
-
-                            
-                    </div>
-                    
-                    <div class="row">
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
-                                <div class="card" style="height: 300px; width: auto; overflow: scroll;">
-                                    <h4 class="card-header text-center">모든 에이전트</h4>
-                                    <div class="card-body p-0">
-                                        <div class="table-responsive">
-                                            <table class="table">
-                                                <thead class="bg-light">
-                                                    <tr class="border-0">
-                                                        <th class="">check</th>
-                                                        <th class="border-0 text-center">상태</th>
-                                                        <th class="border-0 text-center ">IP</th>
-                                                        <th class="border-0 text-center">운영체제 버전</th>
-                                                        <th class="border-0 text-center">용도</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <% for(var i=0; i<recordsets3.length; i++){ %>
-                                                    <tr>
-                                                        <td>
-                                                            <label class="custom-control custom-checkbox" style="margin-left: 10px" >
-                                                                <input class="custom-control-input checkboxes text-center" type="checkbox" value="1" id="one"><span class="custom-control-label "></span>
-                                                            </label>
-                                                        </td>
-                                                        <td>
-                                                            <div class="m-r-10 text-center"><img src="assets/images/pass.png" alt="user" class="rounded" width="45"></div>
-                                                        </td>
-                                                        <td class="text-center"><%=recordsets3[i].IP%> </td>
-                                                        <td class="text-center"><%=recordsets3[i].OS%></td>
-                                                        <td class="text-center"><%=recordsets3[i].PURPOSE%></td>
-                                                    </tr>
-                                                    <%}%>
-                                                     
-                                                </tbody>
-                                            </table>
-
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                            <div class="row col-12">
-                                <!--<div class="col-3"></div>-->
-                                <div class="col-4">
-
-                                <nav aria-label="Demo of active current page number">
-                                    <ul class="pagination">
-                                        <li class="page-item active"><a class="page-link" href="#">Prev</a></li>
-
-                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-
-                                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                                    </ul>
-                                </nav>
-
-                                </div>
-                            </div>
-
-                        </div><!--그룹정보 카드 끝-->
-
-                          <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-                                    
-
-                        <div class="row col-12"> <!-- 버튼 시작-->
-                             
-                            
-                        <div class="col-4"></div>
-
-                        <div class="col-6">
-                            <button type="button" class="btn btn-outline-light" data-method="move" data-option="10" data-second-option="0" title="Move Right" style=" width: 130px; height: 90px; margin-top: 35px;">
-
-                                <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="" data-original-title="$().cropper(&quot;move&quot;, 10, 0)">
-                                 <span class="fa fa-arrow-right"></span>
-                                </span>
-                            </button>
-                        </div>
-                         
-
-                        <div class="col-2"></div>   
-                        
-                        </div><!-- 버튼 끝-->
-
-
-                        <div class="row col-12"> <!-- 버튼 시작-->
-                        
-                            <div class="col-4"></div>
-                        <div class="col-6">                               
-                            <button type="button" class="btn btn-outline-light" data-method="move" data-option="10" data-second-option="0" title="Move Right" style=" width: 130px; height: 90px; margin-top: 50px;">
-
-                                <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="" data-original-title="$().cropper(&quot;move&quot;, 10, 0)">
-                                 <span class="fa fa-arrow-left"></span>
-                                </span>
-                            </button>
-                        </div>
-                        <div class="col-2"></div>
-                        </div><!-- 버튼 끝-->
-                        
-                    </div>   <!-- 더미 div-->
-
-                        <div class="col-3"><!-- 할당된 에이전트 부분-->
-                                <div class="card" style="height: 300px; overflow:scroll; ">
-                                    <h5 class="card-header text-center">할당된 에이전트</h5>
-                                      <div class="table-responsive">
-                                            <table class="table">
-                                                <thead class="bg-light">
-                                                    <tr class="border-0">
-                                                    <th class="border-0">Check</th> 
-                                                      <th class="border-0 text-center ">IP</th> 
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                <% for(var i=0; i<recordsets2.length; i++){ %>
-                                                    <tr>
-                                                        <td>
-                                                            <label class="custom-control custom-checkbox" style="margin-left: 10px;">
-                                                            <input class="custom-control-input checkbox" type="checkbox" value="1" id="one"><span class="custom-control-label "></span>
-                                                        </label>
-                                                        </td>
-                                                        <td class="text-center">
-                                                            <%=recordsets2[i].IP%>
-                                                        </td>
-                                                    </tr>
-                                                <%}%>
-                                                </tbody>
-                                            </table>
-
-
-                                        </div>
-                                    
-                                </div>
+                                <!--"/oldgroup/change_group_set_list"-->
+                                <form id="demoform" action= "/oldgroup/change_group_set_list" method="POST">
+                                    <input type="hidden" name = "group_name" value = <%=name%>>
+                                    <input type="hidden" class="form-control" name="group_set_cd"  value="<%=recordsets[0].GROUP_SET_CD%>">
+                                    <input name="change_group_set_list" id="change_group_set_list" class="hidden" val="">
+                                    <select multiple="multiple" size="10" name="agentlistbox[]">
+                                        <%for(var i=0; i<(recordsets3.length); i++){%>
+                                            <option value="<%=recordsets3[i].AGENT_CD%>"
+                                                    <%if(JSON.stringify(recordsets4).includes(recordsets3[i].IP)){%>
+                                                    selected="selected"
+                                                    <%}%>>
+                                                <%=recordsets3[i].IP%>
+                                            </option>
+                                        <%}%>
+                                    </select>
+                                    <input type="submit" id = "group_agent_change_btn" value = "에이전트 할당 정보 수정" class="btn btn-outline-dark btn-block" style="margin-top: 5px;">
+                                </form>
 
                                 <div class="row">
-                                    <div class="col-2"></div>
+                                    <div class="col-10"></div>
 
-                                    <div class="col-4">
+                                    <!--<div class="col-2">
                                         <div class="metric-label d-inline-block float-right text-success font-weight-bold">
-                                        <a href="#" class="btn btn-outline-dark" data-toggle="modal" data-target="#ipdirectmodal"> 직접 작성 <span class="icon-circle-small icon-box-xs"><i class="fas fa-edit"></i></span></a>
+                                            <a href="#" class="btn btn-outline-dark" data-toggle="modal" data-target="#ipdirectmodal"> 직접 작성 <span class="icon-circle-small icon-box-xs"><i class="fas fa-edit"></i></span></a>
+                                        </div>
+                                    </div>-->
+
+                                    <div class="col-2">
+                                        <div class="metric-label d-inline-block float-right text-success font-weight-bold">
+                                            <a href="#" class="btn btn-outline-success" data-toggle="modal" data-target="#csvModal"> 파일 업로드 <span class="icon-circle-small icon-box-xs text-success bg-success-light"><i class="fa fa-fw fa-arrow-up"></i></span><span class="ml-1"></span></a>
                                         </div>
                                     </div>
-                                    
-                                
-                                    <div class="col-4">
-                                        <div class="metric-label d-inline-block float-right text-success font-weight-bold">
-                                                <a href="#" class="btn btn-outline-success" data-toggle="modal" data-target="#csvModal"> 파일 업로드 <span class="icon-circle-small icon-box-xs text-success bg-success-light"><i class="fa fa-fw fa-arrow-up"></i></span><span class="ml-1"></span></a>     
-                                        </div>
-                                    </div>
-
-
                                 </div>
-                             </div>
-                        </div>
-                    </div><!-- 에이전트 할당 탭 끝-->
 
+
+                            </div><!-- 에이전트 할당 탭 끝-->
                 <!-- 정책 적용 탭 시작-->
-                   
                             <div class="tab-pane" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                         <div class="row">
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
                                 <div class="card" style="height: 300px; overflow: scroll;">
                                     <h4 class="card-header text-center">그룹에 포함된 운영체제 버전</h4>
-                                   
                                     <div class="card-body p-0">
                                         <table class="table table-bordered">
-                                        
                                         <tbody>
-                                            <%for(var i=0; i<(recordsets2.length/2); i++){ %>
+                                            <%
+                                            var i=0
+                                            for(; i<parseInt(recordsets2.length/2); i++){ %>
                                                 <tr>
-                                                    <td>    
+                                                    <td>
                                                         <div class="custom-control custom-checkbox">
                                                         <input type="checkbox" class="custom-control-input is-valid" id="customControlValidation1" required="">
                                                         <label class="custom-control-label" for="customControlValidation1"><%=recordsets2[i*2].OS%></label>
                                                         </div>
                                                     </td>
-                                                    
-                                                    <td>    
+
+                                                    <td>
                                                         <div class="custom-control custom-checkbox">
                                                         <input type="checkbox" class="custom-control-input is-invalid" id="customControlValidation1" required="">
                                                         <label class="custom-control-label" for="customControlValidation1"><%=recordsets2[i*2+1].OS%></label>
                                                         </div>
-                                                    </td>    
-
-
+                                                    </td>
                                                 </tr>
+                                            <%}
+                                            if(recordsets2.length % 2 != 0){%>
+                                            <td>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input is-valid" id="customControlValidation1" required="">
+                                                    <label class="custom-control-label" for="customControlValidation1"><%=recordsets2[i*2].OS%></label>
+                                                </div>
+                                            </td>
+                                            <td></td>
                                             <%}%>
                                         </tbody>
                                     </table>
@@ -371,10 +247,6 @@
                             <div class="col-12" style="margin-top: 15px;">
                                <a href="#" class="col-11 btn btn-outline-success" data-toggle="modal" data-target="#xccdfModal"> 정책 적용 <span class="icon-circle-small icon-box-xs text-success bg-success-light"><i class="fa fa-fw fa-arrow-up"></i></span><span class="ml-1"></span></a>
                             </div>
-
-                           
-                        
-
                              <!-- 정책 적용 모달 시작 -->
                                      <div class="modal" id="xccdfModal" tabindex="-1" role="dialog"
                                             aria-labelledby="exampleModalLabel" aria-hidden="true"
@@ -382,8 +254,6 @@
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-
-
                                                         <h5 class="modal-title" id="xccdfModal">정책 적용</h5>
                                                         <a href="#" class="close" data-dismiss="modal"
                                                             aria-label="Close">
@@ -391,22 +261,16 @@
                                                         </a>
                                                     </div>
 
-                                                     
-
                                                     <form action="" method="POST">
                                                         <div class="modal-body">
-
                                                             <div class="form-group">
                                                                 <label for="inputText1"
                                                                     class="col-form-label">적용할 정책 파일찾기</label>
                                                                 <input name="txtIP" type="text" class="form-control">
                                                             </div>
-
                                                             <a href="download path" download="" class="col-12 btn btn-outline-success btn-lg">
                                                              적용할 정책 파일찾기<input type="file" style="display: none;">
                                                             </a>
-
-                                                      
                                                         </div>
 
                                                         <div class="modal-footer">
@@ -431,26 +295,15 @@
                                       <div class="card-body p-0">
                                           
                                         <table class="table table-hover">
-                                       
                                         <tbody>
+                                            <%for(var i=0; i<(recordsets5.length); i++){%>
                                             <tr>
-                                                <th scope="row">1</th>
+                                                <th scope="row"><%=i+1%></th>
                                                 <td><img src="assets/circle/grey.png" alt="User Avatar" class="rounded-circle user-avatar-lg"></td>
-                                                <td>Windows 10</td>
-                                                <td>Windows 10 bench mark</td>
+                                                <td><%=recordsets5[i].INSPECT_OS%></td>
+                                                <td><%=recordsets5[i].FILE_NAME%></td>
                                             </tr>
-                                            <tr>
-                                                <th scope="row">2</th>
-                                                <td><img src="assets/circle/blue.png" alt="User Avatar" class="rounded-circle user-avatar-lg"></td>
-                                                <td>Windows 10</td>
-                                                <td>Windows 10 bench mark</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">3</th>
-                                                <td><img src="assets/circle/blue.png" alt="User Avatar" class="rounded-circle user-avatar-lg"></td>
-                                                <td>Windows 10</td>
-                                                <td>Windows 10 bench mark</td>
-                                            </tr>
+                                            <%}%>
                                         </tbody>
                                     </table>
 
@@ -488,109 +341,23 @@
                     </div>
                 </div>
                 <!-- 정책 적용 탭 끝 -->
-
-                            
-
-<!-- 4번째 탭 레포팅 시작-->
-                           <div class="tab-pane" id="report" role="tabpanel" aria-labelledby="report-tab"d>
-                     
-                    <div class="row">
-                      
-                        <div class="col-xl-3" style="height: 70px">
-                            <div class="input-group input-search">
-                                <input class="form-control" type="text" placeholder="Search "><span class="input-group-btn">
-                                <button class="btn btn-secondary" type="button"><i class="fas fa-search"></i></button></span>
-                            </div>
-                        </div> 
-                    </div>
-                    
-                    <div class="row">
-                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                <div class="card" style="height: 290px; overflow: scroll;">
-                                    <h4 class="card-header text-center">레포팅(그룹) 이력 조회 및 다운로드
-</h4>
-                                    <div class="card-body p-0">
-                                        <div class="table-responsive">
-                                            <table class="table">
-                                                <thead class="bg-light">
-                                                    <tr class="border-0">
-                                                        <th class="border-0 text-center">번호</th>
-                                                        <th class="border-0 text-center">레포팅 명칭</th>
-                                                        <th class="border-0 text-center">정책 활성화 시간</th>
-                                                        <th class="border-0 text-center">생성시간</th>
-                                                        <th class="border-0 text-center">다운로드</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td class="text-center">1</td>
-                                                        <td class="text-center">생성시간-그룹ID-그룹명</td>
-                                                        <td class="text-center">2019.02.09.15:30.58</td>
-                                                        <td class="text-center">2019.02.10.15:30.58</td>
-                                                        <td class="text-center">
-                                                            
-                                                            <span class="icon"><i class="fas fa-paperclip"></i> </span>
-                                                        </td>
-                                                    </tr>
-
-                                                   
-                                                     
-                                                </tbody>
-                                            </table>
-
-
-                                        </div>
-                                    </div>
-                                </div>
-                            <!-- 아래 화살표 1 2 3 4 5 끝 -->
-                                <div class="col-xs-12 ">
-                                    <nav aria-label="Page navigation">
-                                        <div class="col-xs-5"></div>
-                                        <div class="col-xs-4">
-                                            <ul class="pagination" style="text-align: center;">
-                                                <li>
-                                                    <a href="#" aria-label="Previous">
-                                                        <span aria-hidden="true">«</span>
-                                                    </a>
-                                                </li>
-                                                <li class="active"><a href="#">1</a></li>
-                                                <li><a href="#">2</a></li>
-                                                <li><a href="#">3</a></li>
-                                                <li><a href="#">4</a></li>
-                                                <li><a href="#">5</a></li>
-                                                <li>
-                                                    <a href="#" aria-label="Next">
-                                                        <span aria-hidden="true">»</span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </nav>
-                                </div>
-                              <!-- 아래 화살표 1 2 3 4 5 끝 -->
-
-                            </div>
-                          
-
-        
-
-                        </div>       
-                    </div>
-
-
-
                         </div>
-
-<!-- 4번째 탭 레포팅 끝-->
                     </div>
                 </div>
             </div>
+            <div class="row" style="margin-top: 25px">
+                <div class="col-10"></div>
+                <!--<div class="col-2">
+                   <div class="metric-label d-inline-block float-right text-success font-weight-bold">
+                        <button type="submit" class="btn btn-space btn-primary">수정</button>
 
-            <div class="row">
-                <div class="col-xl-4 col-sm-4 col-lg-4 col-4"></div>
-                <div class="col-xl-3 col-sm-3 col-lg-3" style="margin-top: 25px">
-                    <button type="submit" class="btn btn-space btn-primary col-5">수정</button>
-                    <button class="btn btn-space btn-secondary col-5">취소</button>
+                   </div>
+                </div>-->
+
+                <div class ="col-2">
+                    <div class="metric-label d-inline-block float-right text-success font-weight-bold">
+                        <button id = "change_cancle_btn" name = "change_cancle_btn" class="btn btn-space btn-secondary">취소</button>
+                    </div>
                 </div>
             </div>
             
@@ -598,7 +365,7 @@
         </div>
 
     </div>
-            </div>
+                </div>
         </div>
     </div>
             <!-- ============================================================== -->
@@ -658,7 +425,6 @@
         <div class="modal-content">
             <div class="modal-header">
 
-
                 <h5 class="modal-title" id="csvModal">파일 업로드</h5>
                 <a href="#" class="close" data-dismiss="modal"
                     aria-label="Close">
@@ -666,21 +432,18 @@
                 </a>
             </div>
 
-             
-
-            <form action="" method="POST">
+            <form action="/oldgroup/upload_xlsx" method="POST" enctype = "multipart/form-data">
                 <div class="modal-body">
-
-                    <div class="form-group">
+                   <!-- <div class="form-group">
                         <label for="inputText1"
                             class="col-form-label">파일 경로</label>
                         <input name="txtIP" type="text" class="form-control">
-                    </div>
-
+                    </div>-->
                     <label class="col-12 btn btn-outline-success btn-lg">
                      파일 첨부하기<input type="file" style="display: none;">
                     </label>
-
+                    <span style="color:red">주의 : 중복되는 IP가 있는경우 제외하고 할당되며
+                        등록되지 않은 IP는 할당할 수 없습니다.</span>
                 </div>
 
                 <div class="modal-footer">
@@ -694,14 +457,37 @@
     </div>
 </div>
 <!-- 파일업로드 모달 끝-->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="/assets/vendor/duallistbox/js/jquery.bootstrap-duallistbox.js"></script>
+    <script>
+        var demo1 = $('select[name="agentlistbox[]"]').bootstrapDualListbox({
+            nonSelectedListLabel: '모든 에이전트',
+            selectedListLabel: '할당된 에이전트',
+            preserveSelectionOnMove: 'moved',
+            moveOnSelect: false
+        });
 
-    <!-- jquery 3.3.1 -->
+        $('#group_agent_change_btn').click(() => {
+            let arr = $('[name="agentlistbox[]"]').val();
+            $('#change_group_set_list').val(JSON.stringify(arr));
+            $('#group_agent_change_btn').submit();
+        });
+
+        $('#change_cancle_btn').click(() =>{
+           location.href = '/group';
+        });
+
+
+    </script>
+     jquery 3.3.1
     <script src="assets/vendor/jquery/jquery-3.3.1.min.js"></script>
     <!-- bootstap bundle js -->
     <script src="assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
     <!-- slimscroll js -->
     <script src="assets/vendor/slimscroll/jquery.slimscroll.js"></script>
-    <!-- main js -->
+     main js
     <script src="assets/libs/js/main-js.js"></script>
     <script src="/assets/vendor/datepicker/moment.js"></script>
     <script src="/assets/vendor/datepicker/tempusdominus-bootstrap-4.js"></script>
@@ -709,3 +495,4 @@
 
 </body>
 </html>
+
