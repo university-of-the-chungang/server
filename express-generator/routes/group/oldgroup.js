@@ -60,9 +60,11 @@ router.post('/change_group_set_list', function(req, res, next){
         for(var i = 0; (i < arr.length); i++) {
             DB.insert_group_set_list(req.body.group_set_cd, arr[i]);
         }
-        res.render('./main/GroupPolicy/OldGroup/load', {
-            name: name,
-            tab: 3
+        DB.change_group_agent_counting(req.body.group_set_cd, arr.length).then(result =>{
+            res.render('./main/GroupPolicy/OldGroup/load', {
+                name: name,
+                tab: 3
+            });
         });
     });
 });
