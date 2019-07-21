@@ -1,0 +1,19 @@
+<!doctype html>
+<head>
+<script>
+    function submit_function(){
+        document.frm.submit();
+    }
+
+   /* function init(){
+        setTimeout("submit_function()", 1000);
+    }*/
+</script>
+</head>
+<body onLoad="submit_function()">
+
+<form name="frm" id="frm" action = '/oldgroup' method="post">
+    <input type="hidden" name="change_group_NAME" value = <%=JSON.stringify(name)%>>
+    <input type="hidden" name="tab" value = <%=JSON.stringify(tab)%>>
+</form>
+</body>
