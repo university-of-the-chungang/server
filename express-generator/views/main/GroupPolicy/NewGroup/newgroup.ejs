@@ -512,12 +512,48 @@
                     location.href='/group';
                 })
             }
-        }   
+        }
 
         // active_tab이 profile tab일 때
         else if (active_tab === 'profile_tab') {
 
             // 기본정보 & 에이전트 할당정보 작성돼있는 지 확인하고, 데이터베이스에 업데이트
+            // 기본정보 작성돼있는 지 확인
+            let group_name = document.getElementById('groupName').value
+            let group_desc = document.getElementById('groupDesc').value
+            let group_date = document.getElementById('groupDate').value
+            let group_period = document.getElementById('groupPeriod').value
+
+            console.log(group_name, group_desc, group_date, group_period);
+
+            // 입력값에 누락이 있다면
+            if (!group_name || !group_desc || !group_date || !group_period) {
+                alert("기본정보가 작성되지 않았습니다. 기본정보를 작성해주세요.");
+            }
+
+            // 정상적으로 잘 입력됐다면
+            else {
+
+                // 할당된 에디전트 태그찾기
+                let parent_tag = document.getElementById("bootstrap-duallistbox-selected-list_agentlistbox[]");
+                let cd_list = []
+                for (let option of parent_tag.options){
+                    cd_list.push(option.attributes['value'].value)
+                }
+
+                console.log(cd_list);
+
+                axios.post(document.URL + '/update-profile-tab', {
+                    headers: { 'Content-type': 'application/x-www-form-urlencoded', },
+                    group_name : group_name,
+                    group_desc: group_desc,
+                    group_date: group_date,
+                    group_period: group_period,
+                    cd_list: cd_list
+                }).then(response => {
+                    location.href='/group';
+                })
+            }
         }
 
         // active_tab이 contact tab일 때
