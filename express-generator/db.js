@@ -406,6 +406,71 @@ exports.add_group_info = (name, create_time, active_time, agent_counting, inspec
     });
 
 };
+
+
+// 그룹 관련 DB API
+exports.create_group_home = (group_name, group_desc, group_date, group_period, cd_list) => {
+    return new Promise((resolve, reject) => {
+        let query =
+            `
+            INSERT INTO TBL_GROUP_INFO (NAME, DISCRIPTION, INSPECTION_START_DATE, INSPECTION_PERIOD, AGENT_COUNTING)
+            VALUES (N'` + group_name + `',N'` + group_desc + `','` + group_date + `','` + group_period + `','` + String(cd_list.length) + `')
+            `;
+
+        console.log(query);
+        new sql.Request().query(query, (err, result) => {
+            if (err) {
+                reject(err);
+            }
+            resolve(result);
+        });
+    })
+};
+exports.get_group_id = () => {
+    return new Promise((resolve, reject) => {
+        let query =
+            `
+            SELECT GROUP_SET_CD 
+            FROM TBL_GROUP_INFO 
+            ORDER BY GROUP_SET_CD 
+            DESC
+            `;
+
+        console.log(query);
+        new sql.Request().query(query, (err, result) => {
+            if (err) {
+                reject(err);
+            }
+            resolve(result);
+        });
+    })
+};
+exports.set_group_agent_mapping = (group_agent_mapping) => {
+    return new Promise((resolve, reject) => {
+        let query =
+            `
+            INSERT INTO TBL_GROUP_SET_LIST (GROUP_SET_CD, AGENT_CD)
+            VALUES 
+            `;
+
+        for (let group_agent of group_agent_mapping) {
+            query += `(` + String(group_agent[0]) + `,` + group_agent[1] + `),`
+        }
+
+        query = query.substr(0, query.length - 1);
+
+        console.log(query);
+        new sql.Request().query(query, (err, result) => {
+            if (err) {
+                reject(err);
+            }
+            resolve(result);
+        });
+    })
+};
+
+
+
 exports.add_agent_info = (ip, mac, os, purpose, owner, desc, state) => {
     return new Promise((resolve, reject) => {
         let query = `INSERT INTO TBL_AGENT_INFO (IP, MAC_ADDR, OS, PURPOSE, OWNER, DEL_FLAG, DESCRIPTION, STATE ) VALUES('` + ip + `', '` + mac + `', '` + os + `', N'` + purpose + `', N'` + owner + `', 0, N'` + desc + `', '` + state + `')`;
@@ -417,6 +482,7 @@ exports.add_agent_info = (ip, mac, os, purpose, owner, desc, state) => {
         });
     });
 };
+
 exports.add_agent_info_from_xlsx = (ip,purpose,owner)=>{
     return new Promise((resolve,reject)=>{
         let query = `INSERT INTO TBL_AGENT_INFO (IP, PURPOSE, OWNER) VALUES( '${ip}', N'${purpose}', '${owner}')`;
