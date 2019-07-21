@@ -348,14 +348,18 @@ router.post('/add_manual_agent', (req, res, next) => {
         result2.sess_name = req.session.username;
         res.render('./main/Agent/agent', result2);
       });
+    }).catch(e=>{
+      console.log(e);
+      res.redirect('/agent');
     });
   }
 });
 router.post('/update_agent_info', (req, res, next) => {
-  let arr = [req.body.txtIP, req.body.txtMac, req.body.txtOS, req.body.txtUseful, req.body.txtOwner, req.body.txtDesc, req.body.state];
+  console.log(req.body)
+  let arr = [req.body.txtUseful, req.body.txtOwner];
   let cd = req.body.cd;
   let isnull = false;
-  if (req.body.txtIP.length === 0 || req.body.txtOwner.length === 0 || req.body.txtUseful.length === 0){
+  if (req.body.txtOwner.length === 0 || req.body.txtUseful.length === 0){
     isnull = true;
   }
   
@@ -366,13 +370,10 @@ router.post('/update_agent_info', (req, res, next) => {
       res.render('./main/Agent/agent', result);
     });
   } else {
-    DB.update_agent_info(cd, req.body.txtIP, req.body.txtMac, req.body.txtOS, req.body.txtUseful, req.body.txtOwner, req.body.txtDesc, req.body.state).then(result => {
+    DB.update_agent_info(cd, req.body.txtUseful, req.body.txtOwner).then(result => {
       
       LOGS.make_log("AGENT",req.session.username,"정보수정");
-      DB.get_agent_info().then(result2 => {
-        result2.sess_name = req.session.username;
-        res.render('./main/Agent/agent', result2);
-      });
+      res.redirect('/agent');
     });
   }
 });

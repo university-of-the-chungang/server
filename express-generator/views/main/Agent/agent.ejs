@@ -111,26 +111,26 @@
                                                                 </a>
                                                             </div>
 
-                                                            <form id="updateForm" action="/update_agent_info"
+                                                            <form id="update_form" action="/update_agent_info"
                                                                 method="POST">
                                                                 <div class="modal-body">
                                                                     <input type="hidden" name="cd" id="editID" value="">
                                                                     <div class="form-group">
                                                                         <label for="inputText1"
                                                                             class="col-form-label">IP</label>
-                                                                        <input id="updateIP" name="txtIP" type="text"
+                                                                        <input id="updateIP" name="txtIP" type="text" disabled
                                                                             id="editIP" class="form-control">
                                                                     </div>
 
                                                                     <div class="form-group">
                                                                         <label for="inputText2">MAC Address</label>
-                                                                        <input name="txtMac" type="text" id="editMAC"
+                                                                        <input name="txtMac" type="text" id="editMAC" disabled
                                                                             class="form-control">
                                                                     </div>
 
                                                                     <div class="form-group">
                                                                         <label for="inputText3">운영체제 버전</label>
-                                                                        <input name="txtOS" type="text" id="editOS"
+                                                                        <input name="txtOS" type="text" id="editOS" disabled
                                                                             class="form-control">
                                                                     </div>
 
@@ -148,7 +148,7 @@
 
                                                                     <div class="form-group">
                                                                         <label for="inputText6">설명</label>
-                                                                        <input name="txtDesc" type="text" id="editDesc"
+                                                                        <input name="txtDesc" type="text" id="editDesc" disabled
                                                                             class="form-control">
                                                                     </div>
 
@@ -664,7 +664,7 @@
                 chk_arr.each((idx, elem) => {
                     let id = elem.id;
 
-                    alert(recordsets[id]);
+                    // alert(recordsets[id]);
                     arr.push(recordsets[id].AGENT_CD);
                 });
 
@@ -755,7 +755,7 @@
             if (is_in) {
                 alert("중복되는 IP가 있습니다.");
             } else {
-                $('#add_manual_agent_form').sumbit();
+                $('#add_manual_agent_form').submit();
             }
         });
         $('#updateBtn').click(() => {
@@ -769,7 +769,7 @@
             if (is_in) {
                 alert("중복되는 IP가 있습니다.");
             } else {
-                $('#update_form').sumbit();
+                $('#update_form').submit();
             }
         });
         $('#add_manual_btn').click(() => {
@@ -783,7 +783,7 @@
             if (is_in) {
                 alert("중복되는 IP가 있습니다.");
             } else {
-                $('#add_manual_form').sumbit();
+                $('#add_manual_form').submit();
             }
         });
 

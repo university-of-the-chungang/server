@@ -9,7 +9,8 @@ let config = {
     // 해당 설정 부분은 설정파일 생기면 그리 옮길것 
     "user": "developer", //default is sa
     "password": "ang0511",
-    "server": "52.231.155.141", // for local machine
+    // "server": "52.231.155.141", // for local machine
+    "server": "localhost", // for local machine
     "port": 1444,
     "database": "nsrang", // name of database
     "options": {
@@ -473,13 +474,24 @@ exports.set_group_agent_mapping = (group_agent_mapping) => {
 
 exports.add_agent_info = (ip, mac, os, purpose, owner, desc, state) => {
     return new Promise((resolve, reject) => {
-        let query = `INSERT INTO TBL_AGENT_INFO (IP, MAC_ADDR, OS, PURPOSE, OWNER, DEL_FLAG, DESCRIPTION, STATE ) VALUES('` + ip + `', '` + mac + `', '` + os + `', N'` + purpose + `', N'` + owner + `', 0, N'` + desc + `', '` + state + `')`;
-        new sql.Request().query(query, (err, result) => {
-            if (err) {
+        let check_query = `SELECT COUNT(*) FROM TBL_AGENT_INFO WHERE IP = '${ip}'`;
+        new sql.Request().query(check_query,(err,result)=>{
+            console.log(check_query);
+            console.log(result);
+            if(result['rowsAffected'] > 0){
                 reject(err);
+            }else{
+                let query = `INSERT INTO TBL_AGENT_INFO (IP, MAC_ADDR, OS, PURPOSE, OWNER, DEL_FLAG, DESCRIPTION, STATE ) VALUES('` + ip + `', '` + mac + `', '` + os + `', N'` + purpose + `', N'` + owner + `', 0, N'` + desc + `', '` + state + `')`;
+                new sql.Request().query(query, (err, result) => {
+                    if (err) {
+                        reject(err);
+                    }
+                    resolve(result);
+                });
             }
-            resolve(result);
+
         });
+        
     });
 };
 
@@ -493,9 +505,9 @@ exports.add_agent_info_from_xlsx = (ip,purpose,owner)=>{
     });
 };
 
-exports.update_agent_info = (cd, ip, mac, os, purpose, owner, desc, state) => {
+exports.update_agent_info = (cd, purpose, owner) => {
     return new Promise((resolve, reject) => {
-        let query = `UPDATE TBL_AGENT_INFO SET IP='${ip}', MAC_ADDR = '${mac}', OS = '${os}', PURPOSE = N'${purpose}', OWNER = N'${owner}', DEL_FLAG = 0, DESCRIPTION = N'${desc}', STATE = '${state}' WHERE AGENT_CD = '${cd}'`;
+        let query = `UPDATE TBL_AGENT_INFO SET PURPOSE = N'${purpose}', OWNER = N'${owner}' WHERE AGENT_CD = '${cd}'`;
         console.log(query);
         new sql.Request().query(query, (err, result) => {
             if (err) {
