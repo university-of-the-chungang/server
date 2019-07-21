@@ -191,12 +191,13 @@
                                         <td>오프라인 정보시스템 포함</td>-->
                                         <td>
                                             <form action="/group/active_state" method="post" id = "state_change<%-recordsets[0][i].GROUP_SET_CD%>">
-                                                <div class="switch-button switch-button-yesno">
+                                                <div class="switch-button">
                                                     <input type="hidden" name="state" value="<%=recordsets[0][i].ACTIVE_STATE%>">
                                                     <input type="hidden" name="cd" value="<%=recordsets[0][i].GROUP_SET_CD%>">
-                                                    <input type="checkbox" class="switch" data-toggle="toggle" <%if(recordsets[0][i].ACTIVE_STATE === 'A'){%> checked <%}%>
+                                                    <input type="checkbox" data-toggle="toggle" <%if(recordsets[0][i].ACTIVE_STATE === 'A'){%> checked <%}%>
                                                            name="state_switch" id = "<%=recordsets[0][i].GROUP_SET_CD%>" value = <%=recordsets[0][i].GROUP_SET_CD%>>
-                                                    <span><label for="<%=recordsets[0][i].GROUP_SET_CD%>"></label></span>
+                                                    <span><label for="<%=recordsets[0][i].GROUP_SET_CD%>"
+                                                        <%if(recordsets[0][i].ACTIVE_STATE === 'A'){%> style = "float: right" <%} else {%> style = "float:left" <%}%>></label></span>
                                                 </div>
                                             </form>
                                         </td>

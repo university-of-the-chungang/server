@@ -586,7 +586,7 @@ exports.view_modify_group_info = (group_name) => {
         let query = `Select *
 From  (TBL_GROUP_SET_LIST inner join TBL_AGENT_INFO on TBL_GROUP_SET_LIST.AGENT_CD = TBL_AGENT_INFO.AGENT_CD) 
 inner join TBL_GROUP_INFO On TBL_GROUP_INFO.GROUP_SET_CD = TBL_GROUP_SET_LIST.GROUP_SET_CD
-Where TBL_GROUP_INFO.NAME = '${group_name}' AND TBL_AGENT_INFO.DEL_FLAG = 0` ;
+Where TBL_GROUP_INFO.NAME = N'${group_name}' AND TBL_AGENT_INFO.DEL_FLAG = 0` ;
         new sql.Request().query(query, (err, result) => {
             if(err){
                 reject(err);
@@ -601,7 +601,7 @@ exports.view_modify_group_IP_info = (group_name) => {
         let query = `Select IP
 From  (TBL_GROUP_SET_LIST inner join TBL_AGENT_INFO on TBL_GROUP_SET_LIST.AGENT_CD = TBL_AGENT_INFO.AGENT_CD) 
 inner join TBL_GROUP_INFO On TBL_GROUP_INFO.GROUP_SET_CD = TBL_GROUP_SET_LIST.GROUP_SET_CD
-Where TBL_GROUP_INFO.NAME = '${group_name}' AND TBL_AGENT_INFO.DEL_FLAG = 0` ;
+Where TBL_GROUP_INFO.NAME = N'${group_name}' AND TBL_AGENT_INFO.DEL_FLAG = 0` ;
         new sql.Request().query(query, (err, result) => {
             if(err){
                 reject(err);
@@ -616,7 +616,7 @@ exports.view_modify_os_group_info = (group_name) => {
         let query = `Select TBL_GROUP_INFO.OS
 From  (TBL_GROUP_SET_LIST inner join TBL_AGENT_INFO on TBL_GROUP_SET_LIST.AGENT_CD = TBL_AGENT_INFO.AGENT_CD) 
 inner join TBL_GROUP_INFO On TBL_GROUP_INFO.GROUP_SET_CD = TBL_GROUP_SET_LIST.GROUP_SET_CD
-Where TBL_GROUP_INFO.NAME = '${group_name}' AND TBL_AGENT_INFO.DEL_FLAG = 0` ;
+Where TBL_GROUP_INFO.NAME = N'${group_name}' AND TBL_AGENT_INFO.DEL_FLAG = 0` ;
         console.log(query);
         new sql.Request().query(query, (err, result) => {
             if(err){
@@ -632,7 +632,7 @@ exports.view_xccdf_included_group = (group_name) => {
         let query=`Select *
 From  (TBL_XCCDF_SET_LIST inner join TBL_XCCDF on TBL_XCCDF_SET_LIST.XCCDF_CD = TBL_XCCDF.XCCDF_CD) 
 inner join TBL_GROUP_INFO On TBL_GROUP_INFO.GROUP_SET_CD = TBL_XCCDF_SET_LIST.GROUP_SET_CD
-Where TBL_GROUP_INFO.NAME = '${group_name}'` ;
+Where TBL_GROUP_INFO.NAME = N'${group_name}'` ;
         console.log(query);
         new sql.Request().query(query, (err, result) => {
             if(err){
