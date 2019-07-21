@@ -266,7 +266,7 @@ exports.get_group_info = (group_name = null) => {
     return new Promise((resolve, reject) => {
         sql_adder = "";
         if (group_name) {
-            sql_adder = "WHERE NAME LIKE '" + group_name + "%'";
+            sql_adder = "WHERE NAME LIKE N'" + group_name + "%'";
 
         }
         new sql.Request().query(`SELECT * FROM TBL_GROUP_INFO ` + sql_adder, (err, result) => {
