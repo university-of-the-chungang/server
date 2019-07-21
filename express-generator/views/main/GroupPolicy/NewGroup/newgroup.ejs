@@ -1,112 +1,108 @@
 <!doctype html>
 <html lang="en">
-    <head>
+<head>
     <%include ../../../head.ejs%>
 </head>
 
-    <body>
-        <div class="dashboard-main-wrapper">
-        <div class="dashboard-header">
-            <%include ../../../header.ejs%>
+<body>
+<div class="dashboard-main-wrapper">
+    <div class="dashboard-header">
+        <%include ../../../header.ejs%>
 
         <!-- ============================================================== -->
-        <!-- 헤드 네비게이션 바 종료  -->
+        <!-- 헤더 네비게이션 바 종료  -->
         <!-- ============================================================== -->
 
-            <div class="">
-                <div class="dashboard-ecommerce">
-                    <div class="container-fluid dashboard-content ">
-                        <div class="row">
-                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                <div class="page-header">
-                                    <h2 class="pageheader-title">그룹 및 정책 관리 </h2>
-                                    <div class="page-breadcrumb">
-                                        <nav aria-label="breadcrumb">
-                                            <ol class="breadcrumb">
-                                                <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">MENU</a></li>
-                                                <li class="breadcrumb-item active" aria-current="page">대쉬보드</li>
-                                                <li class="breadcrumb-item active" aria-current="page">그룹 및 정책 관리</li>
-                                                <li class="breadcrumb-item active" aria-current="page">신규 그룹 생성</li>
-                                            </ol>
-                                        </nav>
-                                    </div>
+        <div class="">
+            <div class="dashboard-ecommerce">
+                <div class="container-fluid dashboard-content ">
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="page-header">
+                                <h2 class="pageheader-title">그룹 및 정책 관리 </h2>
+                                <div class="page-breadcrumb">
+                                    <nav aria-label="breadcrumb">
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">MENU</a></li>
+                                            <li class="breadcrumb-item active" aria-current="page">대쉬보드</li>
+                                            <li class="breadcrumb-item active" aria-current="page">그룹 및 정책 관리</li>
+                                            <li class="breadcrumb-item active" aria-current="page">신규 그룹 생성</li>
+                                        </ol>
+                                    </nav>
                                 </div>
                             </div>
                         </div>
-                        <!-- ============================================================== -->
-                        <!-- end pageheader  -->
-                        <!-- ============================================================== -->
+                    </div>
+                    <!-- end pageheader  -->
 
-                        <!-- ============================================================== -->
-                        <!-- Search Bar 시작 -->
-                        <!-- ============================================================== -->
-                        <div class="ecommerce-widget">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="section-block">
-                                        <h5 class="section-title"></h5>
-                                        <p></p>
-                                    </div>
-                                    <div class="tab-regular">
-                                        <ul class="nav nav-tabs " id="myTab" role="tablist">
-                                            <li class="nav-item">
-                                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">기본정보</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">에이전트 할당</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false" onclick=get_selected_os()>정책적용</a>
-                                            </li>
-                                        </ul>
+                    <!-- Search Bar 시작 -->
+                    <div class="ecommerce-widget">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="section-block">
+                                    <h5 class="section-title"></h5>
+                                    <p></p>
+                                </div>
+                                <div class="tab-regular">
+                                    <ul class="nav nav-tabs " id="myTab" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">기본정보</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">에이전트 할당</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false" onclick=get_selected_os()>정책적용</a>
+                                        </li>
+                                    </ul>
 
-                                        <div class="tab-content" id="myTabContent">
-                                            <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                                <div class="row" style="margin-bottom: 50px">
-                                                    <div class="col-1"></div>
-                                                    <div class="col-3">
-                                                        <label for="validationServer01">그룹명</label>
-                                                        <input type="text" class="form-control" id="validationServer01" required="" maxlength="100">
-                                                    </div>
+                                    <div class="tab-content" id="myTabContent">
+                                        <!-- 기본정보 탭 시작 -->
+                                        <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                            <div class="row" style="margin-bottom: 50px">
+                                                <div class="col-1"></div>
+                                                <div class="col-3">
+                                                    <label for="validationServer01">그룹명</label>
+                                                    <input type="text" class="form-control" id="validationServer01" required="" maxlength="100">
                                                 </div>
-                                                <div class="row" style="margin-bottom: 50px">
-                                                    <div class="col-1"></div>
-                                                    <div class="col-6">
-                                                        <label for="validationServer01">그룹설명</label>
-                                                        <input type="text" class="form-control" id="validationServer01"  required="" style="height: 200px" maxlength="500">
-                                                    </div>
+                                            </div>
+                                            <div class="row" style="margin-bottom: 50px">
+                                                <div class="col-1"></div>
+                                                <div class="col-6">
+                                                    <label for="validationServer01">그룹설명</label>
+                                                    <input type="text" class="form-control" id="validationServer01"  required="" style="height: 200px" maxlength="500">
                                                 </div>
+                                            </div>
+                                            <div class="row">
 
-                                                <div class="row">
-
-                                                    <div class="col-1"></div>
-                                                    <div class="col-4">
-                                                        <label for="validationServer01">정책 적용 시작일</label>
-                                                        <div class="input-group date" id="datetimepicker4" data-target-input="nearest">
-                                                            <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker4" style="height: 50px;">
-                                                            <div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker" >
-                                                                <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
-                                                            </div>
+                                                <div class="col-1"></div>
+                                                <div class="col-4">
+                                                    <label for="validationServer01">정책 적용 시작일</label>
+                                                    <div class="input-group date" id="datetimepicker4" data-target-input="nearest">
+                                                        <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker4" style="height: 50px;">
+                                                        <div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker" >
+                                                            <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-2 form-group">
-                                                        <label for="inputText3" class="col-form-label">주기 설정 </label>
-                                                        <input id="inputText3" type="text" class="form-control" style="height: 47px;">
-                                                    </div>
-
                                                 </div>
-                                        </div><!-- 기본정보 탭 끝 -->
+                                                <div class="col-2 form-group">
+                                                    <label for="inputText3" class="col-form-label">주기 설정 </label>
+                                                    <input id="inputText3" type="text" class="form-control" style="height: 47px;">
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <!-- 기본정보 탭 끝 -->
 
 
                                         <!-- 에이전트 할당 탭 시작-->
                                         <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                            <!--"/oldgroup/change_group_set_list"-->
                                             <form id="demoform" action= "/newgroup/change_group_set_list" method="POST">
                                                 <select multiple="multiple" size="10" name="agentlistbox[]">
                                                     <%for(var i=0; i<(recordsets3.length); i++){%>
-                                                    <option value="<%=recordsets3[i].AGENT_CD%>" os="<%=recordsets3[i].OS%>">
-                                                        <%=recordsets3[i].IP%>
-                                                    </option>
+                                                        <option value="<%=recordsets3[i].AGENT_CD%>" os="<%=recordsets3[i].OS%>">
+                                                            <%=recordsets3[i].IP%>
+                                                        </option>
                                                     <%}%>
                                                 </select>
                                                 <input type="submit" id = "group_agent_change_btn" value = "에이전트 할당 정보 수정" class="btn btn-outline-dark btn-block" style="margin-top: 5px;">
@@ -114,96 +110,94 @@
 
                                             <div class="row">
                                                 <div class="col-10"></div>
-
                                                 <div class="col-2">
                                                     <div class="metric-label d-inline-block float-right text-success font-weight-bold">
-                                                        <a href="#" class="btn btn-outline-success" data-toggle="modal" data-target="#csvModal"> 파일 업로드 <span class="icon-circle-small icon-box-xs text-success bg-success-light"><i class="fa fa-fw fa-arrow-up"></i></span><span class="ml-1"></span></a>
+                                                        <a href="#" class="btn btn-outline-success" data-toggle="modal" data-target="#csvModal">
+                                                            파일 업로드 <span class="icon-circle-small icon-box-xs text-success bg-success-light"><i class="fa fa-fw fa-arrow-up"></i></span><span class="ml-1"></span>
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </div>
-                                    </div><!-- 에이전트 할당 탭 끝-->
+                                        </div>
+                                        <!-- 에이전트 할당 탭 끝-->
 
 
-
-                                <!-- 정책적용 탭 시작-->
-                                    <div class="tab-pane" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                                        <div class="row">
-                                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
-                                                <div class="card" style="height: 300px; overflow: scroll;">
-                                                    <h4 class="card-header text-center">그룹에 포함된 운영체제 버전</h4>
-
-                                                    <div class="card-body p-0">
-                                                        <table class="table table-bordered">
-                                                            <tbody>
-                                                            <%try {%>
-                                                                <%for(let i in os_list){%>
-                                                                    <!-- 3번째 마다 tr 태그 삽입하기 -->
-                                                                    <%if (i % 3 == 0) {%>
-                                                                        <tr>
-                                                                    <%}%>
-                                                                    <td>
-                                                                        <div class="custom-control custom-checkbox">
-                                                                            <input type="checkbox" class="custom-control-input is-valid" id="customControlValidation1" required="">
-                                                                            <label class="custom-control-label" for="customControlValidation1"><%=os_list[i]%></label>
-                                                                        </div>
-                                                                    </td>
-                                                                    <!-- 3번째 마다 tr 태그 삽입하기 -->
-                                                                    <%if (i % 3 == 2) {%>
-                                                                        </tr>
-                                                                    <%}%>
-                                                                <%}%>
-                                                            <%} catch (e) { %>
-                                                                <%console.log(e)%>
-                                                            <% }%>
-                                                            </tbody>
-                                                        </table>
-
+                                        <!-- 정책적용 탭 시작-->
+                                        <div class="tab-pane" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                                            <div class="row">
+                                                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
+                                                    <div class="card" style="height: 300px; overflow: scroll;">
+                                                        <h4 class="card-header text-center">그룹에 포함된 운영체제 버전</h4>
+                                                        <div class="card-body p-0">
+                                                            <table class="table table-bordered">
+                                                                <tbody>
+                                                                    <%try {%>
+                                                                        <%for(let i in os_list){%>
+                                                                            <!-- 3번째 마다 tr 태그 삽입하기 -->
+                                                                            <%if (i % 3 == 0) {%>
+                                                                                <tr>
+                                                                            <%}%>
+                                                                            <td>
+                                                                                <div class="custom-control custom-checkbox">
+                                                                                    <input type="checkbox" class="custom-control-input is-valid" id="customControlValidation1" required="">
+                                                                                    <label class="custom-control-label" for="customControlValidation1"><%=os_list[i]%></label>
+                                                                                </div>
+                                                                            </td>
+                                                                            <!-- 3번째 마다 tr 태그 삽입하기 -->
+                                                                            <%if (i % 3 == 2) {%>
+                                                                                </tr>
+                                                                            <%}%>
+                                                                        <%}%>
+                                                                    <%} catch (e) { %>
+                                                                        <%console.log(e)%>
+                                                                    <% }%>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
                                                     </div>
-                                                </div>
+
+                                                    <div class="row col-12">
+                                                        <div class="col-3"></div>
+                                                        <div class="col-4">
+
+                                                            <nav aria-label="Demo of active current page number">
+                                                                <ul class="pagination">
+                                                                    <li class="page-item"><a class="page-link" href="#">Prev</a></li>
+
+                                                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+
+                                                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+
+                                                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+
+                                                                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                                                </ul>
+                                                            </nav>
+
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-12" style="margin-top: 15px;">
+                                                       <a href="#" class="col-11 btn btn-outline-success" data-toggle="modal" data-target="#xccdfModal">
+                                                           정책 적용 <span class="icon-circle-small icon-box-xs text-success bg-success-light"><i class="fa fa-fw fa-arrow-up"></i></span><span class="ml-1"></span>
+                                                       </a>
+                                                    </div>
+
+                                                    <div class="col-12" style="margin-top: 15px;">
+                                                        <a href="#" class="col-11 btn btn-outline-danger" data-toggle="modal" data-target="#xccdfModal2">
+                                                            오프라인 점검용 정책 다운로드 <span class="icon-circle-small icon-box-xs text-danger bg-danger-light bg-danger-light "><i class="fa fa-fw fa-arrow-down"></i></span><span ></span>
+                                                        </a>
+                                                    </div>
 
 
-                                            <div class="row col-12">
-                                                <div class="col-3"></div>
-                                                <div class="col-4">
-
-                                                <nav aria-label="Demo of active current page number">
-                                                    <ul class="pagination">
-                                                        <li class="page-item"><a class="page-link" href="#">Prev</a></li>
-
-                                                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-
-                                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-
-                                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-
-                                                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                                                    </ul>
-                                                </nav>
-
-                                                </div>
-                                            </div>
-
-                                            <div class="col-12" style="margin-top: 15px;">
-                                               <a href="#" class="col-11 btn btn-outline-success" data-toggle="modal" data-target="#xccdfModal"> 정책 적용 <span class="icon-circle-small icon-box-xs text-success bg-success-light"><i class="fa fa-fw fa-arrow-up"></i></span><span class="ml-1"></span></a>
-                                            </div>
-
-                                           <div class="col-12" style="margin-top: 15px;">
-                                                <a href="#" class="col-11 btn btn-outline-danger" data-toggle="modal" data-target="#xccdfModal2"> 오프라인 점검용 정책 다운로드 <span class="icon-circle-small icon-box-xs text-danger bg-danger-light bg-danger-light "><i class="fa fa-fw fa-arrow-down"></i></span><span ></span></a>
-                                            </div>
-
-
-                                             <!-- 정책 적용 모달 시작 -->
-                                                 <div class="modal" id="xccdfModal" tabindex="-1" role="dialog"
-                                                        aria-labelledby="exampleModalLabel" aria-hidden="true"
-                                                        style="display: none;">
+                                                    <!-- 정책 적용 모달 시작 -->
+                                                    <div class="modal" id="xccdfModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="display: none;">
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
 
-
                                                                     <h5 class="modal-title" id="xccdfModal">정책 적용</h5>
-                                                                    <a href="#" class="close" data-dismiss="modal"
-                                                                        aria-label="Close">
+                                                                    <a href="#" class="close" data-dismiss="modal" aria-label="Close">
                                                                         <span aria-hidden="true">×</span>
                                                                     </a>
                                                                 </div>
@@ -227,6 +221,48 @@
                                                                     </div>
 
                                                                     <div class="modal-footer">
+                                                                        <a href="#" class="btn btn-secondary" data-dismiss="modal">닫기</a>
+
+                                                                    </div>
+
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- 정책 적용 모달 끝-->
+
+
+                                                    <!-- 오프라인 점검용 정책 다운로드 모달 시작 -->
+                                                     <div class="modal" id="xccdfModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="display: none;">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+
+
+                                                                    <h5 class="modal-title" id="xccdfModal">정책 다운로드</h5>
+                                                                    <a href="#" class="close" data-dismiss="modal"
+                                                                        aria-label="Close">
+                                                                        <span aria-hidden="true">×</span>
+                                                                    </a>
+                                                                </div>
+
+                                                                <form action="" method="POST">
+                                                                    <div class="modal-body">
+
+                                                                        <div class="form-group">
+                                                                            <label for="inputText1"
+                                                                                class="col-form-label">다운로드 할 정책 파일 경로</label>
+                                                                            <input name="txtIP" type="text" class="form-control">
+                                                                        </div>
+
+                                                                        <a href="download path" download="" class="col-12 btn btn-outline-danger btn-lg">
+                                                                         다운로드 할 정책 파일 찾기<input type="file" style="display: none;">
+                                                                        </a>
+
+
+                                                                    </div>
+
+                                                                    <div class="modal-footer">
                                                                         <a href="#" class="btn btn-secondary"
                                                                             data-dismiss="modal">닫기</a>
 
@@ -235,54 +271,7 @@
                                                                 </form>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                <!-- 정책 적용 모달 끝-->
-
-
-                                             <!-- 오프라인 점검용 정책 다운로드 모달 시작 -->
-                                                     <div class="modal" id="xccdfModal2" tabindex="-1" role="dialog"
-                                                            aria-labelledby="exampleModalLabel" aria-hidden="true"
-                                                            style="display: none;">
-                                                            <div class="modal-dialog" role="document">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-
-
-                                                                        <h5 class="modal-title" id="xccdfModal">정책 다운로드</h5>
-                                                                        <a href="#" class="close" data-dismiss="modal"
-                                                                            aria-label="Close">
-                                                                            <span aria-hidden="true">×</span>
-                                                                        </a>
-                                                                    </div>
-
-
-
-                                                                    <form action="" method="POST">
-                                                                        <div class="modal-body">
-
-                                                                            <div class="form-group">
-                                                                                <label for="inputText1"
-                                                                                    class="col-form-label">다운로드 할 정책 파일 경로</label>
-                                                                                <input name="txtIP" type="text" class="form-control">
-                                                                            </div>
-
-                                                                            <a href="download path" download="" class="col-12 btn btn-outline-danger btn-lg">
-                                                                             다운로드 할 정책 파일 찾기<input type="file" style="display: none;">
-                                                                            </a>
-
-
-                                                                        </div>
-
-                                                                        <div class="modal-footer">
-                                                                            <a href="#" class="btn btn-secondary"
-                                                                                data-dismiss="modal">닫기</a>
-
-                                                                        </div>
-
-                                                                    </form>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                     </div>
                                                     <!-- 오프라인 점검용 정책 다운로드 모달 끝-->
 
 
@@ -291,214 +280,203 @@
                                                 <!-- 운영체제 버전에 대한 div 끝이면서 운영체제 별 정책 할당 결과 div시작-->
                                                 <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-5">
                                                     <div class="card" style="height: 500px; overflow: scroll;">
-                                                    <h4 class="card-header text-center">운영체제 별 정책 할당 결과</h4>
-                                                      <div class="card-body p-0">
+                                                        <h4 class="card-header text-center">운영체제 별 정책 할당 결과</h4>
+                                                        <div class="card-body p-0">
 
-                                                        <table class="table table-hover">
-
-                                                        <tbody>
-                                                            <tr>
-                                                                <th scope="row">1</th>
-                                                                <td><img src="assets/circle/grey.png" alt="User Avatar" class="rounded-circle user-avatar-lg"></td>
-                                                                <td>Windows 10</td>
-                                                                <td>Windows 10 bench mark</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">2</th>
-                                                                <td><img src="assets/circle/blue.png" alt="User Avatar" class="rounded-circle user-avatar-lg"></td>
-                                                                <td>Windows 10</td>
-                                                                <td>Windows 10 bench mark</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">3</th>
-                                                                <td><img src="assets/circle/blue.png" alt="User Avatar" class="rounded-circle user-avatar-lg"></td>
-                                                                <td>Windows 10</td>
-                                                                <td>Windows 10 bench mark</td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-
-                                                      </div>
+                                                            <table class="table table-hover">
+                                                                <tbody>
+                                                                <tr>
+                                                                    <th scope="row">1</th>
+                                                                    <td><img src="assets/circle/grey.png" alt="User Avatar" class="rounded-circle user-avatar-lg"></td>
+                                                                    <td>Windows 10</td>
+                                                                    <td>Windows 10 bench mark</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">2</th>
+                                                                    <td><img src="assets/circle/blue.png" alt="User Avatar" class="rounded-circle user-avatar-lg"></td>
+                                                                    <td>Windows 10</td>
+                                                                    <td>Windows 10 bench mark</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">3</th>
+                                                                    <td><img src="assets/circle/blue.png" alt="User Avatar" class="rounded-circle user-avatar-lg"></td>
+                                                                    <td>Windows 10</td>
+                                                                    <td>Windows 10 bench mark</td>
+                                                                </tr>
+                                                              </tbody>
+                                                            </table>
+                                                        </div>
                                                     </div>
                                                 </div>
 
+                                                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+                                                    <div class="card " overflow="scroll" style="height: 500px;">
+                                                        <div class="card-header">README</div>
+                                                        <div class="card-body">
 
+                                                            <h3> ①  정책적용이 끝난 의미</h3>
+                                                            <p class="card-text"> - 파랑색 원은 windows7sp3에 대한 정책적용이 완료</p>
+                                                            <p class="card-text"> - 회색인 경우 정책적용 필요</p>
 
-                                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-                                            <div class="card " overflow="scroll" style="height: 500px;">
-                                            <div class="card-header">README</div>
-                                            <div class="card-body">
+                                                            <h3> ② 운영체제별 정책 할당 결과</h3>
 
-                                                <h3> ①  정책적용이 끝난 의미</h3>
-                                                <p class="card-text"> - 파랑색 원은 windows7sp3에 대한 정책적용이 완료</p>
-                                                <p class="card-text"> - 회색인 경우 정책적용 필요</p>
-
-                                                <h3> ② 운영체제별 정책 할당 결과</h3>
-
-                                                <p class="card-text"> - 파랑색의 결과는 window7sp3에 대한 정책 할당의 결과</p>
-                                            </div>
-                                                <div class="card-footer p-0 text-center">
-                                                    <div class="card-footer-item card-footer-item-bordered">
-                                                        <a href="#" class="card-link"></a>
+                                                            <p class="card-text"> - 파랑색의 결과는 window7sp3에 대한 정책 할당의 결과</p>
+                                                        </div>
+                                                        <div class="card-footer p-0 text-center">
+                                                            <div class="card-footer-item card-footer-item-bordered">
+                                                                <a href="#" class="card-link"></a>
+                                                            </div>
+                                                        </div>
                                                     </div>
+                                                </div>
+
+                                                <div class="col-9" style="margin-top: 3px;">
+                                                    <a href="#" class="col-12 btn btn-warning btn-lg" data-toggle="modal" data-target="#xccdfModal"> 정책 다운로드 확인 </a>
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <div class="col-9" style="margin-top: 3px;">
-                                            <a href="#" class="col-12 btn btn-warning btn-lg" data-toggle="modal" data-target="#xccdfModal"> 정책 다운로드 확인 </a>
-                                        </div>
-
+                                        <!-- 정책 적용 탭 끝 -->
 
                                     </div>
                                 </div>
-                                <!-- 정책 적용 탭 끝 -->
-
-
-
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
+                        </div>
 
-                            <div class="row">
-                                <div class="col-xl-4 col-sm-4 col-lg-4 col-4"></div>
-                                <div class="col-xl-3 col-sm-3 col-lg-3" style="margin-top: 25px">
-                                    <button type="submit" class="btn btn-space btn-primary col-5">생성</button>
-                                    <button class="btn btn-space btn-secondary col-5">취소</button>
-                                </div>
+                        <div class="row">
+                            <div class="col-xl-4 col-sm-4 col-lg-4 col-4"></div>
+                            <div class="col-xl-3 col-sm-3 col-lg-3" style="margin-top: 25px">
+                                <button type="submit" class="btn btn-space btn-primary col-5">생성</button>
+                                <button class="btn btn-space btn-secondary col-5">취소</button>
                             </div>
-
                         </div>
 
                     </div>
+
                 </div>
             </div>
         </div>
-        <!-- ============================================================== -->
-        <!-- footer -->
-        <!-- ============================================================== -->
-        <div class="footer">
-            <%include ../../../footer.ejs%>
-        </div>
-        <!-- ============================================================== -->
-        <!-- end footer -->
-        <!-- ============================================================== -->
     </div>
+</div>
 
-        <!-- 직접 입력 모달 시작 -->
-        <div class="modal" id="directmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">에이전트 수동 입력</h5>
-                        <a href="#" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </a>
-                    </div>
-                    <form action="/add_manual_group" method="POST">
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label for="inputText1" class="col-form-label">IP</label>
-                                <input name="txtIP" type="text" class="form-control">
-                            </div>
-                        </div>
-                        <input type="hidden" name="sess_name" value="">
-                        <div class="modal-footer">
-                            <a href="#" class="btn btn-secondary" data-dismiss="modal">닫기</a>
-                            <button class="btn btn-primary" type="submit">변경 저장</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div><!-- 직접입력 모달 끝 -->
+<!-- footer -->
+<div class="footer">
+    <%include ../../../footer.ejs%>
+</div>
+<!-- end footer -->
 
-        <!-- 파일 업로드 모달 시작-->
-        <div class="modal" id="csvModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="display: none;">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="csvModal">파일 업로드</h5>
-                        <a href="#" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </a>
-                    </div>
-                    <form action="" method="POST">
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label for="inputText1" class="col-form-label">파일 경로</label>
-                                <input name="txtIP" type="text" class="form-control">
-                            </div>
-                            <label class="col-12 btn btn-outline-success btn-lg">
-                                파일 첨부하기
-                                <input type="file" style="display: none;">
-                            </label>
-                        </div>
-                        <div class="modal-footer">
-                            <a href="#" class="btn btn-secondary" data-dismiss="modal">닫기</a>
-                            <a href="#" class="btn btn-primary" type="submit">변경 저장</a>
-                        </div>
-                    </form>
-                </div>
+<!-- 직접 입력 모달 시작 -->
+<div class="modal" id="directmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">에이전트 수동 입력</h5>
+                <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </a>
             </div>
+            <form action="/add_manual_group" method="POST">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="inputText1" class="col-form-label">IP</label>
+                        <input name="txtIP" type="text" class="form-control">
+                    </div>
+                </div>
+                <input type="hidden" name="sess_name" value="">
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-secondary" data-dismiss="modal">닫기</a>
+                    <button class="btn btn-primary" type="submit">변경 저장</button>
+                </div>
+            </form>
         </div>
-        <!-- 파일업로드 모달 끝-->
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <script src="/assets/vendor/duallistbox/js/jquery.bootstrap-duallistbox.js"></script>
-        <script>
-            var demo1 = $('select[name="agentlistbox[]"]').bootstrapDualListbox({
-                nonSelectedListLabel: '모든 에이전트',
-                selectedListLabel: '할당된 에이전트',
-                preserveSelectionOnMove: 'moved',
-                moveOnSelect: false
-            });
+    </div>
+</div>
+<!-- 직접입력 모달 끝 -->
 
-            $('#group_agent_change_btn').click(() => {
-                let arr = $('[name="agentlistbox[]"]').val();
-                $('#change_group_set_list').val(JSON.stringify(arr));
-                $('#group_agent_change_btn').submit();
-            });
+<!-- 파일 업로드 모달 시작-->
+<div class="modal" id="csvModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="csvModal">파일 업로드</h5>
+                <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </a>
+            </div>
+            <form action="" method="POST">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="inputText1" class="col-form-label">파일 경로</label>
+                        <input name="txtIP" type="text" class="form-control">
+                    </div>
+                    <label class="col-12 btn btn-outline-success btn-lg">
+                        파일 첨부하기
+                        <input type="file" style="display: none;">
+                    </label>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-secondary" data-dismiss="modal">닫기</a>
+                    <a href="#" class="btn btn-primary" type="submit">변경 저장</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- 파일업로드 모달 끝-->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="/assets/vendor/duallistbox/js/jquery.bootstrap-duallistbox.js"></script>
+<script>
+    var demo1 = $('select[name="agentlistbox[]"]').bootstrapDualListbox({
+        nonSelectedListLabel: '모든 에이전트',
+        selectedListLabel: '할당된 에이전트',
+        preserveSelectionOnMove: 'moved',
+        moveOnSelect: false
+    });
 
-            $('#change_cancle_btn').click(() =>{
-                location.href = '/group';
-            });
+    $('#group_agent_change_btn').click(() => {
+        let arr = $('[name="agentlistbox[]"]').val();
+        $('#change_group_set_list').val(JSON.stringify(arr));
+        $('#group_agent_change_btn').submit();
+    });
 
-            // 할당된 에이전트 OS 파싱해서 가져오기
-            function get_selected_os() {
+    $('#change_cancle_btn').click(() =>{
+        location.href = '/group';
+    });
 
-                // 할당된 에디전트 태그찾기
-                let parent_tag = document.getElementById("bootstrap-duallistbox-selected-list_agentlistbox[]");
-                let os_list = []
-                for (let option of parent_tag.options){
-                    os_list.push(option.attributes['os'].value)
-                }
+    // 할당된 에이전트 OS 파싱해서 가져오기
+    function get_selected_os() {
 
-                // 키워드 매핑 - 회의해서 어떻게 할지 정하고 설계하기
+        // 할당된 에디전트 태그찾기
+        let parent_tag = document.getElementById("bootstrap-duallistbox-selected-list_agentlistbox[]");
+        let os_list = []
+        for (let option of parent_tag.options){
+            os_list.push(option.attributes['os'].value)
+        }
 
-                // 중복 제거하기
-                os_list = os_list.reduce(function(a,b){if(a.indexOf(b)<0)a.push(b);return a;},[])
+        // 키워드 매핑 - 회의해서 어떻게 할지 정하고 설계하기
 
-                // 세션스토리지에 저장
-                sessionStorage.setItem('os_list', os_list);
-                $('#contact').load(document.URL + ' #contact', {'os_list': os_list});
-            }
+        // 중복 제거하기
+        os_list = os_list.reduce(function(a,b){if(a.indexOf(b)<0)a.push(b);return a;},[])
 
+        // 세션스토리지에 저장
+        sessionStorage.setItem('os_list', os_list);
+        $('#contact').load(document.URL + ' #contact', {'os_list': os_list});
+    }
 
-        </script>
-        <!-- Optional JavaScript -->
-        <!-- jquery 3.3.1 -->
-        <script src="/assets/vendor/jquery/jquery-3.3.1.min.js"></script>
-        <!-- bootstap bundle js -->
-        <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
-        <!-- slimscroll js -->
-        <script src="/assets/vendor/slimscroll/jquery.slimscroll.js"></script>
-        <!-- main js -->
-        <script src="/assets/libs/js/main-js.js"></script>
-        <!-- chart chartist js -->
-        <script src="/assets/vendor/datepicker/moment.js"></script>
-        <script src="/assets/vendor/datepicker/tempusdominus-bootstrap-4.js"></script>
-        <script src="/assets/vendor/datepicker/datepicker.js"></script>
-    </body>
+</script>
+<!-- Optional JavaScript -->
+<!-- jquery 3.3.1 -->
+<script src="/assets/vendor/jquery/jquery-3.3.1.min.js"></script>
+<!-- bootstap bundle js -->
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+<!-- slimscroll js -->
+<script src="/assets/vendor/slimscroll/jquery.slimscroll.js"></script>
+<!-- main js -->
+<script src="/assets/libs/js/main-js.js"></script>
+<!-- chart chartist js -->
+<script src="/assets/vendor/datepicker/moment.js"></script>
+<script src="/assets/vendor/datepicker/tempusdominus-bootstrap-4.js"></script>
+<script src="/assets/vendor/datepicker/datepicker.js"></script>
+</body>
 </html>
