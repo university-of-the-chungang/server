@@ -5,13 +5,11 @@
 </head>
 
 <body>
+<!-- 메인 로직 시작-->
 <div class="dashboard-main-wrapper">
     <div class="dashboard-header">
         <%include ../../../header.ejs%>
-
-        <!-- ============================================================== -->
         <!-- 헤더 네비게이션 바 종료  -->
-        <!-- ============================================================== -->
 
         <div class="">
             <div class="dashboard-ecommerce">
@@ -57,20 +55,21 @@
                                     </ul>
 
                                     <div class="tab-content" id="myTabContent">
+
                                         <!-- 기본정보 탭 시작 -->
                                         <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                             <div class="row" style="margin-bottom: 50px">
                                                 <div class="col-1"></div>
                                                 <div class="col-3">
                                                     <label for="validationServer01">그룹명</label>
-                                                    <input type="text" class="form-control" id="validationServer01" required="" maxlength="100">
+                                                    <input type="text" class="form-control" id="groupName" required="" maxlength="100">
                                                 </div>
                                             </div>
                                             <div class="row" style="margin-bottom: 50px">
                                                 <div class="col-1"></div>
                                                 <div class="col-6">
                                                     <label for="validationServer01">그룹설명</label>
-                                                    <input type="text" class="form-control" id="validationServer01"  required="" style="height: 200px" maxlength="500">
+                                                    <input type="text" class="form-control" id="groupDesc"  required="" style="height: 200px" maxlength="500">
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -79,7 +78,7 @@
                                                 <div class="col-4">
                                                     <label for="validationServer01">정책 적용 시작일</label>
                                                     <div class="input-group date" id="datetimepicker4" data-target-input="nearest">
-                                                        <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker4" style="height: 50px;">
+                                                        <input type="text" class="form-control datetimepicker-input" id="groupDate" data-target="#datetimepicker4" style="height: 50px;">
                                                         <div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker" >
                                                             <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
                                                         </div>
@@ -87,26 +86,22 @@
                                                 </div>
                                                 <div class="col-2 form-group">
                                                     <label for="inputText3" class="col-form-label">주기 설정 </label>
-                                                    <input id="inputText3" type="text" class="form-control" style="height: 47px;">
+                                                    <input type="text" class="form-control" id="groupPeriod" style="height: 47px;">
                                                 </div>
 
                                             </div>
                                         </div>
                                         <!-- 기본정보 탭 끝 -->
 
-
                                         <!-- 에이전트 할당 탭 시작-->
                                         <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                            <form id="demoform" action= "/newgroup/change_group_set_list" method="POST">
-                                                <select multiple="multiple" size="10" name="agentlistbox[]">
-                                                    <%for(var i=0; i<(recordsets3.length); i++){%>
-                                                        <option value="<%=recordsets3[i].AGENT_CD%>" os="<%=recordsets3[i].OS%>">
-                                                            <%=recordsets3[i].IP%>
-                                                        </option>
-                                                    <%}%>
-                                                </select>
-                                                <input type="submit" id = "group_agent_change_btn" value = "에이전트 할당 정보 수정" class="btn btn-outline-dark btn-block" style="margin-top: 5px;">
-                                            </form>
+                                            <select multiple="multiple" size="10" name="agentlistbox[]">
+                                                <%for(var i=0; i<(recordsets3.length); i++){%>
+                                                    <option value="<%=recordsets3[i].AGENT_CD%>" os="<%=recordsets3[i].OS%>">
+                                                        <%=recordsets3[i].IP%>
+                                                    </option>
+                                                <%}%>
+                                            </select>
 
                                             <div class="row">
                                                 <div class="col-10"></div>
@@ -120,7 +115,6 @@
                                             </div>
                                         </div>
                                         <!-- 에이전트 할당 탭 끝-->
-
 
                                         <!-- 정책적용 탭 시작-->
                                         <div class="tab-pane" id="contact" role="tabpanel" aria-labelledby="contact-tab">
@@ -345,8 +339,8 @@
                         <div class="row">
                             <div class="col-xl-4 col-sm-4 col-lg-4 col-4"></div>
                             <div class="col-xl-3 col-sm-3 col-lg-3" style="margin-top: 25px">
-                                <button type="submit" class="btn btn-space btn-primary col-5">생성</button>
-                                <button class="btn btn-space btn-secondary col-5">취소</button>
+                                <button type="submit" class="btn btn-space btn-primary col-5" onclick=group_creation()>생성</button>
+                                <button class="btn btn-space btn-secondary col-5" onclick=group_creation_cancel()>취소</button>
                             </div>
                         </div>
 
@@ -357,6 +351,7 @@
         </div>
     </div>
 </div>
+<!-- 메인 로직 끝-->
 
 <!-- footer -->
 <div class="footer">
@@ -426,6 +421,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="/assets/vendor/duallistbox/js/jquery.bootstrap-duallistbox.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
     var demo1 = $('select[name="agentlistbox[]"]').bootstrapDualListbox({
         nonSelectedListLabel: '모든 에이전트',
@@ -462,6 +458,89 @@
         // 세션스토리지에 저장
         sessionStorage.setItem('os_list', os_list);
         $('#contact').load(document.URL + ' #contact', {'os_list': os_list});
+    }
+
+    // 생성 버튼 클릭시
+    function group_creation() {
+
+        // 현재 탭의 위치 가져오기
+        let home_tab = document.getElementById('home-tab');
+        let profile_tab = document.getElementById('profile-tab');
+        let contact_tab = document.getElementById('contact-tab');
+
+        let active_tab = '';
+
+        if (home_tab.attributes['aria-selected'].value === 'true') {
+            active_tab = 'home_tab';
+        }
+
+        else if (profile_tab.attributes['aria-selected'].value === 'true') {
+            active_tab = 'profile_tab';
+        }
+
+        else {
+            active_tab = 'contact_tab';
+        }
+
+        // 각 탭 별 활동 정의
+
+        // active_tab이 home_tab일 때
+        if (active_tab === 'home_tab') {
+
+            // 기본정보 작성돼있는 지 확인하고, 데이터베이스에 업데이트
+            let group_name = document.getElementById('groupName').value
+            let group_desc = document.getElementById('groupDesc').value
+            let group_date = document.getElementById('groupDate').value
+            let group_period = document.getElementById('groupPeriod').value
+
+            console.log(group_name, group_desc, group_date, group_period);
+
+            // 입력값에 누락이 있다면
+            if (!group_name || !group_desc || !group_date || !group_period) {
+                alert("입력값에 누락이 있습니다.");
+            }
+
+            // 정상적으로 잘 입력됐다면
+            else {
+                axios.post(document.URL + '/update-home-tab', {
+                    headers: { 'Content-type': 'application/x-www-form-urlencoded', },
+                    group_name : group_name,
+                    group_desc: group_desc,
+                    group_date: group_date,
+                    group_period: group_period
+                }).then(response => {
+                    location.href='/group';
+                })
+            }
+        }   
+
+        // active_tab이 profile tab일 때
+        else if (active_tab === 'profile_tab') {
+
+            // 기본정보 & 에이전트 할당정보 작성돼있는 지 확인하고, 데이터베이스에 업데이트
+        }
+
+        // active_tab이 contact tab일 때
+        else {
+
+            // 기본정보 & 에이전트 할당정보 & 정책적용 정보 작성돼있는 지 확인하고, 데이터베이스에 업데이트
+            alert("적용중입니다.");
+        }
+    }
+
+    // 취소 버튼 클릭시
+    function group_creation_cancel() {
+        let logit = confirm("아직 저장되지 않은 정보가 있습니다. 정말로 취소하시겠습니까?");
+
+        // 확인 버튼 눌렀을 때
+        if (logit === true) {
+            location.href='/group';
+        }
+
+        // 취소 버튼 눌렀을 때
+        else {
+
+        }
     }
 
 </script>
