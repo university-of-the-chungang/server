@@ -350,10 +350,11 @@
                                                 data-target="#exampleModal">수동입력 </a>
 
 
-                                            <a href="#"
-                                                class="btn btn-outline-secondary btn-lg col-xl-3 col-lg-3 col-md-3 col-sm-4"
-                                                style=" margin-left: 10px;" data-toggle="modal"
-                                                data-target="#knownModal">등록정보갱신</a>
+                                        <a href="#"
+                                            class="btn btn-outline-secondary btn-lg col-xl-3 col-lg-3 col-md-3 col-sm-4"
+                                            style=" margin-left: 10px;" data-toggle="modal"
+                                            data-target="#knownModal">일괄정보갱신</a>
+
 
                                             <!-- 등록정보 갱신  모달  시작 -->
 
@@ -558,6 +559,18 @@
                 <form id="add_manual_agent_form" action="/add_manual_agent" method="POST">
                     <div class="modal-body">
 
+<<<<<<< HEAD
+                    <div class="form-group">
+                        <label for="inputText1"
+                            class="col-form-label">IP</label>
+                        <input name="txtIP" type="text" class="form-control" required pattern="^([0-9]{1,3}\.){3}[0-9]{1,3}$">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputText2">MAC Address</label>
+                        <input name="txtMac" type="text" class="form-control" required pattern="^[a-fA-F0-9:]{17}|[a-fA-F0-9]{12}$">
+                    </div>
+=======
                         <div class="form-group">
                             <label for="inputText1" class="col-form-label">IP</label>
                             <input id="manualIP" name="txtIP" type="text" class="form-control">
@@ -567,6 +580,7 @@
                             <label for="inputText2">MAC Address</label>
                             <input name="txtMac" type="text" class="form-control">
                         </div>
+>>>>>>> d77b462107b8e7d4280c5cceace16ebc6e70b13a
 
                         <div class="form-group">
                             <label for="inputText3">운영체제 버전</label>
