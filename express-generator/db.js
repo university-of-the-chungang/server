@@ -474,11 +474,11 @@ exports.set_group_agent_mapping = (group_agent_mapping) => {
 
 exports.add_agent_info = (ip, mac, os, purpose, owner, desc, state) => {
     return new Promise((resolve, reject) => {
-        let check_query = `SELECT COUNT(*) FROM TBL_AGENT_INFO WHERE IP = '${ip}'`;
+        let check_query = `SELECT COUNT(*) as cnt FROM TBL_AGENT_INFO WHERE IP = '${ip}'`;
         new sql.Request().query(check_query,(err,result)=>{
             console.log(check_query);
             console.log(result);
-            if(result['rowsAffected'] > 0){
+            if(result['recordsets']['cnt'] > 0){
                 reject(err);
             }else{
                 let query = `INSERT INTO TBL_AGENT_INFO (IP, MAC_ADDR, OS, PURPOSE, OWNER, DEL_FLAG, DESCRIPTION, STATE ) VALUES('` + ip + `', '` + mac + `', '` + os + `', N'` + purpose + `', N'` + owner + `', 0, N'` + desc + `', '` + state + `')`;
