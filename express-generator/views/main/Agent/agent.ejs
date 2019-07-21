@@ -183,10 +183,10 @@
                                                         id="activateBtn" style="height: 55px">등록</button>
                                                 </form>
 
-                                                <form action="/agent/del_agent_info" method="POST"
+                                                <form id="delForm" action="/agent/del_agent_info" method="POST"
                                                     class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
                                                     <input type="hidden" name="del_agent_cd" id="del_agent_cd" value="">
-                                                    <input type="submit" id="agentDelBtn"
+                                                    <input type="button" id="agentDelBtn"
                                                         class="btn btn-outline-secondary btn-lg col-xl-12 col-lg-12 col-md-12 col-sm-12"
                                                         value="삭제" style="height: 55px">
 
@@ -661,7 +661,9 @@
                 alert("선택된 에이전트가 없습니다.");
                 return;
             } else {
-                chk_arr.each((idx, elem) => {
+                let sel = confirm("정말로 삭제하시겠습니까?");
+                if(sel == true){
+                    chk_arr.each((idx, elem) => {
                     let id = elem.id;
 
                     // alert(recordsets[id]);
@@ -669,7 +671,11 @@
                 });
 
                 $('#del_agent_cd').val(JSON.stringify(arr));
-                $('#agentDelBtn').submit();
+                $('#delForm').submit();
+                }else{
+                    return;
+                }
+                
             }
         });
         $('#activateBtn').click((e) => {
