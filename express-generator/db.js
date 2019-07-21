@@ -406,6 +406,25 @@ exports.add_group_info = (name, create_time, active_time, agent_counting, inspec
     });
 
 };
+
+exports.create_group_home = (group_name, group_desc, group_date, group_period) => {
+    return new Promise((resolve, reject) => {
+        let query =
+            `
+            INSERT INTO TBL_GROUP_INFO (NAME, DISCRIPTION, INSPECTION_START_DATE, INSPECTION_PERIOD, AGENT_COUNTING)
+            VALUES ('` + group_name + `','` + group_desc + `','` + group_date + `','` + group_period + `','` + '0' + `')
+            `;
+
+        console.log(query);
+        new sql.Request().query(query, (err, result) => {
+            if (err) {
+                reject(err);
+            }
+            resolve(result);
+        });
+    })
+};
+
 exports.add_agent_info = (ip, mac, os, purpose, owner, desc, state) => {
     return new Promise((resolve, reject) => {
         let query = `INSERT INTO TBL_AGENT_INFO (IP, MAC_ADDR, OS, PURPOSE, OWNER, DEL_FLAG, DESCRIPTION, STATE ) VALUES('` + ip + `', '` + mac + `', '` + os + `', N'` + purpose + `', N'` + owner + `', 0, N'` + desc + `', '` + state + `')`;
@@ -417,6 +436,7 @@ exports.add_agent_info = (ip, mac, os, purpose, owner, desc, state) => {
         });
     });
 };
+
 exports.add_agent_info_from_xlsx = (ip,purpose,owner)=>{
     return new Promise((resolve,reject)=>{
         let query = `INSERT INTO TBL_AGENT_INFO (IP, PURPOSE, OWNER) VALUES( '${ip}', N'${purpose}', '${owner}')`;
