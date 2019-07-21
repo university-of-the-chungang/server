@@ -28,6 +28,16 @@ router.post('/', function (req, res, next) {
     });
 });//신규 그룹페이지
 
+router.post('/update-home-tab', (req, res, next) => {
+
+    DB.create_group_home(req.body.group_name, req.body.group_desc, req.body.group_date, req.body.group_period).then(result => {
+        console.log(result);
+
+        res.send("success");
+    });
+
+});
+
 router.post('/change_group_set_list', function(req, res, next){
     let name = req.body.group_name;
     let arr = JSON.parse(req.body.change_group_set_list);
