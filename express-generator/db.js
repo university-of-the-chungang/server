@@ -520,6 +520,18 @@ exports.update_group_info = (cd, name, start_date, period, disc) => {
     });
 };
 
+exports.change_group_agent_counting = (cd, count) => {
+    return new Promise((resolve, reject) =>{
+        let query = `UPDATE TBL_GROUP_INFO SET AGENT_COUNTING = ${count} WHERE GROUP_SET_CD = '${cd}'`
+        console.log(query);
+        new sql.Request().query(query, (err, result) => {
+            if(err){
+                reject(err);
+            }
+            resolve(result);
+        });
+    });
+};
 
 exports.activate_agent_info = (agent_cd) => {
     return new Promise((resolve, reject) => {
@@ -529,7 +541,6 @@ exports.activate_agent_info = (agent_cd) => {
             if (err) {
                 reject(err);
             }
-
             resolve(result);
         });
     });
