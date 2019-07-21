@@ -559,7 +559,7 @@
                 <form id="add_manual_agent_form" action="/add_manual_agent" method="POST">
                     <div class="modal-body">
 
-<<<<<<< HEAD
+
                     <div class="form-group">
                         <label for="inputText1"
                             class="col-form-label">IP</label>
@@ -570,18 +570,8 @@
                         <label for="inputText2">MAC Address</label>
                         <input name="txtMac" type="text" class="form-control" required pattern="^[a-fA-F0-9:]{17}|[a-fA-F0-9]{12}$">
                     </div>
-=======
-                        <div class="form-group">
-                            <label for="inputText1" class="col-form-label">IP</label>
-                            <input id="manualIP" name="txtIP" type="text" class="form-control">
-                        </div>
 
-                        <div class="form-group">
-                            <label for="inputText2">MAC Address</label>
-                            <input name="txtMac" type="text" class="form-control">
-                        </div>
->>>>>>> d77b462107b8e7d4280c5cceace16ebc6e70b13a
-
+                    
                         <div class="form-group">
                             <label for="inputText3">운영체제 버전</label>
                             <input name="txtOS" type="text" class="form-control">
@@ -619,7 +609,6 @@
     </div>
 
     <!-- 후보 수동 에이전트 끝 시작 -->
-
     <!-- Optional JavaScript -->
     <!-- jquery 3.3.1 -->
     <script src="/assets/vendor/jquery/jquery-3.3.1.min.js"></script>
@@ -797,11 +786,10 @@
                 $('#add_manual_form').sumbit();
             }
         });
-        let play = setInterval(() => {
-            $('#expire').text(`로그인 세션 만료까지 ${(Number(<%=expire %> - new Date().getTime() / 1000) / 60).toFixed(1)} 분 남음`);
-        }, 1000);
+
+
     </script>
 
-</body>
 
+</body>
 </html>
