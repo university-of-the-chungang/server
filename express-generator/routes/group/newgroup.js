@@ -6,7 +6,6 @@ router.get('/', function (req, res, next) {
 
     DB.get_agent_info().then(result3 => {
 
-        console.log(result3);
         res.render('./main/GroupPolicy/NewGroup/newgroup', {
 
             recordsets3: result3.recordset
@@ -14,17 +13,33 @@ router.get('/', function (req, res, next) {
     });
 });//신규 그룹페이지
 
+router.post('/', function (req, res, next) {
 
-router.post('/save1', (req, res, next) => {
-  res.render('./main/GroupPolicy/group');
-});
+    console.log(req.body['os_list[]']);
 
-router.post('/save2', (req, res, next) => {
-  res.render('./main/GroupPolicy/group');
-});
+    DB.get_agent_info().then(result3 => {
 
-router.post('/save3', (req, res, next) => {
-  res.render('./main/GroupPolicy/group');
+        res.render('./main/GroupPolicy/NewGroup/newgroup', {
+
+            recordsets3: result3.recordset,
+            os_list: req.body['os_list[]']
+        });
+
+    });
+});//신규 그룹페이지
+
+router.post('/change_group_set_list', function(req, res, next){
+    let name = req.body.group_name;
+    let arr = JSON.parse(req.body.change_group_set_list);
+    DB.delete_group_set_list(req.body.group_set_cd).then( result=> {
+        for(var i = 0; (i < arr.length); i++) {
+            DB.insert_group_set_list(req.body.group_set_cd, arr[i]);
+        }
+        res.render('./main/GroupPolicy/OldGroup/load', {
+            name: name,
+            tab: 3
+        });
+    });
 });
 
 
