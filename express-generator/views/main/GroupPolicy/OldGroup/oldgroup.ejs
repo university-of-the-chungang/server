@@ -119,7 +119,7 @@
                                             <label for="validationServer01">정책 적용 시작일</label>
                                             <div class="input-group date" id="datetimepicker4" data-target-input="nearest">
                                                 <input type="text" name = "editINSPECTION_START_DATE" placeholder="<%=recordsets[0].INSPECTION_START_DATE%>" value = "<%=recordsets[0].INSPECTION_START_DATE%>" class="form-control datetimepicker-input" data-target="#datetimepicker4" style="height: 50px;">
-                                                <div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker" >
+                                                <div class="input-group-append" id = "picker" name = "picker" data-target="#datetimepicker4" data-toggle="datetimepicker">
                                                     <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
                                                 </div>
                                             </div>
@@ -135,7 +135,7 @@
                                     <div class="row">
                                         <div class="col-10"></div>
                                         <div class="col-2" style="margin-top: 20px">
-                                            <button type="submit" class="btn btn-space btn-primary">기본 정보 수정</button>
+                                            <button type="submit" id = "group_basic_info" class="btn btn-space btn-primary">기본 정보 수정</button>
                                         </div>
 
                                     </div>
@@ -483,6 +483,7 @@
         });
 
 
+
     </script>
 
     <!-- bootstap bundle js -->
@@ -494,7 +495,6 @@
     <script src="/assets/vendor/datepicker/moment.js"></script>
     <script src="/assets/vendor/datepicker/tempusdominus-bootstrap-4.js"></script>
     <script src="/assets/vendor/datepicker/datepicker.js"></script>
-
 </body>
 </html>
 

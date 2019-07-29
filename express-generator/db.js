@@ -9,8 +9,8 @@ let config = {
     // 해당 설정 부분은 설정파일 생기면 그리 옮길것 
     "user": "developer", //default is sa
     "password": "ang0511",
-    // "server": "52.231.155.141", // for local machine
-    "server": "localhost", // for local machine
+    "server": "52.231.155.141", // for local machine
+    //"server": "localhost", // for local machine
     "port": 1444,
     "database": "nsrang", // name of database
     "options": {
@@ -258,6 +258,25 @@ exports.insert_group_set_list = (group_set_cd, agent_cd) => {
         console.log(query);
         console.log(agent_cd);
         new sql.Request().query(query, (err,result) => {
+            if(err){
+                reject(err);
+            }
+            resolve(result);
+        });
+    });
+};
+
+exports.update_group_info = (cd, name, start_date, period, disc) => {
+    return new Promise((resolve, reject) =>{
+        let adder = "";
+        if(start_date === "")
+            console.log(start_date);
+        else
+            adder = ", INSPECTION_START_DATE = " + "'" +start_date + "'";
+
+        let query = `UPDATE TBL_GROUP_INFO SET NAME = N'${name}', INSPECTION_PERIOD='${period}', DISCRIPTION = N'${disc}'`+ adder + ` WHERE GROUP_SET_CD = '${cd}'`;
+        console.log(query);
+        new sql.Request().query(query, (err, result) => {
             if(err){
                 reject(err);
             }
@@ -523,18 +542,6 @@ exports.update_agent_info = (cd, purpose, owner) => {
     });
 };
 
-exports.update_group_info = (cd, name, start_date, period, disc) => {
-    return new Promise((resolve, reject) =>{
-        let query = `UPDATE TBL_GROUP_INFO SET NAME = N'${name}', INSPECTION_START_DATE = '${start_date}', INSPECTION_PERIOD='${period}', DISCRIPTION = N'${disc}' WHERE GROUP_SET_CD = '${cd}'`
-        console.log(query);
-        new sql.Request().query(query, (err, result) => {
-            if(err){
-                reject(err);
-            }
-            resolve(result);
-        });
-    });
-};
 
 exports.change_group_agent_counting = (cd, count) => {
     return new Promise((resolve, reject) =>{
