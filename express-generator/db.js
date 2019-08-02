@@ -109,7 +109,9 @@ exports.get_group_agents = (group_set_cd) => {
 }
 exports.get_dashboard_datas = ()=>{
     //대쉬보드에 쓸 데이터 조회 
-    query = "SELECT * FROM TBL_AGENT_INFO t1 LEFT OUTER JOIN TBL_INSPECT_SURVEY t2 ON t1.AGENT_CD = t2.AGENT_CD LEFT OUTER JOIN TBL_INSPECT_STATS t3 ON t2.INSPECT_CD = t3.INSPECT_CD LEFT OUTER JOIN TBL_GROUP_INFO t4 ON t3.GROUP_SET_CD = t4.GROUP_SET_CD WHERE t1.DEL_FLAG = 0 ORDER BY IP";
+    // query = "SELECT * FROM TBL_AGENT_INFO t1 LEFT OUTER JOIN TBL_INSPECT_SURVEY t2 ON t1.AGENT_CD = t2.AGENT_CD LEFT OUTER JOIN TBL_INSPECT_STATS t3 ON t2.INSPECT_CD = t3.INSPECT_CD LEFT OUTER JOIN TBL_GROUP_INFO t4 ON t3.GROUP_SET_CD = t4.GROUP_SET_CD WHERE t1.DEL_FLAG = 0 ORDER BY IP";
+    query = "SELECT DISTINCT * FROM TBL_AGENT_INFO T1 INNER JOIN TBL_GROUP_SET_LIST T2 ON T1.AGENT_CD = T2.AGENT_CD INNER JOIN TBL_GROUP_INFO T3 ON T2.GROUP_SET_CD = T3.GROUP_SET_CD INNER JOIN TBL_INSPECT_STATS T4 ON T1.AGENT_CD = T4.AGENT_CD  WHERE T3.ACTIVE_STATE = 'A'AND T1.DEL_FLAG = 0 AND T3.DEL_FLAG = 0  ORDER BY CREATE_TIME DESC";
+    
     return new Promise((resolve,reject)=>{
         new sql.Request().query(query,(err,result)=>{
             if(err){
@@ -120,7 +122,9 @@ exports.get_dashboard_datas = ()=>{
     })
 };
 exports.get_dashboard_top10 = ()=>{
-    query = "SELECT top 10 count(*) as cnt, INSPECT_ITEM_CD item_cd FROM TBL_INSPECT_SURVEY  WHERE INSPECT_RESULT = 0 GROUP BY INSPECT_ITEM_CD ORDER BY cnt DESC ";
+    // query = "SELECT top 10 count(*) as cnt, INSPECT_ITEM_CD item_cd FROM TBL_INSPECT_SURVEY  WHERE INSPECT_RESULT = 0 GROUP BY INSPECT_ITEM_CD ORDER BY cnt DESC ";
+    query = "SELECT TOP 10 COUNT(*) cnt, T5.INSPECT_ITEM_CD AS item_cd FROM TBL_AGENT_INFO T1 INNER JOIN TBL_GROUP_SET_LIST T2 ON T1.AGENT_CD = T2.AGENT_CD INNER JOIN TBL_GROUP_INFO T3 ON T2.GROUP_SET_CD = T3.GROUP_SET_CD INNER JOIN TBL_INSPECT_STATS T4 ON T1.AGENT_CD = T4.AGENT_CD INNER JOIN TBL_INSPECT_SURVEY T5 ON T4.INSPECT_CD = T5.INSPECT_CD  WHERE T5.INSPECT_RESULT = 0 AND T1.DEL_FLAG = 0 AND T3.DEL_FLAG = 0 AND T3.ACTIVE_STATE = 'A' GROUP BY INSPECT_ITEM_CD ORDER BY cnt DESC ";
+    
     return new Promise((resolve,reject)=>{
         new sql.Request().query(query,(err,result)=>{
             if(err){
@@ -254,6 +258,25 @@ exports.insert_group_set_list = (group_set_cd, agent_cd) => {
         console.log(query);
         console.log(agent_cd);
         new sql.Request().query(query, (err,result) => {
+            if(err){
+                reject(err);
+            }
+            resolve(result);
+        });
+    });
+};
+
+exports.update_group_info = (cd, name, start_date, period, disc) => {
+    return new Promise((resolve, reject) =>{
+        let adder = "";
+        if(start_date === "")
+            console.log(start_date);
+        else
+            adder = ", INSPECTION_START_DATE = " + "'" +start_date + "'";
+
+        let query = `UPDATE TBL_GROUP_INFO SET NAME = N'${name}', INSPECTION_PERIOD='${period}', DISCRIPTION = N'${disc}'`+ adder + ` WHERE GROUP_SET_CD = '${cd}'`;
+        console.log(query);
+        new sql.Request().query(query, (err, result) => {
             if(err){
                 reject(err);
             }
@@ -519,18 +542,6 @@ exports.update_agent_info = (cd, purpose, owner) => {
     });
 };
 
-exports.update_group_info = (cd, name, start_date, period, disc) => {
-    return new Promise((resolve, reject) =>{
-        let query = `UPDATE TBL_GROUP_INFO SET NAME = N'${name}', INSPECTION_START_DATE = '${start_date}', INSPECTION_PERIOD='${period}', DISCRIPTION = N'${disc}' WHERE GROUP_SET_CD = '${cd}'`
-        console.log(query);
-        new sql.Request().query(query, (err, result) => {
-            if(err){
-                reject(err);
-            }
-            resolve(result);
-        });
-    });
-};
 
 exports.change_group_agent_counting = (cd, count) => {
     return new Promise((resolve, reject) =>{

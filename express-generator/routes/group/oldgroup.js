@@ -44,7 +44,7 @@ router.post('/change_basic_info', function(req, res, next){
 
     }else{
        DB.update_group_info(cd, req.body.editNAME, req.body.editINSPECTION_START_DATE, req.body.editINSPECTION_PERIOD, req.body.editDISCRIPTION).then(re => {
-           console.log(name);
+           console.log(req.body.editINSPECTION_START_DATE);
            res.render('./main/GroupPolicy/OldGroup/load', {
                name: name,
                tab: 2

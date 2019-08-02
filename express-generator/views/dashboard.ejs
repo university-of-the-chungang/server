@@ -56,10 +56,12 @@
                                                 <div class="col-4 col-md-3 col-sm-3"
                                                     style="position:relative; left: 33%; top:40%; z-index: 9999;">
                                                     <button type="button" id="save_result_btn"
-                                                        class="btn btn-outline-primary btn-lg"> 점겸결과 저장</button>
+                                                        class="btn btn-outline-primary btn-lg"> 점검결과 저장</button>
                                                 </div>
                                             </div>
-
+                                            <form id="viewhtmlfrm" method="POST" action="/dashboard/viewhtml" style="display: none">
+                                                <input type="hidden" id="table_row" name="row_arr" >
+                                            </form>
                                             <div class="table-responsive" style="margin-top:-50px;">
                                                 <table id="agent_table" class="table">
                                                     <thead class="bg-light">
@@ -81,7 +83,7 @@
                                                                 color = "red";
                                                             }
                                                         } %>
-                                                        <tr style="text-align: center; color:<%= color%>">
+                                                        <tr style="text-align: center; color:<%= color%>" id="table_tr_<%=i %>" class="table_tr">
                                                             <td style="text-align:center; vertical-align: middle;">
                                                                 <label class="custom-control custom-checkbox"><input
                                                                         type="checkbox" id='<%=i %>'
@@ -332,6 +334,11 @@
         </style>
 
         <script>
+            $('.table_tr').click((e)=>{
+                let recordset = JSON.parse(`<%- JSON.stringify(recordsets[0])%>`);
+                $('#table_row').val(JSON.stringify(recordset[e.currentTarget.id.split('_')[2]]));
+                $('#viewhtmlfrm').submit();
+            });
             $('#agent_table').DataTable({
                 lengthChange: false,
                 info: false,
@@ -362,7 +369,7 @@ var chart = new Chart(ctx, {
                     datasets: [{
                         backgroundColor: 'rgb(255, 99, 132)',
                         borderColor: 'rgb(255, 99, 132)',
-                        data: [<%=junsu %>,<%=not_junsu%>,<%=not_check%>],
+                        data: [<%=not_junsu%>,<%=junsu %>,<%=not_check%>],
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.2)',
                             'rgba(54, 162, 235, 0.2)',
