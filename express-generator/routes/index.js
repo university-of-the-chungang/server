@@ -577,6 +577,20 @@ router.get('/get_new_xccdf_cd', (req, res, next) => {
 router.get('/grouppolicy', function (req, res, next) {
   res.render('grouppolicy');
 });
+
+router.post('/dashboard/viewgroupreport',(req,res,next)=>{
+  let param = JSON.parse(req.body['row_arr']);
+    // make_dashboard.buildHtml(param).then(result=>{
+    //   res.writeHead(200, {'Content-Type': 'text/html','Content-Length':result.length});
+    //   res.write(result);
+    //   res.end();
+    // });
+    res.write("view group report");
+    res.end();
+    // console.log(result);
+    // res.write(html);
+})
+
 router.post('/dashboard/viewhtml',(req,res,next)=>{
   let param = JSON.parse(req.body['row_arr']);
     make_dashboard.buildHtml(param).then(result=>{

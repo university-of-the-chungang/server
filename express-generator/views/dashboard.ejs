@@ -32,12 +32,13 @@
                         <!-- ============================================================== -->
                         <!-- end pageheader  -->
                         <!-- ============================================================== -->
+                        <% let submit_date = recordsets[0][0].SUBMIT_DATE.toISOString().replace('T',' ').replace('Z','') %>
                         <div class="ecommerce-widget">
                             <div class="row">
                                 <div class="col-1"></div>
                                 <div class="col-5">
                                     <div class="card" style="height: 600px;">
-                                        <h3 class="card-header text-center">점검 규정명(정보보안 관리실태평가) / 점검 그룹명(점검일자)</h3>
+                                        <h3 class="card-header text-center"><b id="group_name" style="cursor: pointer"><%=recordsets[0][0]['NAME'] %></b>(<%=submit_date%>)</h3>
                                         <div class="card-body p-0">
 
                                             <div class="row" style="margin-top: 15px; height: 70px;">
@@ -59,7 +60,7 @@
                                                         class="btn btn-outline-primary btn-lg"> 점검결과 저장</button>
                                                 </div>
                                             </div>
-                                            <form id="viewhtmlfrm" method="POST" action="/dashboard/viewhtml" style="display: none">
+                                            <form id="viewhtmlfrm" method="POST" action="/dashboard/viewhtml" style="display: none" target="_blank">
                                                 <input type="hidden" id="table_row" name="row_arr" >
                                             </form>
                                             <div class="table-responsive" style="margin-top:-50px;">
@@ -83,7 +84,7 @@
                                                                 color = "red";
                                                             }
                                                         } %>
-                                                        <tr style="text-align: center; color:<%= color%>" id="table_tr_<%=i %>" class="table_tr">
+                                                        <tr style="text-align: center; color:<%= color%> ;" id="table_tr_<%=i %>" >
                                                             <td style="text-align:center; vertical-align: middle;">
                                                                 <label class="custom-control custom-checkbox"><input
                                                                         type="checkbox" id='<%=i %>'
@@ -107,12 +108,12 @@
                                                             <img src="../assets/images/avatar-2.jpg" alt="User Avatar" class="rounded-circle user-avatar-lg">
                                                             
                                                              -->
-                                                            <td>
+                                                            <td class="table_tr" style="cursor:pointer">
                                                                 <%= recordsets[0][i].IP %>
                                                                 
                                                             </td>
-                                                            <td><%= recordsets[0][i].OS %></td>
-                                                            <td><%= recordsets[0][i].PURPOSE %></td>
+                                                            <td class="table_tr" style="cursor:pointer"><%= recordsets[0][i].OS %></td>
+                                                            <td class="table_tr" style="cursor:pointer"><%= recordsets[0][i].PURPOSE %></td>
                                                         </tr>
                                                         <input type="hidden"
                                                                     id="is_search_<%=recordsets[0][i].AGENT_CD[0]%>"
@@ -334,9 +335,16 @@
         </style>
 
         <script>
+            $('#group_name').click((e)=>{
+                let recordset = JSON.parse(`<%- JSON.stringify(recordsets[0])%>`);
+                $('#table_row').val(JSON.stringify(recordset));
+                $('#viewhtmlfrm').attr('action','/dashboard/viewgroupreport');
+                $('#viewhtmlfrm').submit();
+            })
             $('.table_tr').click((e)=>{
                 let recordset = JSON.parse(`<%- JSON.stringify(recordsets[0])%>`);
-                $('#table_row').val(JSON.stringify(recordset[e.currentTarget.id.split('_')[2]]));
+                $('#table_row').val(JSON.stringify(recordset[$(e.currentTarget).parent()[0].id.split('_')[2]]));
+                $('#viewhtmlfrm').attr('action','/dashboard/viewhtml');
                 $('#viewhtmlfrm').submit();
             });
             $('#agent_table').DataTable({
