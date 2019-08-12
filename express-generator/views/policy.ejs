@@ -40,7 +40,7 @@
             <div class="row">
              
 
-                <div class="col-xl-7 col-lg-7 col-md-6 col-sm-12 ">
+                <div class="col-9">
                                 <div class="card">
                                     <div class="card-header">
                                         <h3 style="text-align: center;">정책 관리</h3>
@@ -50,7 +50,7 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th scope="col">선택</th>
+                                                <th scope="col" style="text-align: center;vertical-align: middle;">선택</th>
                                                 <th scope="col">정책명</th>
                                                 <th scope="col">운영체제</th>
                                                 <th scope="col">경로</th>
@@ -60,53 +60,136 @@
                                         <tbody>
                                            
                                             <tr class="table-success">
-                                                <th scope="row">1</th>
+                                                <td style="text-align:center; vertical-align: middle;"><label
+                                                                class="custom-control custom-checkbox"><input
+                                                                    type="checkbox" id=""
+                                                                    class="custom-control-input chkbox"><span
+                                                                    class="custom-control-label"
+                                                                    style="position: absolute;left:40%; top:0"></span></label>
+                                                        </td>
                                                 <td>국가보안연구소 실태평가</td>
                                                 <td>Windows 10</td>
                                                 <td>/C:/xxcdf/windows</td>
                                                 <td>2019년 10월 3일</td>
                                             </tr>
 
-                                            <tr class="table-secondary">
-                                                <th scope="row">2</th>
+                                            <tr class="table">
+                                                <td style="text-align:center; vertical-align: middle;"><label
+                                                                class="custom-control custom-checkbox"><input
+                                                                    type="checkbox" id=""
+                                                                    class="custom-control-input chkbox"><span
+                                                                    class="custom-control-label"
+                                                                    style="position: absolute;left:40%; top:0"></span></label>
+                                                        </td>
                                                 <td>주요정보통신기반시설 가이드라인</td>
                                                 <td>Windows 10</td>
                                                 <td>/C:/xxcdf/windows12</td>
                                                 <td>2019년 10월 5일</td>
                                             </tr>
 
-                                            <tr class="table-secondary">
-                                                <th scope="row">2</th>
+                                            <tr class="table">
+                                                <td style="text-align:center; vertical-align: middle;"><label
+                                                                class="custom-control custom-checkbox"><input
+                                                                    type="checkbox" id=""
+                                                                    class="custom-control-input chkbox"><span
+                                                                    class="custom-control-label"
+                                                                    style="position: absolute;left:40%; top:0"></span></label>
+                                                        </td>
                                                 <td>주요정보통신기반시설 가이드라인</td>
                                                 <td>Windows 10</td>
                                                 <td>/C:/xxcdf/windows12</td>
                                                 <td>2019년 10월 5일</td>
                                             </tr>
 
-                                            <tr class="table-secondary">
-                                                <th scope="row">2</th>
+                                            <tr class="table">
+                                                <td style="text-align:center; vertical-align: middle;"><label
+                                                                class="custom-control custom-checkbox"><input
+                                                                    type="checkbox" id=""
+                                                                    class="custom-control-input chkbox"><span
+                                                                    class="custom-control-label"
+                                                                    style="position: absolute;left:40%; top:0"></span></label>
+                                                        </td>
                                                 <td>주요정보통신기반시설 가이드라인</td>
                                                 <td>Windows 10</td>
                                                 <td>/C:/xxcdf/windows12</td>
                                                 <td>2019년 10월 5일</td>
                                             </tr>
 
-                                            
-
-
+                                           
                                         </tbody>
                                     </table>
                                 </div>
 
                                     <div class="card-footer p-0 text-center d-flex justify-content-center ">
                                         <div class="card-footer-item card-footer-item-bordered">
-                                            <a href="#" class="card-link">정책 추가</a>
+                                            <a href="#" class="card-link" data-toggle="modal" data-target="#xccdfModal">정책 추가</a>
                                         </div>
-                                        <div class="card-footer-item card-footer-item-bordered">
-                                            <a href="#" class="card-link">정책 설정</a>
-                                        </div>
-                                        <div class="card-footer-item card-footer-item-bordered">
-                                            <a href="#" class="card-link">정책 삭제</a>
+
+                                     <div class="modal" id="xccdfModal" tabindex="-1" role="dialog"
+                                                aria-labelledby="exampleModalLabel" aria-hidden="true"
+                                                style="display: none;">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="xccdfModal">정책 추가</h5>
+                                                            <a href="#" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
+                                                                <span aria-hidden="true">×</span>
+                                                            </a>
+                                                        </div>
+
+
+                                                        <form action="/agent/upload_xlsx" method="POST"
+                                                            enctype="multipart/form-data">
+                                                            <div class="modal-body">
+
+                                                            	<div class="form-group">
+                                                                    <label for="inputText5">정책명(입력필요)</label>
+                                                                    <input name="txtOwner" type="text"
+                                                                        class="form-control">
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label for="inputText5">운영체제(입력필요)</label>
+                                                                    <input name="txtOwner" type="text"
+                                                                        class="form-control">
+                                                                </div>
+
+                                                                 <div class="form-group">
+                                                                    <label for="inputText5">파일명(입력 x)</label>
+                                                                    <input name="txtOwner" type="text"
+                                                                        class="form-control" disabled="true">
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label for="inputText5">경로(입력 x)</label>
+                                                                    <input name="txtOwner" type="text"
+                                                                        class="form-control" disabled="true">
+                                                                </div>
+
+                                                                <label class="col-12 btn btn-outline-success btn-lg" style="margin-top: 5px ;margin-bottom: 5px;"  >
+                                                                    정책 파일 첨부하기<input type="file" name="xlsx_file"
+                                                                        style="display: none;">
+                                                                </label>
+
+                                                                <span style="color:red";"" >
+                                                                주의 : 모든 내용을 기입해 주세요</span>
+
+
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <a href="#" class="btn btn-secondary"
+                                                                    data-dismiss="modal">닫기</a>
+                                                                <input class="btn btn-primary" type="submit"
+                                                                    value="확인">
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        
+                                    	<div class="card-footer-item card-footer-item-bordered">
+                                            <a href="#xccdfDelBtn" id="xccdfDelBtn" class="card-link">정책 삭제</a>
                                         </div>
                                     </div>
                                 </div>
@@ -115,61 +198,6 @@
                   <!-- 정책관리  끝-->
                 <!-- 점검 주기 관리 시작-->
 
-
-
-
-                            <div class="col-xl-5 col-lg-5 col-md-6 col-sm-12 ">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h3 style="text-align: center;">점검 주기</h3> 
-                                    </div>
-                                    <div class="card-body">
-                                  
-                                        <div class="row" style="margin-bottom: 30px; margin-top :30px;">
-
-                                            <div class="col-lg-3"></div>
-
-                                            <select class="col-lg-5 custom-select d-block w-100" style="height: 45px; margin-left: 20px">
-                                                <option selected="">현재 점검 주기 : 매 월 1 일</option>
-
-                                                <option value="10-20">매 주 월요일</option>
-                                                <option value="20-30">매 주 수요일</option>
-                                                <option value="30-30">매 주 금요일</option>
-                                                <option value="1">매 월 1 일</option>
-                                                <option value="10">매 월 10 일</option>
-                                                <option value="15">매 월 15 일</option>
-                                                <option value="finish">매 월 말일</option>
-                                            </select>
-
-                                            <div class="col-lg-3"></div>
-                                        </div>
-                                           
-                                        <div class="row" style="align-items: center; margin-bottom: 40px;">
-
-                                            <a class="col-lg-3"></a>
-                                            <input type="date" id="datepicker"/>
-
-                                            <a type="date" id="datepicker" class="col-lg-3 btn btn-outline-brand" style="margin-left: 10px; ">적용</a>
-
-                                        </div>
-
-                                    </div>
-
-                                   
-                                    <div class="card-footer  p-0 text-center d-flex justify-content-center">
-                                        <div class="card-footer-item card-footer-item-bordered">
-                                            <a href="#" class="card-link">점검 주기 변경</a>
-                                        </div>
-                                        <div class="card-footer-item card-footer-item-bordered">
-                                            <a href="#" class="card-link">주기 변경 완료</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-                <!-- 점검 주기 관리 끝 -->
               
             </div>
         </div>
@@ -210,27 +238,54 @@
     <!-- ============================================================== -->
     <!-- Optional JavaScript -->
     <!-- jquery 3.3.1 -->
-    <script src="assets/vendor/jquery/jquery-3.3.1.min.js"></script>
+    <script src="/assets/vendor/jquery/jquery-3.3.1.min.js"></script>
+    <script src="/assets/vendor/jquery/datatables.min.js"></script>
     <!-- bootstap bundle js -->
-    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
     <!-- slimscroll js -->
-    <script src="assets/vendor/slimscroll/jquery.slimscroll.js"></script>
+    <script src="/assets/vendor/slimscroll/jquery.slimscroll.js"></script>
     <!-- main js -->
-    <script src="assets/libs/js/main-js.js"></script>
+    <script src="/assets/libs/js/main-js.js"></script>
+    <!-- chart chartist js -->
+    <script src="/assets/vendor/charts/chartist-bundle/chartist.min.js"></script>
+    <!-- sparkline js -->
+    <script src="/assets/vendor/charts/sparkline/jquery.sparkline.js"></script>
+    <!-- morris js -->
+    <!-- <script src="assets/vendor/charts/morris-bundle/raphael.min.js"></script> -->
+    <!-- <script src="assets/vendor/charts/morris-bundle/morris.js"></script> -->
+    <!-- chart c3 js -->
+    <script src="/assets/vendor/charts/c3charts/c3.min.js"></script>
+    <script src="/assets/vendor/charts/c3charts/d3-5.4.0.min.js"></script>
+    <script src="/assets/vendor/charts/c3charts/C3chartjs.js"></script>
         
+<script>
+ $('#xccdfDelBtn').click((e) => {
 
-    <script type="text/javascript">
-        $().ready(function () {
-            if (!Modernizr.inputtypes.date) {
-             $( "#datepicker" ).datepicker();
-            });
-    
-    $('input[type=date]').datepicker();
-  }
-});
-    </script>
+ 			alert("정말 삭제하실꺼유");
+            let arr = [];
+            let chk_arr = $(".chkbox:checked");
+            if (chk_arr.length === 0) {
+                alert("선택된 에이전트가 없습니다.");
+                return;
+            } else {
+                let sel = confirm("정말로 삭제하시겠습니까?");
+                if(sel == true){
+                    chk_arr.each((idx, elem) => {
+                    let id = elem.id;
 
+                    // alert(recordsets[id]);
+                    arr.push();
+                });
 
+                $('#del_agent_cd').val();
+                $('#').submit();
+                }else{
+                    return;
+                }
+                
+            }
+        });
+</script>
 </body>
  
 </html>
