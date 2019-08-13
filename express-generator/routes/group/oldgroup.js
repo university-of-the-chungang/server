@@ -21,11 +21,11 @@ router.post('/', function (req, res, next) {
                           res.render(path, {
                               name: JSON.parse(req.body.change_group_NAME),
                               tab: req.body.tab,
-                              recordsets: result.recordset,
-                              recordsets2: result2.recordset,
-                              recordsets3: result3.recordset,
-                              recordsets4: result4.recordset,
-                              recordsets5: result5.recordset
+                              recordsets: result.recordset, //그룹 정보 조회 -> 그룹 수정 페이지에 디폴트 정보 띄우기
+                              recordsets2: result2.recordset, //그룹 수정 페이지 정보 조회
+                              recordsets3: result3.recordset, //모든 에이전트 정보를 참조하여
+                              recordsets4: result4.recordset, //그룹 수정 페이지 에이전트 할당을 위한 IP를 조회 함
+                              recordsets5: result5.recordset //*****수정 필요
                           });
                       });
                   });
@@ -44,7 +44,6 @@ router.post('/change_basic_info', function(req, res, next){
 
     }else{
        DB.update_group_info(cd, req.body.editNAME, req.body.editINSPECTION_START_DATE, req.body.editINSPECTION_PERIOD, req.body.editDISCRIPTION).then(re => {
-           console.log(req.body.editINSPECTION_START_DATE);
            res.render('./main/GroupPolicy/OldGroup/load', {
                name: name,
                tab: 2

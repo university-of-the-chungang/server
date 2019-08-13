@@ -151,7 +151,15 @@
                                     <select multiple="multiple" size="10" name="agentlistbox[]">
                                         <%for(var i=0; i<(recordsets3.length); i++){%>
                                             <option value="<%=recordsets3[i].AGENT_CD%>"
-                                                    <%if(JSON.stringify(recordsets4).includes(recordsets3[i].IP)){%>
+                                                    <% var flag = 0;
+                                                    for(var j=0; j<(recordsets4.length); j++) {
+                                                        if (recordsets3[i].AGENT_CD === recordsets4[j].AGENT_CD) {
+                                                            flag = 1;
+                                                            break;
+                                                        }
+                                                    }
+                                                    if(flag === 1){
+                                                    %>
                                                     selected="selected"
                                                     <%}%>>
                                                 <%=recordsets3[i].IP%>
@@ -178,10 +186,12 @@
                                 </div>
 
 
-                            </div><!-- 에이전트 할당 탭 끝-->
-                <!-- 정책 적용 탭 시작-->
+                            </div>
+                            <!-- 에이전트 할당 탭 끝-->
+
+                            <!-- 정책 적용 탭 시작-->
                             <div class="tab-pane" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                        <div class="row">
+                                <div class="row">
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
                                 <div class="card" style="height: 300px; overflow: scroll;">
                                     <h4 class="card-header text-center">그룹에 포함된 운영체제 버전</h4>
@@ -193,25 +203,25 @@
                                             for(; i<parseInt(recordsets2.length/2); i++){ %>
                                                 <tr>
                                                     <td>
-                                                        <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input is-valid" id="customControlValidation1" required="">
-                                                        <label class="custom-control-label" for="customControlValidation1"><%=recordsets2[i*2].OS%></label>
+                                                        <div class="custom-control custom-radio custom-control-inline">
+                                                            <input type="radio" class="custom-control-input <%if(1){%>is-valid<%}else{%> is-invalid <%}%>" name = "jb-radio" id="customControlValidation<%-i*2%>">
+                                                            <label class="custom-control-label" for="customControlValidation<%-i*2%>"><%=recordsets2[i*2].OS%></label>
                                                         </div>
                                                     </td>
 
                                                     <td>
-                                                        <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input is-invalid" id="customControlValidation1" required="">
-                                                        <label class="custom-control-label" for="customControlValidation1"><%=recordsets2[i*2+1].OS%></label>
+                                                        <div class="custom-control custom-radio custom-control-inline">
+                                                                <input type="radio" class="custom-control-input <%if(1){%>is-valid<%}else{%> is-invalid <%}%>" name = "jb-radio" id="customControlValidation<%-i*2+1%>">
+                                                                <label class="custom-control-label" for="customControlValidation<%-i*2+1%>"><%=recordsets2[i*2+1].OS%></label>
                                                         </div>
                                                     </td>
                                                 </tr>
                                             <%}
                                             if(recordsets2.length % 2 != 0){%>
                                             <td>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input is-valid" id="customControlValidation1" required="">
-                                                    <label class="custom-control-label" for="customControlValidation1"><%=recordsets2[i*2].OS%></label>
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" class="custom-control-input <%if(1){%>is-valid<%}else{%> is-invalid <%}%>" name = "jb-radio" id="customControlValidation<%-i*2%>">
+                                                    <label class="custom-control-label" for="customControlValidation<%-i*2%>"><%=recordsets2[i*2].OS%></label>
                                                 </div>
                                             </td>
                                             <td></td>
@@ -289,7 +299,7 @@
                                 </div>
                                 
                                    <!-- 운영체제 버전에 대한 div 끝이면서 운영체제 별 정책 할당 결과 div시작-->
-                                                               <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-5">
+                            <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-5">
                                     <div class="card" style="height: 500px; overflow: scroll;">
                                     <h4 class="card-header text-center">운영체제 별 정책 할당 결과</h4>
                                       <div class="card-body p-0">
