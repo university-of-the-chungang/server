@@ -58,6 +58,45 @@ let query_select = (data, table_name,where) => {
     });
 
 };
+exports.delete_policy = (xccdf_cd)=>{
+    console.log(`DELETE FROM TBL_XCCDF WHERE XCCDF_CD IN (${xccdf_cd})`);
+    return new Promise((resolve,reject)=>{
+       new sql.Request().query(`DELETE FROM TBL_XCCDF WHERE XCCDF_CD IN (${xccdf_cd})`,(err,result)=>{
+           if(err){
+               reject(err);
+           }else{
+               resolve(result);
+           }
+       }) 
+    })
+}
+
+exports.get_policy_info = ()=>{
+    return new Promise((resolve,reject)=>{
+        new sql.Request().query(`SELECT * FROM TBL_XCCDF AS T1 LEFT OUTER JOIN TBL_XCCDF_SET_LIST AS T2 ON T1.XCCDF_CD = T2.XCCDF_CD LEFT OUTER JOIN TBL_GROUP_INFO AS T3 ON T2.GROUP_SET_CD = T3.GROUP_SET_CD`,(err,result)=>{
+            if(err){
+                reject(err);
+            }else{
+                resolve(result);
+            }
+        });
+    })
+}
+
+exports.add_policy = (policy_name, policy_os, policy_filepath)=>{
+    return new Promise((resolve,reject)=>{
+        console.log(`INSERT INTO TBL_XCCDF (FILE_NAME,FILE_PATH,INSPECT_OS) VALUES('${policy_name}','${policy_filepath}','${policy_os}')`);
+        new sql.Request().query(`INSERT INTO TBL_XCCDF (FILE_NAME,FILE_PATH,INSPECT_OS) VALUES('${policy_name}','${policy_filepath}','${policy_os}')`,(err,result)=>{
+            if(err){
+                console.log(err);
+                reject(err);
+            }else{
+                resolve(result);
+            }
+        })
+    })
+}
+
 exports.add_log = (log_type,contents,date)=>{
     return new Promise((resolve,reject)=>{
         console.log(`INSERT INTO TBL_LOG(LOG_TYPE,CONTENTS,CONTENT_DATE) VALUES('${log_type}',N'${contents}',CONVERT(DATETIME,'${date}'))`);

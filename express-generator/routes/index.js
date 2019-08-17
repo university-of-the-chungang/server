@@ -59,10 +59,15 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/policy', (req, res, next) => {
-  res.render('policy');
+  DB.get_policy_info().then(result=>{
+    res.render('policy',result);
+  });
 });
-
-
+router.post('/delete_policy',(req,res,next)=>{
+  DB.delete_policy(req.body['del_policy_cd']).then((result)=>{
+    res.redirect('/policy');
+  });
+})
 
 router.get('/dashboard', function (req, res, next) {
   if(req.session.username){
@@ -395,6 +400,8 @@ router.post('/make_xlsx',function(req,res,next){
   res.json(result);
 });
 let upload = multer({dest:'public/uploads/'})
+
+
 router.post('/agent/upload_xlsx',upload.single('xlsx_file'),(req,res,next)=>{
   try{
   LOGS.read_xlsx(req.file.path).then(result=>{
@@ -410,6 +417,24 @@ router.post('/agent/upload_xlsx',upload.single('xlsx_file'),(req,res,next)=>{
   res.redirect('/agent?err_msg=error');
 }
 });
+
+
+router.post('/upload_policy',upload.single('xml_file'),(req,res,next)=>{
+  
+    try{
+      let param = req.body;
+      console.log(param)
+      console.log(param['policy_filepath']);
+      DB.add_policy(param['policy_name'],param['policy_os'],param['policy_filepath']);
+
+    }catch(err){
+      console.log(err);
+    }
+    res.redirect('/policy');
+  
+})
+
+
 router.post('/agent/refresh_xlsx',upload.single('xlsx_file'),(req,res,next)=>{
   LOGS.refresh_xlsx(req.file.path).then(result=>{
     DB.get_agent_info().then(result2 => {
