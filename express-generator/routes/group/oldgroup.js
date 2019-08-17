@@ -55,7 +55,48 @@ router.post('/change_basic_info', function(req, res, next){
 router.post('/change_group_set_list', function(req, res, next){
     let name = req.body.group_name;
     let arr = JSON.parse(req.body.change_group_set_list);
-    DB.delete_group_set_list(req.body.group_set_cd).then( result=> {
+    DB.view_modify_group_IP_info(name).then(result => {
+        //에이전트 추가
+        for(var i = 0; (i < arr.length); i++) {
+            var flag = 0;
+            for(var j=0; (j<result.recordset.length); j++){
+                var com = result.recordset[j].AGENT_CD + '';
+
+                if(com === arr[i]){
+                    flag = 1;
+                    break;
+                }
+            }
+
+            if(flag === 0)
+                DB.insert_group_set_list(req.body.group_set_cd, arr[i]);
+        }
+
+        //에이전트 삭제
+        for(var j=0; (j<result.recordset.length); j++){
+            var flag = 0;
+            var com = result.recordset[j].AGENT_CD + '';
+            for(var i=0; (i <arr.length); i++){
+                if(com === arr[i]){
+                    flag = 1;
+                    break;
+                }
+            }
+
+            if(flag === 0)
+                DB.delete_agent_from_group_set_list(req.body.group_set_cd, result.recordset[j].AGENT_CD);
+        }
+
+        //그룹 정보에 변동 사항 반영
+        DB.change_group_agent_counting(req.body.group_set_cd, arr.length).then(result =>{
+            res.render('./main/GroupPolicy/OldGroup/load', {
+                name: name,
+                tab: 3
+            });
+        });
+    });
+
+    /*DB.delete_group_set_list(req.body.group_set_cd).then( result=> {
         for(var i = 0; (i < arr.length); i++) {
             DB.insert_group_set_list(req.body.group_set_cd, arr[i]);
         }
@@ -65,7 +106,7 @@ router.post('/change_group_set_list', function(req, res, next){
                 tab: 3
             });
         });
-    });
+    });*/
 });
 
 

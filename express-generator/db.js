@@ -660,7 +660,7 @@ Where TBL_GROUP_INFO.NAME = N'${group_name}' AND TBL_AGENT_INFO.DEL_FLAG = 0` ;
 
 exports.view_modify_group_IP_info = (group_name) => {
     return new Promise((resolve, reject) => {
-        let query = `Select TBL_AGENT_INFO.AGENT_CD, IP
+        let query = `Select TBL_AGENT_INFO.AGENT_CD, XCCDF_CD, IP
 From  (TBL_GROUP_SET_LIST inner join TBL_AGENT_INFO on TBL_GROUP_SET_LIST.AGENT_CD = TBL_AGENT_INFO.AGENT_CD) 
 inner join TBL_GROUP_INFO On TBL_GROUP_INFO.GROUP_SET_CD = TBL_GROUP_SET_LIST.GROUP_SET_CD
 Where TBL_GROUP_INFO.NAME = N'${group_name}' AND TBL_AGENT_INFO.DEL_FLAG = 0` ;
@@ -706,9 +706,9 @@ Where TBL_GROUP_INFO.NAME = N'${group_name}'` ;
 };
 
 
-exports.delete_group_set_list = (group_set_cd) => {
+exports.delete_agent_from_group_set_list = (group_set_cd, agent_cd) => {
     return new Promise((resolve, reject) =>{
-        let query = `DELETE FROM TBL_GROUP_SET_LIST WHERE GROUP_SET_CD = ${group_set_cd}`;
+        let query = `DELETE FROM TBL_GROUP_SET_LIST WHERE GROUP_SET_CD = ${group_set_cd} AND AGENT_CD = ${agent_cd}`;
         console.log(query);
         new sql.Request().query(query, (err, result) => {
             if(err){
