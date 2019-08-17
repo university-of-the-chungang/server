@@ -85,12 +85,12 @@
                                                     </td>
                                                     <td><%=recordsets[0][i]['FILE_NAME']%></td>
                                                     <td><%=recordsets[0][i]['INSPECT_OS']%></td>
-                                                    <td><%=recordsets[0][i]['FILE_PATH']%></td>
+                                                    <td>/C:/xxcdf/<%=recordsets[0][i]['FILE_PATH'].split('/')[recordsets[0][i]['FILE_PATH'].split('/').length-1].split('\\')[recordsets[0][i]['FILE_PATH'].split('/')[recordsets[0][i]['FILE_PATH'].split('/').length-1].split('\\').length - 1]%></td>
                                                     <% if (recordsets[0][i]['ACTIVE_TIME']){ %>
                                                         <% let d = recordsets[0][i]['ACTIVE_TIME'] %>
                                                     <td><%=d.getFullYear().toString()+"-"+((d.getMonth()+1).toString().length==2?(d.getMonth()+1).toString():"0"+(d.getMonth()+1).toString())+"-"+(d.getDate().toString().length==2?d.getDate().toString():"0"+d.getDate().toString())+" "+(d.getHours().toString().length==2?d.getHours().toString():"0"+d.getHours().toString())+":"+((parseInt(d.getMinutes()/5)*5).toString().length==2?(parseInt(d.getMinutes()/5)*5).toString():"0"+(parseInt(d.getMinutes()/5)*5).toString())+":00"%></td>
                                                     <% }else{ %>
-                                                    <td style="text-align: center">-</td>
+                                                    <td style="text-align: center"></td>
                                                     <% } %>
                                                 </tr>
                                                 <% } %>
