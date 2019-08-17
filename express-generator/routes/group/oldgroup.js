@@ -67,9 +67,22 @@ router.post('/change_group_set_list', function(req, res, next){
                     break;
                 }
             }
-
-            if(flag === 0)
-                DB.insert_group_set_list(req.body.group_set_cd, arr[i]);
+            if(flag === 0){
+                let agent_cd = arr[i];
+                DB.insert_group_set_list(req.body.group_set_cd, agent_cd);
+                DB.get_agent_info(agent_cd).then(agent_info =>{
+                    DB.view_modify_agent_os_info(req.body.group_set_cd, agent_cd).then(os_info => {
+                        for(var j=0; j<os_info.recordset.length; j++){
+                            if(os_info.recordset[j].OS === agent_info.recordset[0].OS){
+                                if(os_info.recordset[j].XCCDF_CD !== null){
+                                    DB.update_xccdf_cd(req.body.group_set_cd, agent_cd, os_info.recordset[j].XCCDF_CD);
+                                    break;
+                                }
+                            }
+                        }
+                    });
+                });
+            }
         }
 
         //에이전트 삭제
@@ -82,7 +95,6 @@ router.post('/change_group_set_list', function(req, res, next){
                     break;
                 }
             }
-
             if(flag === 0)
                 DB.delete_agent_from_group_set_list(req.body.group_set_cd, result.recordset[j].AGENT_CD);
         }

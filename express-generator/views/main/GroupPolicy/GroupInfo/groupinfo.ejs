@@ -171,10 +171,14 @@
                                                             <%for(var i=0; i<(recordsets3.length); i++){ %>
                                                             <tr>
                                                                 <td class="text-center">
-                                                                    <%=recordsets3[i].INSPECT_OS%>
+                                                                    <%=recordsets3[i].OS %>
                                                                 </td>
                                                                 <td class="text-center">
-                                                                    <%=recordsets3[i].FILE_NAME%>
+                                                                    <%if(recordsets3[i].XCCDF_CD === null){%>
+                                                                            할당되지 않음
+                                                                    <%}else{%>
+                                                                        <%=recordsets3[i].FILE_NAME%>
+                                                                    <%}%>
                                                                 </td>
                                                             </tr>
                                                             <%}%>

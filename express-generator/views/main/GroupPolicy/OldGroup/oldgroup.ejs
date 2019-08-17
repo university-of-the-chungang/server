@@ -200,28 +200,28 @@
                                         <tbody>
                                             <%
                                             var i=0
-                                            for(; i<parseInt(recordsets2.length/2); i++){ %>
+                                            for(; i<parseInt(recordsets5.length/2); i++){ %>
                                                 <tr>
                                                     <td>
                                                         <div class="custom-control custom-radio custom-control-inline">
-                                                            <input type="radio" class="custom-control-input <%if(1){%>is-valid<%}else{%> is-invalid <%}%>" name = "jb-radio" id="customControlValidation<%-i*2%>">
-                                                            <label class="custom-control-label" for="customControlValidation<%-i*2%>"><%=recordsets2[i*2].OS%></label>
+                                                            <input type="radio" class="custom-control-input <%if(recordsets5[i*2].XCCDF_CD !== null){%>is-valid<%}else{%> is-invalid <%}%>" name = "jb-radio" id="customControlValidation<%-i*2%>">
+                                                            <label class="custom-control-label" for="customControlValidation<%-i*2%>"><%=recordsets5[i*2].OS%></label>
                                                         </div>
                                                     </td>
 
                                                     <td>
                                                         <div class="custom-control custom-radio custom-control-inline">
-                                                                <input type="radio" class="custom-control-input <%if(1){%>is-valid<%}else{%> is-invalid <%}%>" name = "jb-radio" id="customControlValidation<%-i*2+1%>">
-                                                                <label class="custom-control-label" for="customControlValidation<%-i*2+1%>"><%=recordsets2[i*2+1].OS%></label>
+                                                                <input type="radio" class="custom-control-input <%if(recordsets5[i*2+1].XCCDF_CD !== null){%>is-valid<%}else{%> is-invalid <%}%>" name = "jb-radio" id="customControlValidation<%-i*2+1%>">
+                                                                <label class="custom-control-label" for="customControlValidation<%-i*2+1%>"><%=recordsets5[i*2+1].OS%></label>
                                                         </div>
                                                     </td>
                                                 </tr>
                                             <%}
-                                            if(recordsets2.length % 2 != 0){%>
+                                            if(recordsets5.length % 2 != 0){%>
                                             <td>
                                                 <div class="custom-control custom-radio custom-control-inline">
-                                                    <input type="radio" class="custom-control-input <%if(1){%>is-valid<%}else{%> is-invalid <%}%>" name = "jb-radio" id="customControlValidation<%-i*2%>">
-                                                    <label class="custom-control-label" for="customControlValidation<%-i*2%>"><%=recordsets2[i*2].OS%></label>
+                                                    <input type="radio" class="custom-control-input <%if(recordsets5[i*2].XCCDF_CD !== null){%>is-valid<%}else{%> is-invalid <%}%>" name = "jb-radio" id="customControlValidation<%-i*2%>">
+                                                    <label class="custom-control-label" for="customControlValidation<%-i*2%>"><%=recordsets5[i*2].OS%></label>
                                                 </div>
                                             </td>
                                             <td></td>
@@ -305,13 +305,29 @@
                                       <div class="card-body p-0">
                                           
                                         <table class="table table-hover">
-                                        <tbody>
+                                            <thead>
+                                                <th></th>
+                                                <th>상태</th>
+                                                <th>운영체제</th>
+                                                <th>xccdf</th>
+                                            </thead>
+                                            <tbody>
                                             <%for(var i=0; i<(recordsets5.length); i++){%>
                                             <tr>
                                                 <th scope="row"><%=i+1%></th>
-                                                <td><img src="assets/circle/grey.png" alt="User Avatar" class="rounded-circle user-avatar-lg"></td>
-                                                <td><%=recordsets5[i].INSPECT_OS%></td>
-                                                <td><%=recordsets5[i].FILE_NAME%></td>
+                                                <td>
+                                                    <%if(recordsets5[i].XCCDF_CD === null){%>
+                                                        <img src="assets/circle/grey.png" alt="User Avatar" class="rounded-circle user-avatar-lg">
+                                                    <%}else{%>
+                                                        <img src="assets/circle/blue.png" alt="User Avatar" class="rounded-circle user-avatar-lg">
+                                                    <%}%>
+                                                </td>
+                                                <td><%=recordsets5[i].OS%></td>
+                                                <td><%if(recordsets5[i].XCCDF_CD === null){%>
+                                                        할당 되지 않음
+                                                    <%}else{%>
+                                                        <%=recordsets5[i].FILE_NAME%>
+                                                    <%}%></td>
                                             </tr>
                                             <%}%>
                                         </tbody>
@@ -491,8 +507,6 @@
         $('#change_cancle_btn').click(() =>{
            location.href = '/group';
         });
-
-
 
     </script>
 
