@@ -86,7 +86,7 @@ exports.get_policy_info = ()=>{
 exports.add_policy = (policy_name, policy_os, policy_filepath)=>{
     return new Promise((resolve,reject)=>{
         console.log(`INSERT INTO TBL_XCCDF (FILE_NAME,FILE_PATH,INSPECT_OS) VALUES('${policy_name}','${policy_filepath}','${policy_os}')`);
-        new sql.Request().query(`INSERT INTO TBL_XCCDF (FILE_NAME,FILE_PATH,INSPECT_OS) VALUES('${policy_name}','${policy_filepath}','${policy_os}')`,(err,result)=>{
+        new sql.Request().query(`INSERT INTO TBL_XCCDF (FILE_NAME,FILE_PATH,INSPECT_OS) VALUES(N'${policy_name}', N'${policy_filepath}', N'${policy_os}')`,(err,result)=>{
             if(err){
                 console.log(err);
                 reject(err);
@@ -388,6 +388,7 @@ exports.get_new_xccdf_cd = () => {
         });
     });
 };
+
 exports.put_xccdf = (xccdf_cd, file_name, file_path, inspect_os) => {
     return new Promise((resolve, reject) => {
         let query = `INSERT INTO TBL_XCCDF (XCCDF_CD, FILE_NAME, FILE_PATH, INSPECT_OS) VALUES (` + xccdf_cd + `, N'` + file_name + `', '` + file_path + `', '` + inspect_os + `')`;
@@ -399,6 +400,7 @@ exports.put_xccdf = (xccdf_cd, file_name, file_path, inspect_os) => {
         });
     });
 };
+
 exports.view_tbl_xccdf = () => {
     return new Promise((resolve, reject) => {
         new sql.Request().query(`SELECT * FROM TBL_XCCDF `, (err, result) => {
