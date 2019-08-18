@@ -152,7 +152,7 @@
 
                                                             <label class="col-12 btn btn-outline-success btn-lg"
                                                                 style="margin-top: 5px ;margin-bottom: 5px;">
-                                                                정책 파일 첨부하기<input type="file" name="xml_file"
+                                                                정책 파일 첨부하기<input type="file" name="xml_file" id="xml_file"
                                                                     accept=".xml" style="display: none;">
                                                             </label>
 
@@ -253,6 +253,26 @@
     <script src="/assets/vendor/charts/c3charts/C3chartjs.js"></script>
 
     <script>
+        $('#xml_file').change((e)=>{
+            console.log(e.target.value);
+            let pathpoint = e.target.value.lastIndexOf('.');
+            let filepoint = e.target.value.substring(pathpoint+1,e.target.length);
+            let filetype = filepoint.toLowerCase();
+
+            console.log(filetype);
+            if(filetype === 'xml'){
+            let filepath = $(e.target).val()
+            let filename = filepath.split('\\')[filepath.split('\\').length - 1]
+            $('#input_policy_filename').val(filename);
+            $('#input_policy_filepath').val(filepath);
+            $('#hidden_filepath').val(filepath);
+
+            }else{
+                alert("xml 파일만 선택할 수 있습니다.");
+                return false;
+            }
+
+        });
         $('#submitBtn').click((e) => {
             let policy_name = $('#input_policy_name').val();
             let policy_os = $('#input_policy_fileos').val();
@@ -264,13 +284,6 @@
 
                 $('#inputpolicyForm').submit();
             }
-        });
-        $('input[type=file]').change((e) => {
-            let filepath = $(e.target).val()
-            let filename = filepath.split('\\')[filepath.split('\\').length - 1]
-            $('#input_policy_filename').val(filename);
-            $('#input_policy_filepath').val(filepath);
-            $('#hidden_filepath').val(filepath);
         });
         $('#xccdfDelBtn').click((e) => {
 
