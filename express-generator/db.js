@@ -692,21 +692,21 @@ Where TBL_GROUP_SET_LIST.GROUP_SET_CD = N'${group_set_cd}' AND TBL_AGENT_INFO.DE
     });
 };
 
-/*exports.view_xccdf_included_group = (group_name) => {
+exports.get_data_for_xccdf_apply = (group_set_cd, os) =>{
     return new Promise((resolve, reject) => {
-        let query=`Select *
-From  (TBL_XCCDF_SET_LIST inner join TBL_XCCDF on TBL_XCCDF_SET_LIST.XCCDF_CD = TBL_XCCDF.XCCDF_CD) 
-inner join TBL_GROUP_INFO On TBL_GROUP_INFO.GROUP_SET_CD = TBL_XCCDF_SET_LIST.GROUP_SET_CD
-Where TBL_GROUP_INFO.NAME = N'${group_name}'` ;
+        let query = `Select TBL_GROUP_SET_LIST.AGENT_CD
+From  TBL_GROUP_SET_LIST 
+inner join TBL_AGENT_INFO on TBL_GROUP_SET_LIST.AGENT_CD = TBL_AGENT_INFO.AGENT_CD 
+Where TBL_GROUP_SET_LIST.GROUP_SET_CD = N'${group_set_cd}' AND TBL_AGENT_INFO.DEL_FLAG = 0 AND TBL_AGENT_INFO.OS = N'${os}'`;
         console.log(query);
         new sql.Request().query(query, (err, result) => {
             if(err){
                 reject(err);
             }
             resolve(result);
-        })
-    })
-};*/
+        });
+    });
+};
 
 exports.view_xccdf_included_group = (group_name) => {
     return new Promise((resolve, reject) => {

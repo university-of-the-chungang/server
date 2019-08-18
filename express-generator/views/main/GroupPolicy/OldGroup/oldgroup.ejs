@@ -204,14 +204,14 @@
                                                 <tr>
                                                     <td>
                                                         <div class="custom-control custom-radio custom-control-inline">
-                                                            <input type="radio" class="custom-control-input <%if(recordsets5[i*2].XCCDF_CD !== null){%>is-valid<%}else{%> is-invalid <%}%>" name = "jb-radio" id="customControlValidation<%-i*2%>">
+                                                            <input type="radio" class="custom-control-input <%if(recordsets5[i*2].XCCDF_CD !== null){%>is-valid<%}else{%> is-invalid <%}%>" name = "jb-radio" id="customControlValidation<%-i*2%>" value="<%=recordsets5[i*2].OS%>">
                                                             <label class="custom-control-label" for="customControlValidation<%-i*2%>"><%=recordsets5[i*2].OS%></label>
                                                         </div>
                                                     </td>
 
                                                     <td>
                                                         <div class="custom-control custom-radio custom-control-inline">
-                                                                <input type="radio" class="custom-control-input <%if(recordsets5[i*2+1].XCCDF_CD !== null){%>is-valid<%}else{%> is-invalid <%}%>" name = "jb-radio" id="customControlValidation<%-i*2+1%>">
+                                                                <input type="radio" class="custom-control-input <%if(recordsets5[i*2+1].XCCDF_CD !== null){%>is-valid<%}else{%> is-invalid <%}%>" name = "jb-radio" id="customControlValidation<%-i*2+1%>" value="<%=recordsets5[i*2+1].OS%>">
                                                                 <label class="custom-control-label" for="customControlValidation<%-i*2+1%>"><%=recordsets5[i*2+1].OS%></label>
                                                         </div>
                                                     </td>
@@ -220,7 +220,7 @@
                                             if(recordsets5.length % 2 != 0){%>
                                             <td>
                                                 <div class="custom-control custom-radio custom-control-inline">
-                                                    <input type="radio" class="custom-control-input <%if(recordsets5[i*2].XCCDF_CD !== null){%>is-valid<%}else{%> is-invalid <%}%>" name = "jb-radio" id="customControlValidation<%-i*2%>">
+                                                    <input type="radio" class="custom-control-input <%if(recordsets5[i*2].XCCDF_CD !== null){%>is-valid<%}else{%> is-invalid <%}%>" name = "jb-radio" id="customControlValidation<%-i*2%>" value="<%=recordsets5[i*2].OS%>">
                                                     <label class="custom-control-label" for="customControlValidation<%-i*2%>"><%=recordsets5[i*2].OS%></label>
                                                 </div>
                                             </td>
@@ -255,8 +255,12 @@
                             </div>
 
                             <div class="col-12" style="margin-top: 15px;">
-                               <a href="#" class="col-11 btn btn-outline-success" data-toggle="modal" data-target="#xccdfModal"> 정책 적용 <span class="icon-circle-small icon-box-xs text-success bg-success-light"><i class="fa fa-fw fa-arrow-up"></i></span><span class="ml-1"></span></a>
-                            </div>
+                                <input type="button"
+                                       class="btn btn-outline-success col-xl-12 col-lg-12 col-md-12 col-sm-12"
+                                       id="xccdf_modal_btn" data-toggle="modal" style="height: 55px"
+                                       value="정책 적용"></button>
+                               <!--<a href="#" id = "xccdf_modal_btn" class="col-11 btn btn-outline-success" data-toggle="modal" data-target="#xccdfModal"> 정책 적용 <span class="icon-circle-small icon-box-xs text-success bg-success-light"><i class="fa fa-fw fa-arrow-up"></i></span><span class="ml-1"></span></a>
+                            --></div>
                              <!-- 정책 적용 모달 시작 -->
                                      <div class="modal" id="xccdfModal" tabindex="-1" role="dialog"
                                             aria-labelledby="exampleModalLabel" aria-hidden="true"
@@ -271,16 +275,43 @@
                                                         </a>
                                                     </div>
 
-                                                    <form action="" method="POST">
+                                                    <form action="/oldgroup/apply_xccdf" method="POST">
+                                                        <input type="hidden" name = "group_name" value = <%=name%>>
+                                                        <input type="hidden" class="form-control" name="group_set_cd"  value="<%=recordsets[0].GROUP_SET_CD%>">
                                                         <div class="modal-body">
                                                             <div class="form-group">
-                                                                <label for="inputText1"
-                                                                    class="col-form-label">적용할 정책 파일찾기</label>
-                                                                <input name="txtIP" type="text" class="form-control">
+                                                                <label class = "col-form-label">적용할 OS</label>
+                                                                <input id = "apply_os" style="font-weight:bold" name="apply_os" type = "text" class="form-control" readonly>
+                                                                <label for="inputText1" class="col-form-label" style="margin-top: 10px">정책 적용</label>
+                                                                <div class = "table-responsive">
+                                                                    <table id = "xccdf_table" class="table">
+                                                                        <thead class = "bg-light">
+                                                                        <th class = "border-0 text-center">선택</th>
+                                                                        <th class = "border-0 text-center">파일 이름</th>
+                                                                        <th class = "border-0 text-center">검사 OS</th>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                        <%for(var i=0; i<recordsets6.length; i++){%>
+                                                                        <tr class="table" style="text-align: center;">
+                                                                            <td>
+                                                                            <label class = "custom-control custom-radio">
+                                                                                <input type="radio" class="custom-control-input" name = "xccdf_radio" value = "<%=recordsets6[i].XCCDF_CD%>" id = "<%=recordsets6[i].XCCDF_CD%>">
+                                                                                <span class="custom-control-label" style="position: absolute;left:40%; top:0"></span>
+                                                                            </label>
+                                                                            </td>
+                                                                            <td style="text-align: center; vertical-align: middle;">
+                                                                                <%=recordsets6[i].FILE_NAME%>
+                                                                            </td>
+                                                                            <td style="text-align: center; vertical-align: middle;">
+                                                                                <%=recordsets6[i].INSPECT_OS%>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <%}%>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
                                                             </div>
-                                                            <a href="download path" download="" class="col-12 btn btn-outline-success btn-lg">
-                                                             적용할 정책 파일찾기<input type="file" style="display: none;">
-                                                            </a>
+                                                            <input type="submit" class="btn btn-outline-success btn-lg col-xl-12 col-lg-12 col-md-12 col-sm-12" value = "정책 적용">
                                                         </div>
 
                                                         <div class="modal-footer">
@@ -482,6 +513,7 @@
         </div>
     </div>
 </div>
+
 <!-- 파일업로드 모달 끝-->
 
     <!--jquery 3.3.1-->
@@ -519,6 +551,47 @@
     <script src="/assets/vendor/datepicker/moment.js"></script>
     <script src="/assets/vendor/datepicker/tempusdominus-bootstrap-4.js"></script>
     <script src="/assets/vendor/datepicker/datepicker.js"></script>
+    <script src="/assets/vendor/jquery/datatables.min.js"></script>
+    <style>
+    .dataTables_wrapper .dataTables_filter {
+        width:100%;
+        text-align: center;
+        margin-bottom:20px;
+    }
+
+    div.dataTables_wrapper div.dataTables_paginate {
+        float: none;
+        text-align: center;
+    }
+    </style>
+
+    <script>
+        var table = $('#xccdf_table').DataTable({
+            displayLength: 7,
+            lengthChange: false,
+            info: false,
+            searching : true,
+            scrollY: 320,
+            language:{
+                search : "",
+                searchPlaceholder : "Search..."
+            },
+        });
+
+        $('#xccdf_modal_btn').click(() => {
+            let cnt =  $("input[name = 'jb-radio']:checked").length;
+            if(cnt === 0){
+                alert("선택된 OS가 없습니다.");
+            }
+            else{
+                let os = $("input[name = 'jb-radio']:checked").val();
+                $('#apply_os').val(os);
+                $('#xccdfModal').modal('show');
+                table.columns(1).search(JSON.stringify($("input[name = 'jb-radio']:checked").val()));
+                table.draw();
+            }
+        });
+    </script>
 </body>
 </html>
 

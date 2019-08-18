@@ -18,14 +18,17 @@ router.post('/', function (req, res, next) {
               DB.get_agent_info().then(result3 => {
                   DB.view_modify_group_IP_info(JSON.parse(req.body.change_group_NAME)).then(result4=>{
                       DB.view_xccdf_included_group(JSON.parse(req.body.change_group_NAME)).then( result5 =>{
-                          res.render(path, {
-                              name: JSON.parse(req.body.change_group_NAME),
-                              tab: req.body.tab,
-                              recordsets: result.recordset, //그룹 정보 조회 -> 그룹 수정 페이지에 디폴트 정보 띄우기
-                              recordsets2: result2.recordset, //그룹 수정 페이지 정보 조회
-                              recordsets3: result3.recordset, //모든 에이전트 정보를 참조하여
-                              recordsets4: result4.recordset, //그룹 수정 페이지 에이전트 할당을 위한 IP를 조회 함
-                              recordsets5: result5.recordset //*****수정 필요
+                          DB.view_tbl_xccdf().then(result6 =>{
+                              res.render(path, {
+                                  name: JSON.parse(req.body.change_group_NAME),
+                                  tab: req.body.tab,
+                                  recordsets: result.recordset, //그룹 정보 조회 -> 그룹 수정 페이지에 디폴트 정보 띄우기
+                                  recordsets2: result2.recordset, //그룹 수정 페이지 정보 조회
+                                  recordsets3: result3.recordset, //모든 에이전트 정보를 참조하여
+                                  recordsets4: result4.recordset, //그룹 수정 페이지 에이전트 할당을 위한 IP를 조회 함
+                                  recordsets5: result5.recordset, //
+                                  recordsets6: result6.recordset
+                              });
                           });
                       });
                   });
@@ -121,6 +124,23 @@ router.post('/change_group_set_list', function(req, res, next){
     });*/
 });
 
+router.post('/apply_xccdf', function(req, res, next){
+   let name =  req.body.group_name;
+   let group_set_cd = req.body.group_set_cd;
+   let os = req.body.apply_os;
+   let xccdf_cd = req.body.xccdf_radio;
+
+   DB.get_data_for_xccdf_apply(group_set_cd, os).then(result => {
+      for(var i = 0; i<result.recordset.length; i++){
+          var agent_cd = result.recordset[i].AGENT_CD;
+          DB.update_xccdf_cd(group_set_cd, agent_cd, xccdf_cd);
+      }
+      res.render('./main/GroupPolicy/OldGroup/load', {
+          name: name,
+          tab: 3
+      });
+   });
+});
 
 
 /*router.post('/', function(req,res,next){
