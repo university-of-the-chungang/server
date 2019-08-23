@@ -1,41 +1,71 @@
 const express = require('express');
 const router = express.Router();
 const DB = require('../../db');
+const multer = require('multer');
 const LOGS = require('../../logs');
 const jwt = require('jsonwebtoken');
+
+let SECRET = 'token_secret';
+
+let isAuthenticatied = (token)=>{
+    let result = false;
+    jwt.verify(token, SECRET, function(err, decoded) {
+        var dateNow = new Date();
+        if (err) {
+            err = {
+                name: 'TokenExpiredError',
+                message: 'jwt expired',
+                expiredAt: dateNow.getTime()/1000
+            }
+        }else{
+            console.log(decoded.exp );
+            console.log(dateNow.getTime()/1000);
+            if(decoded.exp <= dateNow.getTime()/1000){
+                result =  false;
+            }else{
+                result =  decoded.exp;
+            }
+        }
+    });
+    return result;
+};
 
 
 router.post('/', function (req, res, next) {
     let path = './main/GroupPolicy/OldGroup/oldgroup';
+    let is_auth = isAuthenticatied(req.session.token);
 
-    console.log(path);
-
-  if(req.body.change_group_NAME.length === 0) {
-    res.redirect('/group');
-  }else {
-      DB.get_group_info(JSON.parse(req.body.change_group_NAME)).then(result => {
-          DB.view_modify_group_info(JSON.parse(req.body.change_group_NAME)).then(result2 => {
-              DB.get_agent_info().then(result3 => {
-                  DB.view_modify_group_IP_info(JSON.parse(req.body.change_group_NAME)).then(result4=>{
-                      DB.view_xccdf_included_group(JSON.parse(req.body.change_group_NAME)).then( result5 =>{
-                          DB.view_tbl_xccdf().then(result6 =>{
-                              res.render(path, {
-                                  name: JSON.parse(req.body.change_group_NAME),
-                                  tab: req.body.tab,
-                                  recordsets: result.recordset, //그룹 정보 조회 -> 그룹 수정 페이지에 디폴트 정보 띄우기
-                                  recordsets2: result2.recordset, //그룹 수정 페이지 정보 조회
-                                  recordsets3: result3.recordset, //모든 에이전트 정보를 참조하여
-                                  recordsets4: result4.recordset, //그룹 수정 페이지 에이전트 할당을 위한 IP를 조회 함
-                                  recordsets5: result5.recordset, //
-                                  recordsets6: result6.recordset
-                              });
-                          });
-                      });
-                  });
-              });
-          });
-      })
-  }
+    if(is_auth){
+        if(req.body.change_group_NAME.length === 0) {
+            res.redirect('/group');
+        }else {
+            DB.get_group_info(JSON.parse(req.body.change_group_NAME)).then(result => {
+                DB.view_modify_group_info(JSON.parse(req.body.change_group_NAME)).then(result2 => {
+                    DB.get_agent_info().then(result3 => {
+                        DB.view_modify_group_IP_info(JSON.parse(req.body.change_group_NAME)).then(result4=>{
+                            DB.view_xccdf_included_group(JSON.parse(req.body.change_group_NAME)).then( result5 =>{
+                                DB.view_tbl_xccdf().then(result6 =>{
+                                    result.expire = is_auth;
+                                    res.render(path, {
+                                        name: JSON.parse(req.body.change_group_NAME),
+                                        tab: req.body.tab,
+                                        recordsets: result.recordset, //그룹 정보 조회 -> 그룹 수정 페이지에 디폴트 정보 띄우기
+                                        recordsets2: result2.recordset, //그룹 수정 페이지 정보 조회
+                                        recordsets3: result3.recordset, //모든 에이전트 정보를 참조하여
+                                        recordsets4: result4.recordset, //그룹 수정 페이지 에이전트 할당을 위한 IP를 조회 함
+                                        recordsets5: result5.recordset, //
+                                        recordsets6: result6.recordset
+                                    });
+                                });
+                            });
+                        });
+                    });
+                });
+            });
+        }
+    }else{
+        res.redirect('/login');
+    }
 });// 기존 그룹페이지
 
 router.post('/change_basic_info', function(req, res, next){
