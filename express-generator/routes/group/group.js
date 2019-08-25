@@ -36,6 +36,7 @@ router.get('/', function (req, res, next) {
     let is_auth = isAuthenticatied(req.session.token);
     if(is_auth){
       result.expire = is_auth;
+      console.log(result);
       res.render('./main/GroupPolicy/group', result);
     }else{
       res.redirect('/login');
