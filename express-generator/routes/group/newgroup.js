@@ -30,24 +30,17 @@ let isAuthenticatied = (token)=>{
 
 router.get('/', function (req, res, next) {
 
-
-
     DB.get_agent_info().then(result3 => {
+        let is_auth = isAuthenticatied(req.session.token);
+        if(is_auth){
+            result3.expire = is_auth;
+            res.render('./main/GroupPolicy/NewGroup/newgroup', {
 
-        res.render('./main/GroupPolicy/NewGroup/newgroup', {
-
-            recordsets3: result3.recordset
-        });
-        // let is_auth = isAuthenticatied(req.session.token);
-        // if(is_auth){
-        //     result3.expire = is_auth;
-        //     res.render('./main/GroupPolicy/NewGroup/newgroup', {
-        //
-        //         recordsets3: result3.recordset
-        //     });
-        // }else{
-        //     res.redirect('/login');
-        // }
+                recordsets3: result3.recordset
+            });
+        }else{
+            res.redirect('/login');
+        }
     });
 });//신규 그룹페이지
 
