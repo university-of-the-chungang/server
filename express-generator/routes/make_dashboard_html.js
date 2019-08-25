@@ -1,7 +1,7 @@
 let fs = require('fs');
 exports.buildHtml = (row) => {
     return new Promise((resolve, reject) => {
-        fs.readFile(__dirname + '/html_templates/sample.html', 'utf-8', (err, html) => {
+        fs.readFile(__dirname + '/sample.html', 'utf-8', (err, html) => {
             if (err) {
                 reject(err);
             }

@@ -5,7 +5,6 @@ const express = require('express');
 const router = express.Router();
 const DB = require('../db');
 const make_dashboard = require('./make_dashboard_html');
-const make_group = require('./make_group_html');
 const LOGS = require('../logs');
 const multer = require('multer');
 const archiver = require('archiver');
@@ -616,28 +615,6 @@ router.post('/dashboard/viewgroupreport',(req,res,next)=>{
     // console.log(result);
     // res.write(html);
 })
-
-router.post('/group/viewhtml',(req,res,next)=>{
-  let group_cd = JSON.parse(req.body['group_cd']);
-
-  DB.get_group_info(null,group_cd).then((result)=>{
-    let param = result.recordset[0];
-    DB.get_agents_from_group_cd(group_cd).then((result1)=>{
-      param = Object.assign({},param,result1.recordset);
-      console.log(param);
-      make_group.buildHtml(param).then(result2=>{
-        res.writeHead(200, {'Content-Type': 'text/html','Content-Length':result2.length});
-        res.write(result2);
-        res.end();
-      })
-    })
-
-
-    
-  })
-  
-  
-});
 
 router.post('/dashboard/viewhtml',(req,res,next)=>{
   let param = JSON.parse(req.body['row_arr']);

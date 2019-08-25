@@ -174,17 +174,6 @@ exports.get_dashboard_top10 = ()=>{
     })
 
 }
-exports.get_agents_from_group_cd = (group_cd=null)=>{
-    return new Promise((resolve,reject)=>{
-        new sql.Request().query(`SELECT * FROM TBL_AGENT_INFO INNER JOIN TBL_GROUP_SET_LIST ON TBL_AGENT_INFO.AGENT_CD = TBL_GROUP_SET_LIST.AGENT_CD LEFT OUTER JOIN TBL_INSPECT_STATS ON TBL_AGENT_INFO.AGENT_CD = TBL_INSPECT_STATS.AGENT_CD WHERE TBL_GROUP_SET_LIST.GROUP_SET_CD = ${group_cd}`, (err,result)=>{
-            if(err){
-                reject(err);
-            }
-            resolve(result);
-        });
-    });
-}
-
 exports.get_agent_info = (agent_cd = null) => {
     // 에이전트 코드가 agent_cd인 Agent들의 정보를 검색
     // agent_cd를 넣지않으면 전체검색
@@ -335,16 +324,13 @@ exports.update_group_info = (cd, name, start_date, period, disc) => {
     });
 };
 
-
-exports.get_group_info = (group_name = null, group_cd = null) => {
+exports.get_group_info = (group_name = null) => {
     // 그룹 정보 조회
     return new Promise((resolve, reject) => {
         sql_adder = "";
         if (group_name) {
             sql_adder = "WHERE NAME LIKE N'" + group_name + "%'";
 
-        }else if(group_cd){
-            sql_adder = `WHERE GROUP_SET_CD = ${group_cd} `;
         }
         new sql.Request().query(`SELECT * FROM TBL_GROUP_INFO ` + sql_adder, (err, result) => {
             if (err) {
