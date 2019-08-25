@@ -127,18 +127,18 @@
                                                                 <tbody>
                                                                     <%try {%>
                                                                         <%for(let i in os_list){%>
-                                                                            <!-- 3번째 마다 tr 태그 삽입하기 -->
-                                                                            <%if (i % 3 == 0) {%>
+                                                                            <!-- 2번째 마다 tr 태그 삽입하기 -->
+                                                                            <%if (i % 2 == 0) {%>
                                                                                 <tr>
                                                                             <%}%>
                                                                             <td>
-                                                                                <div class="custom-control custom-checkbox">
-                                                                                    <input type="checkbox" class="custom-control-input is-valid" id="customControlValidation1" required="">
-                                                                                    <label class="custom-control-label" for="customControlValidation1"><%=os_list[i]%></label>
+                                                                                <div class="custom-control custom-radio">
+                                                                                    <input type="radio" class="custom-control-input" id="customControlValidation<%-i%>" required="" name = "jb-radio" value="<%=os_list[i]%>">
+                                                                                    <label class="custom-control-label no-policy" for="customControlValidation<%-i%>"><%=os_list[i]%></label>
                                                                                 </div>
                                                                             </td>
                                                                             <!-- 3번째 마다 tr 태그 삽입하기 -->
-                                                                            <%if (i % 3 == 2) {%>
+                                                                            <%if (i % 2 == 1) {%>
                                                                                 </tr>
                                                                             <%}%>
                                                                         <%}%>
@@ -172,17 +172,10 @@
                                                     </div>
 
                                                     <div class="col-12" style="margin-top: 15px;">
-                                                       <a href="#" class="col-11 btn btn-outline-success" data-toggle="modal" data-target="#xccdfModal">
+                                                       <a href="#" class="col-11 btn btn-outline-success" onclick="apply_policy()">
                                                            정책 적용 <span class="icon-circle-small icon-box-xs text-success bg-success-light"><i class="fa fa-fw fa-arrow-up"></i></span><span class="ml-1"></span>
                                                        </a>
                                                     </div>
-
-                                                    <div class="col-12" style="margin-top: 15px;">
-                                                        <a href="#" class="col-11 btn btn-outline-danger" data-toggle="modal" data-target="#xccdfModal2">
-                                                            오프라인 점검용 정책 다운로드 <span class="icon-circle-small icon-box-xs text-danger bg-danger-light bg-danger-light "><i class="fa fa-fw fa-arrow-down"></i></span><span ></span>
-                                                        </a>
-                                                    </div>
-
 
                                                     <!-- 정책 적용 모달 시작 -->
                                                     <div class="modal" id="xccdfModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="display: none;">
@@ -279,24 +272,18 @@
 
                                                             <table class="table table-hover">
                                                                 <tbody>
-                                                                <tr>
-                                                                    <th scope="row">1</th>
-                                                                    <td><img src="assets/circle/grey.png" alt="User Avatar" class="rounded-circle user-avatar-lg"></td>
-                                                                    <td>Windows 10</td>
-                                                                    <td>Windows 10 bench mark</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th scope="row">2</th>
-                                                                    <td><img src="assets/circle/blue.png" alt="User Avatar" class="rounded-circle user-avatar-lg"></td>
-                                                                    <td>Windows 10</td>
-                                                                    <td>Windows 10 bench mark</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th scope="row">3</th>
-                                                                    <td><img src="assets/circle/blue.png" alt="User Avatar" class="rounded-circle user-avatar-lg"></td>
-                                                                    <td>Windows 10</td>
-                                                                    <td>Windows 10 bench mark</td>
-                                                                </tr>
+                                                                    <%try {%>
+                                                                        <%for(let i in os_list){%>
+                                                                            <tr>
+                                                                                <th scope="row"><%-i%></th>
+                                                                                <td><img src="assets/circle/grey.png" alt="User Avatar" class="rounded-circle user-avatar-lg"></td>
+                                                                                <td><%=os_list[i]%></td>
+                                                                                <td>할당 결과 없음</td>
+                                                                            </tr>
+                                                                        <%}%>
+                                                                    <%} catch (e) { %>
+                                                                        <%console.log(e)%>
+                                                                    <% }%>
                                                               </tbody>
                                                             </table>
                                                         </div>
@@ -418,6 +405,12 @@
 </div>
 <!-- 파일업로드 모달 끝-->
 
+<style>
+    .no-policy {
+        color: red;
+    }
+</style>
+
 <!-- jquery 3.3.1 -->
 <script src="/assets/vendor/jquery/jquery-3.3.1.min.js"></script>
 <!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
@@ -441,6 +434,21 @@
 
     $('#change_cancle_btn').click(() =>{
         location.href = '/group';
+    });
+
+    $('#xccdf_modal_btn').click(() => {
+        let cnt =  $("input[name = 'jb-radio']:checked").length;
+        if(cnt === 0){
+            alert("선택된 OS가 없습니다.");
+        }
+        else{
+            let os = $("input[name = 'jb-radio']:checked").val();
+            console.log(os);
+            // $('#apply_os').val(os);
+            // $('#xccdfModal').modal('show');
+            // table.columns(1).search(JSON.stringify($("input[name = 'jb-radio']:checked").val()));
+            // table.draw();
+        }
     });
 
     // 할당된 에이전트 OS 파싱해서 가져오기
@@ -579,6 +587,22 @@
         // 취소 버튼 눌렀을 때
         else {
 
+        }
+    }
+
+    // 정책 적용 버튼 클릭시
+    function apply_policy() {
+        let cnt =  $("input[name = 'jb-radio']:checked").length;
+        if(cnt === 0){
+            alert("선택된 OS가 없습니다.");
+        }
+        else{
+            console.log()
+            let os = $("input[name = 'jb-radio']:checked").val();
+            // $('#apply_os').val(os);
+            $('#xccdfModal').modal('show');
+            // table.columns(1).search(JSON.stringify($("input[name = 'jb-radio']:checked").val()));
+            // table.draw();
         }
     }
 
