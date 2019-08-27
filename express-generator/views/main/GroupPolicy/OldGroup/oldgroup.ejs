@@ -389,12 +389,6 @@
                                 </div>
                             </div>
                         </div>
-
-                            <div class="col-9" style="margin-top: 3px;">
-                                <a href="#" class="col-12 btn btn-warning btn-lg" data-toggle="modal" data-target="#xccdfModal"> 정책 다운로드 확인 </a>
-                            </div>
-                       
-
                     </div>
                 </div>
                 <!-- 정책 적용 탭 끝 -->
@@ -496,17 +490,19 @@
                             class="col-form-label">파일 경로</label>
                         <input name="txtIP" type="text" class="form-control">
                     </div>-->
+                    <input type="hidden" name = "group_set_cd" value = <%=recordsets[0].GROUP_SET_CD%>>
+                    <input type="hidden" name = "group_name" value = <%=name%>>
                     <label class="col-12 btn btn-outline-success btn-lg">
-                     파일 첨부하기<input type="file" style="display: none;">
+                     파일 첨부하기<input type="file" name="xlsx_file" style="display: none;">
                     </label>
                     <span style="color:red">주의 : 중복되는 IP가 있는경우 제외하고 할당되며
-                        등록되지 않은 IP는 할당할 수 없습니다.</span>
+                        에이전트로 등록되지 않은 IP는 할당할 수 없습니다.</span>
                 </div>
 
                 <div class="modal-footer">
                     <a href="#" class="btn btn-secondary"
                         data-dismiss="modal">닫기</a>
-                    <a href="#" class="btn btn-primary" type="submit">변경 저장</a>
+                    <input class="btn btn-primary" type="submit" value = "저장">
                 </div>
 
             </form>
@@ -546,7 +542,6 @@
     <script src="assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
     <!-- slimscroll js -->
     <script src="assets/vendor/slimscroll/jquery.slimscroll.js"></script>
-     main js
     <script src="assets/libs/js/main-js.js"></script>
     <script src="/assets/vendor/datepicker/moment.js"></script>
     <script src="/assets/vendor/datepicker/tempusdominus-bootstrap-4.js"></script>

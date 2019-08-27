@@ -458,6 +458,7 @@ exports.add_admin = (data) => {
         })
     });
 };
+
 exports.add_group_info = (name, create_time, active_time, agent_counting, inspection_period, DESCRIPTION) => {
     return new Promise((resolve, reject) => {
         let query = `INSERT INTO TBL_GROUP_INFO (NAME, CREATE_TIME, ACTIVE_TIME, AGENT_COUNTING, ACTIVE_STATE, INSPECTION_PERIOD, DEL_FLAG, DESCRIPTION) 
@@ -584,7 +585,6 @@ exports.update_agent_info = (cd, purpose, owner) => {
     });
 };
 
-
 exports.change_group_agent_counting = (cd, count) => {
     return new Promise((resolve, reject) =>{
         let query = `UPDATE TBL_GROUP_INFO SET AGENT_COUNTING = ${count} WHERE GROUP_SET_CD = '${cd}'`
@@ -692,6 +692,18 @@ Where TBL_GROUP_SET_LIST.GROUP_SET_CD = N'${group_set_cd}' AND TBL_AGENT_INFO.DE
     });
 };
 
+exports.find_agent = (ip) =>{
+    return new Promise((resolve, reject) => {
+        let query = `Select AGENT_CD From TBL_AGENT_INFO WHERE IP = '${ip}' AND DEL_FLAG = 0`;
+        new sql.Request().query(query, (err, result) => {
+            if(err){
+                reject(err);
+            }
+            resolve(result);
+        })
+    })
+}
+
 exports.get_data_for_xccdf_apply = (group_set_cd, os) =>{
     return new Promise((resolve, reject) => {
         let query = `Select TBL_GROUP_SET_LIST.AGENT_CD
@@ -738,7 +750,7 @@ exports.update_xccdf_cd = (group_set_cd, agent_cd, xccdf_cd) =>{
             resolve(result);
         })
     });
-}
+};
 
 exports.delete_agent_from_group_set_list = (group_set_cd, agent_cd) => {
     return new Promise((resolve, reject) =>{
