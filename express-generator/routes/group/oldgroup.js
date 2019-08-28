@@ -79,6 +79,7 @@ router.post('/change_basic_info', function(req, res, next){
 
     }else{
        DB.update_group_info(cd, req.body.editNAME, req.body.editINSPECTION_START_DATE, req.body.editINSPECTION_PERIOD, req.body.editDISCRIPTION).then(re => {
+           LOGS.make_log("GROUP", req.session.username, "그룹 기본정보 수정");
            res.render('./main/GroupPolicy/OldGroup/load', {
                name: name,
                tab: 2
@@ -136,6 +137,7 @@ router.post('/change_group_set_list', function(req, res, next){
 
         //그룹 정보에 변동 사항 반영
         DB.change_group_agent_counting(req.body.group_set_cd, arr.length).then(result =>{
+            LOGS.make_log("GROUP", req.session.username, "그룹 에이전트 할당 정보 수정");
             res.render('./main/GroupPolicy/OldGroup/load', {
                 name: name,
                 tab: 3
@@ -155,6 +157,7 @@ router.post('/apply_xccdf', function(req, res, next){
           var agent_cd = result.recordset[i].AGENT_CD;
           DB.update_xccdf_cd(group_set_cd, agent_cd, xccdf_cd);
       }
+      LOGS.make_log("GROUP", req.session.username, "그룹 정책 적용 정보 수정");
       res.render('./main/GroupPolicy/OldGroup/load', {
           name: name,
           tab: 3
@@ -243,6 +246,7 @@ router.post('/upload_xlsx', upload.single('xlsx_file'), (req, res, next) => {
     console.log("/oldgroup/upload_xlsx");
     try{
         read_xlsx(req.file.path, group_set_cd, name).then(result => {
+            LOGS.make_log("GROUP", req.session.username, "그룹 에이전트 할당 정보 수정");
             res.render('./main/GroupPolicy/OldGroup/load', {
                 name: name,
                 tab : 2
