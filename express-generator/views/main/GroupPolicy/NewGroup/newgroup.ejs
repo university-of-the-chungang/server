@@ -97,9 +97,9 @@
                                         <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                             <select multiple="multiple" size="10" name="agentlistbox[]">
                                                 <%for(var i=0; i<(recordsets3.length); i++){%>
-                                                    <option value="<%=recordsets3[i].AGENT_CD%>" os="<%=recordsets3[i].OS%>">
-                                                        <%=recordsets3[i].IP%>
-                                                    </option>
+                                                <option value="<%=recordsets3[i].AGENT_CD%>" os="<%=recordsets3[i].OS%>">
+                                                    <%=recordsets3[i].IP%>
+                                                </option>
                                                 <%}%>
                                             </select>
 
@@ -125,26 +125,26 @@
                                                         <div class="card-body p-0">
                                                             <table class="table table-bordered">
                                                                 <tbody>
-                                                                    <%try {%>
-                                                                        <%for(let i in os_list){%>
-                                                                            <!-- 3번째 마다 tr 태그 삽입하기 -->
-                                                                            <%if (i % 3 == 0) {%>
-                                                                                <tr>
-                                                                            <%}%>
-                                                                            <td>
-                                                                                <div class="custom-control custom-checkbox">
-                                                                                    <input type="checkbox" class="custom-control-input is-valid" id="customControlValidation1" required="">
-                                                                                    <label class="custom-control-label" for="customControlValidation1"><%=os_list[i]%></label>
-                                                                                </div>
-                                                                            </td>
-                                                                            <!-- 3번째 마다 tr 태그 삽입하기 -->
-                                                                            <%if (i % 3 == 2) {%>
-                                                                                </tr>
-                                                                            <%}%>
-                                                                        <%}%>
-                                                                    <%} catch (e) { %>
-                                                                        <%console.log(e)%>
-                                                                    <% }%>
+                                                                <%try {%>
+                                                                <%for(let i in os_list){%>
+                                                                <!-- 2번째 마다 tr 태그 삽입하기 -->
+                                                                <%if (i % 2 == 0) {%>
+                                                                <tr>
+                                                                    <%}%>
+                                                                    <td>
+                                                                        <div class="custom-control custom-radio">
+                                                                            <input type="radio" class="custom-control-input" id="customControlValidation<%-i%>" required="" name = "jb-radio" value="<%=os_list[i]%>">
+                                                                            <label class="custom-control-label no-policy" for="customControlValidation<%-i%>"><%=os_list[i]%></label>
+                                                                        </div>
+                                                                    </td>
+                                                                    <!-- 2번째 마다 tr 태그 삽입하기 -->
+                                                                    <%if (i % 2 == 1) {%>
+                                                                </tr>
+                                                                <%}%>
+                                                                <%}%>
+                                                                <%} catch (e) { %>
+                                                                <%console.log(e)%>
+                                                                <% }%>
                                                                 </tbody>
                                                             </table>
                                                         </div>
@@ -172,17 +172,10 @@
                                                     </div>
 
                                                     <div class="col-12" style="margin-top: 15px;">
-                                                       <a href="#" class="col-11 btn btn-outline-success" data-toggle="modal" data-target="#xccdfModal">
-                                                           정책 적용 <span class="icon-circle-small icon-box-xs text-success bg-success-light"><i class="fa fa-fw fa-arrow-up"></i></span><span class="ml-1"></span>
-                                                       </a>
-                                                    </div>
-
-                                                    <div class="col-12" style="margin-top: 15px;">
-                                                        <a href="#" class="col-11 btn btn-outline-danger" data-toggle="modal" data-target="#xccdfModal2">
-                                                            오프라인 점검용 정책 다운로드 <span class="icon-circle-small icon-box-xs text-danger bg-danger-light bg-danger-light "><i class="fa fa-fw fa-arrow-down"></i></span><span ></span>
+                                                        <a href="#" class="col-11 btn btn-outline-success" onclick="apply_policy()">
+                                                            정책 적용 <span class="icon-circle-small icon-box-xs text-success bg-success-light"><i class="fa fa-fw fa-arrow-up"></i></span><span class="ml-1"></span>
                                                         </a>
                                                     </div>
-
 
                                                     <!-- 정책 적용 모달 시작 -->
                                                     <div class="modal" id="xccdfModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="display: none;">
@@ -203,12 +196,12 @@
 
                                                                         <div class="form-group">
                                                                             <label for="inputText1"
-                                                                                class="col-form-label">적용할 정책 파일 경로</label>
+                                                                                   class="col-form-label">적용할 정책 파일 경로</label>
                                                                             <input name="txtIP" type="text" class="form-control">
                                                                         </div>
 
                                                                         <a href="download path" download="" class="col-12 btn btn-outline-success btn-lg">
-                                                                         적용할 정책 파일 찾기<input type="file" style="display: none;">
+                                                                            적용할 정책 파일 찾기<input type="file" style="display: none;">
                                                                         </a>
 
 
@@ -227,7 +220,7 @@
 
 
                                                     <!-- 오프라인 점검용 정책 다운로드 모달 시작 -->
-                                                     <div class="modal" id="xccdfModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="display: none;">
+                                                    <div class="modal" id="xccdfModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="display: none;">
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
@@ -235,7 +228,7 @@
 
                                                                     <h5 class="modal-title" id="xccdfModal">정책 다운로드</h5>
                                                                     <a href="#" class="close" data-dismiss="modal"
-                                                                        aria-label="Close">
+                                                                       aria-label="Close">
                                                                         <span aria-hidden="true">×</span>
                                                                     </a>
                                                                 </div>
@@ -245,12 +238,12 @@
 
                                                                         <div class="form-group">
                                                                             <label for="inputText1"
-                                                                                class="col-form-label">다운로드 할 정책 파일 경로</label>
+                                                                                   class="col-form-label">다운로드 할 정책 파일 경로</label>
                                                                             <input name="txtIP" type="text" class="form-control">
                                                                         </div>
 
                                                                         <a href="download path" download="" class="col-12 btn btn-outline-danger btn-lg">
-                                                                         다운로드 할 정책 파일 찾기<input type="file" style="display: none;">
+                                                                            다운로드 할 정책 파일 찾기<input type="file" style="display: none;">
                                                                         </a>
 
 
@@ -258,14 +251,14 @@
 
                                                                     <div class="modal-footer">
                                                                         <a href="#" class="btn btn-secondary"
-                                                                            data-dismiss="modal">닫기</a>
+                                                                           data-dismiss="modal">닫기</a>
 
                                                                     </div>
 
                                                                 </form>
                                                             </div>
                                                         </div>
-                                                     </div>
+                                                    </div>
                                                     <!-- 오프라인 점검용 정책 다운로드 모달 끝-->
 
 
@@ -279,25 +272,19 @@
 
                                                             <table class="table table-hover">
                                                                 <tbody>
+                                                                <%try {%>
+                                                                <%for(let i in os_list){%>
                                                                 <tr>
-                                                                    <th scope="row">1</th>
+                                                                    <th scope="row"><%-i%></th>
                                                                     <td><img src="assets/circle/grey.png" alt="User Avatar" class="rounded-circle user-avatar-lg"></td>
-                                                                    <td>Windows 10</td>
-                                                                    <td>Windows 10 bench mark</td>
+                                                                    <td><%=os_list[i]%></td>
+                                                                    <td>할당 결과 없음</td>
                                                                 </tr>
-                                                                <tr>
-                                                                    <th scope="row">2</th>
-                                                                    <td><img src="assets/circle/blue.png" alt="User Avatar" class="rounded-circle user-avatar-lg"></td>
-                                                                    <td>Windows 10</td>
-                                                                    <td>Windows 10 bench mark</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th scope="row">3</th>
-                                                                    <td><img src="assets/circle/blue.png" alt="User Avatar" class="rounded-circle user-avatar-lg"></td>
-                                                                    <td>Windows 10</td>
-                                                                    <td>Windows 10 bench mark</td>
-                                                                </tr>
-                                                              </tbody>
+                                                                <%}%>
+                                                                <%} catch (e) { %>
+                                                                <%console.log(e)%>
+                                                                <% }%>
+                                                                </tbody>
                                                             </table>
                                                         </div>
                                                     </div>
@@ -417,6 +404,12 @@
     </div>
 </div>
 <!-- 파일업로드 모달 끝-->
+
+<style>
+    .no-policy {
+        color: red;
+    }
+</style>
 
 <!-- jquery 3.3.1 -->
 <script src="/assets/vendor/jquery/jquery-3.3.1.min.js"></script>
@@ -579,6 +572,22 @@
         // 취소 버튼 눌렀을 때
         else {
 
+        }
+    }
+
+    // 정책 적용 버튼 클릭시
+    function apply_policy() {
+        let cnt =  $("input[name = 'jb-radio']:checked").length;
+        if(cnt === 0){
+            alert("선택된 OS가 없습니다.");
+        }
+        else{
+            console.log()
+            let os = $("input[name = 'jb-radio']:checked").val();
+            // $('#apply_os').val(os);
+            $('#xccdfModal').modal('show');
+            // table.columns(1).search(JSON.stringify($("input[name = 'jb-radio']:checked").val()));
+            // table.draw();
         }
     }
 
