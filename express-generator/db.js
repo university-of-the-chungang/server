@@ -340,6 +340,21 @@ exports.get_group_info = (group_name = null) => {
         });
     });
 }
+
+exports.set_policy = (group_cd, agent_cd, policy_cd) => {
+    return new Promise((resolve, reject) => {
+        let query = `UPDATE TBL_GROUP_SET_LIST SET XCCDF_CD = ` + String(policy_cd) + ` WHERE GROUP_SET_CD = ` + String(group_cd) + ` AND AGENT_CD = ` + String(agent_cd);
+        console.log(query);
+        new sql.Request().query(query, (err, result) => {
+            if (err) {
+                reject(err);
+            }
+            resolve(result);
+        });
+    });
+};
+
+
 exports.view_admin = (column_name,where="") => {
     return new Promise((resolve, reject) => {
         query_select(column_name, "TBL_ADMIN_INFO",where).then((result) => {

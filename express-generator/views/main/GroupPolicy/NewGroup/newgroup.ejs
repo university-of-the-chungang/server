@@ -97,9 +97,9 @@
                                         <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                             <select multiple="multiple" size="10" name="agentlistbox[]">
                                                 <%for(var i=0; i<(recordsets3.length); i++){%>
-                                                <option value="<%=recordsets3[i].AGENT_CD%>" os="<%=recordsets3[i].OS%>">
-                                                    <%=recordsets3[i].IP%>
-                                                </option>
+                                                    <option value="<%=recordsets3[i].AGENT_CD%>" os="<%=recordsets3[i].OS%>">
+                                                        <%=recordsets3[i].IP%>
+                                                    </option>
                                                 <%}%>
                                             </select>
 
@@ -118,33 +118,33 @@
 
                                         <!-- 정책적용 탭 시작-->
                                         <div class="tab-pane" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                                            <div class="row">
+                                            <div class="row" id="abcd">
                                                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
                                                     <div class="card" style="height: 300px; overflow: scroll;">
                                                         <h4 class="card-header text-center">그룹에 포함된 운영체제 버전</h4>
                                                         <div class="card-body p-0">
                                                             <table class="table table-bordered">
                                                                 <tbody>
-                                                                <%try {%>
-                                                                <%for(let i in os_list){%>
-                                                                <!-- 2번째 마다 tr 태그 삽입하기 -->
-                                                                <%if (i % 2 == 0) {%>
-                                                                <tr>
-                                                                    <%}%>
-                                                                    <td>
-                                                                        <div class="custom-control custom-radio">
-                                                                            <input type="radio" class="custom-control-input" id="customControlValidation<%-i%>" required="" name = "jb-radio" value="<%=os_list[i]%>">
-                                                                            <label class="custom-control-label no-policy" for="customControlValidation<%-i%>"><%=os_list[i]%></label>
-                                                                        </div>
-                                                                    </td>
-                                                                    <!-- 2번째 마다 tr 태그 삽입하기 -->
-                                                                    <%if (i % 2 == 1) {%>
-                                                                </tr>
-                                                                <%}%>
-                                                                <%}%>
-                                                                <%} catch (e) { %>
-                                                                <%console.log(e)%>
-                                                                <% }%>
+                                                                    <%try {%>
+                                                                        <%for(let i in os_list){%>
+                                                                            <!-- 2번째 마다 tr 태그 삽입하기 -->
+                                                                            <%if (i % 2 == 0) {%>
+                                                                                <tr>
+                                                                            <%}%>
+                                                                            <td>
+                                                                                <div class="custom-control custom-radio">
+                                                                                    <input type="radio" class="custom-control-input" id="customControlValidation<%-i%>" required="" name = "jb-radio" value="<%=os_list[i]%>">
+                                                                                    <label class="custom-control-label no-policy os-no<%=i%>" for="customControlValidation<%-i%>"><%=os_list[i]%></label>
+                                                                                </div>
+                                                                            </td>
+                                                                            <!-- 2번째 마다 tr 태그 삽입하기 -->
+                                                                            <%if (i % 2 == 1) {%>
+                                                                                </tr>
+                                                                            <%}%>
+                                                                        <%}%>
+                                                                    <%} catch (e) { %>
+                                                                        <%console.log(e)%>
+                                                                    <% }%>
                                                                 </tbody>
                                                             </table>
                                                         </div>
@@ -173,46 +173,64 @@
 
                                                     <div class="col-12" style="margin-top: 15px;">
                                                         <a href="#" class="col-11 btn btn-outline-success" onclick="apply_policy()">
-                                                            정책 적용 <span class="icon-circle-small icon-box-xs text-success bg-success-light"><i class="fa fa-fw fa-arrow-up"></i></span><span class="ml-1"></span>
+                                                           정책 적용 <span class="icon-circle-small icon-box-xs text-success bg-success-light"><i class="fa fa-fw fa-arrow-up"></i></span><span class="ml-1"></span>
                                                         </a>
                                                     </div>
 
                                                     <!-- 정책 적용 모달 시작 -->
-                                                    <div class="modal" id="xccdfModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="display: none;">
+                                                    <div class="modal" id="xccdfModal" tabindex="-1" role="dialog"
+                                                         aria-labelledby="exampleModalLabel" aria-hidden="true"
+                                                         style="display: none;">
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-
                                                                     <h5 class="modal-title" id="xccdfModal">정책 적용</h5>
-                                                                    <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <a href="#" class="close" data-dismiss="modal"
+                                                                       aria-label="Close">
                                                                         <span aria-hidden="true">×</span>
                                                                     </a>
                                                                 </div>
 
+                                                                <input type="hidden" name = "group_name" value = "123123">
+                                                                <input type="hidden" class="form-control" name="group_set_cd"  value="1231234">
 
-
-                                                                <form action="" method="POST">
-                                                                    <div class="modal-body">
-
-                                                                        <div class="form-group">
-                                                                            <label for="inputText1"
-                                                                                   class="col-form-label">적용할 정책 파일 경로</label>
-                                                                            <input name="txtIP" type="text" class="form-control">
-                                                                        </div>
-
-                                                                        <a href="download path" download="" class="col-12 btn btn-outline-success btn-lg">
-                                                                            적용할 정책 파일 찾기<input type="file" style="display: none;">
-                                                                        </a>
-
-
+                                                                <div class="modal-body">
+                                                                    <label class = "col-form-label">적용할 OS</label>
+                                                                    <input id = "apply_os" style="font-weight:bold" name="apply_os" type = "text" class="form-control" readonly>
+                                                                    <label for="inputText1" class="col-form-label" style="margin-top: 10px">정책 적용</label>
+                                                                    <div class = "table-responsive">
+                                                                        <table id = "xccdf_table" class="table">
+                                                                            <thead class = "bg-light">
+                                                                            <th class = "border-0 text-center">선택</th>
+                                                                            <th class = "border-0 text-center">파일 이름</th>
+                                                                            <th class = "border-0 text-center">검사 OS</th>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                <%for(var i=0; i<recordsets6.length; i++){%>
+                                                                                    <tr class="table" style="text-align: center;">
+                                                                                        <td>
+                                                                                            <label class = "custom-control custom-radio">
+                                                                                                <input type="radio" class="custom-control-input" name = "xccdf_radio" value = "<%=recordsets6[i].XCCDF_CD%>" id = "<%=recordsets6[i].XCCDF_CD%>">
+                                                                                                <span class="custom-control-label" style="position: absolute;left:40%; top:0"></span>
+                                                                                            </label>
+                                                                                        </td>
+                                                                                        <td style="text-align: center; vertical-align: middle;" class="file-name<%=recordsets6[i].XCCDF_CD%>">
+                                                                                            <%=recordsets6[i].FILE_NAME%>
+                                                                                        </td>
+                                                                                        <td style="text-align: center; vertical-align: middle;">
+                                                                                            <%=recordsets6[i].INSPECT_OS%>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                <%}%>
+                                                                            </tbody>
+                                                                        </table>
                                                                     </div>
+                                                                    <input type="submit" class="btn btn-outline-success btn-lg col-xl-12 col-lg-12 col-md-12 col-sm-12" value = "정책 적용" onclick="apply_policy2()">
+                                                                </div>
 
-                                                                    <div class="modal-footer">
-                                                                        <a href="#" class="btn btn-secondary" data-dismiss="modal">닫기</a>
-
-                                                                    </div>
-
-                                                                </form>
+                                                                <div class="modal-footer">
+                                                                    <a href="#" class="btn btn-secondary" data-dismiss="modal">닫기</a>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -220,7 +238,7 @@
 
 
                                                     <!-- 오프라인 점검용 정책 다운로드 모달 시작 -->
-                                                    <div class="modal" id="xccdfModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="display: none;">
+                                                     <div class="modal" id="xccdfModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="display: none;">
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
@@ -228,7 +246,7 @@
 
                                                                     <h5 class="modal-title" id="xccdfModal">정책 다운로드</h5>
                                                                     <a href="#" class="close" data-dismiss="modal"
-                                                                       aria-label="Close">
+                                                                        aria-label="Close">
                                                                         <span aria-hidden="true">×</span>
                                                                     </a>
                                                                 </div>
@@ -238,12 +256,12 @@
 
                                                                         <div class="form-group">
                                                                             <label for="inputText1"
-                                                                                   class="col-form-label">다운로드 할 정책 파일 경로</label>
+                                                                                class="col-form-label">다운로드 할 정책 파일 경로</label>
                                                                             <input name="txtIP" type="text" class="form-control">
                                                                         </div>
 
                                                                         <a href="download path" download="" class="col-12 btn btn-outline-danger btn-lg">
-                                                                            다운로드 할 정책 파일 찾기<input type="file" style="display: none;">
+                                                                         다운로드 할 정책 파일 찾기<input type="file" style="display: none;">
                                                                         </a>
 
 
@@ -251,39 +269,46 @@
 
                                                                     <div class="modal-footer">
                                                                         <a href="#" class="btn btn-secondary"
-                                                                           data-dismiss="modal">닫기</a>
+                                                                            data-dismiss="modal">닫기</a>
 
                                                                     </div>
 
                                                                 </form>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                     </div>
                                                     <!-- 오프라인 점검용 정책 다운로드 모달 끝-->
 
 
                                                 </div>
 
                                                 <!-- 운영체제 버전에 대한 div 끝이면서 운영체제 별 정책 할당 결과 div시작-->
-                                                <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-5">
-                                                    <div class="card" style="height: 500px; overflow: scroll;">
+                                                <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-5" id="abcdefg">
+                                                    <div class="card" style="height: 500px; overflow: scroll;" id="abcdefgh">
                                                         <h4 class="card-header text-center">운영체제 별 정책 할당 결과</h4>
                                                         <div class="card-body p-0">
 
                                                             <table class="table table-hover">
                                                                 <tbody>
-                                                                <%try {%>
-                                                                <%for(let i in os_list){%>
-                                                                <tr>
-                                                                    <th scope="row"><%-i%></th>
-                                                                    <td><img src="assets/circle/grey.png" alt="User Avatar" class="rounded-circle user-avatar-lg"></td>
-                                                                    <td><%=os_list[i]%></td>
-                                                                    <td>할당 결과 없음</td>
-                                                                </tr>
-                                                                <%}%>
-                                                                <%} catch (e) { %>
-                                                                <%console.log(e)%>
-                                                                <% }%>
+                                                                    <%try {%>
+                                                                        <%for(let i in os_policy_list){%>
+                                                                        <tr>
+                                                                            <th scope="row"><%-i%></th>
+                                                                            <%if (os_policy_list[i]['is_allocated'] === 0){ %>
+                                                                                <td><img src="assets/circle/grey.png" alt="User Avatar" class="rounded-circle user-avatar-lg"></td>
+                                                                                <td><%=os_policy_list[i]['os']%></td>
+                                                                                <td><%=os_policy_list[i]['file_name']%></td>
+                                                                        <%} else if(os_policy_list[i]['is_allocated'] === 1) {%>
+                                                                                <td><img src="assets/circle/blue.png" alt="User Avatar" class="rounded-circle user-avatar-lg"></td>
+                                                                                <td class="is-allocated" id="<%=os_policy_list[i]['xccdf_number']%>"><%=os_policy_list[i]['os']%></td>
+                                                                                <td><%=os_policy_list[i]['file_name']%></td>
+                                                                            <%}%>
+
+                                                                        </tr>
+                                                                        <%}%>
+                                                                    <%} catch (e) { %>
+                                                                        <%console.log(e)%>
+                                                                    <% }%>
                                                                 </tbody>
                                                             </table>
                                                         </div>
@@ -309,10 +334,6 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-
-                                                <div class="col-9" style="margin-top: 3px;">
-                                                    <a href="#" class="col-12 btn btn-warning btn-lg" data-toggle="modal" data-target="#xccdfModal"> 정책 다운로드 확인 </a>
                                                 </div>
                                             </div>
                                         </div>
@@ -409,6 +430,10 @@
     .no-policy {
         color: red;
     }
+
+    .policy {
+        color: green;
+    }
 </style>
 
 <!-- jquery 3.3.1 -->
@@ -453,7 +478,10 @@
 
         // 세션스토리지에 저장
         sessionStorage.setItem('os_list', os_list);
-        $('#contact').load(document.URL + ' #contact', {'os_list': os_list});
+        sessionStorage.removeItem("ppolicy");
+        sessionStorage.removeItem('pos')
+
+        $('#contact').load(document.URL + ' #abcd', {'os_list': os_list});
     }
 
     // 생성 버튼 클릭시
@@ -554,9 +582,67 @@
 
         // active_tab이 contact tab일 때
         else {
+            // 기본정보 & 에이전트 할당정보 작성돼있는 지 확인하고, 데이터베이스에 업데이트
+            // 기본정보 작성돼있는 지 확인
+            let group_name = document.getElementById('groupName').value
+            let group_desc = document.getElementById('groupDesc').value
+            let group_date = document.getElementById('groupDate').value
+            let group_period = document.getElementById('groupPeriod').value
 
-            // 기본정보 & 에이전트 할당정보 & 정책적용 정보 작성돼있는 지 확인하고, 데이터베이스에 업데이트
-            alert("적용중입니다.");
+            console.log(group_name, group_desc, group_date, group_period);
+
+            // 입력값에 누락이 있다면
+            if (!group_name || !group_desc || !group_date || !group_period) {
+                alert("기본정보가 작성되지 않았습니다. 기본정보를 작성해주세요.");
+            }
+
+            // 정상적으로 잘 입력됐다면
+            else {
+
+                // 할당된 에디전트 태그찾기
+                let parent_tag = document.getElementById("bootstrap-duallistbox-selected-list_agentlistbox[]");
+                let cd_list = []
+                for (let option of parent_tag.options) {
+                    cd_list.push(option.attributes['value'].value)
+                }
+
+                let os_list = []
+                for (let option of parent_tag.options) {
+                    os_list.push(option.attributes['os'].value)
+                }
+
+                console.log(cd_list);
+
+                // 기본정보 & 에이전트 할당정보 & 정책적용 정보 작성돼있는 지 확인하고, 데이터베이스에 업데이트
+                let tags = $('.is-allocated');
+
+                let os_policy = {};
+                for (let tag of tags) {
+                    console.log(tag);
+                    let policy_id = tag.id;
+                    let os = tag.innerHTML
+
+                    os_policy[os] = policy_id
+                }
+
+                console.log(document.URL);
+
+                axios.post(document.URL.split('#')[0] + '/update-contact-tab', {
+                    headers: { 'Content-type': 'application/x-www-form-urlencoded', },
+                    group_name : group_name,
+                    group_desc: group_desc,
+                    group_date: group_date,
+                    group_period: group_period,
+                    cd_list: cd_list,
+                    os_list: os_list,
+                    os_policy: os_policy
+                }).then(response => {
+                    location.href='/group';
+                })
+
+
+            }
+
         }
     }
 
@@ -584,10 +670,65 @@
         else{
             console.log()
             let os = $("input[name = 'jb-radio']:checked").val();
-            // $('#apply_os').val(os);
+            $('#apply_os').val(os);
             $('#xccdfModal').modal('show');
             // table.columns(1).search(JSON.stringify($("input[name = 'jb-radio']:checked").val()));
             // table.draw();
+        }
+    }
+
+    function apply_policy2() {
+        let cnt =  $("input[name = 'xccdf_radio']:checked").length;
+        if(cnt === 0){
+            alert("선택된 정책이 없습니다.");
+        }
+        else{
+            let os = $("input[name = 'jb-radio']:checked").val();
+            let xccdf_number = $("input[name = 'xccdf_radio']:checked").val();
+            let file_name = $('.file-name' + String(xccdf_number)).text().trim();
+            let os_list = sessionStorage.getItem('os_list').split(',')
+
+            let pos = sessionStorage.getItem('pos')
+            let ppolicy = sessionStorage.getItem('ppolicy')
+            let pnumber = sessionStorage.getItem('pnumber')
+
+            if (pos) {
+                pos = pos.split(',');
+            } else{
+                pos = [];
+            }
+
+            if (ppolicy) {
+                ppolicy = ppolicy.split(',');
+            } else{
+                ppolicy = [];
+            }
+
+            if (pnumber) {
+                pnumber = pnumber.split(',');
+            } else{
+                pnumber = [];
+            }
+
+            pos.push(os);
+            ppolicy.push(file_name);
+            pnumber.push(xccdf_number);
+
+            pos = pos.reduce(function(a,b){if(a.indexOf(b)<0)a.push(b);return a;},[])
+            ppolicy = ppolicy.reduce(function(a,b){if(a.indexOf(b)<0)a.push(b);return a;},[])
+            pnumber = pnumber.reduce(function(a,b){if(a.indexOf(b)<0)a.push(b);return a;},[])
+
+            sessionStorage.setItem('pos', pos.join(','));
+            sessionStorage.setItem('ppolicy', ppolicy.join(','));
+            sessionStorage.setItem('pnumber', pnumber.join(','));
+
+            let num = $("input[name = 'jb-radio']:checked").attr('id').split('n')[2]
+            document.getElementsByClassName('os-no' + num)[0].classList.remove('no-policy')
+            document.getElementsByClassName('os-no' + num)[0].classList.add('policy')
+
+
+            $('#abcdefg').load(document.URL + ' #abcdefgh', {'os_list': os_list, 'os_policy': {'os': pos, 'file_name': ppolicy, 'xccdf_number': pnumber}})
+            $('#xccdfModal').modal('hide');
         }
     }
 
