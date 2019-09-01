@@ -3,44 +3,12 @@ const router = express.Router();
 const DB = require('../../db');
 const jwt = require('jsonwebtoken');
 
-let SECRET = 'token_scret';
-
-let isAuthenticatied = (token)=>{
-    let result = false;
-    jwt.verify(token, SECRET, function(err, decoded) {
-        var dateNow = new Date();
-        if (err) {
-            err = {
-                name: 'TokenExpiredError',
-                message: 'jwt expired',
-                expiredAt: dateNow.getTime()/1000
-            }
-        }else{
-            console.log(decoded.exp );
-            console.log(dateNow.getTime()/1000);
-            if(decoded.exp <= dateNow.getTime()/1000){
-                result =  false;
-            }else{
-                result =  decoded.exp;
-            }
-        }
-    });
-    return result;
-}
-
 router.get('/', function (req, res, next) {
 
     DB.get_agent_info().then(result3 => {
-        let is_auth = isAuthenticatied(req.session.token);
-        if(is_auth){
-            result3.expire = is_auth;
-            res.render('./main/GroupPolicy/NewGroup/newgroup', {
-
-                recordsets3: result3.recordset
-            });
-        }else{
-            res.redirect('/login');
-        }
+        res.render('./main/GroupPolicy/NewGroup/newgroup', {
+            recordsets3: result3.recordset
+        });
     });
 });//신규 그룹페이지
 
