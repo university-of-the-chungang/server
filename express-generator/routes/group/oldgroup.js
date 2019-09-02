@@ -167,6 +167,22 @@ router.post('/apply_xccdf', function(req, res, next){
 
 let upload = multer({dest:'public/uploads/'});
 
+let group_agent_map = (group_set_cd, agent_cd) => {
+    DB.insert_group_set_list(group_set_cd, agent_cd);
+    DB.get_agent_info(agent_cd).then(agent_info =>{
+        DB.view_modify_agent_os_info(group_set_cd, agent_cd).then(os_info => {
+            for(var j=0; j<os_info.recordset.length; j++){
+                if(os_info.recordset[j].OS === agent_info.recordset[0].OS){
+                    if(os_info.recordset[j].XCCDF_CD !== null){
+                        DB.update_xccdf_cd(group_set_cd, agent_cd, os_info.recordset[j].XCCDF_CD);
+                        break;
+                    }
+                }
+            }
+        });
+    });
+};
+
 let read_xlsx = (file_path, group_set_cd, name) => {
     let workbook = xlsx.readFile(file_path);
     let first_sheet_name = workbook.SheetNames[0];
@@ -181,31 +197,25 @@ let read_xlsx = (file_path, group_set_cd, name) => {
                 if(typeof(elem['IP']) != 'undefined'){
                     //해당 에이전트 등록되어 있는지 탐색과 동시에 등록 되어 있을 경우 AGENT_CD 값 받아옴
                     DB.find_agent(elem['IP']).then(result2 => {
-                        console.log(result2);
                         if(result2.recordset.length > 0) {
+                            console.log(result2.recordset.length);
                             var agent_cd = result2.recordset[0].AGENT_CD;
                             var flag = 0;
+
+                            if(result.recordset.length === 0)
+                                group_agent_map(group_set_cd, agent_cd);
+
                             for(var j=0; (j<result.recordset.length); j++){
                                 var com = result.recordset[j].AGENT_CD + '';
-
+                                console.log(com, agent_cd);
                                 if(com === agent_cd){
                                     flag = 1;
                                     break;
                                 }
+
                                 if(flag === 0){
-                                    DB.insert_group_set_list(group_set_cd, agent_cd);
-                                    DB.get_agent_info(agent_cd).then(agent_info =>{
-                                        DB.view_modify_agent_os_info(group_set_cd, agent_cd).then(os_info => {
-                                            for(var j=0; j<os_info.recordset.length; j++){
-                                                if(os_info.recordset[j].OS === agent_info.recordset[0].OS){
-                                                    if(os_info.recordset[j].XCCDF_CD !== null){
-                                                        DB.update_xccdf_cd(group_set_cd, agent_cd, os_info.recordset[j].XCCDF_CD);
-                                                        break;
-                                                    }
-                                                }
-                                            }
-                                        });
-                                    });
+                                    console.log(group_set_cd, agent_cd);
+                                    group_agent_map(group_set_cd, agent_cd);
                                 }
                             }
                         }else{

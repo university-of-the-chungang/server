@@ -1,4 +1,4 @@
-DATE,ID,TYPE,CONTENTS
+﻿DATE,ID,TYPE,CONTENTS
 Mon Sep 10 2018 09:00:00 GMT+0900 (GMT+09:00),1,Login,http/Get 200 login....
 Mon Sep 10 2018 09:00:00 GMT+0900 (GMT+09:00),2,Logout,http/Post 200 ...
 Fri May 10 2019 09:00:00 GMT+0900 (GMT+09:00),3,Modify properties,http/Post 200
@@ -576,3 +576,7 @@ Wed Aug 28 2019 20:41:28 GMT+0900 (GMT+09:00),10531,USER,admin 가 로그인을(
 Thu Aug 29 2019 03:28:41 GMT+0900 (GMT+09:00),10532,USER,admin 가 로그인을(를) 하였음
 Thu Aug 29 2019 07:11:20 GMT+0900 (GMT+09:00),10533,USER,admin 가 로그인을(를) 하였음
 Thu Aug 29 2019 07:12:59 GMT+0900 (GMT+09:00),10534,USER,admin 가 로그인을(를) 하였음
+Thu Aug 29 2019 07:20:16 GMT+0900 (GMT+09:00),10535,USER,admin 가 로그인을(를) 하였음
+Thu Aug 29 2019 07:49:13 GMT+0900 (GMT+09:00),10536,USER,admin 가 로그인을(를) 하였음
+Thu Aug 29 2019 08:48:44 GMT+0900 (GMT+09:00),10537,USER,admin 가 로그인을(를) 하였음
+Thu Aug 29 2019 09:08:05 GMT+0900 (GMT+09:00),10538,USER,admin 가 로그인을(를) 하였음

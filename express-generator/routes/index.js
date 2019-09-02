@@ -104,64 +104,60 @@ function downfile(res,a)
     var origFileNm, savedFileNm,savedPath,fileSize;
 
 
-    origFileNm = 'log_output.txt';
-    savedFileNm = "log.txt"
-    savedPath = __dirname+'/log/'
+    origFileNm = 'log_output.csv';
+    savedFileNm = "log.csv";
+    savedPath = __dirname+'/log';
     fileSize = '1000';
     
     
     var file = savedPath + '/'+savedFileNm;
     mimetype = mime.lookup(origFileNm);
-    res.setHeader('Content-disposition','attachment; filename='+origFileNm);
-    res.setHeader('Content-type',mimetype);
 
-    
+    //res.setHeader('Content-type','text/csv');
+    res.setHeader('Content-type', mimetype);
+    res.setHeader('Content-disposition','attachment; filename='+origFileNm);
+
     var filestream = fs.createReadStream(file);
     filestream.pipe(res);
 
-    if(a==1){
+    resolve(true);
+    /*if(a===1){
       resolve(1);  
     }
     else{
       reject(0);
-    }
+    }*/
   });
-
-  
 }
 
 function makelog(log_list,a)
 {
-  
    return new Promise((resolve,reject)=>{
-    var data = "DATE\t\t\t\t\t\t\t\t\t\t\t\tID\t\tTYPE\t\t\tCONTENTS\n";
-    
-    for(var i =0 ; i < log_list.length; i+=1)
-    {
-      var strarray = log_list[i].split(' : ');
-      data += strarray[0]+"\t\t"+strarray[1]+"\t\t"+strarray[2]+"\t\t\t"+strarray[3]+"\n";  
-    }
-   fs.writeFileSync(__dirname+'/log/log.txt',data,'utf8');
+     var BOM = "\uFEFF";
+     var data = BOM + "DATE,ID,TYPE,CONTENTS\n";
+
+     for(var i =0 ; i < log_list.length; i+=1)
+     {
+       var strarray = log_list[i].split(' : ');
+       data += strarray[0]+","+strarray[1]+","+strarray[2]+","+strarray[3]+"\n";
+     }
+
+   fs.writeFileSync(__dirname+'/log/log.csv',data,'utf8');
    console.log("file make fin");
    resolve(true);
-   
-
   });
-
 }
 
 function downlog(log_list,res){
-
   makelog(log_list,1)
     .then(result =>{downfile(res,1)});
-
 }
+
 router.post('/download/', function(req, res){
   
   //console.log(Object.values(req.body))
   log_list = Object.values(req.body);
   downlog(log_list,res);
-
 });
 
 router.get('/404', function (req, res, next) {
@@ -210,6 +206,7 @@ router.post('/signup',(req,res,next)=>{
     res.render('./main/User/login');
   });
 });
+
 router.get('/logout',(req,res,next)=>{
   LOGS.make_log("USER",req.session.username,"로그아웃");
   req.session.username = null;
@@ -241,8 +238,8 @@ router.get('/agent', function (req, res, next) {
       res.redirect('/login');
     }
   });
-
 });// 에이전트 페이지
+
 router.get('/agent/:keyword', (req, res, next) => {
   DB.search_agent_info(req.params.keyword).then(result => {
     result.sess_name = req.session.username;
@@ -260,7 +257,7 @@ router.get('/log', function (req, res, next) {
         recordsets: result.recordsets,
         data: result2.recordsets
       });
-    });    
+    });
     //res.render('./main/Log/log', result);
   });
 }); // 평가문항 및 로그 추출 페이지
@@ -331,7 +328,6 @@ router.post('/agent/del_agent_info', (req, res, next) => {
 
 router.post('/add_manual_agent', (req, res, next) => {
   let arr = [req.body.txtIP, req.body.txtMac, req.body.txtOS, req.body.txtUseful, req.body.txtOwner, req.body.txtDesc, req.body.state];
-
 
   let isnull = false;
   arr.forEach(element => {

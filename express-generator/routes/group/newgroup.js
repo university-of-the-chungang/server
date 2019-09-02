@@ -4,7 +4,6 @@ const DB = require('../../db');
 const jwt = require('jsonwebtoken');
 
 router.get('/', function (req, res, next) {
-
     DB.get_agent_info().then(result3 => {
         DB.view_tbl_xccdf().then(result6 => {
             res.render('./main/GroupPolicy/NewGroup/newgroup', {
@@ -53,7 +52,6 @@ router.post('/', function (req, res, next) {
                 os_policy['is_allocated'] = 1
             }
         }
-
         os_policy_list.push(os_policy);
     }
 
