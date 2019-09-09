@@ -615,7 +615,7 @@ router.post('/dashboard/viewgroupreport',(req,res,next)=>{
 router.post('/dashboard/viewhtml',(req,res,next)=>{
   let param = JSON.parse(req.body['row_arr']);
     make_dashboard.buildHtml(param).then(result=>{
-      res.writeHead(200, {'Content-Type': 'text/html','Content-Length':result.length});
+      res.writeHead(200, {'Content-Type': 'text/html','Content-Length':Buffer.byteLength(result,'utf8')});
       res.write(result);
       res.end();
     });
