@@ -10,7 +10,6 @@
                 $('.nav-tabs').find('a').eq(0).removeClass('active');
                 $('.nav-tabs').find('a').eq(1).addClass('active').siblings().removeClass();
                 $('.tab-content').find('#profile').addClass('active in').siblings().removeClass('active in');
-
             } else if(t=='3'){
                 $('.nav-tabs').find('a').eq(0).removeClass('active');
                 $('.nav-tabs').find('a').eq(2).addClass('active').siblings().removeClass();
@@ -208,7 +207,6 @@
                                                             <label class="custom-control-label" for="customControlValidation<%-i*2%>"><%=recordsets5[i*2].OS%></label>
                                                         </div>
                                                     </td>
-
                                                     <td>
                                                         <div class="custom-control custom-radio custom-control-inline">
                                                                 <input type="radio" class="custom-control-input <%if(recordsets5[i*2+1].XCCDF_CD !== null){%>is-valid<%}else{%> is-invalid <%}%>" name = "jb-radio" id="customControlValidation<%-i*2+1%>" value="<%=recordsets5[i*2+1].OS%>">
@@ -401,7 +399,6 @@
                 <!--<div class="col-2">
                    <div class="metric-label d-inline-block float-right text-success font-weight-bold">
                         <button type="submit" class="btn btn-space btn-primary">수정</button>
-
                    </div>
                 </div>-->
 
@@ -525,17 +522,14 @@
             preserveSelectionOnMove: 'moved',
             moveOnSelect: false
         });
-
         $('#group_agent_change_btn').click(() => {
             let arr = $('[name="agentlistbox[]"]').val();
             $('#change_group_set_list').val(JSON.stringify(arr));
             $('#group_agent_change_btn').submit();
         });
-
         $('#change_cancle_btn').click(() =>{
            location.href = '/group';
         });
-
     </script>
 
     <!-- bootstap bundle js -->
@@ -553,7 +547,6 @@
         text-align: center;
         margin-bottom:20px;
     }
-
     div.dataTables_wrapper div.dataTables_paginate {
         float: none;
         text-align: center;
@@ -572,7 +565,6 @@
                 searchPlaceholder : "Search..."
             },
         });
-
         $('#xccdf_modal_btn').click(() => {
             let cnt =  $("input[name = 'jb-radio']:checked").length;
             if(cnt === 0){
@@ -589,4 +581,3 @@
     </script>
 </body>
 </html>
-

@@ -46,6 +46,10 @@ sql.on('error', err => {
     console.log("Sql database connection error ", err);
 })
 
+
+
+
+
 let query_select = (data, table_name,where) => {
     return new Promise((resolve, reject) => {
         new sql.Request().query(`SELECT ` + String(data) + ` FROM ` + table_name + where, (err, result) => {
