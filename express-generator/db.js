@@ -159,13 +159,15 @@ exports.get_dashboard_datas = ()=>{
     LEFT OUTER JOIN TBL_INSPECT_STATS T4 ON T1.AGENT_CD = T4.AGENT_CD 
     INNER JOIN TBL_XCCDF_SET_LIST T5 ON T3.GROUP_SET_CD = T5.GROUP_SET_CD
     LEFT OUTER JOIN TBL_XCCDF T6 ON T5.XCCDF_CD = T6.XCCDF_CD 
-    WHERE T3.ACTIVE_STATE = 'A'AND T1.DEL_FLAG = 0 AND T3.DEL_FLAG = 0 ORDER BY T3.CREATE_TIME DESC`;
+    WHERE T3.ACTIVE_STATE = 'A'AND T1.DEL_FLAG = 0 AND T3.DEL_FLAG = 0 
+    ORDER BY T3.CREATE_TIME DESC`;
     
     return new Promise((resolve,reject)=>{
         new sql.Request().query(query,(err,result)=>{
             if(err){
                 reject(err);
             }
+            console.log(result);
             resolve(result);
         })
     })
