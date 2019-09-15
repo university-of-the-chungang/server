@@ -458,6 +458,10 @@ const uploads = require('./')
 
 router.use('/oval', oval);
 
+//통신모듈
+const reqFile = require('./reqFile');
+
+router.use('/reqFile', reqFile);
 
 ///////////////// 테스트용 API ////////////////////
 router.get('/test_test',(req,res,next)=>{

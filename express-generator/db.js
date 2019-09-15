@@ -791,3 +791,26 @@ exports.delete_agent_from_group_set_list = (group_set_cd, agent_cd) => {
         });
     });
 };
+
+
+exports.insert_servey = (a0,a1,a2,a3,a4,a5,a6,a7,a8)=>{
+    return new Promise((resolve,reject)=>{
+        new sql.Request().query('insert TBL_INSPECT_SURVEY (INSPECT_ITEM_CD, INSPECT_RESULT) values(\'1\', \''+ a0 + '\'),(\'2\',\''+ a1 + '\'),(\'3\',\''+ a2 + '\'),(\'4\',\''+ a3 + '\'),(\'5\',\''+ a4 + '\'),(\'6\',\''+ a5 + '\'),(\'7\',\''+ a6 + '\'),(\'8\',\''+ a7 + '\'),(\'9\',\''+ a8 + '\')',(err,result)=>{
+            if(err){
+                console.log(err);
+            }else
+                resolve(result);
+        });
+    });
+};
+
+exports.get_servey = ()=>{
+    return new Promise((resolve,reject)=>{
+        new sql.Request().query('select INSPECT_ITEM_CD, INSPECT_RESULT from (select top(9) * from TBL_INSPECT_SURVEY order by inspect_date desc) as a order by inspect_cd asc',(err,result)=>{
+            if(err){
+                console.log(err);
+            }else
+                resolve(result);
+        });
+    });
+};

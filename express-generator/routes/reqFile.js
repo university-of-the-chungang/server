@@ -1,18 +1,17 @@
 const express = require('express');
+const router = express.Router();
 const DB = require('../db');
 const jwt = require('jsonwebtoken');
 let SECRET = 'token_secret';
 
-var router = express.Router();
-
-router.post('/', function(req, res, next) {
+router.get('/', function(req, res, next) {
 
 	console.log("post test");
   
 	ip = req.ip.replace('::ffff:', '');
 	console.log(ip);
 	
-	db.query('select FILE_NAME \
+	DB.query('select FILE_NAME \
 				from TBL_XCCDF \
 				where XCCDF_CD in ( \
 				select XCCDF_CD from TBL_XCCDF_SET_LIST \
@@ -47,7 +46,7 @@ router.post('/:fileId', function(req, res, next) {
 	
 });
 */
-router.post('/:fileId', function(req, res, next) {
+router.get('/:fileId', function(req, res, next) {
   	
 	ip = req.ip.replace('::ffff:', '');
 	console.log(ip);
