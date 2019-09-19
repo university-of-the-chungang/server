@@ -9,7 +9,7 @@ let config = {
     // 해당 설정 부분은 설정파일 생기면 그리 옮길것 
     "user": "developer", //default is sa
     "password": "ang0511",
-    "server": "52.231.155.141", // for local machine
+    "server": "52.231.199.26", // for local machine
     // "server": "localhost", // for local machine
     "port": 1444,
     "database": "nsrang", // name of database
