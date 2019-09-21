@@ -76,4 +76,3 @@ package.json
 .idea
 
 upload/
-express-generator/routes/ssg-nsr-ds.xml
