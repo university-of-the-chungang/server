@@ -9,7 +9,7 @@ let config = {
     // 해당 설정 부분은 설정파일 생기면 그리 옮길것 
     "user": "developer", //default is sa
     "password": "ang0511",
-    "server": "52.231.155.141", // for local machine
+    "server": "52.231.199.26", // for local machine
     // "server": "localhost", // for local machine
     "port": 1444,
     "database": "nsrang", // name of database
@@ -45,6 +45,10 @@ sql.on('error', err => {
     // ... error handler 
     console.log("Sql database connection error ", err);
 })
+
+
+
+
 
 let query_select = (data, table_name,where) => {
     return new Promise((resolve, reject) => {
@@ -155,13 +159,15 @@ exports.get_dashboard_datas = ()=>{
     LEFT OUTER JOIN TBL_INSPECT_STATS T4 ON T1.AGENT_CD = T4.AGENT_CD 
     INNER JOIN TBL_XCCDF_SET_LIST T5 ON T3.GROUP_SET_CD = T5.GROUP_SET_CD
     LEFT OUTER JOIN TBL_XCCDF T6 ON T5.XCCDF_CD = T6.XCCDF_CD 
-    WHERE T3.ACTIVE_STATE = 'A'AND T1.DEL_FLAG = 0 AND T3.DEL_FLAG = 0 ORDER BY T3.CREATE_TIME DESC`;
+    WHERE T3.ACTIVE_STATE = 'A'AND T1.DEL_FLAG = 0 AND T3.DEL_FLAG = 0 
+    ORDER BY T3.CREATE_TIME DESC`;
     
     return new Promise((resolve,reject)=>{
         new sql.Request().query(query,(err,result)=>{
             if(err){
                 reject(err);
             }
+            console.log(result);
             resolve(result);
         })
     })
@@ -782,6 +788,29 @@ exports.delete_agent_from_group_set_list = (group_set_cd, agent_cd) => {
                 reject(err);
             }
             resolve(result);
+        });
+    });
+};
+
+
+exports.insert_servey = (a0,a1,a2,a3,a4,a5,a6,a7,a8)=>{
+    return new Promise((resolve,reject)=>{
+        new sql.Request().query('insert TBL_INSPECT_SURVEY (INSPECT_ITEM_CD, INSPECT_RESULT) values(\'1\', \''+ a0 + '\'),(\'2\',\''+ a1 + '\'),(\'3\',\''+ a2 + '\'),(\'4\',\''+ a3 + '\'),(\'5\',\''+ a4 + '\'),(\'6\',\''+ a5 + '\'),(\'7\',\''+ a6 + '\'),(\'8\',\''+ a7 + '\'),(\'9\',\''+ a8 + '\')',(err,result)=>{
+            if(err){
+                console.log(err);
+            }else
+                resolve(result);
+        });
+    });
+};
+
+exports.get_servey = ()=>{
+    return new Promise((resolve,reject)=>{
+        new sql.Request().query('select INSPECT_ITEM_CD, INSPECT_RESULT from (select top(9) * from TBL_INSPECT_SURVEY order by inspect_date desc) as a order by inspect_cd asc',(err,result)=>{
+            if(err){
+                console.log(err);
+            }else
+                resolve(result);
         });
     });
 };

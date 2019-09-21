@@ -37,12 +37,13 @@ function parseXml(filename){
     let title_arr = [];
     let checkpoint_arr = [];
     let fix_arr = [];
+    let severity_arr = [];
     parser.parseString(xml, (err, result) => {
         let data_stream = result["ds:data-stream-collection"]["ds:data-stream"];
         let component = result["ds:data-stream-collection"]["ds:component"];
         component.forEach(element => {
           if (typeof element["ocil"] != "undefined")
-            console.log(JSON.stringify(element["ocil"][0]["questionnaires"]));
+            // console.log(JSON.stringify(element["ocil"][0]["questionnaires"]));
           console.log("//////////////////////");
         });
         result["ds:data-stream-collection"]["ds:component"][2]["Benchmark"][0][
@@ -51,6 +52,7 @@ function parseXml(filename){
           // console.log(element['Rule'])
           element["Rule"].forEach(elem => {
             // 타이틀
+            severity_arr.push(elem['$']['severity']);
             title_arr.push(elem["title"][0]["_"]);
             if (elem["description"][0]["html:pre"]) {
               // 판단 기준
@@ -63,7 +65,7 @@ function parseXml(filename){
           });
         });
       });
-      return [title_arr,checkpoint_arr,fix_arr];
+      return [title_arr,checkpoint_arr,fix_arr,severity_arr];
 }
 
 
@@ -81,6 +83,7 @@ exports.buildHtml = row => {
         title_arr = new_arr[0];
         checkpoint_arr = new_arr[1];
         fix_arr = new_arr[2];
+        severity_arr = new_arr[3];
       }
       let un_obey_cnt = row["ITEM_CNT"] - row["GRD_SCORE"];
       html = html.replace(/\$\{un_obey_cnt\}/gi, un_obey_cnt);
@@ -114,6 +117,7 @@ exports.buildHtml = row => {
         html = html.replace(/\$\{title_arr\}/gi, JSON.stringify(title_arr));
         html = html.replace('${checkpoint_arr}',JSON.stringify(checkpoint_arr));
         html = html.replace('${fix_arr}',JSON.stringify(fix_arr));
+        html = html.replace('${severity_arr}',JSON.stringify(severity_arr));
 
         // console.log(html);
         html = html.replace(

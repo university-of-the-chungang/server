@@ -93,7 +93,7 @@
 			<div class="modal-body">
 			  <tr><p>제목 : <span id="title"></span></p></tr>
 			  <p>결과 : [DB에 에이전트 점검 결과 ]</p>
-			  <p>위험도 : [정책파일에서 태그 파싱]</p>
+			  <p>위험도 : <span id="severity"></span></p>
 			  <p>판단 기준 : <br/><span id="checkpoint"></span></p>
 			  <p>치료 : <br/><span id="fix"></span></p>
 			</div>
@@ -109,12 +109,14 @@
 	  <script>
 			let title_arr = ${title_arr};
 			let checkpoint_arr = ${checkpoint_arr};
+			let severity_arr = ${severity_arr};
 			let fix_arr = ${fix_arr};
 			$('.agent_tr').click((e)=>{
 				let id = e.currentTarget.id.split('_')[1];
 				console.log(id);
 				console.log(title_arr[id]);
 				$('#title').text(title_arr[id]);
+				$('#severity').text(severity_arr[id]);
 				$('#checkpoint').text(checkpoint_arr[id]);
 				$('#fix').text(fix_arr[id]);
 			});

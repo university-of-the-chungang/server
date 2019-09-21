@@ -32,13 +32,20 @@
                         <!-- ============================================================== -->
                         <!-- end pageheader  -->
                         <!-- ============================================================== -->
-                        <% let submit_date = recordsets[0][0].SUBMIT_DATE.toISOString().replace('T',' ').replace('Z','') %>
+                        <% 
+                        let submit_date = '';
+                        if (recordsets[0].length > 0){
+                        submit_date = recordsets[0][0].SUBMIT_DATE.toISOString().replace('T',' ').replace('Z','') 
+                    }
+                    %>
                         <div class="ecommerce-widget">
                             <div class="row">
                                 <div class="col-1"></div>
                                 <div class="col-5">
                                     <div class="card" style="height: 600px;">
-                                        <h3 class="card-header text-center"><b id="group_name" style="cursor: pointer"><%=recordsets[0][0]['NAME'] %></b>(<%=submit_date%>)</h3>
+                                        <h3 class="card-header text-center"><b id="group_name" style="cursor: pointer">
+                                            <% if (recordsets[0].length > 0){
+                                            %><%=recordsets[0][0]['NAME'] %></b>(<%=submit_date%>)<% } %></h3>
                                         <div class="card-body p-0">
 
                                             <div class="row" style="margin-top: 15px; height: 70px;">
@@ -363,10 +370,10 @@
                 else $(".chkbox").prop('checked', false);
             });
         </script>
+        
         <script>
             var ctx = document.getElementById('myChart').getContext('2d');
-
-var chart = new Chart(ctx, {
+            var chart = new Chart(ctx, {
                 // The type of chart we want to create
                 type: 'doughnut',
 
