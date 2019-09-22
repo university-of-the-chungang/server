@@ -629,18 +629,27 @@ router.post('/dashboard/viewhtml',(req,res,next)=>{
 })
 router.post('/group/viewhtml',(req,res,next)=>{
   let group_cd = JSON.parse(req.body['group_cd']);
-
-  DB.get_group_info(null,group_cd).then((result)=>{
-    let param = result.recordset[0];
-    DB.get_agents_from_group_cd(group_cd).then((result1)=>{
-      param = Object.assign({},param,result1.recordset);
+  DB.get_agents_from_group_cd(group_cd).then(result=>{
+    let param = result.recordset;
       console.log(param);
       make_group.buildHtml(param).then(result2=>{
         res.writeHead(200, {'Content-Type': 'text/html','Content-Length':result2.length});
         res.write(result2);
         res.end();
-      })
-    })
+  })
+
+
+  // DB.get_group_info(null,group_cd).then((result)=>{
+  //   let param = result.recordset[0];
+  //   DB.get_agents_from_group_cd(group_cd).then((result1)=>{
+  //     param = Object.assign({},param,result1.recordset);
+  //     console.log(param);
+  //     make_group.buildHtml(param).then(result2=>{
+  //       res.writeHead(200, {'Content-Type': 'text/html','Content-Length':result2.length});
+  //       res.write(result2);
+  //       res.end();
+  //     })
+  //   })
 
 
 

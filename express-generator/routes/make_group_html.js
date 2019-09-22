@@ -101,22 +101,27 @@ exports.buildHtml = row => {
         if (err) {
           reject(err);
         }
-        html = html.replace(/\${NAME}/gi, row["NAME"]);
-        html = html.replace(/\${CREATE_TIME}/gi, row["CREATE_TIME"].format("yyyy-MM-dd(KS) HH:mm:ss"));
-        html = html.replace(/\${GROUP_SET_CD}/gi, row["GROUP_SET_CD"]);
-        html = html.replace(/\${DESCRIPTION}/gi, row["DISCRIPTION"]);
-        html = html.replace(/\${AGENT_COUNTING}/gi, row["AGENT_COUNTING"]);
-        html = html.replace(
-          /\${INSPECTION_START_DATE}/gi,
-          row["INSPECTION_START_DATE"].format("yyyy-MM-dd(KS) HH:mm:ss")
-        );
-        html = html.replace(/\${INSPECTION_PERIOD}/gi, row["INSPECTION_PERIOD"]);
+        console.log(row);
+        html = html.replace(/\${NAME}/gi, row[0]["NAME"]);
+        if (typeof(row[0]['CREATE_TIME']) != 'undefined') 
+            html = html.replace(/\${CREATE_TIME}/gi, row[0]["CREATE_TIME"].format("yyyy-MM-dd(KS) HH:mm:ss"));
+        
+        html = html.replace(/\${GROUP_SET_CD}/gi, row[0]["GROUP_SET_CD"]);
+        html = html.replace(/\${DESCRIPTION}/gi, row[0]["DISCRIPTION"]);
+        html = html.replace(/\${AGENT_COUNTING}/gi, row[0]["AGENT_COUNTING"]);
+        
+        if (typeof(row[0]['INSPECTION_START_DATE']) != 'undefined') 
+            html = html.replace(
+                /\${INSPECTION_START_DATE}/gi,
+                row[0]["INSPECTION_START_DATE"].format("yyyy-MM-dd(KS) HH:mm:ss")
+                );
+        html = html.replace(/\${INSPECTION_PERIOD}/gi, row[0]["INSPECTION_PERIOD"]);
         new_html = '';
-        for(let i = 0 ; i< row["AGENT_COUNTING"] ; i+=1){
+        for(let i = 0 ; i< row.length ; i+=1){
 
             let success = 0 
             let fail = 0;
-            let total = row[i]['ITEM_CNT'];
+            let total = row[i]['AGENT_COUNTING'];
             if(total){
             success = row[i]['GRD_SCORE'];
             fail = total - success;

@@ -193,7 +193,7 @@
                                                     <input type="hidden" name="state" value="<%=recordsets[0][i].ACTIVE_STATE%>">
                                                     <input type="hidden" name="cd" value="<%=recordsets[0][i].GROUP_SET_CD%>">
                                                     <input type="checkbox" data-toggle="toggle" <%if(recordsets[0][i].ACTIVE_STATE === 'A'){%> checked <%}%>
-                                                           name="state_switch" id = "<%=recordsets[0][i].GROUP_SET_CD%>" value = <%=recordsets[0][i].GROUP_SET_CD%>>
+                                                           class="switch_state" name="state_switch" id = "<%=recordsets[0][i].GROUP_SET_CD%>" value = <%=recordsets[0][i].GROUP_SET_CD%>>
                                                     <span><label for="<%=recordsets[0][i].GROUP_SET_CD%>"
                                                         <%if(recordsets[0][i].ACTIVE_STATE === 'A'){%> style = "float: right" <%} else {%> style = "float:left" <%}%>></label></span>
                                                 </div>
@@ -286,7 +286,7 @@
     $('.group_table_tr').click((e)=>{
         let target_cd = e.currentTarget.id.split('_')[1];
         $('#click_cd').val(target_cd);
-        $('#viewhtmlform').submit();
+        // $('#viewhtmlform').submit();
     });
         $('#group_table').DataTable({
             lengthChange: false,
@@ -326,7 +326,6 @@
      //let cnt = $("input[class='custom-control-input']:checked").length;
             let arr=[];
             let chk_arr = $('input:checkbox[name="chkbox"]:checked');
-
             if (chk_arr.length == 0) {
                 alert("선택 된 그룹이 없습니다.");
                 return;
@@ -352,12 +351,12 @@
             else $('input:checkbox[name="chkbox"]').prop('checked', false);
         });
 
-
-        $('input[name="state_switch"]').change(function() {
+        $('.switch_state').click(function() {
+            console.log("TT")
             let checked = $(this).prop('checked');// checked 상태 (true, false)
             let chk_arr = $('input:checkbox[name="state_switch"]:checked');
             let change = '#state_change' + $(this).val();
-
+            console.log(change);
             if(checked){
                 if(chk_arr.length > 1){
                     alert("하나의 그룹만 활성화 될 수 있습니다. 다른 그룹을 비활성화 시켜주세요");

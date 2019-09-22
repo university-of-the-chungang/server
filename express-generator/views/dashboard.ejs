@@ -16,18 +16,18 @@
                 <div class="dashboard-ecommerce">
                     <div class="container-fluid dashboard-content ">
                         <div class="row">
-                                <div class="page-header">
-                                    <h2 class="pageheader-title">대쉬보드 </h2>
-                                    <div class="page-breadcrumb">
-                                        <nav aria-label="breadcrumb">
-                                            <ol class="breadcrumb">
-                                                <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">MENU</a>
-                                                </li>
-                                                <li class="breadcrumb-item active" aria-current="page">대쉬보드</li>
-                                            </ol>
-                                        </nav>
-                                    </div>
+                            <div class="page-header">
+                                <h2 class="pageheader-title">대쉬보드 </h2>
+                                <div class="page-breadcrumb">
+                                    <nav aria-label="breadcrumb">
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">MENU</a>
+                                            </li>
+                                            <li class="breadcrumb-item active" aria-current="page">대쉬보드</li>
+                                        </ol>
+                                    </nav>
                                 </div>
+                            </div>
                         </div>
                         <!-- ============================================================== -->
                         <!-- end pageheader  -->
@@ -35,7 +35,9 @@
                         <% 
                         let submit_date = '';
                         if (recordsets[0].length > 0){
-                        submit_date = recordsets[0][0].SUBMIT_DATE.toISOString().replace('T',' ').replace('Z','') 
+                            if (typeof(recordsets[0][0].SUBMIT_DATE) != 'undefined'){
+                                submit_date = recordsets[0][0].SUBMIT_DATE.toISOString().replace('T',' ').replace('Z','');
+                            }
                     }
                     %>
                         <div class="ecommerce-widget">
@@ -44,7 +46,7 @@
                                 <div class="col-5">
                                     <div class="card" style="height: 600px;">
                                         <h3 class="card-header text-center"><b id="group_name" style="cursor: pointer">
-                                            <% if (recordsets[0].length > 0){
+                                                <% if (recordsets[0].length > 0){
                                             %><%=recordsets[0][0]['NAME'] %></b>(<%=submit_date%>)<% } %></h3>
                                         <div class="card-body p-0">
 
@@ -67,9 +69,10 @@
                                                         class="btn btn-outline-primary btn-lg"> 점검결과 저장</button>
                                                 </div>
                                             </div>
-                                            <form id="viewhtmlfrm" method="POST" action="/dashboard/viewhtml" style="display: none" target="_blank">
-                                                <input type="hidden" id="table_row" name="row_arr" >
-                                                <input type="hidden" id="click_cd" name="group_cd" >
+                                            <form id="viewhtmlfrm" method="POST" action="/dashboard/viewhtml"
+                                                style="display: none" target="_blank">
+                                                <input type="hidden" id="table_row" name="row_arr">
+                                                <input type="hidden" id="click_cd" name="group_cd">
                                             </form>
                                             <div class="table-responsive" style="margin-top:-50px;">
                                                 <table id="agent_table" class="table">
@@ -88,11 +91,15 @@
                                                         if(recordsets[0][i].GRD_SCORE !== null && recordsets[0][i].ITEM_CNT !== null){ 
                                                             if(Number(recordsets[0][i].GRD_SCORE) == Number(recordsets[0][i].ITEM_CNT)){
                                                         color = "blue";     
-                                                            }else{
+                                                            }else if (typeof(recordsets[0][i].GRD_SCORE) == 'undefined' || typeof(recordsets[0][i].ITEM_CNT) == 'undefined'){
+                                                                color = "grey";
+                                                            }
+                                                            else{
                                                                 color = "red";
                                                             }
                                                         } %>
-                                                        <tr style="text-align: center; color:<%= color%> ;" id="table_tr_<%=i %>" >
+                                                        <tr style="text-align: center; color:<%= color%> ;"
+                                                            id="table_tr_<%=i %>">
                                                             <td style="text-align:center; vertical-align: middle;">
                                                                 <label class="custom-control custom-checkbox"><input
                                                                         type="checkbox" id='<%=i %>'
@@ -102,12 +109,18 @@
                                                             </td>
                                                             <td style="text-align: center">
                                                                 <% if(color == "blue"){ %>
-                                                                <div class="m-r-10 text-center"><img src="/assets/images/pass.png" alt="pass" class="rounded" width="45"></div>
+                                                                <div class="m-r-10 text-center"><img
+                                                                        src="/assets/images/pass.png" alt="pass"
+                                                                        class="rounded" width="45"></div>
                                                                 <% } else if(color == "red"){ %>
-                                                                <div class="m-r-10 text-center"><img src="/assets/images/fail.png" alt="fail" class="rounded" width="45"></div>
-                                                                    <% }else{ %>
-                                                                        <div class="m-r-10 text-center"><img src="/assets/images/default.png" alt="default" class="rounded" width="45"></div>
-                                                                        <% } %>
+                                                                <div class="m-r-10 text-center"><img
+                                                                        src="/assets/images/fail.png" alt="fail"
+                                                                        class="rounded" width="45"></div>
+                                                                <% }else{ %>
+                                                                <div class="m-r-10 text-center"><img
+                                                                        src="/assets/images/default.png" alt="default"
+                                                                        class="rounded" width="45"></div>
+                                                                <% } %>
                                                             </td>
                                                             <!-- 여기에 STATE 값 별로 그림 이미지좀 출력해줘 -->
                                                             <!-- 이미지는 public/assets/images 에 넣어놓을꼐-->
@@ -118,14 +131,15 @@
                                                              -->
                                                             <td class="table_tr" style="cursor:pointer">
                                                                 <%= recordsets[0][i].IP %>
-                                                                
+
                                                             </td>
-                                                            <td class="table_tr" style="cursor:pointer"><%= recordsets[0][i].OS %></td>
-                                                            <td class="table_tr" style="cursor:pointer"><%= recordsets[0][i].PURPOSE %></td>
+                                                            <td class="table_tr" style="cursor:pointer">
+                                                                <%= recordsets[0][i].OS %></td>
+                                                            <td class="table_tr" style="cursor:pointer">
+                                                                <%= recordsets[0][i].PURPOSE %></td>
                                                         </tr>
                                                         <input type="hidden"
-                                                                    id="is_search_<%=recordsets[0][i].AGENT_CD[0]%>"
-                                                                    value=<% 
+                                                            id="is_search_<%=recordsets[0][i].AGENT_CD[0]%>" value=<% 
                                                                 if(color.length > 0){
                                                                 %>true<%
                                                                 }else{
@@ -158,6 +172,8 @@
                                         if(recordsets[0][i].GRD_SCORE !== null && recordsets[0][i].ITEM_CNT !== null){ 
                                             if(Number(recordsets[0][i].GRD_SCORE) == Number(recordsets[0][i].ITEM_CNT)){
                                                 junsu += 1;   
+                                            }else if (typeof((recordsets[0][i].GRD_SCORE)) == 'undefined' || typeof((recordsets[0][i].ITEM_CNT)) == 'undefined'){
+                                                not_check +=1;
                                             }else{
                                                 not_junsu +=1;
                                             }
@@ -197,7 +213,8 @@
                                                                 style="width: <%=Number(not_junsu/total_junsu * 100)%>%"
                                                                 aria-valuenow="100" aria-valuemin="0"
                                                                 aria-valuemax="100">
-                                                                <%=Number(not_junsu/total_junsu * 100).toFixed(2)%>%</div>
+                                                                <%=Number(not_junsu/total_junsu * 100).toFixed(2)%>%
+                                                            </div>
 
                                                         </div>
                                                         <h4>(<%=not_junsu%>/<%=total_junsu%>)</h4>
@@ -210,7 +227,8 @@
                                                                 style="width: <%=Number(not_check/total_junsu * 100)%>%"
                                                                 aria-valuenow="75" aria-valuemin="0"
                                                                 aria-valuemax="100">
-                                                                <%=Number(not_check/total_junsu * 100).toFixed(2)%>%</div>
+                                                                <%=Number(not_check/total_junsu * 100).toFixed(2)%>%
+                                                            </div>
                                                         </div>
                                                         <h4>(<%=not_check%>/<%=total_junsu%>)</h4>
                                                     </div>
@@ -270,7 +288,7 @@
                 <!-- ============================================================== -->
                 <div class="footer">
                     <%include ./footer.ejs%>
-                    
+
                     <!--<div class="container-fluid">
                     <div class="row">
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
@@ -343,17 +361,20 @@
         </style>
 
         <script>
-            $('#group_name').click((e)=>{
-                let recordset = JSON.parse(`<%- JSON.stringify(recordsets[0])%>`);
+            $('#group_name').click((e) => {
+                // let recordset = JSON.parse(`<%- JSON.stringify(recordsets[0])%>`)[0];
+                let recordset = JSON.parse(`<%- JSON.stringify(recordsets[0]).replace(/\\/gi,'/')%>`)[0];
                 // $('#table_row').val(JSON.stringify(recordset));
-                $('#click_cd').val(`<%=recordsets[0][0]['GROUP_SET_CD'][0] %>`);
-                $('#viewhtmlfrm').attr('action','/group/viewhtml');
-                $('#viewhtmlfrm').submit();
+                if (typeof (recordset) != 'undefined' && typeof(recordset['GROUP_SET_CD']) != 'undefined') {
+                    $('#click_cd').val(recordset['GROUP_SET_CD'][0]);
+                    $('#viewhtmlfrm').attr('action', '/group/viewhtml');
+                    $('#viewhtmlfrm').submit();
+                }
             })
-            $('.table_tr').click((e)=>{
-                let recordset = JSON.parse(`<%- JSON.stringify(recordsets[0])%>`);
+            $('.table_tr').click((e) => {
+                let recordset = JSON.parse(`<%- JSON.stringify(recordsets[0]).replace(/\\/gi,'/')%>`);
                 $('#table_row').val(JSON.stringify(recordset[$(e.currentTarget).parent()[0].id.split('_')[2]]));
-                $('#viewhtmlfrm').attr('action','/dashboard/viewhtml');
+                $('#viewhtmlfrm').attr('action', '/dashboard/viewhtml');
                 $('#viewhtmlfrm').submit();
             });
             $('#agent_table').DataTable({
@@ -372,7 +393,7 @@
                 else $(".chkbox").prop('checked', false);
             });
         </script>
-        
+
         <script>
             var ctx = document.getElementById('myChart').getContext('2d');
             var chart = new Chart(ctx, {
@@ -381,12 +402,12 @@
 
                 // The data for our dataset
                 data: {
-                    labels: ["미준수","준수","미점검"
-            ],
+                    labels: ["미준수", "준수", "미점검"
+                    ],
                     datasets: [{
                         backgroundColor: 'rgb(255, 99, 132)',
                         borderColor: 'rgb(255, 99, 132)',
-                        data: [<%=not_junsu%>,<%=junsu %>,<%=not_check%>],
+                        data: [<%=not_junsu %>,<%=junsu %>,<%=not_check %>],
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.2)',
                             'rgba(54, 162, 235, 0.2)',
@@ -461,9 +482,9 @@
                 }
 
             });
-            let play = setInterval(()=>{
-                $('#expire').text(`로그인 세션 만료까지 ${(Number(<%=expire%> - new Date().getTime()/1000)/60).toFixed(1)} 분 남음`);
-            },1000);
+            let play = setInterval(() => {
+                $('#expire').text(`로그인 세션 만료까지 ${(Number(<%=expire %> - new Date().getTime() / 1000) / 60).toFixed(1)} 분 남음`);
+            }, 1000);
 
         </script>
 </body>

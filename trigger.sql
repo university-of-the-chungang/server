@@ -1,0 +1,18 @@
+ALTER TRIGGER trigger001
+on TBL_AGENT_INFO
+for INSERT, UPDATE, DELETE
+AS 
+declare @agent_cd int
+declare @group_cd int
+declare @cnt int
+declare @group_cnt int
+declare @seq int
+
+select @agent_cd = AGENT_CD FROM inserted
+select @cnt = B.CNT FROM (SELECT COUNT(T1.AGENT_CD) AS CNT FROM TBL_AGENT_INFO T1 INNER JOIN TBL_GROUP_SET_LIST T2 ON T1.AGENT_CD = T2.AGENT_CD INNER JOIN TBL_GROUP_INFO T3 ON T2.GROUP_SET_CD = T3.GROUP_SET_CD WHERE T1.AGENT_CD = @agent_cd GROUP BY T3.GROUP_SET_CD) B
+
+update TBL_GROUP_INFO SET AGENT_COUNTING =  @cnt
+	WHERE GROUP_SET_CD IN(SELECT GROUP_SET_CD FROM TBL_GROUP_SET_LIST WHERE AGENT_CD = @agent_cd )
+
+
+

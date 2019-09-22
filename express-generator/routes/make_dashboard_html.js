@@ -78,8 +78,10 @@ exports.buildHtml = row => {
       title_arr = [];
       checkpoint_arr = [];
       fix_arr = [];
-      if(row['FILE_NAME']){
-        new_arr = parseXml(row['FILE_NAME']);
+      severity_arr= [];
+      if(row['FILE_PATH']){
+        new_arr = parseXml(row['FILE_PATH'].split('//')[row['FILE_PATH'].split('//').length - 1]);
+        console.log(new_arr);
         title_arr = new_arr[0];
         checkpoint_arr = new_arr[1];
         fix_arr = new_arr[2];
