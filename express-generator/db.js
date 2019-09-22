@@ -184,8 +184,18 @@ exports.get_dashboard_top10 = ()=>{
             resolve(result);
         })
     })
-
 }
+exports.get_agents_from_group_cd = (group_cd=null)=>{
+    return new Promise((resolve,reject)=>{
+        new sql.Request().query(`SELECT * FROM TBL_AGENT_INFO INNER JOIN TBL_GROUP_SET_LIST ON TBL_AGENT_INFO.AGENT_CD = TBL_GROUP_SET_LIST.AGENT_CD LEFT OUTER JOIN TBL_INSPECT_STATS ON TBL_AGENT_INFO.AGENT_CD = TBL_INSPECT_STATS.AGENT_CD WHERE TBL_GROUP_SET_LIST.GROUP_SET_CD = ${group_cd}`, (err,result)=>{
+            if(err){
+                reject(err);
+            }
+            resolve(result);
+        });
+    });
+}
+
 exports.get_agent_info = (agent_cd = null) => {
     // 에이전트 코드가 agent_cd인 Agent들의 정보를 검색
     // agent_cd를 넣지않으면 전체검색

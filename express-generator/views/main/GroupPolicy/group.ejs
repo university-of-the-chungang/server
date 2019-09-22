@@ -170,17 +170,15 @@
                                     </thead>
                                     <tbody>
                                     <% for(var i=0; i<recordsets[0].length; i++){ %>
-                                    <tr class="table" style="text-align: center;">
-
-                                        <td style="text-align: center; vertical-align: middle;">
-
-                                            <label class="custom-control custom-checkbox">
-                                                <input type="checkbox" id='<%=i%>' name = "chkbox" class="custom-control-input">
-                                                <span class="custom-control-label" style="position: absolute;left:40%; top:0"></span>
-                                            </label>
+                                    <tr class="table group_table_tr" style="text-align: center; cursor: pointer; z-index: 1" id="tr_<%=recordsets[0][i].GROUP_SET_CD%>" >
+                                        <td style="text-align: center; vertical-align: middle; z-index: 10;">
+                                        <label class="custom-control custom-checkbox">
+                                            <input type="checkbox" id='<%=i%>' name = "chkbox" class="custom-control-input">
+                                            <span class="custom-control-label" style="position: absolute;left:40%; top:0"></span>
+                                        </label>
                                         </td>
                                         <!--<td colspan="2">-->
-                                        <td><h4 class="font-16">그룹<%=i+1%></h4></td>
+                                        <td><h4 class="font-16">그룹<%=i%></h4></td>
                                         <!--<td colspan="4">-->
                                         <td><h4 class="font-16"><%=recordsets[0][i].NAME%></h4></td>
 <!--                                        <td><%=recordsets[0][i].DISCRIPTION%></td>-->
@@ -229,6 +227,9 @@
     </div>
 </div>
                 </div>
+                <form style="display: none;" method="POST" action="/group/viewhtml" id="viewhtmlform">
+                    <input type="hidden" name="group_cd" id="click_cd">
+                </form>
             <!-- ============================================================== -->
             <!-- footer -->
             <!-- ============================================================== -->
@@ -282,6 +283,11 @@
     </style>
 
     <script type="text/javascript">
+    $('.group_table_tr').click((e)=>{
+        let target_cd = e.currentTarget.id.split('_')[1];
+        $('#click_cd').val(target_cd);
+        $('#viewhtmlform').submit();
+    });
         $('#group_table').DataTable({
             lengthChange: false,
             info: false,
