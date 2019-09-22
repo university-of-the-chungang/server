@@ -2,7 +2,9 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-console */
 let sql = require('mssql');
-
+let fs = require("fs");
+let xmljs = require("xml2js");
+let parser = new xmljs.Parser();
 // DB 정보 
 
 let config = {
@@ -89,13 +91,41 @@ exports.get_policy_info = ()=>{
 
 exports.add_policy = (policy_name, policy_os, policy_filepath)=>{
     return new Promise((resolve,reject)=>{
-        console.log(`INSERT INTO TBL_XCCDF (FILE_NAME,FILE_PATH,INSPECT_OS) VALUES('${policy_name}','${policy_filepath}','${policy_os}')`);
-        new sql.Request().query(`INSERT INTO TBL_XCCDF (FILE_NAME,FILE_PATH,INSPECT_OS) VALUES(N'${policy_name}', N'${policy_filepath}', N'${policy_os}')`,(err,result)=>{
+        new sql.Request().query(`INSERT INTO TBL_XCCDF (FILE_NAME,FILE_PATH,INSPECT_OS) VALUES(N'${policy_name}', N'${policy_filepath}', N'${policy_os}'); SELECT SCOPE_IDENTITY() AS XCCDF_CD;`,(err,res)=>{
             if(err){
                 console.log(err);
                 reject(err);
             }else{
-                resolve(result);
+                console.log(`${__dirname}\\routes\\${policy_filepath.split('\\')[policy_filepath.split('\\').length-1]}`);
+                let xml = fs.readFileSync(`${__dirname}\\routes\\${policy_filepath.split('\\')[policy_filepath.split('\\').length-1]}`, "utf-8");
+                let severity_arr = [];
+                let id_arr = [];
+                parser.parseString(xml, (err, result) => {
+                    result["ds:data-stream-collection"]["ds:component"][2]["Benchmark"][0][
+                    "Group"][0]["Group"].forEach(element => {
+                    // console.log(element['Rule'])
+                    element["Rule"].forEach(elem => {
+                        severity_arr.push(elem['$']['severity']);
+                        id_arr.push(elem['$']['id']);
+                    });
+                    });
+                    id_arr.forEach((elem,idx)=>{
+                        new sql.Request().query(`
+                        IF NOT EXISTS(SELECT XCCDF_CD, XCCDF_ITEM_CODE, SEVERITY FROM TBL_XCCDF_ITEM WHERE XCCDF_CD = ${res.recordset[0]['XCCDF_CD']} AND XCCDF_ITEM_CODE = N'${elem}' AND SEVERITY = N'${severity_arr[idx]}')
+                        BEGIN
+                            INSERT INTO TBL_XCCDF_ITEM (XCCDF_CD,XCCDF_ITEM_CODE, SEVERITY) VALUES (N'${res.recordset[0]['XCCDF_CD']}', N'${elem}', N'${severity_arr[idx]}')
+                        END
+                        `,(err2,result2)=>{
+                            if (err2){
+                                reject(err2);
+                            }
+                        });
+                    });
+                    resolve(1);
+                });
+
+
+                
             }
         })
     })

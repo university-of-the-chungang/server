@@ -69,6 +69,7 @@
                                             </div>
                                             <form id="viewhtmlfrm" method="POST" action="/dashboard/viewhtml" style="display: none" target="_blank">
                                                 <input type="hidden" id="table_row" name="row_arr" >
+                                                <input type="hidden" id="click_cd" name="group_cd" >
                                             </form>
                                             <div class="table-responsive" style="margin-top:-50px;">
                                                 <table id="agent_table" class="table">
@@ -344,8 +345,9 @@
         <script>
             $('#group_name').click((e)=>{
                 let recordset = JSON.parse(`<%- JSON.stringify(recordsets[0])%>`);
-                $('#table_row').val(JSON.stringify(recordset));
-                $('#viewhtmlfrm').attr('action','/dashboard/viewgroupreport');
+                // $('#table_row').val(JSON.stringify(recordset));
+                $('#click_cd').val(`<%=recordsets[0][0]['GROUP_SET_CD'][0] %>`);
+                $('#viewhtmlfrm').attr('action','/group/viewhtml');
                 $('#viewhtmlfrm').submit();
             })
             $('.table_tr').click((e)=>{
