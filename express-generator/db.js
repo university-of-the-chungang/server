@@ -852,8 +852,7 @@ exports.delete_agent_from_group_set_list = (group_set_cd, agent_cd) => {
 
 exports.insert_servey = (a0,a1,a2,a3,a4,a5,a6,a7,a8)=>{
     return new Promise((resolve,reject)=>{
-        new sql.Request().query('insert TBL_INSPECT_SURVEY (INSPECT_ITEM_CD, INSPECT_RESULT) values(\'1\', \''+ a0 + '\'),(\'2\',\''+ a1 + '\'),(\'3\',\''+ a2 + '\'),(\'4\',\''+ a3 + '\'),(\'5\',\''+ a4 + '\'),(\'6\',\''+ a5 + '\'),(\'7\',\''+ a6 + '\'),(\'8\',\''+ a7 + '\'),(\'9\',\''+ a8 + '\')',(err,result)=>{
-            if(err){
+        new sql.Request().query('insert TBL_INSPECT_SURVEY (INSPECT_CD, INSPECT_RESULT) values(\'1\', \''+ a0 + '\'),(\'2\',\''+ a1 + '\'),(\'3\',\''+ a2 + '\'),(\'4\',\''+ a3 + '\'),(\'5\',\''+ a4 + '\'),(\'6\',\''+ a5 + '\'),(\'7\',\''+ a6 + '\'),(\'4\',\''+ a7 + '\'),(\'9\',\''+ a8 + '\')',(err,result)=>{    if(err){
                 console.log(err);
             }else
                 resolve(result);
@@ -868,6 +867,18 @@ exports.get_servey = ()=>{
                 console.log(err);
             }else
                 resolve(result);
+        });
+    });
+};
+
+exports.get_xccdf = (ip)=>{
+    return new Promise((resolve,reject)=>{
+        new sql.Request().query(`select FIlE_PATH from TBL_XCCDF where XCCDF_CD = 10006`,(err,result)=> {
+            if (err) {
+                console.log(err);
+            } else {
+                resolve(result);
+            }
         });
     });
 };

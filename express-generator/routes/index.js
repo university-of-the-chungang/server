@@ -455,14 +455,17 @@ router.use('/newgroup', newgroup);
 
 // 정책
 const oval = require('./policy/oval');
-const uploads = require('./')
 
 router.use('/oval', oval);
 
 //통신모듈
 const reqFile = require('./reqFile');
+const sendResult = require('./sendResult');
 
 router.use('/reqFile', reqFile);
+router.use('/sendResult', sendResult);
+
+
 
 ///////////////// 테스트용 API ////////////////////
 router.get('/test_test',(req,res,next)=>{

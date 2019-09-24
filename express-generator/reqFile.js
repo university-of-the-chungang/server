@@ -1,5 +1,5 @@
 const express = require('express');
-const DB = require('../../db');
+const DB = require('../db');
 const jwt = require('jsonwebtoken');
 let SECRET = 'token_secret';
 
