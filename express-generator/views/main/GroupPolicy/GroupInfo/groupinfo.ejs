@@ -208,7 +208,7 @@
                                                                         <th class="border-0 text-center">번호</th>
                                                                         <th class="border-0 text-center">레포팅 명칭</th>
                                                                         <th class="border-0 text-center">정책 활성화 시간</th>
-                                                                        <th class="border-0 text-center">생성시간</th>
+                                                                        <th class="border-0 text-center">결과 업로드 시간</th>
                                                                         <th class="border-0 text-center">다운로드</th>
                                                                     </tr>
                                                                     </thead>
@@ -306,15 +306,24 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                    <div class="col-9"></div>               
+                                        
+                                        <a href="#"
+                                                class="btn btn-warning col-2"
+                                                data-toggle="modal" data-target="#offlineuplodadModal"
+                                                style="margin-right: 2px; margin-top: 10px;">오프라인 업로드
+                                        </a>
+                                          
                                         <form action = "/oldgroup" method = "POST">
-                                          <label class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 text-right" style = "margin-top: 10px;">
+                                          <label class="col-1" style = "margin-top: 10px; " >
                                              <input type = "hidden" name = "change_group_NAME" id = "chang_group_NAME" value = "<%=JSON.stringify(recordsets[0].NAME)%>">
-                                             <input class = "btn btn-success btn-lg" type="submit" value="수정" style="width:150px;"><!--<span class="custom-control-label">모두 선택</span>-->
+                                             <input class = "btn btn-success" type="submit" value="수정">
                                          </label>
                                         </form>
-                                    </div>
+
+                                     
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -425,6 +434,45 @@
 <!-- 평가관리 모달 끝-->
 
 
+<!-- 오프라인 점검 결과 업로드 모달 시작-->
+    <div class="modal" id="offlineuplodadModal" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="offlineuplodadModal">오프라인 점검 결과 업로드</h5>
+                    <a href="#" class="close" data-dismiss="modal"
+                        aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </a>
+                </div>
+
+
+                <form action="" method="POST"
+                    enctype="multipart/form-data">
+                    <div class="modal-body">
+
+                        <label class="col-12 btn btn-outline-warning btn-lg" style="margin-bottom: 10px;">
+                            결과 파일 업로드<input type="file" name="xlsx_file"
+                                style="display: none;">
+                        </label>
+                        
+                        <span style="color:red;">주의 : 에이전트가 다를 시 등록이 불가합니다.</span>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#" class="btn btn-secondary"
+                            data-dismiss="modal">닫기</a>
+                        <input class="btn btn-primary" type="submit"
+                            value="변경 저장">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+                                            <!-- 엑셀입력 모달 끝-->
 <!-- 평가 문항 추출 모달 시작 -->
     <div class="modal" id="extractingEvaluation" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="display: none;">
         <div class="modal-dialog modal-lg" role="document">
@@ -529,6 +577,10 @@
             </div>
         </div>
     </div>
+
+
+    
+
 
 <!-- 평가관리 모달 끝-->
 
