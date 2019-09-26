@@ -4,7 +4,7 @@ const DB = require('../db');
 const jwt = require('jsonwebtoken');
 let SECRET = 'token_secret';
 
-router.get('/', function(req, res, next) {
+router.post('/', function(req, res, next) {
 
 	console.log("post test");
   
@@ -46,19 +46,19 @@ router.post('/:fileId', function(req, res, next) {
 	
 });
 */
-router.get('/:fileId', function(req, res, next) {
-  	
+router.post('/:fileId', function(req, res, next) {
+
 	ip = req.ip.replace('::ffff:', '');
 	console.log(ip);
 
 	file_name = req.params.fileId;
 
-	if(file_name == 'reqxccdf'){
-
+	if(file_name === 'reqxccdf'){
 		DB.get_xccdf(ip).then(result => {
-			console.log(result.recordsets[0][0]['FILE_PATH']);
-			res.sendFile(result.recordsets[0][0]['FILE_PATH']);
-   		 });
+			let path = JSON.stringify(result.recordsets);
+			console.log(result.recordsets[0][0]['FIlE_PATH']);
+			res.sendFile("C:\\Temp\\testplay-update-untrust-for-ds-comment-script.xml");
+		});
 	}
 });
 

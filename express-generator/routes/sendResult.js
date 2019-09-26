@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const DB = require('../../db');
+const DB = require('../db');
 const jwt = require('jsonwebtoken');
 
 
@@ -27,7 +27,6 @@ router.post('/', function(req, res, next) {
 	DB.insert_servey(req.body.a0,req.body.a1,req.body.a2,req.body.a3,req.body.a4,req.body.a5,req.body.a6,req.body.a7,req.body.a8).then(result => {
 		res.send(result); 
     });
-	
 });
 
 module.exports = router;
