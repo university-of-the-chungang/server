@@ -213,15 +213,47 @@
                                                                     </tr>
                                                                     </thead>
                                                                     <tbody>
+                                                                        <% 
+                                                                        function leadingZeros(n, digits) {
+                                                                            var zero = '';
+                                                                            n = n.toString();
+                                                                          
+                                                                            if (n.length < digits) {
+                                                                              for (i = 0; i < digits - n.length; i++)
+                                                                                zero += '0';
+                                                                            }
+                                                                            return zero + n;
+                                                                          }  
+                                                                        function getTimeStamp(d) {
+                                                                            console.log(d)
+                                                                          var s =
+                                                                            leadingZeros(d.getFullYear(), 4) +
+                                                                            "-" +
+                                                                            leadingZeros(d.getMonth() + 1, 2) +
+                                                                            "-" +
+                                                                            leadingZeros(d.getDate(), 2) +
+                                                                            " " +
+                                                                            leadingZeros(d.getHours(), 2) +
+                                                                            ":" +
+                                                                            leadingZeros(d.getMinutes(), 2) +
+                                                                            ":" +
+                                                                            leadingZeros(d.getSeconds(), 2);
+                                                                        
+                                                                          return s;
+                                                                        }
+                                                                        
+                                                                        %>
+                                                                        <% for(let i = 0 ; i < recordsets2.length ; i +=1){ %>
                                                                     <tr>
-                                                                        <td class="text-center">1</td>
-                                                                        <td class="text-center">생성시간-그룹ID-그룹명</td>
-                                                                        <td class="text-center">2019.02.09.15:30.58</td>
-                                                                        <td class="text-center">2019.02.10.15:30.58</td>
+                                                                        <td class="text-center"><%=i+1%></td>
+                                                                        <td class="text-center"><%=getTimeStamp(recordsets2[i].CREATE_TIME)%>-<%=recordsets2[i].GROUP_SET_CD[0]%>-<%=recordsets2[i].NAME%></td>
+                                                                        <td class="text-center"><%=getTimeStamp(recordsets2[i].INSPECTION_START_DATE)%></td>
+                                                                        <td class="text-center"> <% if (recordsets2[i].SUBMIT_DATE != null){ %> <%=getTimeStamp(recordsets2[i].SUBMIT_DATE)%> <% }else{ %> - <% } %></td>
                                                                         <td class="text-center">
-                                                                            <span class="icon"><i class="fas fa-paperclip"></i> </span>
+                                                                            <a href="<% if(recordsets2[i].SUBMIT_DATE != null){ %>/group/downloadhtml?inspect_cd=<%=recordsets2[i].INSPECT_CD%><% }else{ %>#<% } %>"><span class="icon"><i class="fas fa-paperclip"></i> </span></a>
                                                                         </td>
                                                                     </tr>
+                                                                    <% } %>
                                                                     </tbody>
                                                                 </table>
 

@@ -728,14 +728,48 @@ exports.total_group_info = () =>{
         });
     });
 };
+exports.downloadhtml= (inspect_cd)=>{
+    return new Promise((resolve,reject)=>{
+        let query = `
+        SELECT 
+            * 
+        FROM 
+            TBL_GROUP_INFO t1
+            INNER JOIN
+                TBL_GROUP_SET_LIST t2
+            ON
+                t1.GROUP_SET_CD = t2.GROUP_SET_CD
+            INNER JOIN
+                TBL_AGENT_INFO t3
+            ON
+                t2.AGENT_CD = t3.AGENT_CD
+            INNER JOIN
+                TBL_INSPECT_STATS t4 
+            ON t1.GROUP_SET_CD = t4.GROUP_SET_CD AND t3.AGENT_CD = t4.AGENT_CD
+			INNER JOIN 
+				TBL_XCCDF t5
+			ON t2.XCCDF_CD = t5.XCCDF_CD
+        WHERE
+            t4.INSPECT_CD = ${inspect_cd}
+        `;
+        new sql.Request().query(query,(err,result)=>{
+            if(err){
+                console.log(err);
+                reject(err);
+            }
+            resolve(result);
+        });
+    })
 
+}
 //그룹 수정 페이지 정보 띄우기
 exports.view_modify_group_info = (group_name) => {
     return new Promise((resolve, reject) => {
         let query = `Select *
 From  (TBL_GROUP_SET_LIST inner join TBL_AGENT_INFO on TBL_GROUP_SET_LIST.AGENT_CD = TBL_AGENT_INFO.AGENT_CD) 
-inner join TBL_GROUP_INFO On TBL_GROUP_INFO.GROUP_SET_CD = TBL_GROUP_SET_LIST.GROUP_SET_CD
-Where TBL_GROUP_INFO.NAME = N'${group_name}' AND TBL_AGENT_INFO.DEL_FLAG = 0` ;
+inner join TBL_GROUP_INFO t1 On t1.GROUP_SET_CD = TBL_GROUP_SET_LIST.GROUP_SET_CD
+LEFT OUTER JOIN TBL_INSPECT_STATS t2 ON t1.GROUP_SET_CD = t2.GROUP_SET_CD AND TBL_AGENT_INFO.AGENT_CD = t2.AGENT_CD
+Where t1.NAME = N'${group_name}' AND TBL_AGENT_INFO.DEL_FLAG = 0` ;
         new sql.Request().query(query, (err, result) => {
             if(err){
                 reject(err);

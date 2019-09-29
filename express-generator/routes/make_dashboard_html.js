@@ -81,7 +81,6 @@ exports.buildHtml = row => {
       severity_arr= [];
       if(row['FILE_PATH']){
         new_arr = parseXml(row['FILE_PATH'].split('//')[row['FILE_PATH'].split('//').length - 1]);
-        console.log(new_arr);
         title_arr = new_arr[0];
         checkpoint_arr = new_arr[1];
         fix_arr = new_arr[2];
@@ -91,12 +90,20 @@ exports.buildHtml = row => {
       html = html.replace(/\$\{un_obey_cnt\}/gi, un_obey_cnt);
       html = html.replace(/\$\{AGENT_IP\}/gi, row["IP"]);
       html = html.replace(/\$\{AGENT_OS\}/gi, row["OS"]);
-      html = html.replace(/\$\{CREATE_TIME\}/gi, getTimeStamp( new Date(row["CREATE_TIME"][0])));
+      if (typeof(row['CREATE_TIME']) == 'object' ){
+        html = html.replace(/\$\{CREATE_TIME\}/gi, getTimeStamp( new Date(row["CREATE_TIME"])));
+      }else{
+        html = html.replace(/\$\{CREATE_TIME\}/gi, getTimeStamp( new Date(row["CREATE_TIME"][0])));
+      }
       html = html.replace(/\$\{SUBMIT_DATE\}/gi, getTimeStamp( new Date(row["SUBMIT_DATE"])));
       html = html.replace(/\$\{GROUP_NO\}/gi, row["GROUP_SET_CD"][0]);
       html = html.replace(/\$\{STATE\}/gi, row["STATE"]);
       html = html.replace(/\$\{PURPOSE\}/gi, row["PURPOSE"]);
-      html = html.replace(/\$\{GROUP_NAME\}/gi, row["NAME"][0]);
+      if(typeof(row['NAME']) == "string"){
+        html = html.replace(/\$\{GROUP_NAME\}/gi, row["NAME"]);
+      }else{
+        html = html.replace(/\$\{GROUP_NAME\}/gi, row["NAME"][0]);
+      }
       html = html.replace(/\$\{GROUP_DESCRIPTION\}/gi, row["DISCRIPTION"][0]);
       html = html.replace(/\$\{FILE_NAME\}/gi, row["FILE_NAME"]);
       html = html.replace(/\$\{rule_no\}/gi, row["INSPECT_CD"]);
@@ -127,7 +134,6 @@ exports.buildHtml = row => {
             agent_list_tr
         );
 
-      console.log(row);
 
       resolve(html);
     });
