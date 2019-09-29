@@ -472,6 +472,9 @@ $.datepicker._selectDate = function(id, dateStr) {
 //   headerHtml.remove();
 //   $(".ui-datepicker").prepend(headerHtml);
 };
+$.datepicker._gotoToday = function(id) { 
+    $(id).datepicker('setDate', new Date()).datepicker('hide').blur(); 
+};
 $("input[data-type='date']").datepicker({
   showButtonPanel: true,
   closeText: 'OK',
