@@ -285,11 +285,19 @@
                                                                     </tr>
                                                                     </thead>
                                                                     <tbody>
+                                                                    <% for(var i=0; i<recordsets2.length; i++){ %>
                                                                     <tr>
-                                                                        <td class="text-center">1</td>
-                                                                        <td class="text-center">에이전트 테이블에서 아이피</td>
-                                                                        <td class="text-center">에이전트 테이블에서 시스템 정보</td>
-                                                                        <td class="text-center">2019.02.10.15:30.58</td>
+                                                                        <td class="text-center"><%=i+1%></td>
+                                                                        <td class="text-center"><%=recordsets2[i].IP%></td>   <!--에이전트 테이블에서 아이피-->
+                                                                        <td class="text-center"><%=recordsets2[i].OS%></td> <!--에이전트 테이블에서 시스템 정보-->
+                                                                        <td class="text-center">
+                                                                            <%for(var j=0; j<recordsets3.length; j++){
+                                                                                if(recordsets3[j].OS === recordsets2[i].OS){%>
+                                                                                    <%=recordsets3[j].FILE_NAME%>
+                                                                            <%  break;
+                                                                                }
+                                                                            }%>
+                                                                        </td>
 
                                                                         <td class="text-center">
                                                                             <span class="icon" data-toggle="modal" data-target="#managingEvaluation"><i class="fas fa-calendar-alt"></i> </span>
@@ -300,30 +308,8 @@
                                                                                 <i class="fas fa-share"></i>
                                                                             </span>
                                                                         </td>
-
-
                                                                     </tr>
-
-                                                                    <tr>
-                                                                        <td class="text-center">1</td>
-                                                                        <td class="text-center">생성시간-그룹ID-그룹명</td>
-                                                                        <td class="text-center">2019.02.09.15:30.58</td>
-                                                                        <td class="text-center">2019.02.10.15:30.58</td>
-                                                                       
-
-                                                                        <td class="text-center">
-                                                                            <span class="icon" data-toggle="modal" data-target="#managingEvaluation"><i class="fas fa-calendar-alt"></i> </span>
-                                                                        </td>
-
-                                                                        <td class="text-center">
-                                                                            <span class="icon" data-toggle="modal" data-target="#extractingEvaluation">
-                                                                                
-                                                                               <i class="fas fa-share"></i>
-                                                                            </span>
-                                                                        </td>
-
-
-                                                                    </tr>
+                                                                    <%}%>
                                                                     </tbody>
                                                                 </table>
 
@@ -480,17 +466,14 @@
                 </div>
 
 
-                <form action="" method="POST"
-                    enctype="multipart/form-data">
+                <form action="/group/upload_offline_result" method="POST" enctype="multipart/form-data">
                     <div class="modal-body">
-
+                        <input class = "hidden" name = "group_NAME" id = "group_NAME" value = "<%=JSON.stringify(recordsets[0].NAME)%>">
                         <label class="col-12 btn btn-outline-warning btn-lg" style="margin-bottom: 10px;">
-                            결과 파일 업로드<input type="file" name="xlsx_file"
-                                style="display: none;">
+                            결과 파일 업로드<input type="file" name="offresultfile" style="display: none;">
                         </label>
-                        
-                        <span style="color:red;">주의 : 에이전트가 다를 시 등록이 불가합니다.</span>
 
+                        <span style="color:red;">주의 : 에이전트가 다를 시 등록이 불가합니다.</span>
 
                     </div>
                     <div class="modal-footer">

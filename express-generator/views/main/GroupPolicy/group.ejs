@@ -169,7 +169,13 @@
                                     <th class = "border-0 text-center">그룹 정보 더 보기</th>
                                     </thead>
                                     <tbody>
-                                    <% for(var i=0; i<recordsets[0].length; i++){ %>
+                                    <% if (typeof(reason) !='undefined' && reason == 'error'){ %>
+                                        <script>alert("ERROR");</script>
+                                    <% } else if(typeof(reason) !='undefined'){  %>
+                                        <script>alert("<%= reason %>");</script>
+                                        <script>setTimeout(() => {}, 3000);</script>
+                                    <%}
+                                    for(var i=0; i<recordsets[0].length; i++){ %>
                                     <tr class="table group_table_tr" style="text-align: center; cursor: pointer; z-index: 1" id="tr_<%=recordsets[0][i].GROUP_SET_CD%>" >
                                         <td style="text-align: center; vertical-align: middle; z-index: 10;">
                                         <label class="custom-control custom-checkbox">

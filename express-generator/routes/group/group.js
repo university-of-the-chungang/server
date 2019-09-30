@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const DB = require("../../db");
+const multer = require('multer');
 const jwt = require("jsonwebtoken");
 const make_dashboard = require("../make_dashboard_html");
 var fs = require("fs");
@@ -58,6 +59,9 @@ let isAuthenticatied = token => {
 // 그룹페이지 홈
 router.get("/", function(req, res, next) {
   DB.total_group_info().then(result => {
+    if(typeof(req.query.err_msg) !== "undefined"){
+      result.reason = req.query.err_msg;
+    }
     result.token = req.session.token;
     result.user_name = req.session.username;
     let is_auth = isAuthenticatied(req.session.token);
@@ -67,8 +71,6 @@ router.get("/", function(req, res, next) {
     } else {
       res.redirect("/login");
     }
-    //let len = result.recordset.length;
-    //console.log(result.recordset[0]);
   });
 });
 
@@ -150,6 +152,30 @@ router.get("/:name", (req, res, next) => {
   } else {
     res.redirect("/login");
   }
+});
+
+let upload = multer({dest:'public/uploads_off_result/'});
+
+router.post("/upload_offline_result", upload.single("offresultfile"), (req, res, next) => {
+  try{
+    var name = JSON.parse(req.body.group_NAME);
+    var redirect_path = "/group/" + name;
+    console.log(redirect_path);
+    data = fs.readFileSync(req.file.path);
+    console.log(data);
+    line_data = data.toString().split('\r');
+    for (var a in line_data) {
+      var dd = line_data[a].split(' ');
+      console.log(dd[0]);
+      console.log(dd[2]);
+      DB.insert_result(dd[0], dd[2]);
+    }
+    res.redirect(redirect_path);
+  }catch (e) {
+    console.log(e);
+    res.redirect('/group?err_msg=error');
+  }
+
 });
 
 module.exports = router;

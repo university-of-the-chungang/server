@@ -1,0 +1,5 @@
+xccdf_kr.nsr.test.4itemsfor_rule_oslatestupdate_rule : 1
+xccdf_kr.nsr.test4items_rule_vaccinelatestupdate_rule : 0
+xccdf_kr.nsr.test.4itemsfor_rule_AcrobatReaderevaluation_rule : 2
+xccdf_kr.nsr.test4items_rule_forjava_rule : 2
+xccdf_kr.nsr.test4items_rule_foMS-officeevaluation_rule : 1
