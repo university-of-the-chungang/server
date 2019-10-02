@@ -35,7 +35,7 @@
                         <% 
                         let submit_date = '';
                         if (recordsets[0].length > 0){
-                            if (typeof(recordsets[0][0].SUBMIT_DATE) != 'undefined'){
+                            if (typeof(recordsets[0][0].SUBMIT_DATE) != 'undefined' && recordsets[0][0].SUBMIT_DATE != null){
                                 submit_date = recordsets[0][0].SUBMIT_DATE.toISOString().replace('T',' ').replace('Z','');
                             }
                     }
@@ -372,10 +372,14 @@
                 }
             })
             $('.table_tr').click((e) => {
+                if($(e.currentTarget).css('color') === 'rgb(113, 116, 141)'){
+                    alert("아직 점검이 완료되지 않았습니다.");
+                }else{
                 let recordset = JSON.parse(`<%- JSON.stringify(recordsets[0]).replace(/\\/gi,'/')%>`);
                 $('#table_row').val(JSON.stringify(recordset[$(e.currentTarget).parent()[0].id.split('_')[2]]));
                 $('#viewhtmlfrm').attr('action', '/dashboard/viewhtml');
                 $('#viewhtmlfrm').submit();
+                }
             });
             $('#agent_table').DataTable({
                 lengthChange: false,

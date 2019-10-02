@@ -291,21 +291,17 @@ router.get('/log/:keyword2', (req, res, next) => {
   });
 })
 
-router.get('/log_date/:keyword2', (req, res, next) => {
-  DB.search_logDate_info(req.params.keyword2).then(result => {
+router.get('/log_date', (req, res, next) => {
+  DB.search_log_info(req.query).then(result=>{
     result.sess_name = req.session.username;
     DB.total_group_info().then(result2 => {
-      res.render('./main/Log/log', {
-        recordsets: result.recordsets,
+      res.render('./main/Log/log',{
+        recordsets:result.recordsets,
         data: result2.recordsets
       });
-    });    
-  }).catch(err => {
-    console.log(err);
+    });
   });
-
-})
-
+});
 
 router.post('/agent/del_agent_info', (req, res, next) => {
   if (req.body.del_agent_cd.length === 0) {

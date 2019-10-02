@@ -250,7 +250,7 @@
                                                                         <td class="text-center"><%=getTimeStamp(recordsets2[i].INSPECTION_START_DATE)%></td>
                                                                         <td class="text-center"> <% if (recordsets2[i].SUBMIT_DATE != null){ %> <%=getTimeStamp(recordsets2[i].SUBMIT_DATE)%> <% }else{ %> - <% } %></td>
                                                                         <td class="text-center">
-                                                                            <a href="<% if(recordsets2[i].SUBMIT_DATE != null){ %>/group/downloadhtml?inspect_cd=<%=recordsets2[i].INSPECT_CD%><% }else{ %>#<% } %>"><span class="icon"><i class="fas fa-paperclip"></i> </span></a>
+                                                                            <a href="<% if(recordsets2[i].SUBMIT_DATE != null){ %>/group/downloadhtml?inspect_cd=<%=recordsets2[i].INSPECT_CD%>"<% }else{ %>#" onclick='alert("점검결과가 없습니다.");'<% } %>><span class="icon"><i class="fas fa-paperclip"></i> </span></a>
                                                                         </td>
                                                                     </tr>
                                                                     <% } %>

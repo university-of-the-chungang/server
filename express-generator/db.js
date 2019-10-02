@@ -313,18 +313,28 @@ exports.get_PGMH_info = (keyword2 = "") => {
     });
 }
 
-exports.search_log_info = (keyword2 = "") => {
-    let search_key = `LIKE '%${keyword2}%'`;
-    let query = `SELECT * FROM TBL_LOG WHERE ( LOG_ID ${search_key} OR LOG_TYPE ${search_key} OR CONTENTS ${search_key} )`;
-    return new Promise((resolve, reject) => {
-        new sql.Request().query(query, (err, result) => {
-            if (err)
+exports.search_log_info = (obj)=>{
+    let qry = '';
+    if (obj['start_date'] && obj['end_date']){
+        qry = `SELECT * FROM TBL_LOG WHERE CONTENT_DATE BETWEEN '${obj['start_date']} 00:00:00' AND '${obj['end_date']} 23:59:59'`;
+        if(obj['search_keyword'] && obj['search_keyword'].length > 0){
+            qry += ` AND (LOG_ID LIKE '%${obj['search_keyword']}%' OR LOG_TYPE LIKE '%${obj['search_keyword']}%' OR CONTENTS LIKE '%${obj['search_keyword']}%')`;
+        }
+        
+    }else{
+        if(obj['search_keyword'] && obj['search_keyword'].length > 0){
+            qry = `SELECT * FROM TBL_LOG WHERE LOG_ID LIKE '%${obj['search_keyword']}%' OR LOG_TYPE LIKE '%${obj['search_keyword']}%' OR CONTENTS LIKE '%${obj['search_keyword']}%'`;
+        }
+    }
+    return new Promise((resolve,reject)=>{
+        new sql.Request().query(qry,(err,result)=>{
+            if(err)
                 reject(err);
-            console.log(query);
             resolve(result);
         });
-    });
+    })
 }
+
 
 exports.search_logDate_info = (keyword2 = "") => {
     let search_key = `between '${keyword2} 00:00:00' and '${keyword2} 23:59:59'`;

@@ -299,17 +299,21 @@
                                                                     class="fas fa-search"></i></button></span>
                                                     </div>
                                                 </td>
-                                                <td class="border-0 text-center" style="left: 10%;">
-                                                    <div class="input-group input-search col-7">
+                                                <td class="border-0 text-center" style="left: 10%; vertical-align: middle;">
+                                                    <div class="input-group input-search col-8" style="vertical-align: middle;">
 
-                                                        <input type="text" placeholder="*****-**-**" class="form-control" data-type="date" id="search_date" />
-                                                        
-
-                                                        <span class="input-group-btn">
+                                                        <input type="text" placeholder="시작일 선택" class="form-control" data-type="date" id="start_date"  style="width:40%;"/>
+                                                        <span style="vertical-align: middle; line-height:24.5pt;"> ~ </span>
+                                                        <input type="text" placeholder="종료일 선택" class="form-control" data-type="date" id="end_date" style="width:40%;" />
+                                                        <span class="input-group-btn" style="margin-left: 10px;">
                                                             <button class="btn btn-primary" type="button"
                                                                 id="dateBtn"><i
                                                                     class="fas fa-search"></i></button></span>
                                                     </div>
+                                                    
+                                                </td>
+                                                <td>
+                                                    
                                                 </td>
 
                                                 <td class="border-0 text-center">
@@ -437,7 +441,7 @@
             }
         });
         $('#searchBtn').click(() => {
-            location.href = "/log/" + $('#search_keyword').val();
+            location.href = `/log_date?start_date=${$('#start_date').val()}&end_date=${$('#end_date').val()}&search_keyword=${$('#search_keyword').val()}`;
         });
         $('#search_keyword').keydown((key) => {
             if (key.keyCode === 13) {
@@ -448,7 +452,7 @@
             location.href = "/download/";
         });
         $('#dateBtn').click(() => {
-            location.href = "/log_date/" + $('#search_date').val();
+        location.href = `/log_date?start_date=${$('#start_date').val()}&end_date=${$('#end_date').val()}&search_keyword=${$('#search_keyword').val()}`;
         });
         // $('#search_date').datepicker();
         // $('#search_date').datepicker("option", "dateFormat", "yy-mm-dd");
