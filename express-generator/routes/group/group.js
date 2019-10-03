@@ -130,6 +130,14 @@ router.get("/downloadhtml", (req, res, next) => {
   });
 });
 
+router.get('/xccdf',(req,res,next)=>{
+  let query = req.query;
+  console.log(query);
+  let xccdf_cd = query['xccdf_cd'];
+  DB.view_xccdf_items(xccdf_cd).then(result=>{
+    res.json(result);
+  })
+});
 //그룹 정보 상세보기
 router.get("/:name", (req, res, next) => {
   let is_auth = isAuthenticatied(req.session.token);
@@ -153,6 +161,7 @@ router.get("/:name", (req, res, next) => {
     res.redirect("/login");
   }
 });
+
 
 let upload = multer({dest:'public/uploads_off_result/'});
 

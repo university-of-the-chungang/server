@@ -847,12 +847,12 @@ Where TBL_GROUP_SET_LIST.GROUP_SET_CD = N'${group_set_cd}' AND TBL_AGENT_INFO.DE
 
 exports.view_xccdf_included_group = (group_name) => {
     return new Promise((resolve, reject) => {
-        let query=`Select DISTINCT TBL_AGENT_INFO.OS, TBL_GROUP_SET_LIST.XCCDF_CD, TBL_XCCDF.FILE_NAME
+        let query=`Select DISTINCT TBL_AGENT_INFO.OS, TBL_GROUP_SET_LIST.XCCDF_CD, TBL_XCCDF.FILE_NAME, TBL_XCCDF.FILE_PATH
 From  TBL_GROUP_SET_LIST 
 inner join TBL_AGENT_INFO on TBL_GROUP_SET_LIST.AGENT_CD = TBL_AGENT_INFO.AGENT_CD
 inner join TBL_GROUP_INFO On TBL_GROUP_INFO.GROUP_SET_CD = TBL_GROUP_SET_LIST.GROUP_SET_CD
 left join TBL_XCCDF on TBL_GROUP_SET_LIST.XCCDF_CD = TBL_XCCDF.XCCDF_CD
-WHERE TBL_GROUP_INFO.NAME = N'${group_name}' AND TBL_AGENT_INFO.DEL_FLAG = 0` ;
+WHERE TBL_GROUP_INFO.NAME = N'${group_name}' AND TBL_AGENT_INFO.DEL_FLAG = 0 ` ;
         console.log(query);
         new sql.Request().query(query, (err, result) => {
             if(err){
@@ -862,6 +862,17 @@ WHERE TBL_GROUP_INFO.NAME = N'${group_name}' AND TBL_AGENT_INFO.DEL_FLAG = 0` ;
         })
     })
 };
+exports.view_xccdf_items = (xccdf_cd) =>{
+    return new Promise((resolve, reject)=>{
+        let query = `SELECT DISTINCT * FROM TBL_XCCDF_ITEM WHERE XCCDF_CD = ${xccdf_cd}`;
+        console.log(query);
+        new sql.Request().query(query, (err,result)=>{
+            if (err)
+                reject(err);
+            resolve(result);
+        });
+    });
+}
 
 exports.update_xccdf_cd = (group_set_cd, agent_cd, xccdf_cd) =>{
     return new Promise((resolve, reject) =>{

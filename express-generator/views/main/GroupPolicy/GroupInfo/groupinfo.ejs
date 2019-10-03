@@ -304,7 +304,7 @@
                                                                         </td>
 
                                                                         <td class="text-center">
-                                                                            <span class="icon" data-toggle="modal" data-target="#extractingEvaluation">
+                                                                            <span class="icon export" data-toggle="modal" id="export_<%=i %>" data-target="#extractingEvaluation">
                                                                                 <i class="fas fa-share"></i>
                                                                             </span>
                                                                         </td>
@@ -507,72 +507,20 @@
                         <div class="form-group">
                             
                             <label for="inputText1" class="col-form-label" style="margin-top: 10px"> 에이전트를 점검한 정책의 평가문항을 추출합니다.</label>
+                            <br />
 
-                            <label for="inputText1" class="col-form-label" style="margin-top: 10px">ip : 192.168.13.123 / 시스템 정보 : Windows 7 / 정책명 : window_XCCDF.xml  <- 수정</label>
+                            <label for="inputText1" class="col-form-label" style="margin-top: 10px">ip : <span id="export_ip">192.168.13.123</span> / 시스템 정보 : <span id="export_os">Windows 7</span> / 정책명 : <span id="export_filename">window_XCCDF.xml</span></label>
 
                             <div class = "table-responsive">
                                 <table id = "" class="table">
                                     <thead class = "bg-light">
                                     <th class = "border-0 text-center">선택</th>
-                                    <th class = "border-0 text-center">문항명</th>
                                     <th class = "border-0 text-center">OVAL</th>
                                     <th class = "border-0 text-center">심각도</th>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="export_tbl">
                                    
-                                    <tr class="table" style="text-align: center;">
-                                        <td>
-                                        <label class = "custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" name = "" value = "" id = "">
-                                            <span class="custom-control-label" style="position: absolute;left:40%; top:0"></span> 
-                                        </label>
-                                        </td>
-                                        <td style="text-align: center; vertical-align: middle;">
-                                          패스워드가 8자리 미만인지 
-                                        </td>
-                                        <td style="text-align: center; vertical-align: middle;">
-                                          oval:def:nsr:1001
-                                        </td>
-                                        <td style="text-align: center; vertical-align: middle;">
-                                            <span class="badge-dot  badge-danger">high</span>
-                                        </td>
-                                    </tr>
-
-                                    <tr class="table" style="text-align: center;">
-                                        <td>
-                                        <label class = "custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" name = "" value = "" id = "">
-                                            <span class="custom-control-label" style="position: absolute;left:40%; top:0"></span> 
-                                        </label>
-                                        </td>
-                                        <td style="text-align: center; vertical-align: middle;">
-                                          암호화를 하고 있는지 
-                                        </td>
-                                        <td style="text-align: center; vertical-align: middle;">
-                                          oval:def:nsr:1002
-                                        </td>
-                                        <td style="text-align: center; vertical-align: middle;">
-                                            <span class="badge-dot  badge-warning">warning</span>
-                                        </td>
-                                    </tr>
-
-                                    <tr class="table" style="text-align: center;">
-                                        <td>
-                                        <label class = "custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" name = "" value = "" id = "">
-                                            <span class="custom-control-label" style="position: absolute;left:40%; top:0"></span> 
-                                        </label>
-                                        </td>
-                                        <td style="text-align: center; vertical-align: middle;">
-                                          패스워드가 8자리 미만인지 
-                                        </td>
-                                        <td style="text-align: center; vertical-align: middle;">
-                                          oval:def:nsr:1001
-                                        </td>
-                                        <td style="text-align: center; vertical-align: middle;">
-                                            <span class="badge-dot  badge-success">low</span>
-                                        </td>
-                                    </tr>
+                                    
 
                                     
                                     </tbody>
@@ -610,5 +558,62 @@
     <script src="/assets/vendor/datepicker/moment.js"></script>
     <script src="/assets/vendor/datepicker/tempusdominus-bootstrap-4.js"></script>
     <script src="/assets/vendor/datepicker/datepicker.js"></script>
+
+
+    <script>
+        <% 
+            console.log(recordsets3);
+        %>
+        let recordsets2 = JSON.parse('<%- JSON.stringify(recordsets2) %>');
+        let recordsets3 = JSON.parse('<%- JSON.stringify(recordsets3).replace(/\\/gi,'/') %>');
+        console.log(recordsets3);
+        $('.export').click((e)=>{
+            let id = e.currentTarget.id.split('export_')[1];
+            let xccdf_cd = recordsets2[id]['XCCDF_CD']
+            $('#export_ip').text(recordsets2[id]['IP']);
+            $('#export_os').text(recordsets2[id]['OS']);
+            $('#export_filename').text(recordsets3[id]['FILE_PATH'].split('//')[recordsets3[id]['FILE_PATH'].split('//').length - 1]);
+            $.ajax({
+                url:`/group/xccdf?xccdf_cd=${xccdf_cd}`,
+                success:(result)=>{
+                    let html = '';
+                    console.log(result);
+                    result = result['recordset'];
+                    for(let i = 0 ; i < result.length ; i +=1){
+                        html += `
+                        <tr class="table" style="text-align: center;">
+                                        <td>
+                                        <label class = "custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" name = "" value = "" id = "export_chk_${i}">
+                                            <span class="custom-control-label" style="position: absolute;left:40%; top:0"></span> 
+                                        </label>
+                                        </td>
+                                        
+                                        <td style="text-align: center; vertical-align: middle;">
+                                          ${result[i]['XCCDF_ITEM_CODE']}
+                                        </td>
+                                        <td style="text-align: center; vertical-align: middle;">
+                                            <span class="badge-dot  `;
+                                            
+                                            if (result[i]['SEVERITY'] == 'high'){
+                                            html += `badge-danger`;
+                                            }else if(result[i]['SEVERITY'] == 'medium'){
+                                            html += `badge-warning`;
+                                            }else{
+                                                html += `badge-success`;
+                                            }
+                                            
+                                            html +=`">${result[i]['SEVERITY']}</span>
+                                        </td>
+                                    </tr>
+                        `;
+                    }
+                    console.log(html);
+                    $('#export_tbl').html(html);
+                }
+            })
+        });
+    </script>
+
 </body>
 </html>
