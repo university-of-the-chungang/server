@@ -292,7 +292,7 @@
     $('.group_table_tr').click((e)=>{
         let target_cd = e.currentTarget.id.split('_')[1];
         $('#click_cd').val(target_cd);
-        // $('#viewhtmlform').submit();
+        $('#viewhtmlform').submit();
     });
         $('#group_table').DataTable({
             lengthChange: false,

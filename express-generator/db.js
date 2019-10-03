@@ -224,14 +224,19 @@ exports.get_dashboard_top10 = ()=>{
         })
     })
 }
-exports.get_agents_from_group_cd = (group_cd=null)=>{
+exports.get_agents_from_group_cd = (group_cd=null,agent_cd=null)=>{
+    let adder = "";
+    if(agent_cd != null){
+        adder = `AND TBL_INSPECT_STATS.AGENT_CD = ${agent_cd}`;
+    }
+
     return new Promise((resolve,reject)=>{
         new sql.Request().query(`SELECT TBL_AGENT_INFO.AGENT_CD,NAME, IP, MAC_ADDR, OS, PURPOSE, OWNER, STATE, TBL_AGENT_INFO.DEL_FLAG, TBL_GROUP_INFO.DEL_FLAG, DESCRIPTION, TBL_GROUP_SET_LIST.GROUP_SET_CD, CREATE_TIME,ACTIVE_TIME, INSPECTION_START_DATE, INSPECTION_PERIOD, GRD_SCORE,ITEM_CNT,SUBMIT_DATE, AGENT_COUNTING, DISCRIPTION
         FROM TBL_AGENT_INFO 
         INNER JOIN TBL_GROUP_SET_LIST ON TBL_AGENT_INFO.AGENT_CD = TBL_GROUP_SET_LIST.AGENT_CD 
         INNER JOIN TBL_GROUP_INFO ON TBL_GROUP_SET_LIST.GROUP_SET_CD = TBL_GROUP_INFO.GROUP_SET_CD
         LEFT OUTER JOIN TBL_INSPECT_STATS ON TBL_AGENT_INFO.AGENT_CD = TBL_INSPECT_STATS.AGENT_CD 
-        WHERE TBL_GROUP_SET_LIST.GROUP_SET_CD = ${group_cd}`, (err,result)=>{
+        WHERE TBL_GROUP_SET_LIST.GROUP_SET_CD = ${group_cd} AND TBL_GROUP_SET_LIST.GROUP_SET_CD = ${group_cd} AND TBL_INSPECT_STATS.GROUP_SET_CD = ${group_cd} ${adder}`, (err,result)=>{
             if(err){
                 reject(err);
             }

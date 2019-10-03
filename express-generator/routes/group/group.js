@@ -4,6 +4,7 @@ const DB = require("../../db");
 const multer = require('multer');
 const jwt = require("jsonwebtoken");
 const make_dashboard = require("../make_dashboard_html");
+const make_group = require("../make_group_html");
 const make_export = require("../make_xccdf_export_html");
 var fs = require("fs");
 
@@ -101,19 +102,16 @@ router.post("/active_state", (req, res, next) => {
   });
 });
 router.get("/downloadhtml", (req, res, next) => {
-  let inspect_cd = JSON.parse(req.query["inspect_cd"]);
-  DB.downloadhtml(inspect_cd).then(result => {
-    let param = result.recordset[0];
-    param["FILE_PATH"] = param["FILE_PATH"].replace(/\\/gi, "//");
-    make_dashboard.buildHtml(param).then(result2 => {
+  let group_cd = JSON.parse(req.query["group_cd"].split(',')[0]);
+  let agent_cd = req.query['agent_cd'].split(',')[0];
+  DB.get_agents_from_group_cd(group_cd,agent_cd).then(result => {
+    let param = result.recordset;
+    let idx = 0;
+    make_group.buildHtml(param).then(result2 => {
       let filename =
-        getTimeStamp(param["CREATE_TIME"]) +
+        getTimeStamp(param[idx]["SUBMIT_DATE"]) +
         "_" +
-        getTimeStamp(param["ACTIVE_TIME"]) +
-        "_" +
-        param["GROUP_SET_CD"][0] +
-        "_" +
-        param["IP"];
+        param[idx]["GROUP_SET_CD"];
       let stream = fs.createWriteStream(
         "public/uploads/" + filename.replace(/(\s|\:)/gi, "_") + ".html"
       );
