@@ -4,6 +4,7 @@ const DB = require("../../db");
 const multer = require('multer');
 const jwt = require("jsonwebtoken");
 const make_dashboard = require("../make_dashboard_html");
+const make_export = require("../make_xccdf_export_html");
 var fs = require("fs");
 
 let SECRET = "token_secret";
@@ -132,12 +133,20 @@ router.get("/downloadhtml", (req, res, next) => {
 
 router.get('/xccdf',(req,res,next)=>{
   let query = req.query;
-  console.log(query);
   let xccdf_cd = query['xccdf_cd'];
   DB.view_xccdf_items(xccdf_cd).then(result=>{
     res.json(result);
   })
 });
+router.get('/export',(req,res,next)=>{
+  let query = req.query;
+  make_export.buildHtml(query).then(result=>{
+    res.writeHead(200, {'Content-Type': 'text/html','Content-Length':Buffer.byteLength(result,'utf8')});
+    res.write(result);
+    res.end();
+  });
+})
+
 //그룹 정보 상세보기
 router.get("/:name", (req, res, next) => {
   let is_auth = isAuthenticatied(req.session.token);

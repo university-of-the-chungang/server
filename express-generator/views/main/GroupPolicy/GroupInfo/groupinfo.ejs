@@ -300,11 +300,11 @@
                                                                         </td>
 
                                                                         <td class="text-center">
-                                                                            <span class="icon" data-toggle="modal" data-target="#managingEvaluation"><i class="fas fa-calendar-alt"></i> </span>
+                                                                            <span class="icon" data-toggle="modal" data-target="#managingEvaluation" style="cursor: pointer"><i class="fas fa-calendar-alt"></i> </span>
                                                                         </td>
 
-                                                                        <td class="text-center">
-                                                                            <span class="icon export" data-toggle="modal" id="export_<%=i %>" data-target="#extractingEvaluation">
+                                                                        <td class="text-center" >
+                                                                            <span class="icon export" data-toggle="modal" id="export_<%=i %>" data-target="#extractingEvaluation" style="cursor: pointer">
                                                                                 <i class="fas fa-share"></i>
                                                                             </span>
                                                                         </td>
@@ -531,7 +531,7 @@
 
                     <div class="modal-footer">
 
-                        <a href="#" class="btn btn-outline-success">추출하기</a>
+                        <a href="#" id="export_btn" class="btn btn-outline-success">추출하기</a>
 
                         <a href="#" class="btn btn-outline-secondary" data-dismiss="modal">닫기</a>
                         
@@ -561,9 +561,6 @@
 
 
     <script>
-        <% 
-            console.log(recordsets3);
-        %>
         let recordsets2 = JSON.parse('<%- JSON.stringify(recordsets2) %>');
         let recordsets3 = JSON.parse('<%- JSON.stringify(recordsets3).replace(/\\/gi,'/') %>');
         console.log(recordsets3);
@@ -577,23 +574,22 @@
                 url:`/group/xccdf?xccdf_cd=${xccdf_cd}`,
                 success:(result)=>{
                     let html = '';
-                    console.log(result);
                     result = result['recordset'];
                     for(let i = 0 ; i < result.length ; i +=1){
                         html += `
                         <tr class="table" style="text-align: center;">
                                         <td>
                                         <label class = "custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" name = "" value = "" id = "export_chk_${i}">
+                                            <input type="checkbox" class="custom-control-input" name = "export_chk" value = "" id = "export_chk_${i}">
                                             <span class="custom-control-label" style="position: absolute;left:40%; top:0"></span> 
                                         </label>
                                         </td>
                                         
-                                        <td style="text-align: center; vertical-align: middle;">
+                                        <td style="text-align: center; vertical-align: middle;" id="oval_${i}">
                                           ${result[i]['XCCDF_ITEM_CODE']}
                                         </td>
                                         <td style="text-align: center; vertical-align: middle;">
-                                            <span class="badge-dot  `;
+                                            <span id="severity_${i}" class="badge-dot  `;
                                             
                                             if (result[i]['SEVERITY'] == 'high'){
                                             html += `badge-danger`;
@@ -608,10 +604,43 @@
                                     </tr>
                         `;
                     }
-                    console.log(html);
                     $('#export_tbl').html(html);
                 }
             })
+        });
+        $('#export_btn').click(e=>{
+            let check_arr = $('input:checkbox[name=export_chk]:checked');
+            let check_id_arr = [];
+            for (let i = 0 ; i < check_arr.length ; i +=1){
+                let id = check_arr[i].id.split('export_chk_')[1];
+                check_id_arr.push(id);
+            }
+            
+            let export_list = [];
+            for (let i = 0 ; i < check_id_arr.length ; i +=1){
+                let tmp = {
+                severity : $(`#severity_${check_id_arr[i]}`).text(),
+                xccdf_item_code : $(`#oval_${check_id_arr[i]}`).text().replace(/[\n\s]*/gi,'')
+                }
+                export_list.push(tmp);
+            }
+
+            let ip = $('#export_ip').text();
+            let os = $('#export_os').text();
+            let group_name = $('.pageheader-title').text().split('그룹 상세 정보 - ')[1];
+            let xccdf_name = $('#export_filename').text();
+            
+
+
+            $.ajax({
+                url:`/group/export?ip=${ip}&os=${os}&group_name=${group_name}&xccdf_name=${xccdf_name}&export_list=${JSON.stringify(export_list)}`,
+                success:(result)=>{
+                    document.open('text/html', 'replace');
+                    document.write(result);
+                    document.close();
+                }
+            });
+
         });
     </script>
 
