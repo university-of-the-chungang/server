@@ -243,14 +243,21 @@
                                                                         }
                                                                         
                                                                         %>
-                                                                        <% for(let i = 0 ; i < recordsets2.length ; i +=1){ %>
+                                                                        <% for(let i = 0 ; i < recordsets4.length ; i +=1){ %>
                                                                     <tr>
                                                                         <td class="text-center"><%=i+1%></td>
-                                                                        <td class="text-center"><%=getTimeStamp(recordsets2[i].CREATE_TIME)%>-<%=recordsets2[i].GROUP_SET_CD[0]%>-<%=recordsets2[i].NAME%></td>
-                                                                        <td class="text-center"><%=getTimeStamp(recordsets2[i].INSPECTION_START_DATE)%></td>
-                                                                        <td class="text-center"> <% if (recordsets2[i].SUBMIT_DATE != null){ %> <%=getTimeStamp(recordsets2[i].SUBMIT_DATE)%> <% }else{ %> - <% } %></td>
+                                                                        <td class="text-center"><%=getTimeStamp(recordsets4[i].CREATE_TIME)%>-<%=recordsets4[i].GROUP_SET_CD[0]%>-<%=recordsets4[i].NAME%></td>
+                                                                        <td class="text-center"><%=getTimeStamp(recordsets4[i].INSPECTION_START_DATE)%></td>
+                                                                        <td class="text-center"> <% if (recordsets4[i].SUBMIT_DATE != null){ %> <%=getTimeStamp(recordsets4[i].SUBMIT_DATE)%> <% }else{ %> - <% } %></td>
                                                                         <td class="text-center">
-                                                                            <a href="<% if(recordsets2[i].SUBMIT_DATE != null){ %>/group/downloadhtml?group_cd=<%=recordsets2[i].GROUP_SET_CD%>&agent_cd=<%=recordsets2[i].AGENT_CD%>"<% }else{ %>#" onclick='alert("점검결과가 없습니다.");'<% } %>><span class="icon"><i class="fas fa-paperclip"></i> </span></a>
+                                                                            <a href="
+                                                                                <% if(recordsets4[i].SUBMIT_DATE != null){
+                                                                                    %>/group/downloadhtml?group_cd=<%=recordsets4[i].GROUP_SET_CD%>&agent_cd=<%=recordsets4[i].AGENT_CD%>"
+                                                                                <% }else{
+                                                                                %> onclick='alert("점검결과가 없습니다.");'<%
+                                                                                } %>>
+                                                                                <span class="icon"><i class="fas fa-paperclip"></i> </span>
+                                                                            </a>
                                                                         </td>
                                                                     </tr>
                                                                     <% } %>
@@ -300,7 +307,7 @@
                                                                         </td>
 
                                                                         <td class="text-center">
-                                                                            <span class="icon" data-toggle="modal" data-target="#managingEvaluation" style="cursor: pointer"><i class="fas fa-calendar-alt"></i> </span>
+                                                                            <span class="icon manage" data-toggle="modal" id="manage_<%=i%>" data-target="#managingEvaluation" style="cursor: pointer"><i class="fas fa-calendar-alt"></i> </span>
                                                                         </td>
 
                                                                         <td class="text-center" >
@@ -374,7 +381,7 @@
                             
                             <label for="inputText1" class="col-form-label" style="margin-top: 10px">해당 에이전트의 점검 이력을 확인합니다.</label>
 
-                            <label for="inputText1" class="col-form-label" style="margin-top: 10px">ip : 192.168.13.123 / 시스템 정보 : Windows 7  <- 수정</label>
+                            <label for="inputText1" class="col-form-label" style="margin-top: 10px">ip: <span id="manage_ip"></span> / 시스템 정보 : <span id="manage_os"></span></label>
 
                             <div class = "table-responsive">
                                 <table id = "" class="table">
@@ -383,54 +390,8 @@
                                     <th class = "border-0 text-center">점검 일시</th>
                                     <th class = "border-0 text-center">다운로드</th>
                                     </thead>
-                                    <tbody>
-                                   
-                                    <tr class="table" style="text-align: center;">
-                                        <td>
-                                        <label class = "custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" name = "" value = "" id = "">
-                                            <span class="custom-control-label" style="position: absolute;left:40%; top:0"></span> 
-                                        </label>
-                                        </td>
-                                        <td style="text-align: center; vertical-align: middle;">
-                                          2019.1월 1일 <- 수정 
-                                        </td>
-                                        <td style="text-align: center; vertical-align: middle;">
-                                            <i class="fas fa-share-square"></i></i> <- 수정
-                                        </td>
-                                    </tr>
+                                    <tbody id="manage_tbl">
 
-                                    <tr class="table" style="text-align: center;">
-                                        <td>
-                                        <label class = "custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" name = "" value = "" id = "">
-                                            <span class="custom-control-label" style="position: absolute;left:40%; top:0"></span> 
-                                        </label>
-                                        </td>
-                                        <td style="text-align: center; vertical-align: middle;">
-                                          2019.1월 1일 <- 수정 
-                                        </td>
-                                        <td style="text-align: center; vertical-align: middle;">
-                                            <i class="fas fa-share-square"></i> <- 수정
-                                        </td>
-                                    </tr>
-
-                                    <tr class="table" style="text-align: center;">
-                                        <td>
-                                        <label class = "custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" name = "" value = "" id = "">
-                                            <span class="custom-control-label" style="position: absolute;left:40%; top:0"></span> 
-                                        </label>
-                                        </td>
-                                        <td style="text-align: center; vertical-align: middle;">
-                                          2019.1월 1일 <- 수정 
-                                        </td>
-                                        <td style="text-align: center; vertical-align: middle;">
-                                            <i class="fas fa-share-square"></i> <- 수정
-                                        </td>
-                                    </tr>
-
-                                    
                                     </tbody>
                                 </table>
                             </div>
@@ -469,6 +430,11 @@
                 <form action="/group/upload_offline_result" method="POST" enctype="multipart/form-data">
                     <div class="modal-body">
                         <input class = "hidden" name = "group_NAME" id = "group_NAME" value = "<%=JSON.stringify(recordsets[0].NAME)%>">
+                        <input class = "hidden" name="group_cd" id = "group_cd" value = "<%=JSON.stringify(recordsets[0].GROUP_SET_CD)%>">
+                        에이전트 IP
+                        <input type = "text" class = "col-12 form-control" name = "agent_ip"
+                               placeholder="에이전트 IP를 입력하세요" id ="agent_ip" style="margin-bottom: 10px;" >
+
                         <label class="col-12 btn btn-outline-warning btn-lg" style="margin-bottom: 10px;">
                             결과 파일 업로드<input type="file" name="offresultfile" style="display: none;">
                         </label>
@@ -563,7 +529,47 @@
     <script>
         let recordsets2 = JSON.parse('<%- JSON.stringify(recordsets2) %>');
         let recordsets3 = JSON.parse('<%- JSON.stringify(recordsets3).replace(/\\/gi,'/') %>');
-        console.log(recordsets3);
+        console.log(recordsets2);
+
+        $('.manage').click((e)=>{
+            let id = e.currentTarget.id.split('manage_')[1]
+            let agent_cd = Array.from(new Set(recordsets2[id]['AGENT_CD']));
+            let group_set_cd = Array.from(new Set(recordsets2[id]['GROUP_SET_CD']));
+
+            console.log("group_set_cd", group_set_cd);
+            console.log("agent_cd", agent_cd);
+
+            $('#manage_ip').text(recordsets2[id]['IP']);
+            $('#manage_os').text(recordsets2[id]['OS']);
+
+            $.ajax({
+                url:`/group/stats?agent_cd=${agent_cd}&group_set_cd=${group_set_cd}`,
+                success:(result) =>{
+                    let html = '';
+                    result = result['recordset'];
+                    for(let i = 0; i<result.length; i++){
+                        html +=`
+                        <tr class="table" style="text-align: center;">
+                            <td>
+                                <label class = "custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" name = "inspect_delete" value = "" id = "inspect_delete_${i}">
+                                <span class="custom-control-label" style="position: absolute;left:40%; top:0"></span>
+                                </label>
+                            </td>
+                            <td style="text-align: center; vertical-align: middle;">
+                                ${result[i]['SUBMIT_DATE']}
+                            </td>
+                            <td style="text-align: center; vertical-align: middle;">
+                                <i class="fas fa-share-square" id = "inspect_download_${i}"></i>
+                            </td>
+                        </tr>
+                        `
+                    }
+                    $('#manage_tbl').html(html);
+                }
+            });
+        })
+
         $('.export').click((e)=>{
             let id = e.currentTarget.id.split('export_')[1];
             let xccdf_cd = recordsets2[id]['XCCDF_CD']
@@ -608,6 +614,7 @@
                 }
             })
         });
+
         $('#export_btn').click(e=>{
             let check_arr = $('input:checkbox[name=export_chk]:checked');
             let check_id_arr = [];
@@ -629,8 +636,6 @@
             let os = $('#export_os').text();
             let group_name = $('.pageheader-title').text().split('그룹 상세 정보 - ')[1];
             let xccdf_name = $('#export_filename').text();
-            
-
 
             $.ajax({
                 url:`/group/export?ip=${ip}&os=${os}&group_name=${group_name}&xccdf_name=${xccdf_name}&export_list=${JSON.stringify(export_list)}`,

@@ -155,17 +155,23 @@ exports.login_admin = (login_name, login_pw) => {
         }
     });
 }
-exports.get_inspect_stats = (group_set_cd) => {
+exports.get_inspect_stats = (group_set_cd, agent_cd = null) => {
     // group_set_cd를 가진 점검 결과를 검색
+    let adder = "";
+    if(agent_cd != null){
+        adder = `AND TBL_INSPECT_STATS.AGENT_CD = ${agent_cd}`;
+    }
     return new Promise((resolve, reject) => {
-        new sql.Request().query(`SELECT * FROM TBL_INSPECT_STATS WHERE GROUP_SET_CD = '` + group_set_cd + "'", (err, result) => {
+        new sql.Request().query(`SELECT * FROM TBL_INSPECT_STATS WHERE GROUP_SET_CD = '` + group_set_cd + "'" + adder, (err, result) => {
             if (err) {
                 reject(err);
             }
+            console.log(result);
             resolve(result);
         });
     });
 }
+
 exports.get_group_agents = (group_set_cd) => {
     // 그룹생성코드가 group_set_cd인 Agent CD를 검색
     return new Promise((resolve, reject) => {
@@ -203,6 +209,7 @@ exports.get_dashboard_datas = ()=>{
     ORDER BY T3.CREATE_TIME DESC`;
     return new Promise((resolve,reject)=>{
         new sql.Request().query(query,(err,result)=>{
+            console.log(result);
             if(err){
                 reject(err);
             }
@@ -780,6 +787,21 @@ exports.view_modify_group_info = (group_name) => {
         let query = `Select *
 From  (TBL_GROUP_SET_LIST inner join TBL_AGENT_INFO on TBL_GROUP_SET_LIST.AGENT_CD = TBL_AGENT_INFO.AGENT_CD) 
 inner join TBL_GROUP_INFO t1 On t1.GROUP_SET_CD = TBL_GROUP_SET_LIST.GROUP_SET_CD
+Where t1.NAME = N'${group_name}' AND TBL_AGENT_INFO.DEL_FLAG = 0` ;
+        new sql.Request().query(query, (err, result) => {
+            if(err){
+                reject(err);
+            }
+            resolve(result);
+        });
+    });
+};
+
+exports.view_group_for_report = (group_name) => {
+    return new Promise((resolve, reject) => {
+        let query = `Select *
+From  (TBL_GROUP_SET_LIST inner join TBL_AGENT_INFO on TBL_GROUP_SET_LIST.AGENT_CD = TBL_AGENT_INFO.AGENT_CD) 
+inner join TBL_GROUP_INFO t1 On t1.GROUP_SET_CD = TBL_GROUP_SET_LIST.GROUP_SET_CD
 LEFT OUTER JOIN TBL_INSPECT_STATS t2 ON t1.GROUP_SET_CD = t2.GROUP_SET_CD AND TBL_AGENT_INFO.AGENT_CD = t2.AGENT_CD
 Where t1.NAME = N'${group_name}' AND TBL_AGENT_INFO.DEL_FLAG = 0` ;
         new sql.Request().query(query, (err, result) => {
@@ -790,6 +812,7 @@ Where t1.NAME = N'${group_name}' AND TBL_AGENT_INFO.DEL_FLAG = 0` ;
         });
     });
 };
+
 
 exports.view_modify_group_IP_info = (group_name) => {
     return new Promise((resolve, reject) => {
@@ -906,10 +929,33 @@ exports.delete_agent_from_group_set_list = (group_set_cd, agent_cd) => {
     });
 };
 
+exports.report_inspect_stats = (group_set_cd, agent_cd, cnt)=>{
+    return new Promise((resolve, reject) => {
+        let query = `insert TBL_INSPECT_STATS (GROUP_SET_CD, AGENT_CD, ITEM_CNT) values(${group_set_cd}, ${agent_cd}, ${cnt})`;
+        new sql.Request().query(query, (err, result) => {
+            if(err){
+                reject(err);
+            }
+            resolve(result);
+        })
+    });
+};
 
-exports.insert_servey = (a0,a1,a2,a3,a4,a5,a6,a7,a8)=>{
+exports.get_inspect_cd = () => {
+    return new Promise((resolve, reject) => {
+        let query = `SELECT MAX(INSPECT_CD) as max_INSPECT_CD FROM TBL_INSPECT_STATS`;
+        new sql.Request().query(query, (err, result) =>{
+            if(err){
+                reject(err);
+            }
+            resolve(result);
+        });
+    });
+};
+
+exports.insert_servey = (inspect_cd, agent_cd, a0,a1,a2,a3,a4,a5,a6,a7,a8)=>{
     return new Promise((resolve,reject)=>{
-        new sql.Request().query('insert TBL_INSPECT_SURVEY (INSPECT_ITEM_CD, INSPECT_RESULT) values(\'1\', \''+ a0 + '\'),(\'2\',\''+ a1 + '\'),(\'3\',\''+ a2 + '\'),(\'4\',\''+ a3 + '\'),(\'5\',\''+ a4 + '\'),(\'6\',\''+ a5 + '\'),(\'7\',\''+ a6 + '\'),(\'4\',\''+ a7 + '\'),(\'9\',\''+ a8 + '\')',(err,result)=>{    if(err){
+        new sql.Request().query('insert TBL_INSPECT_SURVEY (INSPECT_CD, AGENT_CD, INSPECT_ITEM_CD, INSPECT_RESULT) values('+ inspect_cd +',' + agent_cd +',\'1\', \''+ a0 + '\'),(\'2\',\''+ a1 + '\'),(\'3\',\''+ a2 + '\'),(\'4\',\''+ a3 + '\'),(\'5\',\''+ a4 + '\'),(\'6\',\''+ a5 + '\'),(\'7\',\''+ a6 + '\'),(\'4\',\''+ a7 + '\'),(\'9\',\''+ a8 + '\')',(err,result)=>{    if(err){
                 console.log(err);
             }else
                 resolve(result);
@@ -917,9 +963,9 @@ exports.insert_servey = (a0,a1,a2,a3,a4,a5,a6,a7,a8)=>{
     });
 };
 
-exports.insert_result = (item_code, item_result) => {
+exports.insert_result = (inspect_cd, item_code, item_result, agent_cd) => {
     return new Promise((resolve, reject) => {
-        let query = `insert TBL_INSPECT_SURVEY (INSPECT_ITEM_CD, INSPECT_RESULT) values(N'${item_code}', ${item_result})`;
+        let query = `insert TBL_INSPECT_SURVEY (INSPECT_CD, AGENT_CD, INSPECT_ITEM_CD, INSPECT_RESULT) values(${inspect_cd}, ${agent_cd}, N'${item_code}', ${item_result})`;
         console.log(query);
         new sql.Request().query(query, (err, result) => {
             if(err){
@@ -952,3 +998,4 @@ exports.get_xccdf = (ip)=>{
         });
     });
 };
+

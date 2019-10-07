@@ -101,6 +101,7 @@ router.post("/active_state", (req, res, next) => {
     res.redirect("/group");
   });
 });
+
 router.get("/downloadhtml", (req, res, next) => {
   let group_cd = JSON.parse(req.query["group_cd"].split(',')[0]);
   let agent_cd = req.query['agent_cd'].split(',')[0];
@@ -136,6 +137,7 @@ router.get('/xccdf',(req,res,next)=>{
     res.json(result);
   })
 });
+
 router.get('/export',(req,res,next)=>{
   let query = req.query;
   make_export.buildHtml(query).then(result=>{
@@ -145,6 +147,18 @@ router.get('/export',(req,res,next)=>{
   });
 })
 
+router.get('/stats', (req, res, next) => {
+  let query = req.query;
+  let agent_cd = query['agent_cd'];
+  let group_set_cd = query['group_set_cd'];
+
+  console.log(agent_cd, group_set_cd);
+
+  DB.get_inspect_stats(group_set_cd, agent_cd).then(result=>{
+    res.json(result);
+  });
+});
+
 //그룹 정보 상세보기
 router.get("/:name", (req, res, next) => {
   let is_auth = isAuthenticatied(req.session.token);
@@ -152,14 +166,17 @@ router.get("/:name", (req, res, next) => {
     DB.get_group_info(req.params.name).then(result => {
       DB.view_modify_group_info(req.params.name).then(result2 => {
         DB.view_xccdf_included_group(req.params.name).then(result3 => {
-          result.expire = is_auth;
-          console.log(result.recordset);
-          console.log(result2.recordset);
-          console.log(result3.recordset);
-          res.render("./main/GroupPolicy/GroupInfo/groupinfo", {
-            recordsets: result.recordset,
-            recordsets2: result2.recordset,
-            recordsets3: result3.recordset
+          DB.view_group_for_report(req.params.name).then(result4=>{
+            result.expire = is_auth;
+            console.log(result.recordset);
+            console.log(result2.recordset);
+            console.log(result3.recordset);
+            res.render("./main/GroupPolicy/GroupInfo/groupinfo", {
+              recordsets: result.recordset,
+              recordsets2: result2.recordset,
+              recordsets3: result3.recordset,
+              recordsets4: result4.recordset
+            });
           });
         });
       });
@@ -172,21 +189,55 @@ router.get("/:name", (req, res, next) => {
 
 let upload = multer({dest:'public/uploads_off_result/'});
 
+const find_agent_inGroup = (ip, group_set_cd) => {
+  return new Promise((resolve, reject) =>{
+    let flag = 0;
+    DB.get_group_agents(group_set_cd).then(result => {
+      DB.find_agent(ip).then(agent_cd => {
+        for(var i=0; i<result.recordset.length; i++){
+          if(result.recordset[i].AGENT_CD === agent_cd.recordset[0].AGENT_CD){
+            flag = 1;
+            break;
+          }
+        }
+        if(flag === 1){
+          resolve(agent_cd.recordset[0].AGENT_CD);
+        }else{
+          reject(-111);
+        }
+      });
+    });
+  });
+};
+
 router.post("/upload_offline_result", upload.single("offresultfile"), (req, res, next) => {
   try{
     var name = JSON.parse(req.body.group_NAME);
+    var group_set_cd = JSON.parse(req.body.group_cd);
+    var ip = req.body.agent_ip;
     var redirect_path = "/group/" + name;
     console.log(redirect_path);
     data = fs.readFileSync(req.file.path);
-    console.log(data);
     line_data = data.toString().split('\r');
-    for (var a in line_data) {
-      var dd = line_data[a].split(' ');
-      console.log(dd[0]);
-      console.log(dd[2]);
-      DB.insert_result(dd[0], dd[2]);
-    }
-    res.redirect(redirect_path);
+
+    find_agent_inGroup(ip, group_set_cd).then(agent_cd => {
+      if(agent_cd === -111){
+        console.log("error");
+        res.redirect('/group?err_msg=error');
+      }
+
+      console.log(agent_cd);
+
+      DB.report_inspect_stats(group_set_cd, agent_cd, line_data.length);
+      DB.get_inspect_cd().then(result => {
+          let inspect_cd = result.recordset[0].max_INSPECT_CD;
+          for (var a in line_data) {
+              var dd = line_data[a].split(' ');
+              DB.insert_result(inspect_cd, dd[0], dd[2], agent_cd);
+          }
+          res.redirect(redirect_path);
+      });
+    });
   }catch (e) {
     console.log(e);
     res.redirect('/group?err_msg=error');
