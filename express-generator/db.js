@@ -955,7 +955,9 @@ exports.get_inspect_cd = () => {
 
 exports.insert_servey = (inspect_cd, agent_cd, a0,a1,a2,a3,a4,a5,a6,a7,a8)=>{
     return new Promise((resolve,reject)=>{
-        new sql.Request().query('insert TBL_INSPECT_SURVEY (INSPECT_CD, AGENT_CD, INSPECT_ITEM_CD, INSPECT_RESULT) values('+ inspect_cd +',' + agent_cd +',\'1\', \''+ a0 + '\'),('+ inspect_cd +',' + agent_cd +',\'2\',\''+ a1 + '\'),('+ inspect_cd +',' + agent_cd +',\'3\',\''+ a2 + '\'),('+ inspect_cd +',' + agent_cd +',\'4\',\''+ a3 + '\'),('+ inspect_cd +',' + agent_cd +',\'5\',\''+ a4 + '\'),('+ inspect_cd +',' + agent_cd +',\'6\',\''+ a5 + '\'),(\'7\',\''+ a6 + '\'),('+ inspect_cd +',' + agent_cd +',\'4\',\''+ a7 + '\'),('+ inspect_cd +',' + agent_cd +',\'9\',\''+ a8 + '\')',(err,result)=>{    if(err){
+        let query = `insert TBL_INSPECT_SURVEY (INSPECT_CD, AGENT_CD, INSPECT_ITEM_CD, INSPECT_RESULT) values(${inspect_cd}, ${agent_cd} ,\'1\', ${a0}),(${inspect_cd}, ${agent_cd} ,\'2\',${a1}),(${inspect_cd}, ${agent_cd} ,\'3\',${a2}),(${inspect_cd}, ${agent_cd} ,\'4\', ${a3}),(${inspect_cd}, ${agent_cd} ,\'5\', ${a4}),(${inspect_cd}, ${agent_cd} ,\'6\', ${a5}),(${inspect_cd}, ${agent_cd},\'7\',${a6}),(${inspect_cd}, ${agent_cd} ,\'8\', ${a7}),(${inspect_cd}, ${agent_cd} ,\'9\',${a8} )`;
+        console.log(query);
+        new sql.Request().query(query,(err,result)=>{    if(err){
                 console.log(err);
             }else
                 resolve(result);
