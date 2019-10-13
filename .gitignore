@@ -6,11 +6,6 @@ yarn-error.log*
 *.log*
 */*.log*
 */*/*.log*
-*.html
-*/*.html
-*/*/*.html
-*/*/*/*.html
-*/*/*/*/*.html
 *.zip
 *.xlsx
 # Runtime data
