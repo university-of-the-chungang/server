@@ -26,7 +26,7 @@ router.post('/', function(req, res, next) {
 */
 	DB.get_inspect_cd_agent().then(result => {
 		let inspect_cd = result.recordset[0].min_INSPECT_CD;
-		DB.insert_servey(min_INSPECT_CD -1, 10056, req.body.a0,req.body.a1,req.body.a2,req.body.a3,req.body.a4,req.body.a5,req.body.a6,req.body.a7,req.body.a8).then(result => {
+		DB.insert_servey(inspect_cd-1, 10056, req.body.a0,req.body.a1,req.body.a2,req.body.a3,req.body.a4,req.body.a5,req.body.a6,req.body.a7,req.body.a8).then(result => {
 			res.send(result);
 		});
 	});
