@@ -69,10 +69,12 @@
                                                         class="btn btn-outline-primary btn-lg"> 점검결과 저장</button>
                                                 </div>
                                             </div>
-                                            <form id="viewhtmlfrm" method="POST" action="/dashboard/viewhtml"
+                                            <form id="viewhtmlfrm" method="POST" action="/group/download_inspect_result"
                                                 style="display: none" target="_blank">
                                                 <input type="hidden" id="table_row" name="row_arr">
                                                 <input type="hidden" id="click_cd" name="group_cd">
+                                                <input type="hidden" id="agent_cd" name="agent_cd">
+                                                <input type="hidden" id="inspect_cd" name="inspect_cd">
                                             </form>
                                             <div class="table-responsive" style="margin-top:-50px;">
                                                 <table id="agent_table" class="table">
@@ -99,7 +101,7 @@
                                                             }
                                                         } %>
                                                         <tr style="text-align: center; color:<%= color%> ;"
-                                                            id="table_tr_<%=i %>">
+                                                            id="table_tr_<%=i%>">
                                                             <td style="text-align:center; vertical-align: middle;">
                                                                 <label class="custom-control custom-checkbox"><input
                                                                         type="checkbox" id='<%=i %>'
@@ -164,11 +166,7 @@
                                             </div>
                                             <!-- ======  파이 차트 끝 ============================-->
                                             <%
-                                    let total_junsu = 0;
-                                      let junsu = 0
-                                      let not_junsu = 0
-                                      let not_check = 0
-                                      for(let i = 0 ; i < recordsets[0].length ; i+=1){
+                                      /*for(let i = 0 ; i < recordsets[0].length ; i+=1){
                                         if(recordsets[0][i].GRD_SCORE !== null && recordsets[0][i].ITEM_CNT !== null){ 
                                             if(Number(recordsets[0][i].GRD_SCORE) == Number(recordsets[0][i].ITEM_CNT)){
                                                 junsu += 1;   
@@ -183,7 +181,7 @@
                                         total_junsu +=1;
 
 
-                                      }
+                                      }*/
                                       
                                       
                                       %>
@@ -371,16 +369,25 @@
                     $('#viewhtmlfrm').submit();
                 }
             })
+
             $('.table_tr').click((e) => {
                 if($(e.currentTarget).css('color') === 'rgb(113, 116, 141)'){
                     alert("아직 점검이 완료되지 않았습니다.");
                 }else{
-                let recordset = JSON.parse(`<%- JSON.stringify(recordsets[0]).replace(/\\/gi,'/')%>`);
-                $('#table_row').val(JSON.stringify(recordset[$(e.currentTarget).parent()[0].id.split('_')[2]]));
-                $('#viewhtmlfrm').attr('action', '/dashboard/viewhtml');
-                $('#viewhtmlfrm').submit();
+                    let recordset = JSON.parse(`<%- JSON.stringify(recordsets[0]).replace(/\\/gi,'/')%>`);
+                    //console.log(recordset[$(e.currentTarget).parent()[0].id.split('_')[2]]);
+                    $('#table_row').val(JSON.stringify(recordset[$(e.currentTarget).parent()[0].id.split('_')[2]]));
+                    $('#click_cd').val(recordset[$(e.currentTarget).parent()[0].id.split('_')[2]]['GROUP_SET_CD'][0]);
+                    $('#agent_cd').val(recordset[$(e.currentTarget).parent()[0].id.split('_')[2]]['AGENT_CD'][0]);
+                    $('#inspect_cd').val(recordset[$(e.currentTarget).parent()[0].id.split('_')[2]]['INSPECT_CD']);
+                    console.log($('#click_cd').val());
+                    console.log($('#agent_cd').val());
+                    console.log($('#inspect_cd').val());
+                    $('#viewhtmlfrm').attr('action', '/group/download_inspect_result');
+                    $('#viewhtmlfrm').submit();
                 }
             });
+
             $('#agent_table').DataTable({
                 lengthChange: false,
                 info: false,
@@ -459,6 +466,9 @@
                     alert("한개 이상의 에이전트 선택이 필요합니다.");
                 } else {
                     let recordset = JSON.parse(`<%- JSON.stringify(recordsets[0])%>`);
+
+                    console.log(recordset);
+
                     let record_arr = [];
                     let is_pass = true;
                     checkbox_arr.each((idx, elem) => {

@@ -260,11 +260,7 @@
                                         &lt;!&ndash;<td colspan="2">&ndash;&gt;
                                         <td>오프라인 정보시스템 포함</td>
                                         <td>
-                                            <form action="/group/<%=data[0][i].NAME%>" method = "GET" style="z-index: 9999;">
-                                                <input type="submit" id="GroupInfoBtn"
-                                                       class="btn btn-outline-info btn-lg"
-                                                       value = "Details" style="width: 150px; z-index:9998">
-                                            </form>
+
                                         </td>
 
                                     </tr>
@@ -317,12 +313,10 @@
                                                 </td>
 
                                                 <td class="border-0 text-center">
-                                                    <form action="/download/" method="POST">
-
+                                                    <form action="/log_download" method="POST">
                                                         <% for(let i = 0 ; i < recordsets[0].length ; i+=1){ %>
                                                         <input type="hidden" name="logall<%=i%>"
                                                             value="<%=recordsets[0][i].CONTENT_DATE %> : <%= recordsets[0][i].LOG_ID %> : <%= recordsets[0][i].LOG_TYPE %> : <%=recordsets[0][i].CONTENTS %>">
-
                                                         <% } %>
 
                                                         <button type="submit" id="downBtn"

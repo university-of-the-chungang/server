@@ -535,6 +535,7 @@
             let id = e.currentTarget.id.split('manage_')[1]
             let agent_cd = Array.from(new Set(recordsets2[id]['AGENT_CD']));
             let group_set_cd = Array.from(new Set(recordsets2[id]['GROUP_SET_CD']));
+            let group_name = '<%-JSON.stringify(recordsets[0].NAME)%>';
 
             console.log("group_set_cd", group_set_cd);
             console.log("agent_cd", agent_cd);
@@ -547,6 +548,7 @@
                 success:(result) =>{
                     let html = '';
                     result = result['recordset'];
+
                     for(let i = 0; i<result.length; i++){
                         html +=`
                         <tr class="table" style="text-align: center;">
@@ -560,11 +562,20 @@
                                 ${result[i]['SUBMIT_DATE']}
                             </td>
                             <td style="text-align: center; vertical-align: middle;">
-                                <i class="fas fa-share-square" id = "inspect_download_${i}"></i>
+                                <form id = "down_inspect_result" method = "POST" action = "/group/download_inspect_result">
+                                    <input type="hidden" name="inspect_cd" value = ${result[i]['INSPECT_CD']}>
+                                    <input type="hidden" name="agent_cd" value = ${agent_cd}>
+                                    <input type = "hidden" name="group_cd" value = ${group_set_cd}>
+                                    <input type = "hidden" name="group_name" value = ${group_name}>
+
+                                    <button type="submit" class = "fas fa-share-square">
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                         `
                     }
+
                     $('#manage_tbl').html(html);
                 }
             });

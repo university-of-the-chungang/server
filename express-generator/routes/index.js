@@ -73,22 +73,43 @@ router.post('/delete_policy',(req,res,next)=>{
 router.get('/dashboard', function (req, res, next) {
   if(req.session.username){
   DB.get_dashboard_datas().then(result => {
-    DB.get_dashboard_top10().then(result2=>{
-      result.sess_name = req.session.username;
-      result.top10 = result2.recordsets[0];
-      result.token = req.session.token;
-      let is_auth = isAuthenticatied(req.session.token)
-      if(is_auth){
-        result.expire = is_auth;
-        DB.view_admin('DIVISION, POSITION'," WHERE NAME = '"+result.sess_name+"'").then((result2)=>{
-          result.division = result2.recordsets[0][0]['DIVISION'];
-          result.position = result2.recordsets[0][0]['POSITION'];
-          res.render('dashboard',result);
-        });
-      }else{
-        res.redirect('/login');
+    DB.get_chart_data().then(result2 => {
+      let junsu = 0;
+      let not_junsu = 0;
+      let not_check = 0;
+
+      for(var i = 0; i<result2.recordset.length; i++)
+      {
+        if(result2.recordset[i].INSPECT_RESULT === 1)
+            junsu ++;
+        else if(result2.recordset[i].INSPECT_RESULT === 2)
+            not_junsu++;
+        else
+          not_check++;
       }
-    })
+      console.log("결과:", junsu, not_check, not_junsu);
+      result.junsu = junsu;
+      result.not_junsu = not_junsu;
+      result.not_check = not_check;
+      result.total_junsu = result2.recordset.length;
+
+      DB.get_dashboard_top10().then(result2=>{
+        result.sess_name = req.session.username;
+        result.top10 = result2.recordsets[0];
+        result.token = req.session.token;
+        let is_auth = isAuthenticatied(req.session.token);
+        if(is_auth){
+          result.expire = is_auth;
+          DB.view_admin('DIVISION, POSITION'," WHERE NAME = '"+result.sess_name+"'").then((result2)=>{
+            result.division = result2.recordsets[0][0]['DIVISION'];
+            result.position = result2.recordsets[0][0]['POSITION'];
+            res.render('dashboard',result);
+          });
+        }else{
+          res.redirect('/login');
+        }
+      });
+    });
     
   });
 }else{
@@ -154,8 +175,7 @@ function downlog(log_list,res){
     .then(result =>{downfile(res,1)});
 }
 
-router.post('/download/', function(req, res){
-  
+router.post('/log_download', function(req, res){
   //console.log(Object.values(req.body))
   log_list = Object.values(req.body);
   downlog(log_list,res);
@@ -626,6 +646,7 @@ router.post('/dashboard/viewhtml',(req,res,next)=>{
     // console.log(result);
     // res.write(html);
 })
+
 router.post('/group/viewhtml',(req,res,next)=>{
   let group_cd = JSON.parse(req.body['group_cd']);
   DB.get_agents_from_group_cd(group_cd).then(result=>{

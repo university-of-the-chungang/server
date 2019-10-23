@@ -1,0 +1,684 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data-stream-collection xmlns="http://scap.nist.gov/schema/scap/source/1.2" id="scap_mil.disa.stig_collection_U_Windows_10_V1R13_STIG_SCAP_1-2_Benchmark" schematron-version="1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://checklists.nist.gov/xccdf/1.2 http://scap.nist.gov/schema/xccdf/1.2/xccdf_1.2.xsd http://cpe.mitre.org/dictionary/2.0 http://scap.nist.gov/schema/cpe/2.3/cpe-dictionary_2.3.xsd http://oval.mitre.org/XMLSchema/oval-common-5 http://oval.mitre.org/language/download/schema/version5.10.1/ovaldefinition/complete/oval-common-schema.xsd http://oval.mitre.org/XMLSchema/oval-definitions-5 http://oval.mitre.org/language/download/schema/version5.10.1/ovaldefinition/complete/oval-definitions-schema.xsd http://oval.mitre.org/XMLSchema/oval-definitions-5#independent http://oval.mitre.org/language/download/schema/version5.10.1/ovaldefinition/complete/independent-definitions-schema.xsd http://oval.mitre.org/XMLSchema/oval-definitions-5#windows http://oval.mitre.org/language/download/schema/version5.10.1/ovaldefinition/complete/windows-definitions-schema.xsd http://scap.nist.gov/schema/scap/source/1.2 http://scap.nist.gov/schema/scap/1.2/scap-source-data-stream_1.2.xsd">
+  <data-stream id="scap_kr.nsr.eval_datastream_Windows_10_Benchmark" use-case="compliance" scap-version="1.2" timestamp="2010-08-13T11:16:23">
+    <dictionaries>
+      <component-ref id="scap_mil.disa.stig_cref_U_Windows_10_V1R13_STIG_SCAP_1-2_Benchmark-cpe-dictionary.xml" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#scap_mil.disa.stig_comp_U_Windows_10_V1R13_STIG_SCAP_1-2_Benchmark-cpe-dictionary.xml">
+        <cat:catalog xmlns:cat="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+          <cat:uri name="U_Windows_10_V1R13_STIG_SCAP_1-2_Benchmark-cpe-oval.xml" uri="#scap_mil.disa.stig_cref_U_Windows_10_V1R13_STIG_SCAP_1-2_Benchmark-cpe-oval.xml" />
+        </cat:catalog>
+      </component-ref>
+    </dictionaries>
+    <checklists>
+      <component-ref id="scap_mil.disa.stig_cref_U_Windows_10_V1R13_STIG_SCAP_1-2_Benchmark-xccdf.xml" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#scap_mil.disa.stig_comp_U_Windows_10_V1R13_STIG_SCAP_1-2_Benchmark-xccdf.xml">
+        <cat:catalog xmlns:cat="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+          <cat:uri name="U_Windows_10_V1R13_STIG_SCAP_1-2_Benchmark-oval.xml" uri="#scap_mil.disa.stig_cref_U_Windows_10_V1R13_STIG_SCAP_1-2_Benchmark-oval.xml" />
+        </cat:catalog>
+      </component-ref>
+    </checklists>
+    <checks>
+      <component-ref id="scap_mil.disa.stig_cref_U_Windows_10_V1R13_STIG_SCAP_1-2_Benchmark-oval.xml" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#scap_mil.disa.stig_comp_U_Windows_10_V1R13_STIG_SCAP_1-2_Benchmark-oval.xml" />
+      <component-ref id="scap_mil.disa.stig_cref_U_Windows_10_V1R13_STIG_SCAP_1-2_Benchmark-cpe-oval.xml" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#scap_mil.disa.stig_comp_U_Windows_10_V1R13_STIG_SCAP_1-2_Benchmark-cpe-oval.xml" />
+    </checks>
+  </data-stream>
+  
+  <!-- component 1 Benchmark-cpe-dictionary define using Benchmark-cpe-oval.xml  -->
+  
+  <component id="scap_mil.disa.stig_comp_U_Windows_10_V1R13_STIG_SCAP_1-2_Benchmark-cpe-dictionary.xml" timestamp="2018-11-13T11:16:23">
+    <cpe-list xmlns="http://cpe.mitre.org/dictionary/2.0">
+      <cpe-item name="cpe:/o:microsoft:windows_10">
+        <title>Microsoft Windows 10</title>
+        <check system="http://oval.mitre.org/XMLSchema/oval-definitions-5" href="U_Windows_10_V1R13_STIG_SCAP_1-2_Benchmark-cpe-oval.xml">oval:mil.disa.stig.windows:def:1</check>
+      </cpe-item>
+    </cpe-list>
+  </component>
+  
+  
+ <!-- component 2 Benchmark-xccdf using profile, value, group -->
+  
+  <component id="scap_mil.disa.stig_comp_U_Windows_10_V1R13_STIG_SCAP_1-2_Benchmark-xccdf.xml" timestamp="2018-11-13T11:16:23">
+    <xccdf:Benchmark xmlns:xccdf="http://checklists.nist.gov/xccdf/1.2" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:cpe="http://cpe.mitre.org/language/2.0" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" id="xccdf_mil.disa.stig_benchmark_Windows_10_STIG" xml:lang="en" style="SCAP_1.2">
+      <xccdf:status date="2019-08-15">draft</xccdf:status>
+      <xccdf:title> 실효성 검증 4개 항목 모음 </xccdf:title>
+      <xccdf:description> 정보보안 관리실태에 활용되는 항목중 운영체제, 백신, 응용프로그램 최신 업데이트 및 비인가프로그램 점검 항목 검증 목적으로 만듬.</xccdf:description>
+      <xccdf:notice id="terms-of-use" xml:lang="en">NSR 개발</xccdf:notice>
+      <xccdf:reference href="http://www.nsr.re.kr">
+        <dc:publisher>NSR</dc:publisher>
+        <dc:source>NSR</dc:source>
+      </xccdf:reference>
+      <xccdf:plain-text id="release-info">Release: 1 2019</xccdf:plain-text>
+      <xccdf:platform idref="cpe:/o:microsoft:windows_10" />
+      <xccdf:version update="http://iase.disa.mil/stigs">001.013</xccdf:version>
+      <xccdf:metadata>
+        <dc:creator>NSR</dc:creator>
+        <dc:publisher>NSR</dc:publisher>
+        <dc:contributor>NSR</dc:contributor>
+        <dc:source>STIG.DOD.MIL</dc:source>
+      </xccdf:metadata>
+      
+ <!-- xccdf profile -->      
+
+      <xccdf:Profile id="xccdf_kr.nsr.eval_profile_check_4items"> 
+        <xccdf:title>기존 PC점검도구 관련 점검 수행</xccdf:title>  
+        <xccdf:description>운영체제, 백신, 응용프로그램 최신 업데이트 및 비인가프로그램 설치 여부 점검</xccdf:description>
+        <xccdf:select idref="xccdf_kr.nsr.test.4itemsfor_rule_oslatestupdate_rule" selected="true" />    
+        <xccdf:select idref="xccdf_kr.nsr.test4items_rule_vaccinelatestupdate_rule" selected="true" />     
+        <xccdf:select idref="xccdf_kr.nsr.test.4itemsfor_rule_AcrobatReaderevaluation_rule" selected="true" />    
+        <xccdf:select idref="xccdf_kr.nsr.test4items_rule_forjava_rule" selected="true" />
+        <xccdf:select idref="xccdf_kr.nsr.test4items_rule_foMS-officeevaluation_rule" selected="true" />
+        <xccdf:select idref="xccdf_kr.nsr.test4items_rule_forkakaotalkevaluation_rule" selected="true" />
+        <xccdf:select idref="xccdf_kr.nsr.test4items_rule_fornateonevaluation_rule" selected="true" />
+        <xccdf:select idref="xccdf_kr.nsr.test4items_rule_forhwpevaluation_rule" selected="true" />
+        <xccdf:select idref="xccdf_kr.nsr.test4items_rule_forutorrentevaluation_rule" selected="true" />
+      </xccdf:Profile>
+        
+<!-- xccdf group -->      
+
+
+      <xccdf:Rule id="xccdf_kr.nsr.test.4itemsfor_rule_oslatestupdate_rule" severity="high" weight="10.0">
+         <xccdf:version update="http://iase.disa.mil/stigs">WN10-CC-000180</xccdf:version>
+         <xccdf:title>[운영체제 최신 업데이트] 운영체제 최신 업데이트 점검 </xccdf:title>
+         <xccdf:description>&lt;취약점 설명 &gt; 신규 보안 취약점에 신속히 대처하기 위해서는 패치관리 서버 등을 활용하여 기관 전체 운영체제 최신 업데이트를 권고한다.&#10; 
+          &lt;국가 정보보안 기본지침 제26조(PC 등 단말기 보안관리)&gt;&#10; 
+        </xccdf:description>
+         <xccdf:reference>
+           <dc:title>대상 Windows 10</dc:title>
+           <dc:publisher>NSR</dc:publisher>
+           <dc:type>대상 </dc:type>
+           <dc:subject>Windows 10</dc:subject>
+           <dc:identifier>1</dc:identifier>
+         </xccdf:reference>
+         <xccdf:ident system="http://www.nsr.re.kr">미정</xccdf:ident>
+         <xccdf:fixtext fixref="F-69595r1_fix">운영체제 최신 업데이트를 다음의 순서에 맞게 진행합니다.&#10;
+                 1. 윈도우 업데이트 설정을 위해 [Windows 설정]창을 띄웁니다.&#10;
+                 2. 단축키 윈도우키 + I 를 누르거나 시작 메뉴를 이용합니다. &#10;
+                 3. 윈도우 설정에서 [업데이트 및 복구] 메뉴를 클릭합니다.&#10;
+                 4. 업데이트 및 복구 화면에서 왼쪽 메뉴 제일 상단에 있는 [Windows 업데이트]를 선택합니다. &#10;
+                 5. [업데이트 확인] 버튼을 눌러 최신 상태인지 확인합니다. &#10;
+         </xccdf:fixtext>
+         <xccdf:fix id="F-69595r1_fix" />
+          <xccdf:check system="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+            <xccdf:check-content-ref name="oval:nkr.nsr.os.test1:def:1" href="U_Windows_10_V1R13_STIG_SCAP_1-2_Benchmark-oval.xml" />
+          </xccdf:check>
+      </xccdf:Rule>
+
+
+      <xccdf:Rule id="xccdf_kr.nsr.test4items_rule_vaccinelatestupdate_rule" severity="high" weight="10.0">
+          <xccdf:version update="http://iase.disa.mil/stigs">WN10-CC-000185</xccdf:version>
+          <xccdf:title>[백신 최신 업데이트] 백신 최신 업데이트 점검</xccdf:title>
+         <xccdf:description>&lt;취약점 설명 &gt; &#10;사이버보안 진단의 날 등을 이용하여 모든 PC에 대해 월 1회 이상 백신검사를 수행한다. 단, 백신검사를 중단한 경우는 인정하지 않는다.&#10; 
+         백신 프로그램의 실시간 감시 기능을 활성화시키고 최신 엔진 및 패턴으로 업데이트 한다. 
+          &lt;국가 정보보안 기본지침 제26조(PC 등 단말기 보안관리)&gt;&#10; 
+        </xccdf:description>
+         <xccdf:reference>
+           <dc:title>대상 Windows 10</dc:title>
+           <dc:publisher>NSR</dc:publisher>
+           <dc:type>대상 </dc:type>
+           <dc:subject>Windows 10</dc:subject>
+           <dc:identifier>1</dc:identifier>
+         </xccdf:reference>
+         <xccdf:ident system="http://www.nsr.re.kr">미정</xccdf:ident>
+          <xccdf:fixtext fixref="F-69599r2_fix"> 자동으로 백신 최신 업데이트 및 한달에 한번 전체검사를 할 수 있게 백신의 환경을 설정합니다. &#10;
+          </xccdf:fixtext>
+          <xccdf:fix id="F-69599r2_fix" />
+          <xccdf:check system="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+            <xccdf:check-content-ref name="oval:nkr.nsr.vaccine.test1:def:1" href="U_Windows_10_V1R13_STIG_SCAP_1-2_Benchmark-oval.xml" />
+          </xccdf:check>
+      </xccdf:Rule>
+
+
+      <xccdf:Rule id="xccdf_kr.nsr.test.4itemsfor_rule_AcrobatReaderevaluation_rule" severity="high" weight="9.0">
+         <xccdf:version update="http://iase.disa.mil/stigs">WN10-CC-000180</xccdf:version>
+         <xccdf:title>[응용프로그램 최신 업데이트] 1. Acrobat Reader 점검 </xccdf:title>
+         <xccdf:description>&lt;취약점 설명 &gt; 응용프로그램 취약점을 악용한 사이버 공격이 크게 증가하고 있어 응용프로그램 최신 업데이트를 반듯이 수행하여야 한다.
+          &#10;본 점검에서는 애크로뱃리더의 최신 버전 업데이트 여부를 점검한다.&#10; 
+          &lt;국가 정보보안 기본지침 제26조(PC 등 단말기 보안관리)&gt;&#10; 
+          &lt;보안강화 협조(2015-1호) 어도비 플래시 플레이어 및 윈도우 OLE 보안대책 통보(사책-999, 2015.3.30) &gt;
+        </xccdf:description>
+         <xccdf:reference>
+           <dc:title>대상 Windows 10</dc:title>
+           <dc:publisher>NSR</dc:publisher>
+           <dc:type>대상 </dc:type>
+           <dc:subject>Windows 10</dc:subject>
+           <dc:identifier>1</dc:identifier>
+         </xccdf:reference>
+         <xccdf:ident system="http://www.nsr.re.kr">미정</xccdf:ident>
+         <xccdf:fixtext fixref="F-69595r3_fix"> 애크로뱃 리더 최신 업데이트를 다음의 순서에 맞게 진행합니다.&#10;
+             &lt;자동 업데이트 &gt;&#10;
+                 1.Adobe Reader 또는 Acrobat을 실행합니다.&#10;
+                 2.도움말을 열고 업데이트 확인을 선택합니다.&#10;
+                 3.Updater 창의 단계를 따라 최신 업데이트를 다운로드하고 설치합니다.&#10;
+             &lt;수동 업데이트 &gt;&#10;
+                 1.제품을 엽니다.&#10;
+                 2.[도움말] >[Acrobat 정보] 또는 Adobe Reader를 선택합니다.&#10;
+                 3.버전을 확인합니다. &#10;
+                 4.제품을 닫습니다. &#10;
+                 5.최신 버전이 설치되지 않은 경우 다음 위치에서 필요한 설치 프로그램을 다운로드하십시오.&#10;
+                 6.Windows용 Adobe Reader 전체 설치 프로그램 및 업데이트&#10;
+                 7.Windows용 Adobe Acrobat 업데이트&#10;
+                 8.설치 프로그램을 클릭하여 설치 프로세스를 시작합니다. </xccdf:fixtext>
+         <xccdf:fix id="F-69595r3_fix" />
+          <xccdf:check system="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+            <xccdf:check-content-ref name="oval:nkr.nsr.adobe.test1:def:1" href="U_Windows_10_V1R13_STIG_SCAP_1-2_Benchmark-oval.xml" />
+          </xccdf:check>
+      </xccdf:Rule>
+
+
+      <xccdf:Rule id="xccdf_kr.nsr.test4items_rule_forjava_rule" severity="high" weight="9.0">
+          <xccdf:version update="http://iase.disa.mil/stigs">WN10-CC-000185</xccdf:version>
+          <xccdf:title>[응용프로그램 최신 업데이트] 2. 자바 점검</xccdf:title>
+         <xccdf:description>&lt;취약점 설명 &gt; &#10;응용프로그램 취약점을 악용한 사이버 공격이 크게 증가하고 있어 응용프로그램 최신 업데이트를 반듯이 수행하여야 한다.
+          &#10;본 점검에서는 자바 최신 버전 업데이트 여부를 점검한다.&#10; 
+          &lt;국가 정보보안 기본지침 제26조(PC 등 단말기 보안관리)&gt;&#10; 
+          &lt;보안강화 협조(사책-2052호) 어도비 플래시 플레이어, MS IE, 자바 등 취약점 정보 및 보안대책 정보(사책-2052, 2015.7.21) &gt;
+        </xccdf:description>
+         <xccdf:reference>
+           <dc:title>대상 Windows 10</dc:title>
+           <dc:publisher>NSR</dc:publisher>
+           <dc:type>대상 </dc:type>
+           <dc:subject>Windows 10</dc:subject>
+           <dc:identifier>1</dc:identifier>
+         </xccdf:reference>
+         <xccdf:ident system="http://www.nsr.re.kr">미정</xccdf:ident>
+          <xccdf:fixtext fixref="F-69599r4_fix">자바 업데이트 최신 업데이트를 다음의 순서에 맞게 진행합니다. &#10;
+             &lt;자동 업데이트 &gt;&#10;
+                 1.Java 제어판 찾기 및 실행&#10;
+                 2.업데이트 탭을 눌러 설정에 액세스합니다.&#10;
+                 3.Java 업데이트를 자동으로 확인하려면 자동 업데이트 확인 체크 박스를 선택합니다. &#10;
+          </xccdf:fixtext>
+          <xccdf:fix id="F-69599r4_fix" />
+          <xccdf:check system="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+            <xccdf:check-content-ref name="oval:kr.nsr.program.checkversion.java:def:1" href="U_Windows_10_V1R13_STIG_SCAP_1-2_Benchmark-oval.xml" />
+          </xccdf:check>
+      </xccdf:Rule>
+
+      <xccdf:Rule id="xccdf_kr.nsr.test4items_rule_foMS-officeevaluation_rule" severity="high" weight="5.0">
+          <xccdf:version update="http://iase.disa.mil/stigs">WN10-CC-000190</xccdf:version>
+          <xccdf:title>[비인가 프로그램 설치 여부 점검] 1. MS 오피스 점검</xccdf:title>
+          <xccdf:description>&lt;취약점 설명&gt;&#10;
+            인터넷PC에 비인가 프로그램(MS 오피스 등) 설치 및 비인가 프로그램을 통한 업무자료 소통을 금지한다. &#10;
+            &lt;국가 정보보안 기본지침 제26조(PC 등 단말기 보안관리)&gt;&#10; 
+            &lt;보안강화 협조(2017-8호) 전자우편-메신저 보안관리 강화(사책-2271, 2017.12.29) &gt;
+           </xccdf:description>
+         <xccdf:reference>
+           <dc:title>대상 Windows 10</dc:title>
+           <dc:publisher>NSR</dc:publisher>
+           <dc:type>대상 </dc:type>
+           <dc:subject>Windows 10</dc:subject>
+           <dc:identifier>1</dc:identifier>
+         </xccdf:reference>
+          <xccdf:ident system="http://www.nsr.re.kr">미정</xccdf:ident>
+          <xccdf:fixtext fixref="F-69603r5_fix">인터넷 PC에 MS 오피스와 같은 문서편집기 설치를 금지한다. &#10;
+            설치 자체를 금지하며 설치시 제어판을 이용하여 깨긋이 삭제한다. 
+          </xccdf:fixtext>
+          <xccdf:fix id="F-69603r5_fix" />
+          <xccdf:check system="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+            <xccdf:check-content-ref name="oval:kt.nsr.program.untrust:def:1" href="U_Windows_10_V1R13_STIG_SCAP_1-2_Benchmark-oval.xml" />
+          </xccdf:check>
+     </xccdf:Rule>  
+        
+
+
+      <xccdf:Rule id="xccdf_kr.nsr.test4items_rule_forkakaotalkevaluation_rule" severity="high" weight="5.0">
+          <xccdf:version update="http://iase.disa.mil/stigs">WN10-CC-000185</xccdf:version>
+          <xccdf:title>[비인가 프로그램 설치 여부 점검] 2. 카카오톡 점검</xccdf:title>
+          <xccdf:description>&lt;취약점 설명&gt;&#10;
+            인터넷PC에 비인가 프로그램(카카오톡 등) 설치 및 비인가 프로그램을 통한 업무자료 소통을 금지한다. &#10;
+            &lt;국가 정보보안 기본지침 제26조(PC 등 단말기 보안관리)&gt;&#10; 
+            &lt;보안강화 협조(2017-8호) 전자우편-메신저 보안관리 강화(사책-2271, 2017.12.29) &gt;</xccdf:description>
+         <xccdf:reference>
+           <dc:title>대상 Windows 10</dc:title>
+           <dc:publisher>NSR</dc:publisher>
+           <dc:type>대상 </dc:type>
+           <dc:subject>Windows 10</dc:subject>
+           <dc:identifier>1</dc:identifier>
+         </xccdf:reference>
+          <xccdf:ident system="http://www.nsr.re.kr">미정</xccdf:ident>
+          <xccdf:fixtext fixref="F-69599r6_fix">인터넷 PC에 카카오톡 같은 메신저 설치를 금지한다. &#10;
+            설치 자체를 금지하며 설치시 제어판을 이용하여 깨긋이 삭제한다. </xccdf:fixtext>
+          <xccdf:fix id="F-69599r6_fix" />
+          <xccdf:check system="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+            <xccdf:check-content-ref name="oval:kr.nsr.program.untrust.kakao:def:1" href="U_Windows_10_V1R13_STIG_SCAP_1-2_Benchmark-oval.xml" />
+          </xccdf:check>
+      </xccdf:Rule>
+
+      <xccdf:Rule id="xccdf_kr.nsr.test4items_rule_fornateonevaluation_rule" severity="high" weight="5.0">
+          <xccdf:version update="http://iase.disa.mil/stigs">WN10-CC-000190</xccdf:version>
+          <xccdf:title>[비인가 프로그램 설치 여부 점검] 3. 네이트온 점검</xccdf:title>
+          <xccdf:description>&lt;취약점 설명&gt;&#10;
+            인터넷PC에 비인가 프로그램(네이트온 등) 설치 및 비인가 프로그램을 통한 업무자료 소통을 금지한다. &#10;
+            &lt;국가 정보보안 기본지침 제26조(PC 등 단말기 보안관리)&gt;&#10; 
+            &lt;보안강화 협조(2017-8호) 전자우편-메신저 보안관리 강화(사책-2271, 2017.12.29) &gt;</xccdf:description>
+         <xccdf:reference>
+           <dc:title>대상 Windows 10</dc:title>
+           <dc:publisher>NSR</dc:publisher>
+           <dc:type>대상 </dc:type>
+           <dc:subject>Windows 10</dc:subject>
+           <dc:identifier>1</dc:identifier>
+         </xccdf:reference>
+          <xccdf:ident system="http://www.nsr.re.kr">미정</xccdf:ident>
+          <xccdf:fixtext fixref="F-69599r7_fix">인터넷 PC에 네이트온 같은 메신저 설치를 금지한다. &#10;
+            설치 자체를 금지하며 설치시 제어판을 이용하여 깨긋이 삭제한다. </xccdf:fixtext>
+          <xccdf:fix id="F-69603r7_fix" />
+          <xccdf:check system="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+            <xccdf:check-content-ref name="oval:kr.nsr.program.untrust.nateon:def:1" href="U_Windows_10_V1R13_STIG_SCAP_1-2_Benchmark-oval.xml" />
+          </xccdf:check>
+     </xccdf:Rule>  
+
+      <xccdf:Rule id="xccdf_kr.nsr.test4items_rule_forhwpevaluation_rule" severity="high" weight="5.0">
+          <xccdf:version update="http://iase.disa.mil/stigs">WN10-CC-000185</xccdf:version>
+          <xccdf:title>[비인가 프로그램 설치 여부 점검] 4. 한글 편집기 점검 </xccdf:title>
+          <xccdf:description>&lt;취약점 설명&gt;&#10;
+            인터넷PC에 비인가 프로그램(한글 등) 설치 및 비인가 프로그램을 통한 업무자료 소통을 금지한다. &#10;
+            &lt;국가 정보보안 기본지침 제26조(PC 등 단말기 보안관리)&gt;&#10; 
+            &lt;보안강화 협조(2017-8호) 전자우편-메신저 보안관리 강화(사책-2271, 2017.12.29) &gt;</xccdf:description>
+         <xccdf:reference>
+           <dc:title>대상 Windows 10</dc:title>
+           <dc:publisher>NSR</dc:publisher>
+           <dc:type>대상 </dc:type>
+           <dc:subject>Windows 10</dc:subject>
+           <dc:identifier>1</dc:identifier>
+         </xccdf:reference>
+          <xccdf:ident system="http://www.nsr.re.kr">미정</xccdf:ident>
+          <xccdf:fixtext fixref="F-69599r8_fix">인터넷 PC에 한글과 같은 문서편집기 설치를 금지한다. &#10;
+            설치 자체를 금지하며 설치시 제어판을 이용하여 깨긋이 삭제한다. </xccdf:fixtext>
+          <xccdf:fix id="F-69599r8_fix" />
+          <xccdf:check system="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+            <xccdf:check-content-ref name="oval:kr.nsr.program.untrust.hwp:def:1" href="U_Windows_10_V1R13_STIG_SCAP_1-2_Benchmark-oval.xml" />
+          </xccdf:check>
+      </xccdf:Rule>
+
+      <xccdf:Rule id="xccdf_kr.nsr.test4items_rule_forutorrentevaluation_rule" severity="high" weight="5.0">
+          <xccdf:version update="http://iase.disa.mil/stigs">WN10-CC-000190</xccdf:version>
+          <xccdf:title>[비인가 프로그램 설치 여부 점검] 5. 토렌트(utorrent) 점검</xccdf:title>
+          <xccdf:description>&lt;취약점 설명&gt;&#10;
+            인터넷PC에 비인가 프로그램(토렌트 등) 설치 및 비인가 프로그램을 통한 업무자료 소통을 금지한다. &#10;
+            &lt;국가 정보보안 기본지침 제26조(PC 등 단말기 보안관리)&gt;&#10; 
+            &lt;보안강화 협조(2017-8호) 전자우편-메신저 보안관리 강화(사책-2271, 2017.12.29) &gt;</xccdf:description>
+         <xccdf:reference>
+           <dc:title>대상 Windows 10</dc:title>
+           <dc:publisher>NSR</dc:publisher>
+           <dc:type>대상 </dc:type>
+           <dc:subject>Windows 10</dc:subject>
+           <dc:identifier>1</dc:identifier>
+         </xccdf:reference>
+          <xccdf:ident system="http://www.nsr.re.kr">미정</xccdf:ident>
+          <xccdf:fixtext fixref="F-69599r9_fix">인터넷 PC에 토렌트와 같은 공유프로그램 설치를 금지한다. &#10;
+            설치 자체를 금지하며 설치시 제어판을 이용하여 깨긋이 삭제한다. </xccdf:fixtext>
+          <xccdf:fix id="F-69603r9_fix" />
+          <xccdf:check system="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+            <xccdf:check-content-ref name="oval:kr.nsr.program.untrust.utorrent:def:1" href="U_Windows_10_V1R13_STIG_SCAP_1-2_Benchmark-oval.xml" />
+          </xccdf:check>
+     </xccdf:Rule>  
+        
+    </xccdf:Benchmark>
+  </component>
+  
+     <!-- component 3 OVAL for Benchmark -->
+  
+  <component id="scap_mil.disa.stig_comp_U_Windows_10_V1R13_STIG_SCAP_1-2_Benchmark-oval.xml" timestamp="2018-11-13T11:16:23">
+    <oval_definitions xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5">
+      <generator>
+        <oval:product_name>repotool</oval:product_name>
+        <oval:schema_version>5.10</oval:schema_version>
+        <oval:timestamp>2018-11-13T11:16:22</oval:timestamp>
+      </generator>
+      
+<!-- OVAL Definition -->  
+      
+  <definitions>
+
+
+      <definition id="oval:nkr.nsr.os.test1:def:1" version="1" class="compliance">
+        <metadata>
+          <title>운영체제 최신 업데이트 여부 점검</title>
+          <affected family="windows">
+            <platform>windows 10</platform>
+          </affected>
+          <reference source="CCE" ref_id="sds" />
+          <description>운영체제는 항상 최신 업데이트가 되어 있어야 한다. </description>
+        </metadata>
+        <criteria comment="에이전트에 설치된 스크립트를 이용한 검사 ">
+          <criterion comment="운영체제 최신 업데이트 검사" test_ref="oval:nkr.nsr.os.test1:tst:1" />
+        </criteria>
+      </definition>
+
+     <definition id="oval:nkr.nsr.vaccine.test1:def:1" version="1" class="compliance">
+        <metadata>
+          <title>백신 구동 및 최신 업데이트 여부 점검</title>
+          <affected family="windows">
+            <platform>windows 10</platform>
+          </affected>
+          <reference source="CCE" ref_id="sds" />
+          <description>백신은 최신 업데이트가 되어 있어야 하며 실시간 감시를 수행하여야 한다.  </description>
+        </metadata>
+        <criteria comment="에이전트에 설치된 스크립트를 이용한 검사 ">
+          <criterion comment="백신 최신 업데이트 검사" test_ref="oval:nkr.nsr.vaccine.test1:tst:1" />
+        </criteria>
+      </definition>
+
+    <definition id="oval:nkr.nsr.adobe.test1:def:1" version="1" class="compliance">
+      <metadata>
+        <title>응용프로그램 최신업데이트 점검-acrobart reader DC</title>
+        <affected family="windows">
+          <platform>Adobe Acrobat DC</platform>
+        </affected>
+        <reference source="CCE" ref_id="sds" />
+        <description>Adobe Acrobat DC Series is installed</description>
+      </metadata>
+      <criteria comment="gogg">
+        <criterion comment="애크로뱃 dc 버전 검사 시험" test_ref="oval:nkr.nsr.adobe.test1:tst:1" />
+      </criteria>
+    </definition>
+
+
+    <definition id="oval:kr.nsr.program.checkversion.java:def:1" version="1" class="compliance">
+      <metadata>
+        <title>자바 최신 버전 검사</title>
+        <affected family="windows">
+          <product>java</product>
+        </affected>
+        <description>자바 최신 버전 검사</description>
+      </metadata>
+      <criteria operator="AND" negate="false" comment="자바 최신 검사">
+        <criterion comment="자바최신 업데이트 검사" test_ref="oval:kr.nsr.program.checkversion.java:tst:1" negate="false" />
+      </criteria>
+    </definition>
+
+    <definition id="oval:kt.nsr.program.untrust:def:1" version="1" class="compliance">
+      <metadata>
+        <title>비인가 프로그램 설치여부 점검-마이크로소프트 오피스</title>
+        <affected family="windows">
+          <platform>wimdows 10</platform>
+          <product>MS office 2017</product>
+        </affected>
+        <reference source="CCE" ref_id="in preparation" />
+        <description>망분리된 국가공공기관 인터넷 컴퓨터에 마이크로소프트사의 오피스(편집기)가 설치되어 있으면 안된다. 
+- 근거 : 국가 정보보안 기본 지침</description>
+      </metadata>
+      <criteria operator="AND" negate="false" comment="비인가프로그램 설치여부 점검(마이크로소프트 오피스)">
+        <criterion comment="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\*\displayname을 확인하여 설치여부 점검" test_ref="oval:kt.nsr.program.untrust:tst:1" negate="false" />
+      </criteria>
+    </definition>
+
+
+    <definition id="oval:kr.nsr.program.untrust.kakao:def:1" version="1" class="compliance">
+      <metadata>
+        <title>비인가 프로그램 설치 여부를 점검(카카오톡) - 국가공공기관 인터넷PC에는 설치되면 안됨</title>
+        <affected family="windows">
+          <product>kakaotalk</product>
+        </affected>
+        <description>자료 유출등을 방지하기 위하여 인터넷PC에는 비인가 프로그램(카카오톡)이 설치되면 안됨</description>
+      </metadata>
+      <criteria operator="AND" negate="false" comment="컴퓨터\HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\KakaoTalk를 점검하여 카카옽톡 설치여부를 점검">
+        <criterion comment="컴퓨터\HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\KakaoTalk의 Displayname을 확인하여 점검" test_ref="oval:kr.nsr.program.untrust.kakao:tst:1" negate="false" />
+      </criteria>
+    </definition>
+
+    <definition id="oval:kr.nsr.program.untrust.nateon:def:1" version="1" class="compliance">
+      <metadata>
+        <title>비인가 프로그램 설치 확인 - 네이트온</title>
+        <affected family="windows">
+          <product>nateon</product>
+        </affected>
+        <description>국가정보보안 기본지침
+실태평가 항목</description>
+      </metadata>
+      <criteria operator="AND" negate="false" comment="비인가 프로그램 설치 확인-네이트온">
+        <criterion comment="비인가 설치 프로그램 확인 - 네이트온" test_ref="oval:kr.nsr.program.untrust.nateon:tst:1" negate="false" />
+      </criteria>
+    </definition>
+
+    <definition id="oval:kr.nsr.program.untrust.hwp:def:1" version="1" class="compliance">
+      <metadata>
+        <title>비인가 프로그램 점검 - 한글</title>
+        <affected family="windows">
+          <product>hwp</product>
+        </affected>
+        <description>국가 정보보안 기본지침
+정보보안 관리실태 평가</description>
+      </metadata>
+      <criteria operator="AND" negate="false" comment="비인가 프로그램 점검 - 한글">
+        <criterion comment="비인가 프로그램 점검 - 한글" test_ref="oval:kr.nsr.program.untrust.hwp:tst:1" negate="false" />
+      </criteria>
+    </definition>
+
+    <definition id="oval:kr.nsr.program.untrust.utorrent:def:1" version="1" class="vulnerability">
+      <metadata>
+        <title>비인가 프로그램 점검 - utorrent</title>
+        <affected family="windows">
+          <product>utorrent</product>
+        </affected>
+        <description>국가정보보안 기본지침
+정보보안 관리실태 평가</description>
+      </metadata>
+      <criteria operator="AND" negate="false" comment="비인가 프로그램 점검 - utorrent">
+        <criterion comment="비인가 프로그램 점검 - utorrent" test_ref="oval:kr.nsr.program.untrust.utorrent:tst:1" negate="true" />
+      </criteria>
+    </definition>
+
+  </definitions>
+      
+
+      
+  <tests>
+<!-- 스크립트로 분기되는 운영체제 부분입니다. -->
+    <script_test id="oval:nkr.nsr.os.test1:tst:1" comment="에이전트에 있는 운영체제 최신 업데이트 점검 스크립트를 활용하여 점검을 수행 " check_existence="at_least_one_exists">
+      <object object_ref="osupdate.ps1" /> <!-- osupdate.ps1을 에이전트에서 불러와야 합니다. -->
+      </script_test>
+
+<!-- 스크립트로 분기되는 백신 부분입니다. -->
+    <script_test id="oval:nkr.nsr.vaccine.test1:tst:1" comment="에이전트에 있는 백신 최신 업데이트 점검 스크립트를 활용하여 점검을 수행 " check_existence="at_least_one_exists">
+      <object object_ref="antivirusupdate.ps1" /> <!-- antivirusupdate.ps1을 에이전트에서 불러와야 합니다. -->
+      </script_test>
+
+    <registry_test xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#windows" id="oval:nkr.nsr.adobe.test1:tst:1" version="1" check="at least one" comment="응용프로그램 최신 업데이트 점검-애크로뱃 리더 DC" check_existence="at_least_one_exists">
+      <object object_ref="oval:nkr.nsr.adobe.test1:obj:1" />
+      <state state_ref="oval:nkr.nsr.adobe.test1:ste:1" />
+    </registry_test>
+
+    <registry_test xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#windows" id="oval:kr.nsr.program.checkversion.java:tst:1" version="1" check="all" comment="자바 최신 버전 검사" check_existence="at_least_one_exists">
+      <object object_ref="oval:kr.nsr.program.checkversion.java:obj:1" />
+      <state state_ref="oval:kr.nsr.program.checkversion.java:ste:1" />
+    </registry_test>
+
+    <registry_test xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#windows" id="oval:kt.nsr.program.untrust:tst:1" version="1" check="all" comment="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\*\displayname을 확인하여 설치여부 점검" check_existence="at_least_one_exists">
+      <object object_ref="oval:kt.nsr.program.untrust:obj:1" />
+      <state state_ref="oval:kt.nsr.program.untrust:ste:1" />
+    </registry_test>
+
+
+    <registry_test xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#windows" id="oval:kr.nsr.program.untrust.kakao:tst:1" version="1" check="all" comment="컴퓨터\HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\KakaoTalk의 Displayname을 확인하여 점검" check_existence="none_check_existence">
+      <object object_ref="oval:kr.nsr.program.untrust.kakao:obj:1" />
+      <state state_ref="oval:kr.nsr.program.untrust.kakao:ste:1" />
+    </registry_test>
+
+    <registry_test xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#windows" id="oval:kr.nsr.program.untrust.nateon:tst:1" version="1" check="all" comment="비인가 프로그램- 네이트온 설치 확인ㄹ" check_existence="none_check_existence">
+      <object object_ref="oval:kr.nsr.program.untrust.nateon:obj:1" />
+      <state state_ref="oval:kr.nsr.program.untrust.nateon:ste:1" />
+    </registry_test>
+
+    <registry_test xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#windows" id="oval:kr.nsr.program.untrust.hwp:tst:1" version="1" check="all" comment="비인가 프로그램 점검 - 한글" check_existence="none_check_existence">
+      <object object_ref="oval:kr.nsr.program.untrust.hwp:obj:1" />
+      <state state_ref="oval:kr.nsr.program.untrust.hwp:ste:1" />
+    </registry_test>
+
+    <registry_test xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#windows" id="oval:kr.nsr.program.untrust.utorrent:tst:1" version="1" check="only one" comment="비인가 프로그램 점검 - utorrent " check_existence="none_check_existence">
+      <object object_ref="oval:kr.nsr.program.untrust.utorrent:obj:1" />
+      <state state_ref="oval:kr.nsr.program.untrust.utorrent:ste:1" />
+    </registry_test>
+
+
+
+  </tests>
+      
+<!-- OVAL objects for AutoPlay-->    
+      
+      <objects>
+ 
+     <registry_object xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#windows" id="oval:nkr.nsr.adobe.test1:obj:1" version="1" comment="DisplayVersion까지 전체 경로를  이요하여 애크로벳 리더 DC의 버전 확인">
+      <hive datatype="string">HKEY_LOCAL_MACHINE</hive>
+      <key datatype="string">SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{AC76BA86-7AD7-1042-7B44-AC0F074E4100}</key>
+      <name datatype="string">DisplayVersion</name>
+    </registry_object>
+
+    <registry_object xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#windows" id="oval:nkr.nsr.adobe.test1:obj:2" version="1" comment="SOFTWARE\WOW6432Node\Adobe\Acrobat Reader\DC\Installer에서 ENU_GUID의 값을 읽는다">
+      <hive datatype="string">HKEY_LOCAL_MACHINE</hive>
+      <key datatype="string">SOFTWARE\WOW6432Node\Adobe\Acrobat Reader\DC\Installer</key>
+      <name datatype="string">ENU_GUID</name>
+    </registry_object>
+
+    <registry_object xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#windows" id="oval:kr.nsr.program.checkversion.java:obj:1" version="1" comment="자바 최신 업데이트 상황 점검">
+      <hive datatype="string" operation="equals">HKEY_LOCAL_MACHINE</hive>
+      <key datatype="string" operation="equals">SOFTWARE\JavaSoft\Java Runtime Environment\1.8.0_212\MSI</key> 
+      <name datatype="string" operation="equals">FullVersion</name>
+    </registry_object>
+
+    <registry_object xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#windows" id="oval:kt.nsr.program.untrust:obj:1" version="1" comment="비인가 프로그램 사용 점검 - Microsoift office 설치 점검(망분리 된 국가공공기관 인터넷 용 컴퓨터 점검)">
+      <hive datatype="string" operation="equals">HKEY_LOCAL_MACHINE</hive>
+      <key datatype="string" operation="equals">SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{90160000-0011-0000-1000-0000000FF1CE}</key>
+      <name datatype="string" operation="equals">DisplayName</name>
+    </registry_object>
+
+    <registry_object xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#windows" id="oval:kr.nsr.program.untrust.kakao:obj:1" version="1" comment="컴퓨터\HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\KakaoTalk 의 Displayname 대상을 지정">
+      <hive datatype="string" operation="equals">HKEY_LOCAL_MACHINE</hive>
+      <key datatype="string" operation="equals">SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\KakaoTalk</key>
+      <name datatype="string" operation="equals">DisplayName</name>
+    </registry_object>
+
+
+    <registry_object xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#windows" id="oval:kr.nsr.program.untrust.nateon:obj:1" version="1" comment="HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{697E41EA-AEBE-4B5F-884E-87B5CD6C70AC} 의 DisplayName 까지 대상 확인">
+      <hive datatype="string" operation="equals">HKEY_LOCAL_MACHINE</hive>
+      <key datatype="string" operation="equals">SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{697E41EA-AEBE-4B5F-884E-87B5CD6C70AC}</key>
+      <name datatype="string" operation="equals">DisplayName</name>
+    </registry_object>
+
+    <registry_object xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#windows" id="oval:kr.nsr.program.untrust.hwp:obj:1" version="1" comment="\HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{8A1934CE-9331-426C-B03F-C3E95B0D23FC} 에서 DisplayName위치 확인">
+      <hive datatype="string" operation="equals">HKEY_LOCAL_MACHINE</hive>
+      <key datatype="string" operation="equals">SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{8A1934CE-9331-426C-B03F-C3E95B0D23FC}</key>
+      <name datatype="string" operation="equals">DisplayName</name>
+    </registry_object>
+
+    <registry_object xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#windows" id="oval:kr.nsr.program.untrust.utorrent:obj:1" version="1" comment="HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run의 대상 지정">
+      <hive datatype="string" operation="equals">HKEY_CURRENT_USER</hive>
+      <key datatype="string" operation="equals">Software\Microsoft\Windows\CurrentVersion\Run</key>
+      <name datatype="string" operation="equals">uTorrent</name>
+    </registry_object>
+
+
+     
+      </objects>
+      
+<!-- OVAL states for autoplay -->    
+      
+  <states>
+
+    <registry_state xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#windows" id="oval:nkr.nsr.adobe.test1:ste:1" version="1" comment="최신버전(19.012.20035) 보다 현재 버전이 작은 경우 false를 전달">
+      <type>reg_sz</type>
+      <value datatype="version" operation="less than or equal">19.012.20036</value>
+    </registry_state>
+
+    <registry_state xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#windows" id="oval:kr.nsr.program.checkversion.java:ste:1" version="1" comment="자바 버전 체크">
+      <type>reg_sz</type>
+      <value datatype="version" operation="greater than or equal">1.8.0_212-b10</value>
+    </registry_state>
+
+    <registry_state xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#windows" id="oval:kt.nsr.program.untrust:ste:1" version="1" comment="언인스톨에에 Microsoft Office Professional Plus 2016 이름이 있는지 점검, 있으면 설치되어 있음">
+      <value datatype="string" operation="equals" entity_check="all" var_check="all">Microsoft Office Professional Plus 2016</value>
+    </registry_state>
+
+    <registry_state xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#windows" id="oval:kr.nsr.program.untrust.kakao:ste:1" version="1" comment="Displayname의 값이 Kakao Corp. 같은지 검사">
+      <value datatype="string" operation="equals" entity_check="all" var_check="all">카카오톡</value>
+    </registry_state>
+
+    <registry_state xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#windows" id="oval:kr.nsr.program.untrust.nateon:ste:1" version="1" comment="DisplayName의 값이 네이트온과 같은지 상태 확인, 같으면 설치됨">
+      <value datatype="string" operation="equals" entity_check="all" var_check="all">네이트온</value>
+    </registry_state>
+
+    <registry_state xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#windows" id="oval:kr.nsr.program.untrust.hwp:ste:1" version="1" comment="DisplayName이 한컴오피스 한글 2014 VP이면 설치되어 있음">
+      <value datatype="string" operation="equals" entity_check="all" var_check="all">한컴오피스 한글 2014 VP</value>
+    </registry_state>
+
+    <registry_state xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#windows" id="oval:kr.nsr.program.untrust.utorrent:ste:1" version="1" comment="Default comment, please change">
+      <value datatype="string" operation="equals" entity_check="all" var_check="all">uTorrent</value>
+    </registry_state>
+    
+  </states>
+        
+<!-- OVAL Variables for AutoPlay-->    
+        
+  <variables>   
+
+    <local_variable id="oval:nkr.nsr.adobe.test1:var:1" version="1" comment="다른 경로로 확인된 ENG_GUID 값을 읽어 DisplayVersion  까지 완전한 경로를 만듬" datatype="string">
+      <concat>
+        <literal_component>SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\</literal_component>
+        <object_component object_ref="oval:nkr.nsr.adobe.test1:obj:2" item_field="value" />
+      </concat>
+    </local_variable>
+
+
+
+  </variables>      
+    </oval_definitions>
+  </component>
+  
+  <!-- component 4 CPE related OVAL -->
+  
+  <component id="scap_mil.disa.stig_comp_U_Windows_10_V1R13_STIG_SCAP_1-2_Benchmark-cpe-oval.xml" timestamp="2018-11-13T11:16:23">
+    <oval_definitions xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5">
+      <generator>
+        <oval:product_name>repotool</oval:product_name>
+        <oval:schema_version>5.10</oval:schema_version>
+        <oval:timestamp>2018-11-13T11:16:22</oval:timestamp>
+      </generator>
+      <definitions>
+        <definition id="oval:mil.disa.stig.windows:def:1" version="1" class="inventory">
+          <metadata>
+            <title>Microsoft Windows 10</title>
+            <affected family="windows">
+              <platform>Microsoft Windows 10</platform>
+              <!-- including Microsoft Windows 8 only for the purpose of allowing SCV 1.2.1.13 validation to pass; it does not recognize Microsoft Windows 10 -->
+              <platform>Microsoft Windows 8</platform>
+            </affected>
+            <reference source="CPE" ref_id="cpe:/o:microsoft:windows_10:-:-:~-~-~-~-~" />
+            <description>Microsoft Windows 10 is the installed operating system</description>
+          </metadata>
+          <criteria operator="AND">
+            <criterion comment="The installed operating system belongs to the Microsoft Windows family" test_ref="oval:mil.disa.stig.windows:tst:100" />
+            <criterion comment="The installed operating system is Microsoft Windows 10" test_ref="oval:mil.disa.stig.windows:tst:101" />
+          </criteria>
+        </definition>
+      </definitions>
+
+      <tests>
+        <family_test xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#independent" id="oval:mil.disa.stig.windows:tst:100" version="1" comment="The installed operating system belongs to the Microsoft Windows family" check_existence="at_least_one_exists" check="all">
+          <object object_ref="oval:mil.disa.stig.windows:obj:100" />
+          <state state_ref="oval:mil.disa.stig.windows:ste:100" />
+        </family_test>
+        <registry_test xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#windows" id="oval:mil.disa.stig.windows:tst:101" version="1" comment="The installed operating system is Windows 10" check_existence="at_least_one_exists" check="all">
+          <object object_ref="oval:mil.disa.stig.windows:obj:101" />
+          <state state_ref="oval:mil.disa.stig.windows:ste:101" />
+        </registry_test>
+      </tests>
+
+      <objects>
+        <family_object xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#independent" id="oval:mil.disa.stig.windows:obj:100" version="1" comment="OS family" />
+        <registry_object xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#windows" id="oval:mil.disa.stig.windows:obj:101" version="2" comment="ProductName registry entry">
+          <hive datatype="string">HKEY_LOCAL_MACHINE</hive>
+          <key datatype="string">SOFTWARE\Microsoft\Windows NT\CurrentVersion</key>
+          <name datatype="string">ProductName</name>
+        </registry_object>
+      </objects>
+
+      <states>
+        <family_state xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#independent" id="oval:mil.disa.stig.windows:ste:100" version="1" comment="Microsoft Windows family">
+          <family operation="equals">windows</family>
+        </family_state>
+        <registry_state xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#windows" id="oval:mil.disa.stig.windows:ste:101" version="1" comment="Microsoft Windows 10 registry entry state">
+          <value operation="pattern match">^[Ww][Ii][Nn][Dd][Oo][Ww][Ss] 10.*$</value>
+        </registry_state>
+      </states>
+
+    </oval_definitions>
+  </component>
+</data-stream-collection>
+

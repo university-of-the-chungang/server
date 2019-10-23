@@ -7,13 +7,13 @@ String.prototype.replaceAll = function(org, dest) {
 function leadingZeros(n, digits) {
     var zero = '';
     n = n.toString();
-  
+
     if (n.length < digits) {
       for (i = 0; i < digits - n.length; i++)
         zero += '0';
     }
     return zero + n;
-  }  
+  }
 function getTimeStamp(d) {
     console.log(d)
   var s =
@@ -71,6 +71,7 @@ function parseXml(filename){
 
 exports.buildHtml = row => {
   return new Promise((resolve, reject) => {
+    console.log("buildHtml", row);
     fs.readFile(__dirname + "/sample.html", "utf-8", (err, html) => {
       if (err) {
         reject(err);
