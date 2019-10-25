@@ -64,6 +64,20 @@ let query_select = (data, table_name,where) => {
     });
 
 };
+exports.delete_policy_from_group_set_list = (xccdf_cd) =>{
+    return new Promise((resolve, reject) => {
+        let query = `UPDATE TBL_GROUP_SET_LIST SET XCCDF_CD = NULL WHERE XCCDF_CD IN (${xccdf_cd})`;
+        console.log(query)
+       new sql.Request().query(query, (err, result) => {
+          if(err){
+              reject(err);
+          } else {
+              resolve(result);
+          }
+       });
+    });
+};
+
 exports.delete_policy = (xccdf_cd)=>{
     console.log(`DELETE FROM TBL_XCCDF WHERE XCCDF_CD IN (${xccdf_cd})`);
     return new Promise((resolve,reject)=>{
@@ -75,11 +89,13 @@ exports.delete_policy = (xccdf_cd)=>{
            }
        }) 
     })
-}
+};
 
 exports.get_policy_info = ()=>{
     return new Promise((resolve,reject)=>{
-        new sql.Request().query(`SELECT * FROM TBL_XCCDF AS T1 LEFT OUTER JOIN TBL_XCCDF_SET_LIST AS T2 ON T1.XCCDF_CD = T2.XCCDF_CD LEFT OUTER JOIN TBL_GROUP_INFO AS T3 ON T2.GROUP_SET_CD = T3.GROUP_SET_CD`,(err,result)=>{
+        new sql.Request().query(`SELECT * 
+        FROM TBL_XCCDF AS T1 
+        LEFT OUTER JOIN TBL_GROUP_SET_LIST AS T2 ON T1.XCCDF_CD = T2.XCCDF_CD`,(err,result)=>{
             if(err){
                 reject(err);
             }else{
@@ -87,7 +103,7 @@ exports.get_policy_info = ()=>{
             }
         });
     })
-}
+};
 
 exports.add_policy = (policy_name, policy_os, policy_filepath)=>{
     return new Promise((resolve,reject)=>{
@@ -219,7 +235,7 @@ exports.get_dashboard_datas = ()=>{
                     FROM TBL_INSPECT_STATS T4 
                     GROUP BY AGENT_CD)
 					) B
-	ON B.AGENT_CD = T1.AGENT_CD
+	ON B.AGENT_CD = T1.AGENT_CD AND B.GROUP_SET_CD = T2.GROUP_SET_CD
     WHERE T3.ACTIVE_STATE = 'A' AND T1.DEL_FLAG = 0 AND T3.DEL_FLAG = 0
     ORDER BY T3.CREATE_TIME DESC`;
     return new Promise((resolve,reject)=>{
@@ -239,7 +255,9 @@ exports.get_chart_data = () => {
         FROM TBL_INSPECT_SURVEY
         WHERE INSPECT_CD in (SELECT MAX(INSPECT_CD) INSPECT_CD
         FROM TBL_INSPECT_STATS T4
+        WHERE GROUP_SET_CD in (SELECT GROUP_SET_CD FROM TBL_GROUP_INFO WHERE ACTIVE_STATE = 'A' AND DEL_FLAG = 0)
         GROUP BY AGENT_CD)`;
+
     return new Promise((resolve, reject) => {
        new sql.Request().query(query,(err, result) => {
           if(err){
@@ -546,6 +564,7 @@ exports.view_tbl_xccdf = () => {
         });
     });
 }
+
 exports.mapping_xccdf_group = (xccdf_cd, group_set_cd) => {
     return new Promise((resolve, reject) => {
         let query = `INSERT INTO TBL_XCCDF_SET_LIST (GROUP_SET_CD, XCCDF_CD) VALUES (` + group_set_cd + `, ` + xccdf_cd + `)`;
@@ -557,6 +576,7 @@ exports.mapping_xccdf_group = (xccdf_cd, group_set_cd) => {
         });
     });
 };
+
 exports.view_tbl_xccdf_set_list = () => {
     return new Promise((resolve, reject) => {
         new sql.Request().query(`SELECT * FROM TBL_XCCDF_SET_LIST `, (err, result) => {

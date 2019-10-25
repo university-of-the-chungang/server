@@ -56,7 +56,6 @@
                                                     <th scope="col">정책명</th>
                                                     <th scope="col">운영체제</th>
                                                     <th scope="col">경로</th>
-                                                    <th scope="col">정책 활성화 날짜</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -86,12 +85,12 @@
                                                     <td><%=recordsets[0][i]['FILE_NAME']%></td>
                                                     <td><%=recordsets[0][i]['INSPECT_OS']%></td>
                                                     <td>/C:/xxcdf/<%=recordsets[0][i]['FILE_PATH'].split('/')[recordsets[0][i]['FILE_PATH'].split('/').length-1].split('\\')[recordsets[0][i]['FILE_PATH'].split('/')[recordsets[0][i]['FILE_PATH'].split('/').length-1].split('\\').length - 1]%></td>
-                                                    <% if (recordsets[0][i]['ACTIVE_TIME']){ %>
-                                                        <% let d = recordsets[0][i]['ACTIVE_TIME'] %>
-                                                    <td><%=d.getFullYear().toString()+"-"+((d.getMonth()+1).toString().length==2?(d.getMonth()+1).toString():"0"+(d.getMonth()+1).toString())+"-"+(d.getDate().toString().length==2?d.getDate().toString():"0"+d.getDate().toString())+" "+(d.getHours().toString().length==2?d.getHours().toString():"0"+d.getHours().toString())+":"+((parseInt(d.getMinutes()/5)*5).toString().length==2?(parseInt(d.getMinutes()/5)*5).toString():"0"+(parseInt(d.getMinutes()/5)*5).toString())+":00"%></td>
-                                                    <% }else{ %>
-                                                    <td style="text-align: center"></td>
-                                                    <% } %>
+<!--                                                    <% if (recordsets[0][i]['ACTIVE_TIME']){ %>-->
+<!--                                                        <% let d = recordsets[0][i]['ACTIVE_TIME'] %>-->
+<!--                                                    <td><%=d.getFullYear().toString()+"-"+((d.getMonth()+1).toString().length==2?(d.getMonth()+1).toString():"0"+(d.getMonth()+1).toString())+"-"+(d.getDate().toString().length==2?d.getDate().toString():"0"+d.getDate().toString())+" "+(d.getHours().toString().length==2?d.getHours().toString():"0"+d.getHours().toString())+":"+((parseInt(d.getMinutes()/5)*5).toString().length==2?(parseInt(d.getMinutes()/5)*5).toString():"0"+(parseInt(d.getMinutes()/5)*5).toString())+":00"%></td>-->
+<!--                                                    <% }else{ %>-->
+<!--                                                    <td style="text-align: center"></td>-->
+<!--                                                    <% } %>-->
                                                 </tr>
                                                 <% } %>
 
@@ -156,7 +155,7 @@
                                                                     accept=".xml" style="display: none;">
                                                             </label>
 
-                                                            <span style="color:red" ;"">
+                                                            <span style="color:red">
                                                                 주의 : 모든 내용을 기입해 주세요</span>
 
 

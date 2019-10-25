@@ -562,7 +562,7 @@
                                 ${result[i]['SUBMIT_DATE']}
                             </td>
                             <td style="text-align: center; vertical-align: middle;">
-                                <form id = "down_inspect_result" method = "POST" action = "/group/download_inspect_result">
+                                <form id = "down_inspect_result" method = "POST" action = "/group/download_inspect_result" target = "_blank">
                                     <input type="hidden" name="inspect_cd" value = ${result[i]['INSPECT_CD']}>
                                     <input type="hidden" name="agent_cd" value = ${agent_cd}>
                                     <input type = "hidden" name="group_cd" value = ${group_set_cd}>
@@ -572,10 +572,8 @@
                                     </button>
                                 </form>
                             </td>
-                        </tr>
-                        `
+                        </tr>`
                     }
-
                     $('#manage_tbl').html(html);
                 }
             });

@@ -279,7 +279,9 @@
                     <%=sess_name%> / <span id="expire"></span> / <%=division%> / <%=position%>
                 </div>
                 <form id="hiddenForm" action="/dashboard/download/" method="POST">
-                    <input type="hidden" id="row_arr" name="row_arr">
+                    <input type="hidden" id="group_cd_arr" name="group_cd_arr">
+                    <input type="hidden" id="agent_cd_arr" name="agent_cd_arr">
+                    <input type="hidden" id="inspect_cd_arr" name="inspect_cd_arr">
                 </form>
                 <!-- ============================================================== -->
                 <!-- footer -->
@@ -380,9 +382,6 @@
                     $('#click_cd').val(recordset[$(e.currentTarget).parent()[0].id.split('_')[2]]['GROUP_SET_CD'][0]);
                     $('#agent_cd').val(recordset[$(e.currentTarget).parent()[0].id.split('_')[2]]['AGENT_CD'][0]);
                     $('#inspect_cd').val(recordset[$(e.currentTarget).parent()[0].id.split('_')[2]]['INSPECT_CD']);
-                    console.log($('#click_cd').val());
-                    console.log($('#agent_cd').val());
-                    console.log($('#inspect_cd').val());
                     $('#viewhtmlfrm').attr('action', '/group/download_inspect_result');
                     $('#viewhtmlfrm').submit();
                 }
@@ -465,11 +464,14 @@
                 if (checkbox_arr.length == 0) {
                     alert("한개 이상의 에이전트 선택이 필요합니다.");
                 } else {
-                    let recordset = JSON.parse(`<%- JSON.stringify(recordsets[0])%>`);
-
+                    let recordset = JSON.parse(`<%- JSON.stringify(recordsets[0]).replace(/\\/gi,'/')%>`);
+                    //console.log(recordset[$(e.currentTarget).parent()[0].id.split('_')[2]]);
                     console.log(recordset);
 
-                    let record_arr = [];
+                    let group_cd_arr = [];
+                    let agent_cd_arr = [];
+                    let inspect_cd_arr = [];
+
                     let is_pass = true;
                     checkbox_arr.each((idx, elem) => {
                         let id = elem.id;
@@ -486,13 +488,16 @@
                             let id = elem.id;
                             $('#hiddenForm').attr('target', 'hiddenifr');
                             $('#hiddenForm').attr('action', "/dashboard/download");
-                            record_arr.push(recordset[id])
+                            group_cd_arr.push(recordset[id]['GROUP_SET_CD'][0]);
+                            agent_cd_arr.push(recordset[id]['AGENT_CD'][0]);
+                            inspect_cd_arr.push(recordset[id]['INSPECT_CD']);
                         });
-                        $('#row_arr').val(JSON.stringify(record_arr));
 
+                        $('#group_cd_arr').val(JSON.stringify(group_cd_arr));
+                        $('#agent_cd_arr').val(JSON.stringify(agent_cd_arr));
+                        $('#inspect_cd_arr').val(JSON.stringify(inspect_cd_arr));
                         $('#hiddenForm').submit();
                     }
-
                 }
 
             });

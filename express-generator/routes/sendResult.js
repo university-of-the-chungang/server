@@ -43,13 +43,14 @@ router.post('/', function(req, res, next) {
 			res.send("error");
 		}
 		let grd = 0;
-		let dummy_list = [req.body.a0, req.body.a1, req.body.a2, req.body.a3, req.body.a4, req.body.a5, req.body.a6, req.body.a7, req.body.a8]
+		let dummy_list = [req.body.a0, req.body.a1, req.body.a2, req.body.a3, req.body.a4, req.body.a5, req.body.a6, req.body.a7, req.body.a8];
 
 		for (var a in dummy_list)
 		{
 			if(a === 1)
 				grd ++;
 		}
+
 		DB.report_inspect_stats(group_set_cd, grd,10056, 9);
 		DB.get_inspect_cd().then(result => {
 			let inspect_cd = result.recordset[0].max_INSPECT_CD;

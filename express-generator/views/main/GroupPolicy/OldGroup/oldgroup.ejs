@@ -200,14 +200,14 @@
                                             <%
                                             var i=0
                                             for(; i<parseInt(recordsets5.length/2); i++){ %>
-                                                <tr>
-                                                    <td>
+                                                <tr class = "col-4">
+                                                    <td class = "col-2">
                                                         <div class="custom-control custom-radio custom-control-inline">
                                                             <input type="radio" class="custom-control-input <%if(recordsets5[i*2].XCCDF_CD !== null){%>is-valid<%}else{%> is-invalid <%}%>" name = "jb-radio" id="customControlValidation<%-i*2%>" value="<%=recordsets5[i*2].OS%>">
                                                             <label class="custom-control-label" for="customControlValidation<%-i*2%>"><%=recordsets5[i*2].OS%></label>
                                                         </div>
                                                     </td>
-                                                    <td>
+                                                    <td class = "col-2">
                                                         <div class="custom-control custom-radio custom-control-inline">
                                                                 <input type="radio" class="custom-control-input <%if(recordsets5[i*2+1].XCCDF_CD !== null){%>is-valid<%}else{%> is-invalid <%}%>" name = "jb-radio" id="customControlValidation<%-i*2+1%>" value="<%=recordsets5[i*2+1].OS%>">
                                                                 <label class="custom-control-label" for="customControlValidation<%-i*2+1%>"><%=recordsets5[i*2+1].OS%></label>
@@ -216,13 +216,12 @@
                                                 </tr>
                                             <%}
                                             if(recordsets5.length % 2 != 0){%>
-                                            <td>
+                                            <td class = "col-2">
                                                 <div class="custom-control custom-radio custom-control-inline">
                                                     <input type="radio" class="custom-control-input <%if(recordsets5[i*2].XCCDF_CD !== null){%>is-valid<%}else{%> is-invalid <%}%>" name = "jb-radio" id="customControlValidation<%-i*2%>" value="<%=recordsets5[i*2].OS%>">
                                                     <label class="custom-control-label" for="customControlValidation<%-i*2%>"><%=recordsets5[i*2].OS%></label>
                                                 </div>
                                             </td>
-                                            <td></td>
                                             <%}%>
                                         </tbody>
                                     </table>
@@ -574,7 +573,8 @@
                 let os = $("input[name = 'jb-radio']:checked").val();
                 $('#apply_os').val(os);
                 $('#xccdfModal').modal('show');
-                table.columns(1).search(JSON.stringify($("input[name = 'jb-radio']:checked").val()));
+                table.columns(2).search(JSON.stringify($("input[name = 'jb-radio']:checked").val()));
+                console.log(JSON.stringify($("input[name = 'jb-radio']:checked").val()));
                 table.draw();
             }
         });

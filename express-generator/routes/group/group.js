@@ -21,6 +21,8 @@ function leadingZeros(n, digits) {
 }
 function getTimeStamp(d) {
   console.log(d);
+  d = new Date(d);
+
   var s =
     leadingZeros(d.getFullYear(), 4) +
     "-" +
@@ -111,15 +113,16 @@ router.get("/downloadhtml", (req, res, next) => {
     let idx = 0;
     make_group.buildHtml(param).then(result2 => {
       let filename =
-        getTimeStamp(param[idx]["SUBMIT_DATE"]) +
-        "_" +
-        param[idx]["GROUP_SET_CD"];
+          getTimeStamp(param[idx]["SUBMIT_DATE"]) +
+          "_" +
+          param[idx]["GROUP_SET_CD"];
       let stream = fs.createWriteStream(
-        "public/uploads/" + filename.replace(/(\s|\:)/gi, "_") + ".html"
+          "public/uploads/" + filename.replace(/(\s|\:)/gi, "_") + ".html"
       );
+
       stream.on("finish", function() {
         res.download(
-          "public/uploads/" + filename.replace(/(\s|\:)/gi, "_") + ".html"
+            "public/uploads/" + filename.replace(/(\s|\:)/gi, "_") + ".html"
         );
       });
       stream.write(result2);
@@ -130,6 +133,7 @@ router.get("/downloadhtml", (req, res, next) => {
     });
   });
 });
+
 
 router.get('/xccdf',(req,res,next)=>{
   let query = req.query;
@@ -189,30 +193,51 @@ router.get("/:name", (req, res, next) => {
   }
 });
 
+
 router.post("/download_inspect_result", (req, res, next) => {
-  let agent_cd = req.body.agent_cd;
-  let group_cd = req.body.group_cd;
-  let inspect_cd = req.body.inspect_cd;
-  let group_name = req.body.group_name;
+    let agent_cd = req.body.agent_cd;
+    let group_cd = req.body.group_cd;
+    let inspect_cd = req.body.inspect_cd;
+    let group_name = req.body.group_name;
 
-  console.log(agent_cd , group_cd , inspect_cd, group_name);
+    console.log(agent_cd , group_cd , inspect_cd, group_name);
 
-  DB.get_report_data(agent_cd, inspect_cd, group_cd).then(result2 => {
-    let recordset = JSON.parse(JSON.stringify(result2.recordset).replace(/\\/gi, '/'));
-   // console.log("recordset", recordset[0]);
-    //res.redirect("/group");
-    DB.get_inspect_survey(inspect_cd, agent_cd).then(result3 => {
-      console.log("result3", result3.recordset);
-      make_report.buildHtml(recordset[0], result3.recordset).then(result=>{
-        res.writeHead(200, {'Content-Type' : 'text/html', 'Content-Length':result.length});
-        res.write(result);
-        res.end();
-      });
+    DB.get_report_data(agent_cd, inspect_cd, group_cd).then(result2 => {
+        let recordset = JSON.parse(JSON.stringify(result2.recordset).replace(/\\/gi, '/'));
+        // console.log("recordset", recordset[0]);
+        //res.redirect("/group");
+        DB.get_inspect_survey(inspect_cd, agent_cd).then(result3 => {
+            console.log("result3", result3.recordset);
+            make_report.buildHtml(recordset[0], result3.recordset).then(result=>{
+                let filename =
+                    getTimeStamp(recordset[0]['SUBMIT_DATE']) +
+                    "_" +
+                    recordset[0]['GROUP_SET_CD'][0]
+                    +"inspect_result";
+                console.log(filename);
+                let stream = fs.createWriteStream(
+                    "public/uploads/" + filename.replace(/(\s|\:)/gi, "_") + ".html"
+                );
+
+                stream.on("finish", function() {
+                    res.download(
+                        "public/uploads/" + filename.replace(/(\s|\:)/gi, "_") + ".html"
+                    );
+                });
+
+                stream.write(result);
+                stream.end();
+
+                //res.writeHead(200, {'Content-Type' : 'text/html', 'Content-Length':result.length});
+                //res.write(result);
+                //res.end();
+            });
+        });
+        //res.redirect("/group");
     });
-    //res.redirect("/group");
-  });
 
 });
+
 
 let upload = multer({dest:'public/uploads_off_result/'});
 

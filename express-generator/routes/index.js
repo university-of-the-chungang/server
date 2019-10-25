@@ -6,6 +6,7 @@ const router = express.Router();
 const DB = require('../db');
 const make_dashboard = require('./make_dashboard_html');
 const make_group = require('./make_group_html');
+const make_report = require('./make_report_html');
 const LOGS = require('../logs');
 const multer = require('multer');
 const archiver = require('archiver');
@@ -64,11 +65,14 @@ router.get('/policy', (req, res, next) => {
     res.render('policy',result);
   });
 });
+
 router.post('/delete_policy',(req,res,next)=>{
-  DB.delete_policy(req.body['del_policy_cd']).then((result)=>{
-    res.redirect('/policy');
-  });
-})
+    DB.delete_policy_from_group_set_list(req.body['del_policy_cd']).then((result) =>{
+        DB.delete_policy(req.body['del_policy_cd']).then((result)=>{
+            res.redirect('/policy');
+        });
+    });
+});
 
 router.get('/dashboard', function (req, res, next) {
   if(req.session.username){
@@ -680,11 +684,13 @@ router.post('/group/viewhtml',(req,res,next)=>{
 
 
 router.post("/dashboard/download",(req,res,next)=>{
-  let param = JSON.parse(req.body['row_arr']);
+  let group_cd_arr = JSON.parse(req.body['group_cd_arr']);
+  let agent_cd_arr = JSON.parse(req.body['agent_cd_arr']);
+  let inspect_cd_arr = JSON.parse(req.body['inspect_cd_arr']);
   // console.log(param);
   DB.get_dashboard_datas().then(result=>{
     let paths = [];
-      make_dashboard.make_html(param).then(filepath=>{
+      make_report.make_html(group_cd_arr, agent_cd_arr, inspect_cd_arr).then(filepath=>{
         console.log(filepath);
         if(filepath.length > 1){
           let output = fs.createWriteStream(__dirname +'/result.zip');
@@ -703,8 +709,7 @@ router.post("/dashboard/download",(req,res,next)=>{
           }
           archive.finalize();
           console.log(output.path);
-
-        }else if(filepath.length ==1){
+        }else if(filepath.length === 1){
           res.download(filepath[0]);
         }
       });
